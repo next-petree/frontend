@@ -1,0 +1,46 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:    
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: .env setting
+        run: | 
+          echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - run: rm /etc/nginx/conf.d/default.conf
+      - run: mv default.conf /etc/nginx/conf.d/
+      - run: service nginx reload
+
+      - name: Notify Deploy Job Done
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: frontend
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
