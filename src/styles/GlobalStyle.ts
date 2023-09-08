@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
    }
    body {
+      min-width: 1440px;
       font-family: ${({ theme }) => theme.fonts.SUIT};
       background-color: ${({ theme }) => theme.colors.background};
    }
