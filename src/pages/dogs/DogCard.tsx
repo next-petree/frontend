@@ -8,10 +8,24 @@ import { styled } from 'styled-components';
 import BadgeSvg from 'assets/images/badge.svg';
 import { E_Dog_Status, dogGenderMap, dogStatusMap } from './constatns';
 
-const DogCard = ({ name, type, gender, birthDate, imgUrl, breederNickName, isBreederVerified, status }: IDog) => {
-  console.log(isBreederVerified);
+interface Props extends IDog {
+  onClick: (id: number) => void;
+}
+
+const DogCard = ({
+  id,
+  name,
+  type,
+  gender,
+  birthDate,
+  imgUrl,
+  breederNickName,
+  isBreederVerified,
+  status,
+  onClick,
+}: Props) => {
   return (
-    <Card>
+    <Card onClick={() => onClick(id)}>
       <ImageContainer>
         <Image src={imgUrl} alt="img" />
         {status !== E_Dog_Status.AVAILABLE && <Mask>{dogStatusMap[status]}</Mask>}
@@ -19,9 +33,9 @@ const DogCard = ({ name, type, gender, birthDate, imgUrl, breederNickName, isBre
       <Info>
         <Name>{name}</Name>
         <Details>
-          <p>견종: {type}</p>
-          <p>성별: {dogGenderMap[gender]}</p>
-          <p>출생일: {birthDate}</p>
+          <p>견종 : {type}</p>
+          <p>성별 : {dogGenderMap[gender]}</p>
+          <p>출생일 : {birthDate}</p>
         </Details>
 
         <BreederInfo>
@@ -47,6 +61,7 @@ const Card = styled.div`
   padding: 20px 20px 30px 20px;
   color: #333333;
   font-family: Noto Sans KR;
+  cursor: pointer;
 `;
 const ImageContainer = styled.div`
   position: relative;

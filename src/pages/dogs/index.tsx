@@ -11,13 +11,15 @@ import SearchInput from 'components/common/search/SearchInput';
 import { useState, useEffect, FC } from 'react';
 import { Page, Pageable } from 'pageable-response';
 import DogCard from './DogCard';
-import { E_Dog_Status } from './constatns';
+import { E_Dog_Gender, E_Dog_Status } from './constatns';
+import Detail from './Detail';
+import { styled } from 'styled-components';
 
 export interface IDog {
   id: number;
   name: string;
   type: string;
-  gender: 'MALE' | 'FEMALE';
+  gender: E_Dog_Gender;
   birthDate: string;
   imgUrl: string;
   status: E_Dog_Status;
@@ -25,8 +27,15 @@ export interface IDog {
   isBreederVerified: boolean;
 }
 
+export interface DogDetailProp extends IDog {
+  imagesUrl: Array<string>;
+  management: string;
+}
+
 const Dogs: FC = () => {
   const [dogs, setDogs] = useState<any>([]);
+  const [selectedDogId, setSelectedDogId] = useState<number | undefined>();
+  const [selectedDogInfo, setSelectedDogInfo] = useState<DogDetailProp | undefined>();
   const [page, setPage] = useState<number>(1);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
@@ -69,13 +78,21 @@ const Dogs: FC = () => {
     fetchDogs({ keyword });
   };
 
+  const handleDetail = async (id: number) => {
+    setSelectedDogId(id);
+    try {
+      const {
+        data: { data },
+      } = await axios.get(`dogs/${id}`);
+      setSelectedDogInfo(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <Layout
-      style={{
-        marginTop: '10rem',
-      }}
-    >
-      <SearchInput placeholder="원하시는 견종을 입력해주세요" onSearch={onSearch} />
+    <Layout>
+      <SearchInput placeholder="원하시는 견종을 입력해주세요" onSearch={onSearch} style={{ marginTop: 175 }} />
       <Board
         style={{
           marginBottom: '7.25rem',
@@ -83,7 +100,7 @@ const Dogs: FC = () => {
         }}
       >
         {dogs.map((dog: IDog) => (
-          <DogCard key={dog.id} {...dog} />
+          <DogCard key={dog.id} {...dog} onClick={() => handleDetail(dog.id)} />
         ))}
       </Board>
 
@@ -105,8 +122,19 @@ const Dogs: FC = () => {
           <h1>검색 결과가 없습니다.</h1>
         </div>
       )}
+      {selectedDogId && (
+        <Mask style={{ display: `${selectedDogId ? 'block' : 'none'}` }} onClick={() => setSelectedDogId(undefined)} />
+      )}
+      {selectedDogId && <Detail info={selectedDogInfo} />}
     </Layout>
   );
 };
 
 export default Dogs;
+
+const Mask = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #5a5a5a40;
+`;
