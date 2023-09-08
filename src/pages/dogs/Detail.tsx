@@ -79,7 +79,7 @@ const Modal = styled.div`
   padding: 112px 83px;
   border-radius: 32px;
   color: #333;
-  font-family: Noto Sans KR;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
 `;
 
 const Top = styled.div`
@@ -153,7 +153,7 @@ const Button = styled.button`
   height: 52px;
   background: #35d8d5;
   color: #fff;
-  font-family: Noto Sans KR;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   font-size: 16px;
   font-weight: 700;
 `;

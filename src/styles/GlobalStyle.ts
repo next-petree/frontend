@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
    }
    body {
-      font-family: 'SUIT Variable', sans-serif;
+      font-family: ${({ theme }) => theme.fonts.SUIT};
       background-color: ${({ theme }) => theme.colors.background};
    }
    a {

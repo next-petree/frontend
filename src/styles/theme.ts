@@ -13,6 +13,7 @@ const theme: DefaultTheme = {
   },
   fonts: {
     SUIT: 'SUIT Variable, sans-serif',
+    NOTOSANSKR: "'Noto Sans KR', sans-serif",
   },
 };
 

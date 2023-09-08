@@ -60,7 +60,7 @@ const Card = styled.div`
   box-shadow: 0px 4px 20px 0px #00000017;
   padding: 20px 20px 30px 20px;
   color: #333333;
-  font-family: Noto Sans KR;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   cursor: pointer;
 `;
 const ImageContainer = styled.div`

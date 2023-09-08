@@ -64,7 +64,7 @@ const Textarea = styled.textarea`
   height: 11.813rem;
   padding: 1.5rem;
   font-size: 1rem;
-  font-family: Noto Sans KR;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   border: none;
   border-radius: 1rem;
   background-color: #f5f5f5 !important;

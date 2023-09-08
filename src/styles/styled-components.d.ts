@@ -14,6 +14,7 @@ declare module 'styled-components' {
     };
     fonts: {
       SUIT: 'SUIT Variable, sans-serif';
+      NOTOSANSKR: "'Noto Sans KR', sans-serif";
     };
   }
 }
