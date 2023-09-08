@@ -13,10 +13,6 @@ export const footerItems: FooterItem[] = [
     title: 'Categories',
     links: [
       {
-        name: '홈',
-        path: PATHS.root,
-      },
-      {
         name: '인증 테스트',
         path: PATHS.certification.root,
       },
@@ -34,25 +30,12 @@ export const footerItems: FooterItem[] = [
     title: 'Pages',
     links: [
       {
-        name: 'About',
+        name: 'About Us',
         path: '/about',
       },
       {
-        name: 'Contact',
+        name: 'Contact Us',
         path: '/contact',
-      },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      {
-        name: 'Privacy Policy',
-        path: '/privacy-policy',
-      },
-      {
-        name: 'Terms of Use',
-        path: '/terms-of-use',
       },
     ],
   },
