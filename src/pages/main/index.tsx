@@ -1,13 +1,17 @@
-import BreederLinksSection from 'components/main/BreederLinksSection';
+import StartSection from 'components/main/StartSection';
 import HeroSection from 'components/main/HeroSection';
-import IntroductionSection from 'components/main/IntroductionSection';
+import JoinSection from 'components/main/JoinSection';
+import ServiceSection from 'components/main/ServiceSection';
+import TeamMissionSection from 'components/main/TeamMissionSection';
 
 const Main = () => {
   return (
     <>
       <HeroSection />
-      <IntroductionSection />
-      <BreederLinksSection />
+      <ServiceSection />
+      <TeamMissionSection />
+      <JoinSection />
+      <StartSection />
     </>
   );
 };
