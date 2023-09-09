@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import Detail from 'components/common/detail/Detail';
-import { API_PATHS } from '../../constants';
+import { API_PATHS } from '../../../constants';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IBreederDetail } from 'assets/types/User';

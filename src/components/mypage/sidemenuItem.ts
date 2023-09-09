@@ -12,7 +12,7 @@ export const adoptmenuItem: ISidemenuItem[] = [
   },
   {
     name: '분양후기 관리',
-    path: PATHS.mypage.review,
+    path: PATHS.mypage.reviews,
   },
   {
     name: '프로필 관리',

@@ -1,7 +1,7 @@
 /** 상수 */
 export const CONSTANTS = {
   get API_URL() {
-    const url = process.env.REACT_APP_API_URL || "http://3.38.43.179:8080";
+    const url = process.env.REACT_APP_API_URL || 'http://3.38.43.179:8080';
     if (!url) {
       throw new Error('API_URL 환경변수가 설정되지 않았습니다.');
     }
@@ -103,7 +103,7 @@ export const PATHS = {
     /**분양 신청 내역 */
     adopt: '/mypage/adopt',
     /**분양 후기 관리 */
-    review: '/mypage/review',
+    reviews: '/mypage/reviews',
     /** 보유견종 관리 */
     breed: {
       /** 보유견종 관리 루트 */

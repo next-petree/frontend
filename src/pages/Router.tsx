@@ -19,8 +19,7 @@ import Footer from '../components/common/footer/Footer';
 import SignUpStep1 from './signup/step-1';
 import SignUpStep2 from './signup/step-2';
 import SignUpStep3 from './signup/step-3';
-import Breeders from './breeders';
-import Reserve from './reserve';
+import Breeders from './mypage/breeders';
 import Adopt from './mypage/adopt';
 import Breed from './mypage/breed';
 import Modify from './mypage/modify';
@@ -29,11 +28,13 @@ import Profile from './mypage/profile';
 import Review from './mypage/review';
 import NewBreed from './mypage/breed/new';
 import EditBreed from './mypage/breed/edit';
-import BreederDetail from './breeders/[id]';
+import BreederDetail from './mypage/breeders/[id]';
 
 import { useLogin } from '../api/useLogin';
 import UserDetail from './user/[id]';
 import Dogs from './dogs';
+import Reviews from './mypage/breeders/reviews/reviews';
+import Reserve from './reserve';
 
 export default function Router() {
   const { isLoggedIn } = useLogin();
@@ -82,7 +83,7 @@ export default function Router() {
         <Route path="*" element={<div>404</div>} />
 
         <Route path={PATHS.mypage.adopt} element={<Adopt />} />
-        <Route path={PATHS.mypage.review} element={<Review />} />
+        <Route path={PATHS.mypage.reviews} element={<Reviews />} />
         <Route path={PATHS.mypage.breed.root} element={<Breed />} />
         <Route path={PATHS.mypage.breed.new} element={<NewBreed />} />
         <Route path={PATHS.mypage.breed.edit} element={<EditBreed />} />

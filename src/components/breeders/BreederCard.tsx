@@ -1,6 +1,6 @@
 import Board from 'components/common/board/Board';
 import { PATHS } from '../../constants';
-import { IBreeder } from 'pages/breeders';
+import { IBreeder } from 'pages/mypage/breeders';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { ReactComponent as Badge } from 'assets/images/badge.svg';
