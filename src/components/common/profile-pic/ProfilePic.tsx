@@ -9,12 +9,12 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Image = styled.img<{ verified: boolean }>`
+const Image = styled.img<{ $verified: boolean }>`
   cursor: pointer;
   width: ${(props) => props.style?.width ?? '2rem'};
   height: ${(props) => props.style?.height ?? '2rem'};
   border-radius: 50%;
-  border: ${({ verified }) => (verified ? `0.2rem solid #23F39C` : 'none')};
+  border: ${({ $verified }) => ($verified ? `0.2rem solid #23F39C` : 'none')};
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
