@@ -18,8 +18,8 @@ const PictureEl = styled.picture`
 const Picture = ({ className, imgUrl, imgAlt, avifUrl, webpUrl }: Props) => {
   return (
     <PictureEl className={className}>
-      <source srcSet={avifUrl} type="image/avif" />
-      <source srcSet={webpUrl} type="image/webp" />
+      {avifUrl && <source srcSet={avifUrl} type="image/avif" />}
+      {webpUrl && <source srcSet={webpUrl} type="image/webp" />}
       <img src={imgUrl} alt={imgAlt} />
     </PictureEl>
   );
