@@ -1,15 +1,31 @@
 import { styled } from 'styled-components';
 import Layout from 'components/common/Layout';
 import BgImage from 'assets/images/main/start_background.png';
+import BgImageAvif from 'assets/images/main/start_background.avif';
+import BgImageWebp from 'assets/images/main/start_background.webp';
+import Picture from 'components/common/Picture';
 
 const Start = styled.section`
   width: 100%;
   height: 717px;
   background: linear-gradient(324deg, #3cbe9f 8.33%, #8ff9b9 100%);
-  background-image: url(${BgImage});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  .background {
+    img {
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1920px;
+      height: 717px;
+    }
+    & + div {
+      z-index: 2;
+      position: relative;
+    }
+  }
   h2 {
     margin-top: 229px;
     color: ${({ theme }) => theme.colors.white};
@@ -62,6 +78,7 @@ const TagWrapper = styled.div`
 export default function StartSection() {
   return (
     <Start>
+      <Picture className="background" imgUrl={BgImage} avifUrl={BgImageAvif} webpUrl={BgImageWebp} imgAlt="강아지" />
       <Layout>
         <h2>
           펫트리와 함께,

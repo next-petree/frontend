@@ -1,7 +1,12 @@
 import Layout from 'components/common/Layout';
 import { styled } from 'styled-components';
 import breader from 'assets/images/main/join_breeder.png';
+import breaderAvif from 'assets/images/main/join_breeder.avif';
+import breaderWebp from 'assets/images/main/join_breeder.webp';
 import buyer from 'assets/images/main/join_hopeful_buyer.png';
+import buyerAvif from 'assets/images/main/join_hopeful_buyer.avif';
+import buyerWebp from 'assets/images/main/join_hopeful_buyer.webp';
+import Picture from 'components/common/Picture';
 
 const Join = styled.section`
   width: 100%;
@@ -91,7 +96,7 @@ const JoinSection = () => {
           <ThumbnailCard>
             <div className="thumbnailWrapper">
               <span className="tag">#브리더</span>
-              <img src={breader} alt="브리더" />
+              <Picture imgUrl={breader} imgAlt="브리더" avifUrl={breaderAvif} webpUrl={breaderWebp} />
             </div>
             <p>
               반려견의 속마음을 <br />잘 아는 브리더
@@ -100,7 +105,7 @@ const JoinSection = () => {
           <ThumbnailCard>
             <div className="thumbnailWrapper">
               <span className="tag">#분양희망자</span>
-              <img src={buyer} alt="분양희망자" />
+              <Picture imgUrl={buyer} imgAlt="분양희망자" avifUrl={buyerAvif} webpUrl={buyerWebp} />
             </div>
             <p>
               반려견을 잘 케어해 줄 <br />

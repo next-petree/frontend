@@ -1,20 +1,33 @@
 import { styled } from 'styled-components';
 import HeroImage from 'assets/images/main/hero.png';
+import HeroImageAvif from 'assets/images/main/hero.avif';
+import HeroImageWebp from 'assets/images/main/hero.webp';
 import LogoPawWhite from 'assets/images/logo_paw_white.svg';
 import LogoTextWhite from 'assets/images/logo_text_white.svg';
 import BottomArrow from 'assets/images/main/bottom_arrow.svg';
 import Layout from 'components/common/Layout';
+import Picture from 'components/common/Picture';
 
 const Hero = styled.section`
   width: 100%;
   height: 980px;
   background-color: #ddd;
-  background-image: url(${HeroImage});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  .background img {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1920px;
+    height: 980px;
+  }
 `;
+
 const HeroSloganWrapper = styled.div`
+  z-index: 2;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,6 +66,13 @@ const HeroSloganWrapper = styled.div`
 export default function HeroSection() {
   return (
     <Hero>
+      <Picture
+        className="background"
+        imgUrl={HeroImage}
+        avifUrl={HeroImageAvif}
+        webpUrl={HeroImageWebp}
+        imgAlt="히어로 이미지"
+      />
       <Layout>
         <HeroSloganWrapper id="hero-slogan-wrapper">
           <img id="logo-paw" src={LogoPawWhite} alt="logo-paw" />

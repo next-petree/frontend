@@ -1,6 +1,9 @@
 import Layout from 'components/common/Layout';
 import { styled } from 'styled-components';
 import TwoPuppys from 'assets/images/main/service_left.png';
+import TwoPuppysAvif from 'assets/images/main/service_left.avif';
+import TwoPuppysWebp from 'assets/images/main/service_left.webp';
+import Picture from 'components/common/Picture';
 
 const Service = styled.section`
   width: 100%;
@@ -9,12 +12,11 @@ const Service = styled.section`
     display: flex;
     gap: 90px;
     margin: 222px 320px 184px;
+    .left-image img {
+      width: 480px;
+      height: 440px;
+    }
   }
-`;
-
-const TowPuppysImage = styled.img`
-  width: 480px;
-  height: 440px;
 `;
 
 const TextWrapper = styled.div`
@@ -70,7 +72,13 @@ const ServiceSection = () => {
     <Service>
       <Layout>
         <div className="container">
-          <TowPuppysImage src={TwoPuppys} alt="두마리 강아지" />
+          <Picture
+            className="left-image"
+            imgUrl={TwoPuppys}
+            avifUrl={TwoPuppysAvif}
+            webpUrl={TwoPuppysWebp}
+            imgAlt="두마리 강아지"
+          />
           <TextWrapper>
             <h2>
               완전히 새로운 서비스
