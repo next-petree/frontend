@@ -92,7 +92,7 @@ const ContainerWrap = styled.div`
   display: flex;
   flex-direction: row;
   top: 17.75rem;
-  width: 85%;
+  min-width: 1280px;
   height: 100%;
 `;
 
@@ -136,6 +136,12 @@ const LabelWrap = styled.h4`
   font-style: normal;
   font-weight: 500;
   line-height: 2.25rem;
+  margin-bottom: 40px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 MypageLayout.Header = styled.div`
@@ -144,8 +150,10 @@ MypageLayout.Header = styled.div`
 `;
 MypageLayout.ContentsHeaders = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  margin-bottom: 20px;
+  position: relative;
 `;
 
 MypageLayout.Content = styled.div``;

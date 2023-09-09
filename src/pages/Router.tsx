@@ -35,6 +35,7 @@ import UserDetail from './user/[id]';
 import Dogs from './dogs';
 import Reviews from './mypage/breeders/reviews/reviews';
 import Reserve from './reserve';
+import ReviewWriting from './mypage/breeders/reviews/reviewWriting';
 
 export default function Router() {
   const { isLoggedIn } = useLogin();
@@ -83,7 +84,8 @@ export default function Router() {
         <Route path="*" element={<div>404</div>} />
 
         <Route path={PATHS.mypage.adopt} element={<Adopt />} />
-        <Route path={PATHS.mypage.reviews} element={<Reviews />} />
+        <Route path={PATHS.mypage.reviews.root} element={<Reviews />} />
+        <Route path={PATHS.mypage.reviews.edit} element={<ReviewWriting />} />
         <Route path={PATHS.mypage.breed.root} element={<Breed />} />
         <Route path={PATHS.mypage.breed.new} element={<NewBreed />} />
         <Route path={PATHS.mypage.breed.edit} element={<EditBreed />} />

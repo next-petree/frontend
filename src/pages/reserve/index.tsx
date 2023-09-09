@@ -38,11 +38,9 @@ export default function Login() {
       const { data } = await axios.get(API_PATHS.myDog(Number(params.id)));
       setProfile(data.data);
       if (data.status === 'ERROR' || data.status === 'FAIL') throw new Error('500 error');
-      888;
     } catch (e) {
       const err = e as AxiosError;
       console.log('error ::::', err.response?.data);
-      5;
     }
   };
   useEffect(() => {

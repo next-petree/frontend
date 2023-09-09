@@ -16,6 +16,7 @@
       "@types/react": "^18.0.0",
       "@types/react-dom": "^18.0.0",
       "@types/react-query": "^1.2.9",
+      "@types/ua-parser-js": "^0.7.37",
       "add": "^2.0.6",
       "axios": "^1.4.0",
       "framer-motion": "^10.15.1",
@@ -30,7 +31,9 @@
       "react-test-renderer": "^18.2.0",
       "styled-components": "^6.0.7",
       "styled-reset": "^4.5.1",
+      "toast": "^0.5.4",
       "typescript": "^5.1.6",
+      "user-agent-parser": "^0.6.0",
       "web-vitals": "^2.1.0",
       "yarn": "^1.22.19"
    },

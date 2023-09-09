@@ -12,6 +12,7 @@ interface SelectOptionProps {
   optionStyle?: React.CSSProperties;
   selectedOptionStyle?: React.CSSProperties;
   placeholder: string | undefined;
+  size: 'lg' | 'md' | 'sm';
 }
 const CustomSelect = styled.div`
   position: relative;
@@ -45,10 +46,10 @@ const StyledOption = styled.option<{ isSelected: boolean }>`
   font-weight: ${(props) => (props.isSelected ? 'bold' : 'normal')};
 `;
 
-const SelectOption: React.FC<SelectOptionProps> = ({ selectedValue, onSelect, options, placeholder }) => {
+const SelectOption: React.FC<SelectOptionProps> = ({ selectedValue, onSelect, options, placeholder, size }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   return (
-    <Container ref={containerRef}>
+    <Container ref={containerRef} size={size}>
       <CustomSelect>
         <Select placeholder={placeholder}>
           {options.map((option) => (
@@ -74,10 +75,29 @@ const SelectOption: React.FC<SelectOptionProps> = ({ selectedValue, onSelect, op
 };
 
 export default SelectOption;
-const Container = styled.div`
+const Container = styled.div<{ size: string }>`
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
-  margin-bottom: 1rem;
+  gap: 1.25rem;
+  margin-right: 15px;
+  ${(props) => {
+    switch (props.size) {
+      case 'lg':
+        return `
+        max-width:280px
+        `;
+      case 'md':
+        return `
+        max-width:240px
+        `;
+      case 'sm':
+        return `
+        max-width:160px
+        `;
+      default:
+        return '';
+    }
+  }}
 `;

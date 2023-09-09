@@ -103,7 +103,10 @@ export const PATHS = {
     /**분양 신청 내역 */
     adopt: '/mypage/adopt',
     /**분양 후기 관리 */
-    reviews: '/mypage/reviews',
+    reviews: {
+      root: '/mypage/reviews',
+      edit: '/mypage/reviews/edit/:id',
+    },
     /** 보유견종 관리 */
     breed: {
       /** 보유견종 관리 루트 */

@@ -18,6 +18,8 @@ const Input = styled.input`
   border-radius: 1rem;
   padding: 1rem 1.75rem;
   min-width: 20rem;
+  height: 48px;
+  box-sizing: border-box;
   border: none;
   transition: outline 0.2s ease-in-out;
   &::placeholder {
