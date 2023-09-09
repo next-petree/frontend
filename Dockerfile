@@ -4,7 +4,7 @@
 FROM node:lts AS development
 
 # Set working directory
-WORKDIR /app
+WORKDIR /app  
 
 # 
 COPY package.json /app/package.json
