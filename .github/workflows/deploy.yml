@@ -30,9 +30,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - run: rm /etc/nginx/conf.d/default.conf
-      - run: mv default.conf /etc/nginx/conf.d/
-      - run: service nginx reload
+      - run: mv default.conf ~/etc/nginx/conf.d/
+      - run: docker stop nginx; docker start nginx
 
       - name: Notify Deploy Job Done
         uses: 8398a7/action-slack@v3
