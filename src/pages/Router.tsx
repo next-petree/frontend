@@ -20,6 +20,7 @@ import SignUpStep1 from './signup/step-1';
 import SignUpStep2 from './signup/step-2';
 import SignUpStep3 from './signup/step-3';
 import Breeders from './breeders';
+import Reserve from './reserve';
 import Adopt from './mypage/adopt';
 import Breed from './mypage/breed';
 import Modify from './mypage/modify';
@@ -65,6 +66,7 @@ export default function Router() {
         </Route>
         {/* 강아지 모아보기 */}
         <Route path={PATHS.dogs.root} element={<Dogs />} />
+        <Route path={PATHS.reserve.root} element={<Reserve />} />
         <Route path={PATHS.breeders.root} element={<Breeders />} />
         <Route path={PATHS.breeders.detail} element={<BreederDetail />} />
         <Route path={PATHS.users.detail} element={<UserDetail />} />

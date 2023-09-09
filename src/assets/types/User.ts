@@ -38,3 +38,16 @@ interface IBreederDog {
   name: string;
   dogImgUrl: string | null;
 }
+
+export interface IBreederDogDetail {
+  id: number;
+  name: string;
+  type: string;
+  gender: string;
+  birthDate: string;
+  management: string;
+  breederId: number;
+  breederNickName: string;
+  isBreederVerified: boolean;
+  dogImgUrl: string[]
+}

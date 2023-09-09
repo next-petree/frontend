@@ -66,6 +66,8 @@ export const API_PATHS = {
   breeder: (id: number) => `/breeders/${id}`,
   /** 유저 단건 조회 */
   user: (id: number) => `/adopters/${id}`,
+  /** 분양 신청 */
+  doMatching: () => `/me/matchings/`,
 };
 
 /** 업로드 파일 확장자 */
@@ -152,6 +154,11 @@ export const PATHS = {
     root: '/breeders',
     /** 브리더 상세보기 */
     detail: '/breeders/:id',
+  },
+  /** 브리더 예약하기 */
+  reserve: {
+    /** 브리더 모아보기 루트 */
+    root: '/reserve/:id',
   },
   /** 유저 보기 */
   users: {

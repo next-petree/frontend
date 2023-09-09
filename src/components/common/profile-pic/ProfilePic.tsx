@@ -36,7 +36,13 @@ export default function ProfilePic({ verified, mine, ...props }: Props) {
 
   return (
     <Container>
-      <Image src={url} onError={handleError} alt="프로필" verified={verified ?? false} {...props} />
+      <Image
+        src={url}
+        onError={handleError}
+        alt="프로필"
+        $verified={verified !== undefined ? verified : false}
+        {...props}
+      />
       {verified && <Badge />}
     </Container>
   );
