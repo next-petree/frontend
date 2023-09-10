@@ -30,8 +30,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - run: mv default.conf ~/etc/nginx/conf.d/
-      - run: docker stop nginx; docker start nginx
+      - run: docker compose stop frontend; docker compose rm -fsv
+      - run: docker compose build
+      - run: docker compose up -d
 
       - name: Notify Deploy Job Done
         uses: 8398a7/action-slack@v3
