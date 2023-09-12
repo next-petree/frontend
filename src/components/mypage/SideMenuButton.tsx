@@ -8,15 +8,15 @@ interface ISideMenu {
 
 export default function SideMenuButton({ label, state, ...props }: ISideMenu & HTMLAttributes<HTMLButtonElement>) {
   return (
-    <Button {...props} state={state}>
+    <Button {...props} $state={state}>
       {label}
     </Button>
   );
 }
 
-const Button = styled.button<{ state: boolean }>`
+const Button = styled.button<{ $state: boolean }>`
   padding: 24px;
-  background-color: ${({ state }) => (state ? '#F5F5F5' : '#ffffff')};
+  background-color: ${({ $state }) => ($state ? '#F5F5F5' : '#ffffff')};
   color: ${({ theme }) => theme.colors.black333};
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
