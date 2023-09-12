@@ -114,7 +114,7 @@ const TableBoard = ({ category, children, ...props }: TableBoardProps) => {
 
 const TbodyItems = ({ isDisabled, children, ...props }: TbodyItemsProps) => {
   return (
-    <tr className={isDisabled ? '' : 'disabled'} {...props}>
+    <tr className={isDisabled ? 'disabled' : ''} {...props}>
       {children}
     </tr>
   );
