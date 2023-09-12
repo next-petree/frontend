@@ -48,6 +48,7 @@ const Title = styled.p`
 export default function Breeders() {
   const SIZE = 8 as const;
   const [page, setPage] = useState(1);
+  const [verification, setVerification] = useState(true);
   const [breeders, setBreeders] = useState<IBreeder[]>([]);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
@@ -55,8 +56,7 @@ export default function Breeders() {
     last: false,
     number: 0,
   });
-
-  const fetchBreeders = async ({ keyword = '', page = 0 }) => {
+  const fetchBreeders = async ({ keyword = '', page = 0, verification = true }) => {
     try {
       const { data: res } = await axios.get<AxiosResponse<Pageable<IBreeder[]>>>('/breeders', {
         params: {
@@ -64,6 +64,7 @@ export default function Breeders() {
           keyword,
           size: SIZE,
           sort: 'string',
+          verification: verification ? 'yes' : '',
         },
       });
 
@@ -80,18 +81,21 @@ export default function Breeders() {
   };
 
   const onSearch = async (keyword: string) => {
-    fetchBreeders({ keyword });
+    fetchBreeders({ keyword, verification });
+  };
+  const handleSwitchChange = () => {
+    setVerification(!verification);
   };
 
   useEffect(() => {
-    fetchBreeders({ page: page - 1 });
-  }, [page]);
+    fetchBreeders({ page: page - 1, verification });
+  }, [page, verification]);
 
   return (
     <Layout style={{ marginTop: '10rem' }}>
       <Title>브리더 모아보기</Title>
       <div style={{ display: 'flex' }}>
-        <Switch />
+        <Switch checked={verification} onChange={handleSwitchChange} />
         <Text>인증 브리더만 보기</Text>
         <SearchInput placeholder="원하시는 견종을 입력해주세요." onSearch={onSearch} />
       </div>

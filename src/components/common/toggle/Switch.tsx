@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 import { styled } from 'styled-components';
 
 const StyledLabel = styled.label<{ checked: boolean }>`
@@ -25,14 +25,15 @@ const StyledLabel = styled.label<{ checked: boolean }>`
   }
 `;
 
-const Switch = () => {
-  const [switchState, setSwitchState] = useState(true);
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    setSwitchState(!switchState);
-  }
+interface Props {
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Switch = ({ checked, onChange }: Props) => {
   return (
-    <StyledLabel htmlFor="checkbox" checked={switchState}>
-      <input id="checkbox" type="checkbox" checked={switchState} onChange={handleOnChange} />
+    <StyledLabel htmlFor="checkbox" checked={checked}>
+      <input id="checkbox" type="checkbox" checked={checked} onChange={onChange} />
     </StyledLabel>
   );
 };
