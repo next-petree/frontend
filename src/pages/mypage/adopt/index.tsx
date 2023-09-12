@@ -40,7 +40,11 @@ export default function Adopt() {
     <AdoptWrapper>
       <MypageLayout>
         <MypageForm>
-          <MypageLayout.Label>{role === 'BREEDER' ? '분양신청내역' : '신청내역'}</MypageLayout.Label>
+          <MypageLayout.Label
+            subText={role === 'BREEDER' ? '' : '신청내역 > 상세보기를 클릭하면 브리더정보를 확인하실 수 있습니다.'}
+          >
+            {role === 'BREEDER' ? '분양신청내역' : '신청내역'}
+          </MypageLayout.Label>
           <MypageLayout.ContentsHeaders
             style={{
               marginBottom: '26px',
@@ -54,7 +58,7 @@ export default function Adopt() {
               size="sm"
             ></SelectOption>
             <SearchInput
-              placeholder="검색어를 입력해주세요."
+              placeholder="내역을 검색하세요"
               onSearch={(value) => {
                 onSearch(value);
               }}

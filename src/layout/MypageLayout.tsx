@@ -148,22 +148,36 @@ const Gap = styled.div`
   flex: 1;
 `;
 
-MypageLayout.Label = function Label({ children }: { children: React.ReactNode }) {
-  return <LabelWrap>{children}</LabelWrap>;
+MypageLayout.Label = function Label({ subText, children }: { subText?: string; children: React.ReactNode }) {
+  return (
+    <LabelWrap>
+      <h4>{children}</h4>
+      {subText && <p className="sub-text">{subText}</p>}
+    </LabelWrap>
+  );
 };
 
-const LabelWrap = styled.h4`
-  font-size: 1.75rem;
-  font-style: normal;
-  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
-  font-weight: 500;
-  line-height: 2.25rem;
+const LabelWrap = styled.div`
   margin-bottom: 40px;
   position: relative;
   display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
+  h4 {
+    font-size: 1.75rem;
+    font-style: normal;
+    font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
+    font-weight: 500;
+    line-height: 2.25rem;
+  }
+  p {
+    color: #7a7a7a;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+  }
 `;
 
 MypageLayout.Header = styled.div`
