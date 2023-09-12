@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import DefaultImage from 'assets/images/logo_paw_white.svg';
 import { useEffect, useState } from 'react';
+import { ReactComponent as Badge } from 'assets/images/badge.svg';
 
 const Container = styled.div<{ col: number; row: number }>`
   display: grid;
@@ -32,6 +33,7 @@ const ImageComp = styled.img`
 `;
 
 const NoImage = styled.div`
+  position: relative;
   width: 15rem;
   height: 9rem;
   background-color: #dfdfdf;
@@ -40,13 +42,14 @@ const NoImage = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 0.5rem;
   color: #fff;
 `;
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  verified: boolean;
+}
 
-Board.Image = function Image({ alt, src, ...props }: ImageProps) {
+Board.Image = function Image({ alt, src, verified, ...props }: ImageProps) {
   const [noImage, setNoImage] = useState(false);
 
   useEffect(() => {
@@ -60,10 +63,34 @@ Board.Image = function Image({ alt, src, ...props }: ImageProps) {
   return noImage ? (
     <NoImage>
       <img src={DefaultImage} alt="noimage" />
+      {verified && (
+        <Badge
+          style={{
+            position: 'absolute',
+            left: '188px',
+            top: '92px',
+            width: '2.5rem',
+            height: '2.5rem',
+          }}
+        />
+      )}
       <span>프로필 이미지가 없습니다.</span>
     </NoImage>
   ) : (
-    <ImageComp src={src} alt={alt} {...props} />
+    <div style={{ position: 'relative' }}>
+      <ImageComp src={src} alt={alt} {...props} />
+      {verified && (
+        <Badge
+          style={{
+            position: 'absolute',
+            left: '188px',
+            top: '92px',
+            width: '2.5rem',
+            height: '2.5rem',
+          }}
+        />
+      )}
+    </div>
   );
 };
 

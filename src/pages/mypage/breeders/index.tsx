@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import BreederCard from 'components/breeders/BreederCard';
+import { styled } from 'styled-components';
 import Layout from 'components/common/Layout';
+import Switch from 'components/common/toggle/Switch';
 import Board from 'components/common/board/Board';
 import Pagination from 'components/common/board/Pagination';
 import SearchInput from 'components/common/search/SearchInput';
@@ -19,6 +21,30 @@ export interface IBreeder {
   profileImagUrl: string;
 }
 
+const Text = styled.p`
+  display: flex;
+  align-items: center;
+  color: #4ec1bf;
+  font-family: Noto Sans KR;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.42px;
+  margin-left: 15px;
+  margin-right: 27px;
+`;
+
+const Title = styled.p`
+  color: #4ec1bf;
+  font-family: Noto Sans KR;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 111.111% */
+  letter-spacing: -1.8px;
+  margin-bottom: 42px;
+`;
 export default function Breeders() {
   const SIZE = 8 as const;
   const [page, setPage] = useState(1);
@@ -62,8 +88,14 @@ export default function Breeders() {
   }, [page]);
 
   return (
-    <Layout>
-      <SearchInput placeholder="원하는 견종을 입력하세요..." onSearch={onSearch} />
+    <Layout style={{ marginTop: '10rem' }}>
+      <Title>브리더 모아보기</Title>
+      <div style={{ display: 'flex' }}>
+        <Switch />
+        <Text>인증 브리더만 보기</Text>
+        <SearchInput placeholder="원하시는 견종을 입력해주세요." onSearch={onSearch} />
+      </div>
+
       <Board
         style={{
           marginBottom: '7.25rem',
@@ -74,6 +106,7 @@ export default function Breeders() {
           <BreederCard key={breeder.id} {...breeder} />
         ))}
       </Board>
+
       <Pagination
         style={{
           marginBottom: '4.25rem',

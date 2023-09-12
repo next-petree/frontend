@@ -16,7 +16,7 @@ const Input = styled.input`
   line-height: normal;
   letter-spacing: -0.03rem;
   border-radius: 1rem;
-  padding: 1rem 1.75rem;
+  padding: 1rem 1.5rem;
   min-width: 20rem;
   height: 48px;
   box-sizing: border-box;
@@ -47,7 +47,7 @@ export default function SearchInput({ onSearch, ...props }: Props) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} style={{ marginTop: 175 }}>
+    <Form onSubmit={handleSubmit}>
       <Input onChange={(e) => setKeyword(e.target.value)} value={keyword} {...props} />
       <Button onClick={onButtonClick} buttonSize={ButtonSize.SMALL}>
         검색
