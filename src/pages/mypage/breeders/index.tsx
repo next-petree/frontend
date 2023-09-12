@@ -96,16 +96,22 @@ export default function Breeders() {
         <SearchInput placeholder="원하시는 견종을 입력해주세요." onSearch={onSearch} />
       </div>
 
-      <Board
-        style={{
-          marginBottom: '7.25rem',
-          marginTop: '4rem',
-        }}
-      >
-        {breeders.map((breeder) => (
-          <BreederCard key={breeder.id} {...breeder} />
-        ))}
-      </Board>
+      {breeders.length ? (
+        <Board
+          style={{
+            marginBottom: '7.25rem',
+            marginTop: '5.5rem',
+          }}
+        >
+          {breeders.map((breeder) => (
+            <BreederCard key={breeder.id} {...breeder} />
+          ))}
+        </Board>
+      ) : (
+        <div>
+          <h1>검색 결과가 없습니다.</h1>
+        </div>
+      )}
 
       <Pagination
         style={{
@@ -119,11 +125,6 @@ export default function Breeders() {
           setPage(page);
         }}
       />
-      {breeders.length === 0 && (
-        <div>
-          <h1>검색 결과가 없습니다.</h1>
-        </div>
-      )}
     </Layout>
   );
 }
