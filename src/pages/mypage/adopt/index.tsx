@@ -1,0 +1,79 @@
+import { useJwtInfo } from 'hooks/useJwtInfo';
+import SelectOption from 'components/common/select/SelectOption';
+import SearchInput from 'components/common/search/SearchInput';
+import MypageLayout from 'layout/MypageLayout';
+import MypageForm from 'layout/MypageForm';
+import { useState } from 'react';
+import Pagination from 'components/common/board/Pagination';
+import BreederBoard from './Breeder';
+import UserBoard from './User';
+import { styled } from 'styled-components';
+import { Page } from 'pageable-response';
+
+const AdoptWrapper = styled.section`
+  .container {
+    min-height: 58rem;
+  }
+`;
+
+export default function Adopt() {
+  const [page, setPage] = useState(0);
+  const [pageInfo, setPageInfo] = useState<Page>({
+    totalPages: 0,
+    first: false,
+    last: false,
+    number: 0,
+  });
+  const { role } = useJwtInfo();
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const searchOptions = [
+    { value: 'all', label: '전체' },
+    { value: 'breed', label: '견종' },
+    { value: 'name', label: '강아지 이름' },
+  ];
+
+  const onSearch = async (keyword: string) => {
+    // keyword로 찾기 api 쓰겠쥬
+  };
+  // {role === 'BREEDER' ? <Breeder /> : <User />}
+  return (
+    <AdoptWrapper>
+      <MypageLayout>
+        <MypageForm>
+          <MypageLayout.Label>{role === 'BREEDER' ? '분양신청내역' : '신청내역'}</MypageLayout.Label>
+          <MypageLayout.ContentsHeaders
+            style={{
+              marginBottom: '26px',
+            }}
+          >
+            <SelectOption
+              selectedValue={selectedOption}
+              onSelect={setSelectedOption}
+              options={searchOptions}
+              placeholder="항목을 선택해 주세요"
+              size="sm"
+            ></SelectOption>
+            <SearchInput
+              placeholder="검색어를 입력해주세요."
+              onSearch={(value) => {
+                onSearch(value);
+              }}
+            />
+          </MypageLayout.ContentsHeaders>
+          <MypageLayout.Content>{role === 'BREEDER' ? <BreederBoard /> : <UserBoard />}</MypageLayout.Content>
+          <MypageLayout.Footer>
+            <Pagination
+              style={{
+                alignSelf: 'center',
+                margin: '64px auto',
+              }}
+              currentpage={page}
+              totalPage={pageInfo.totalPages}
+              onChange={(page) => setPage(page)}
+            />
+          </MypageLayout.Footer>
+        </MypageForm>
+      </MypageLayout>
+    </AdoptWrapper>
+  );
+}

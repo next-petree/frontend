@@ -46,7 +46,7 @@ const Table = styled.table`
   tbody {
     tr {
       td {
-        padding: 22px 10px;
+        padding: 19px 10px;
         text-align: center;
         vertical-align: middle;
         color: #9e9e9e;
