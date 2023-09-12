@@ -112,7 +112,7 @@ const ContainerWrap = styled.div`
   display: flex;
   flex-direction: row;
   gap: 35px;
-  min-width: 1280px;
+  min-width: 1400px;
   height: 100%;
 `;
 
