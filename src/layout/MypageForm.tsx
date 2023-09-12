@@ -5,16 +5,16 @@ interface IMypageForm {
 }
 
 export default function MypageForm({ children }: IMypageForm) {
-  return <Container>{children}</Container>;
+  return <Container className="container">{children}</Container>;
 }
 
 const Container = styled.div`
   width: 100%;
   padding: 80px 2.2rem 3rem 2.2rem;
-  background-color: #ffffff;
-  border-radius: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-  min-height: 928px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 32px;
+  margin-bottom: 40px;
+  min-height: 300px;
   box-sizing: border-box;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.09);
 `;

@@ -1,12 +1,15 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import ICON1 from 'assets/images/mypage/icon1.svg';
-import ICON2 from 'assets/images/mypage/icon2.svg';
-import LOGO from 'assets/images/mypage/logo.svg';
+import LogoPow from 'assets/images/mypage/subbanner/logo_paw_brown.svg';
+import LogoText from 'assets/images/mypage/subbanner/logo_text_brown.svg';
+import Background from 'assets/images/mypage/subbanner/sub_banner_background.png';
+import BackgroundAvif from 'assets/images/mypage/subbanner/sub_banner_background.avif';
+import BackgroundWebp from 'assets/images/mypage/subbanner/sub_banner_background.webp';
 import SideMenuButton from 'components/mypage/SideMenuButton';
 import { adoptmenuItem, breedmenuItem } from 'components/mypage/sidemenuItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useJwtInfo } from 'hooks/useJwtInfo';
+import Picture from 'components/common/Picture';
 
 interface IMypageLayout {
   children: React.ReactNode;
@@ -22,12 +25,20 @@ export default function MypageLayout({ children, ...props }: IMypageLayout & HTM
   return (
     <Container {...props}>
       <HeaderWrap>
-        <Img1 src={ICON1} />
-        <Logo src={LOGO} />
-        <Img2 src={ICON2} />
+        <Picture
+          className="background"
+          imgUrl={Background}
+          avifUrl={BackgroundAvif}
+          webpUrl={BackgroundWebp}
+          imgAlt="서브배너 강아지"
+        />
+        <div className="logo">
+          <img className="logo-pow" src={LogoPow} alt="펫트리 로고 발바닥" />
+          <img className="logo-text" src={LogoText} alt="펫트리 로고 텍스트" />
+        </div>
       </HeaderWrap>
       <ContainerWrap>
-        <SideMenu>
+        <SideMenu className="side-menu">
           {menuList.map((v, i) => (
             <SideMenuButton
               key={i}
@@ -52,46 +63,55 @@ export default function MypageLayout({ children, ...props }: IMypageLayout & HTM
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 105rem;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
 `;
 
 const HeaderWrap = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   width: 100%;
-  height: 23.938rem;
+  height: 383px;
   background-color: #4ec1bf;
-  padding-left: 8rem;
-`;
-
-const Img1 = styled.img`
-  width: 7.563rem;
-  height: 12.813rem;
-  margin-bottom: 1rem;
-  margin-top: 1.4rem;
-`;
-const Img2 = styled.img`
-  width: 11.261rem;
-  height: 14.799rem;
-  margin-top: 4.8rem;
-  margin-left: 18rem;
-`;
-
-const Logo = styled.img`
-  width: 21.438rem;
-  height: 6.688rem;
-  margin-left: 4rem;
+  overflow: hidden;
+  .background img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1920px;
+    height: 383px;
+  }
+  .logo {
+    padding: 24px 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-100% - 224px), -50%);
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    &-pow {
+      width: 107.826px;
+      height: 107.826px;
+      flex-shrink: 0;
+    }
+    &-text {
+      width: 218.456px;
+      height: 71.754px;
+      flex-shrink: 0;
+    }
+  }
 `;
 
 const ContainerWrap = styled.div`
-  position: absolute;
+  margin-top: -100px;
+  margin: -100px 0 100px;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: row;
-  top: 17.75rem;
+  gap: 35px;
   min-width: 1280px;
   height: 100%;
 `;
@@ -99,12 +119,13 @@ const ContainerWrap = styled.div`
 const SideMenu = styled.div`
   display: flex;
   flex-direction: column;
-  width: 17%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 325px;
   height: 58rem;
-  margin-right: 3rem;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-  border-radius: 1.5rem;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.09);
+  border-radius: 20px;
 `;
 
 const ContentWrap = styled.div`
