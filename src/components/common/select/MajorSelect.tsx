@@ -15,6 +15,7 @@ const Container = styled.div`
 
 interface BreedSearchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
   onChange?: (values: BreedSelectType[]) => void;
+  maxNum?: number;
 }
 
 export interface BreedSearchType {
@@ -27,11 +28,11 @@ export interface BreedSearchType {
 export type BreedSelectType = Pick<BreedSearchType, 'id' | 'name'>;
 
 /**
- * 강아지의 종 3개까지 선택 가능한 select 컴포넌트
+ * 강아지의 종 maxNum개까지 선택 가능한 select 컴포넌트
  * onChange 이벤트로 선택된 종을 전달
  * @param onChange: (value: BreedSelectType[]) => void
  */
-export default function MajorSelect({ onChange, ...props }: BreedSearchProps) {
+export default function MajorSelect({ onChange, style, maxNum = 3, ...props }: BreedSearchProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selected, setSelected] = useState<BreedSelectType[]>([]); // MAX 3
   const [searchResult, setSearchResult] = useState<BreedSearchType[]>([]);
@@ -56,7 +57,7 @@ export default function MajorSelect({ onChange, ...props }: BreedSearchProps) {
     if (isIncluded(breed.id)) {
       setSelected((prev) => prev.filter((e) => e.id !== breed.id));
     } else {
-      if (selected.length >= 3) return;
+      if (selected.length >= maxNum) return;
       setSelected((prev) => [...prev, { name: breed.name, id: breed.id }]);
     }
     focusInput();
@@ -76,6 +77,7 @@ export default function MajorSelect({ onChange, ...props }: BreedSearchProps) {
   };
 
   useEffect(() => {
+    console.log('=========');
     onChange?.(selected);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
@@ -102,10 +104,10 @@ export default function MajorSelect({ onChange, ...props }: BreedSearchProps) {
   });
 
   return (
-    <Container ref={containerRef}>
+    <Container ref={containerRef} style={style}>
       <SearchBreed
         ref={inputRef}
-        placeholder="원하는 견종을 검색하세요"
+        placeholder="원하시는 견종을 입력해 주세요."
         setSearchResult={setSearchResult}
         onFocus={handleFocus}
         onChange={(e) => setInputText(e.target.value)}

@@ -47,7 +47,7 @@ export default function SearchInput({ onSearch, ...props }: Props) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ marginTop: 175 }}>
       <Input onChange={(e) => setKeyword(e.target.value)} value={keyword} {...props} />
       <Button onClick={onButtonClick} buttonSize={ButtonSize.SMALL}>
         검색

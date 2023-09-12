@@ -4,6 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { CONSTANTS } from './constants';
+import { Provider } from 'react-redux';
+import store from './store';
 
 axios.defaults.baseURL = CONSTANTS.API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -33,6 +35,10 @@ axios.interceptors.request.use((config) => {
 // );
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+);
 
 reportWebVitals();

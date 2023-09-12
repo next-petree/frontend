@@ -29,11 +29,16 @@ const dogStatusList: List<E_Dog_Status> = [
 export const dogStatusMap = parseListToMap(dogStatusList);
 
 export enum E_Dog_Gender {
+  ALL = 'ALL',
   MALE = 'MALE',
   FEMALE = 'FEMALE'
 }
 
-const dogGenderList : List<E_Dog_Gender> = [
+export const dogGenderList : List<E_Dog_Gender> = [
+  {
+    code: E_Dog_Gender.ALL,
+    label: '전체',
+  },
   {
     code: E_Dog_Gender.MALE,
     label: '수컷',
@@ -43,5 +48,24 @@ const dogGenderList : List<E_Dog_Gender> = [
     label: '암컷',
   }
 ]
+
+export enum E_is_verified {
+  ALL = 'ALL',
+  IS_VERIFIED = 'IS_VERIFIED',
+}
+
+export enum E_is_available {
+  ALL = 'ALL',
+  IS_AVAILABLE = 'IS_AVAILABLE',
+}
+
+export enum E_dog_size {
+  ALL = 'ALL',
+  EXTRA_SMALL = 'EXTRA_SMALL',
+  SMALL = 'SMALL',
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE',
+  UNKNOWN = 'UNKNOWN',
+}
 
 export const dogGenderMap = parseListToMap(dogGenderList);

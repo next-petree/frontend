@@ -62,11 +62,7 @@ export default function Breeders() {
   }, [page]);
 
   return (
-    <Layout
-      style={{
-        marginTop: '10rem',
-      }}
-    >
+    <Layout>
       <SearchInput placeholder="원하는 견종을 입력하세요..." onSearch={onSearch} />
       <Board
         style={{

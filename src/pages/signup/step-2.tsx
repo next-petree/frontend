@@ -132,9 +132,9 @@ export default function Step2() {
       return;
     }
 
-    if (!userInfo.nicknameChecked) {
-      return;
-    }
+    // if (!userInfo.nicknameChecked) {
+    //   return;
+    // }
 
     try {
       const { data: res } = await axios.get('/nickname/check', {
@@ -541,13 +541,13 @@ const Img = styled.img`
   margin: 3rem 0;
 `;
 
-const HashtagBox = styled.div`
+export const HashtagBox = styled.div`
   display: flex;
   flex-direction: row;
   margin: -1rem 0 0.5rem 0;
 `;
 
-const Hashtag = styled.span`
+export const Hashtag = styled.span`
   font-size: 1rem;
   border-radius: 1rem;
   padding: 0.5rem;

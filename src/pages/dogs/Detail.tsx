@@ -4,20 +4,33 @@
  */
 
 import { styled, css } from 'styled-components';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import BadgeSvg from 'assets/images/badge.svg';
 import { E_Dog_Gender, dogGenderMap } from './constatns';
 import { DogDetailProp } from '.';
+import { Link } from 'react-router-dom';
+import CloseBtnSvg from 'assets/CloseBtn.svg';
 
 interface Props {
   info: DogDetailProp | undefined;
+  onClose: () => void;
 }
 
-const Detail: FC<Props> = ({ info }) => {
+const Detail: FC<Props> = ({ info, onClose }) => {
   const [selectedImgId, setSelectedImgId] = useState<number>(0);
+
+  useEffect(() => {
+    window.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    });
+    return () => window.removeEventListener('keydown', () => onClose);
+  }, [onClose]);
 
   return (
     <Modal>
+      <CloseBtn src={CloseBtnSvg} alt="closeBtn" onClick={onClose} />
       <Top>
         <Left>
           {info?.imagesUrl && <BigImg src={info?.imagesUrl[selectedImgId]} alt="main_img" />}
@@ -50,12 +63,12 @@ const Detail: FC<Props> = ({ info }) => {
               )}
             </P>
           </RightDetail>
-          <Button>예약하기</Button>
+          <Button to={`/reserve/${info?.id}`}>예약하기</Button>
         </Right>
       </Top>
       <Bottom>
-        <h3 style={{ marginBottom: '2rem' }}>상세설명</h3>
-        <P style={{ marginLeft: 20 }}>{info?.management}</P>
+        <P style={{ marginBottom: '2rem', fontSize: 20 }}>상세설명</P>
+        <h3 style={{ marginLeft: 20 }}>{info?.management}</h3>
       </Bottom>
     </Modal>
   );
@@ -147,7 +160,7 @@ const RightDetail = styled.div`
   width: 100%;
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
   border-radius: 1rem;
   width: 120px;
   height: 52px;
@@ -156,7 +169,22 @@ const Button = styled.button`
   font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   font-size: 16px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Bottom = styled.div`
   margin-top: 37px;
+`;
+
+const CloseBtn = styled.img`
+  background: black;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -22px;
+  right: -22px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
 `;

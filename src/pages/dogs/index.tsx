@@ -7,13 +7,13 @@ import axios, { AxiosResponse } from 'axios';
 import Layout from 'components/common/Layout';
 import Board from 'components/common/board/Board';
 import Pagination from 'components/common/board/Pagination';
-import SearchInput from 'components/common/search/SearchInput';
 import { useState, useEffect, FC } from 'react';
 import { Page, Pageable } from 'pageable-response';
 import DogCard from './DogCard';
 import { E_Dog_Gender, E_Dog_Status } from './constatns';
 import Detail from './Detail';
 import { styled } from 'styled-components';
+import SearchModal from './SearchModal';
 
 export interface IDog {
   id: number;
@@ -36,6 +36,7 @@ const Dogs: FC = () => {
   const [dogs, setDogs] = useState<any>([]);
   const [selectedDogId, setSelectedDogId] = useState<number | undefined>();
   const [selectedDogInfo, setSelectedDogInfo] = useState<DogDetailProp | undefined>();
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
@@ -73,11 +74,6 @@ const Dogs: FC = () => {
     }
   };
 
-  const onSearch = async (keyword: string) => {
-    setPage(1); // reset pagination
-    fetchDogs({ keyword });
-  };
-
   const handleDetail = async (id: number) => {
     setSelectedDogId(id);
     try {
@@ -91,8 +87,11 @@ const Dogs: FC = () => {
   };
 
   return (
-    <Layout>
-      <SearchInput placeholder="원하시는 견종을 입력해주세요" onSearch={onSearch} style={{ marginTop: 175 }} />
+    <Layout style={{ display: 'flex', flexFlow: 'column' }}>
+      <Title>강아지 모아보기</Title>
+      <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', paddingRight: 90 }}>
+        <SearchBtn onClick={() => setIsSearching(true)}>검색 필터</SearchBtn>
+      </div>
       <Board
         style={{
           marginBottom: '7.25rem',
@@ -118,14 +117,16 @@ const Dogs: FC = () => {
           }}
         />
       ) : (
-        <div>
-          <h1>검색 결과가 없습니다.</h1>
+        <div style={{ height: '100vh' }}>
+          <NoResult>검색 결과가 없습니다.</NoResult>
         </div>
       )}
-      {selectedDogId && (
-        <Mask style={{ display: `${selectedDogId ? 'block' : 'none'}` }} onClick={() => setSelectedDogId(undefined)} />
-      )}
-      {selectedDogId && <Detail info={selectedDogInfo} />}
+      <Mask
+        style={{ display: `${selectedDogId || isSearching ? 'block' : 'none'}` }}
+        onClick={() => setSelectedDogId(undefined)}
+      />
+      {selectedDogId && <Detail info={selectedDogInfo} onClose={() => setSelectedDogId(undefined)} />}
+      {isSearching && <SearchModal onClose={() => setIsSearching(false)} setDogs={setDogs} setPageInfo={setPageInfo} />}
     </Layout>
   );
 };
@@ -137,4 +138,32 @@ const Mask = styled.div`
   height: 100%;
   position: absolute;
   background: #5a5a5a40;
+`;
+
+const Title = styled.p`
+  margin-top: 175px;
+  font-family: Noto Sans KR;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #4ec1bf;
+`;
+
+const SearchBtn = styled.button`
+  border-radius: 1em;
+  width: 120px;
+  height: 52px;
+  background: #4ec1bf;
+  color: #fff;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  margin-top: 59px;
+`;
+
+const NoResult = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 40px;
 `;
