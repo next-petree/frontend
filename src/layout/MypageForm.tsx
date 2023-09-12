@@ -10,7 +10,7 @@ export default function MypageForm({ children }: IMypageForm) {
 
 const Container = styled.div`
   width: 100%;
-  padding: 80px 2.2rem 3rem 2.2rem;
+  padding: 80px 46px 3rem;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 32px;
   margin-bottom: 40px;
