@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { Page } from 'pageable-response';
 import MypageForm from 'layout/MypageForm';
-import SelectOption from 'components/common/select/OptionsSelected';
+import SelectOption from 'components/common/select/SelectOption';
 import { styled } from 'styled-components';
 import EXEOG from 'assets/images/reviews/dog_01.png';
 interface Option {
