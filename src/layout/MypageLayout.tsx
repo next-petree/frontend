@@ -155,6 +155,7 @@ MypageLayout.Label = function Label({ children }: { children: React.ReactNode })
 const LabelWrap = styled.h4`
   font-size: 1.75rem;
   font-style: normal;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   font-weight: 500;
   line-height: 2.25rem;
   margin-bottom: 40px;
