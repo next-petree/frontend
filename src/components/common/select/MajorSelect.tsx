@@ -77,7 +77,6 @@ export default function MajorSelect({ onChange, style, maxNum = 3, ...props }: B
   };
 
   useEffect(() => {
-    console.log('=========');
     onChange?.(selected);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);

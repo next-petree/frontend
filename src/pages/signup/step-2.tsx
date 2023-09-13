@@ -43,7 +43,27 @@ export default function Step2() {
     verify: '',
   });
 
-  const [userInfo, setUserInfo] = useState({
+  interface userInfoType {
+    emailChecked: boolean;
+    nicknameChecked: boolean;
+    phoneNumberChecked: boolean;
+    verifyChecked: boolean;
+    passwordChecked: boolean;
+    confirmPasswordChecked: boolean;
+    addressChecked: boolean;
+    email: string;
+    nickname: string;
+    password: string;
+    confirmPassword: string;
+    phoneNumber: string;
+    verifyNumber: string;
+    address1: string;
+    address2: string;
+    role: Role;
+    dogTypeId: any[];
+  }
+
+  const [userInfo, setUserInfo] = useState<userInfoType>({
     emailChecked: false,
     nicknameChecked: false,
     phoneNumberChecked: false,
@@ -60,7 +80,7 @@ export default function Step2() {
     address1: '',
     address2: '',
     role: Role.BREEDER,
-    dogTypeId: [{}],
+    dogTypeId: [],
   });
   const [daumAddress, setDaumAddress] = useState({
     address: '',
@@ -121,8 +141,8 @@ export default function Step2() {
     } catch (error: any) {}
   };
 
-  const handleGetDogId = () => {
-    setUserInfo((prev) => ({ ...prev, dogTypeId: dogTypeIdList!.map((v: any) => v.id) }));
+  const handleGetDogId = (v: any) => {
+    setUserInfo((prev) => ({ ...prev, dogTypeId: v!.map((v: any) => v.id) }));
   };
 
   const handleNicknameCheck = async () => {
@@ -215,7 +235,7 @@ export default function Step2() {
   };
 
   const handleSubmit = async () => {
-    handleGetDogId();
+    // handleGetDogId();
     if (
       userInfo.emailChecked &&
       userInfo.nicknameChecked &&
@@ -379,6 +399,7 @@ export default function Step2() {
               <MajorSelect
                 onChange={(v) => {
                   setDogTypeIdList(v);
+                  handleGetDogId(v);
                 }}
               />
               <HashtagBox>{dogTypeIdList?.map((v, i) => <Hashtag key={i}>#{v.name}</Hashtag>)}</HashtagBox>

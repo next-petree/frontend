@@ -141,12 +141,13 @@ const Mask = styled.div`
 `;
 
 const Title = styled.p`
-  margin-top: 175px;
+  margin-top: 10rem;
   font-family: Noto Sans KR;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 40px;
   color: #4ec1bf;
+  letter-spacing: -1.8px;
 `;
 
 const SearchBtn = styled.button`
