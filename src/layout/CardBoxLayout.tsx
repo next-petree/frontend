@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0;
+  font-family: 'Noto Sans KR', sans-serif !important;
 `;
 
 const Box = styled.div`
@@ -19,10 +20,13 @@ const Box = styled.div`
   width: 1420px;
   min-height: 300px;
   box-sizing: border-box;
-  padding: 86px;
+  padding: 86px 0px;
   border-radius: 32px;
   background: white;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.09);
+  > div {
+    margin: auto;
+  }
 `;
 const SubContainer = styled.div`
   position: relative;
@@ -62,8 +66,10 @@ export default function CardBoxLayout({ children, ...props }: IDefaultLayout & H
       <SubContainer>
         <SubVisual $bg={props.bg} />
         <Box>
-          <SubTitle>{props.title}</SubTitle>
-          {children}
+          <div>
+            <SubTitle>{props.title}</SubTitle>
+            {children}
+          </div>
         </Box>
       </SubContainer>
     </Container>

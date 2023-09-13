@@ -62,6 +62,8 @@ export const API_PATHS = {
   myDogs: '/breeder/dogs',
   /** 보유 견종 단건 조회 */
   myDog: (id: number) => `/breeder/dogs/${id}`,
+  /** 강아지 개별 상세정보 */
+  myDogDetail: (id: number) => `/dogs/${id}`,
   /** 브리더 단건 조회 */
   breeder: (id: number) => `/breeders/${id}`,
   /** 유저 단건 조회 */
