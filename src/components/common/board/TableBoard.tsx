@@ -90,6 +90,9 @@ const Table = styled.table`
         &.uid {
           color: #ccc;
         }
+        td button {
+          background: #b7b7b7;
+        }
       }
     }
   }

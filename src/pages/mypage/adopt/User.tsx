@@ -70,7 +70,7 @@ const UserBoard = () => {
       <TableBoard category={listCategory}>
         {list?.map(({ matchingId, adopterNickname, submitDate, nameAndBreed, isProcessed }) => {
           return (
-            <TableBoard.TbodyItems key={matchingId} isDisabled={isProcessed}>
+            <TableBoard.TbodyItems key={matchingId} isDisabled={!isProcessed}>
               <td className="uid matching-id">{matchingId}</td>
               <td className="adopter-nickname,">{adopterNickname}</td>
               <td className="submit-date">{submitDate}</td>
