@@ -35,6 +35,7 @@ import UserDetail from './user/[id]';
 import Dogs from './dogs';
 import Reviews from './mypage/breeders/reviews/reviews';
 import Reserve from './reserve';
+import BreederCert from './breedercert';
 import ReviewWriting from './mypage/breeders/reviews/reviewWriting';
 
 export default function Router() {
@@ -91,6 +92,7 @@ export default function Router() {
         <Route path={PATHS.mypage.breed.edit} element={<EditBreed />} />
         <Route path={PATHS.mypage.profile} element={<Profile />} />
         <Route path={PATHS.mypage.modify} element={<Modify />} />
+        <Route path={PATHS.breedercert.root} element={<BreederCert />} />
       </Routes>
       <Footer />
     </BrowserRouter>

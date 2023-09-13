@@ -165,6 +165,10 @@ export const PATHS = {
     /** 브리더 모아보기 루트 */
     root: '/reserve/:id',
   },
+  /** 브리더 인증받기 */
+  breedercert: {
+    root: '/breedercert/:breeder/:admin',
+  },
   /** 유저 보기 */
   users: {
     /** 유저 상세보기 */

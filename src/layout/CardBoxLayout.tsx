@@ -58,6 +58,7 @@ interface IDefaultLayout {
   children: React.ReactNode;
   bg: string;
   title: string;
+  subtitle?: string;
 }
 
 export default function CardBoxLayout({ children, ...props }: IDefaultLayout & HTMLAttributes<HTMLDivElement>) {
@@ -67,7 +68,10 @@ export default function CardBoxLayout({ children, ...props }: IDefaultLayout & H
         <SubVisual $bg={props.bg} />
         <Box>
           <div>
-            <SubTitle>{props.title}</SubTitle>
+            <SubTitle>
+              {props.title}
+              {props.subtitle ? <span>{props.subtitle}</span> : ''}
+            </SubTitle>
             {children}
           </div>
         </Box>
