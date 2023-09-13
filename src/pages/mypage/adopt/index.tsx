@@ -41,9 +41,13 @@ export default function Adopt() {
       <MypageLayout>
         <MypageForm>
           <MypageLayout.Label
-            subText={role === 'BREEDER' ? '' : '신청내역 > 상세보기를 클릭하면 브리더정보를 확인하실 수 있습니다.'}
+            subText={
+              role === 'BREEDER'
+                ? '분양 승인시, 분양희망자의 연락처가 공개됩니다.'
+                : '분양 승인시, 신청내역 > 상세보기를 클릭하면 브리더 정보를 확인할 수 있습니다.'
+            }
           >
-            {role === 'BREEDER' ? '분양신청내역' : '신청내역'}
+            분양신청내역
           </MypageLayout.Label>
           <MypageLayout.ContentsHeaders
             style={{
