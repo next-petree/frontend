@@ -1,7 +1,7 @@
 /** 상수 */
 export const CONSTANTS = {
   get API_URL() {
-    const url = process.env.REACT_APP_API_URL || 'http://3.38.172.15:8080';
+    const url = process.env.REACT_APP_API_URL || 'http://3.37.230.170:8080';
     if (!url) {
       throw new Error('API_URL 환경변수가 설정되지 않았습니다.');
     }
