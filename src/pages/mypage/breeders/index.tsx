@@ -48,7 +48,7 @@ const Title = styled.p`
 export default function Breeders() {
   const SIZE = 8 as const;
   const [page, setPage] = useState(1);
-  const [verification, setVerification] = useState(true);
+  const [verification, setVerification] = useState(false);
   const [breeders, setBreeders] = useState<IBreeder[]>([]);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
