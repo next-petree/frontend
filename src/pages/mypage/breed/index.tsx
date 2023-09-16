@@ -9,7 +9,12 @@ import { useEffect, useState } from 'react';
 import { Page, Pageable } from 'pageable-response';
 import DogsCard from 'components/mypage/breed/DogsCard';
 import MypageForm from 'layout/MypageForm';
-
+import SelectOption from 'components/common/select/SelectOption';
+import { styled } from 'styled-components';
+interface Option {
+  value: string;
+  label: string;
+}
 export interface IMyDogs {
   id: number;
   birthDate: string;
@@ -20,7 +25,11 @@ export interface IMyDogs {
   status: 'AVAILABLE' | 'UNDERWAY';
   type: string;
 }
-
+const options: Option[] = [
+  { value: 'all', label: '전체' },
+  { value: 'name', label: '강아지 이름' },
+  { value: 'content', label: '견종' },
+];
 export default function Breed() {
   const [page, setPage] = useState(1);
   const [myDogs, setMyDogs] = useState<IMyDogs[]>([]);
@@ -30,12 +39,23 @@ export default function Breed() {
     last: false,
     number: 0,
   });
-
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const handleOptionSelect = (value: string) => {
+    setSelectedOption(value);
+  };
+  const handleFormSubmit = (keyword: string) => {
+    console.log(keyword);
+    setSearchTerm(keyword);
+    fetchMyDogs(page);
+  };
   const fetchMyDogs = async (page: number) => {
     try {
       const { data } = await axios<AxiosResponse<Pageable<IMyDogs[]>>>(API_PATHS.myDogs, {
         params: {
           page: page - 1,
+          searchType: selectedOption,
+          keyword: searchTerm,
         },
       });
       setPageInfo({
@@ -50,67 +70,76 @@ export default function Breed() {
       console.log(err);
     }
   };
-
   useEffect(() => {
     fetchMyDogs(page);
   }, [page]);
 
   return (
     <MypageLayout>
-      <MypageForm>
-        <MypageLayout.Header
-          style={{
-            marginBottom: '4rem',
-          }}
-        >
-          <MypageLayout.Label>보유 견종 관리</MypageLayout.Label>
-          <SearchInput placeholder="" onSearch={(v) => console.log(v)} />
-        </MypageLayout.Header>
-        <MypageLayout.Content
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gridTemplateRows: 'repeat(2, 1fr)',
-            gap: '3rem',
-            marginBottom: '6rem',
-          }}
-        >
-          {myDogs.map((v, i) => (
-            <DogsCard
-              key={i}
-              dogId={v.id}
-              name={v.name}
-              birthDate={v.birthDate}
-              gender={v.gender}
-              type={v.type}
-              status={v.status}
-              management={v.management}
-              imgUrl={v.imgUrl}
+      <ReviewContentsBox>
+        <MypageForm>
+          <MypageLayout.Label>보유견종 관리</MypageLayout.Label>
+          <MypageLayout.ContentsHeaders>
+            <SelectOption
+              size="md"
+              placeholder="선택해주세요"
+              selectedValue={selectedOption}
+              onSelect={handleOptionSelect}
+              options={options}
             />
-          ))}
-        </MypageLayout.Content>
-        <MypageLayout.Footer>
-          <Pagination
+            <SearchInput placeholder="검색어를 입력해주세요." onSearch={handleFormSubmit} />
+          </MypageLayout.ContentsHeaders>
+
+          <MypageLayout.Content
             style={{
-              alignSelf: 'center',
-            }}
-            currentpage={page}
-            totalPage={pageInfo.totalPages}
-            onChange={(page) => setPage(page)}
-          />
-          <Link
-            to="/mypage/breed/new"
-            style={{
-              position: 'absolute',
-              right: 0,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gridTemplateRows: 'repeat(2, 1fr)',
+              gap: '3rem',
+              marginBottom: '6rem',
             }}
           >
-            <Button buttonSize={ButtonSize.MEDIUM} style={{ fontSize: 18 }}>
-              추가
-            </Button>
-          </Link>
-        </MypageLayout.Footer>
-      </MypageForm>
+            {myDogs.map((v, i) => (
+              <DogsCard
+                key={i}
+                dogId={v.id}
+                name={v.name}
+                birthDate={v.birthDate}
+                gender={v.gender}
+                type={v.type}
+                status={v.status}
+                management={v.management}
+                imgUrl={v.imgUrl}
+              />
+            ))}
+          </MypageLayout.Content>
+          <MypageLayout.Footer>
+            <Pagination
+              style={{
+                alignSelf: 'center',
+              }}
+              currentpage={page}
+              totalPage={pageInfo.totalPages}
+              onChange={(page) => setPage(page)}
+            />
+            <Link
+              to="/mypage/breed/new"
+              style={{
+                position: 'absolute',
+                right: 0,
+              }}
+            >
+              <Button buttonSize={ButtonSize.MEDIUM} style={{ fontSize: 18 }}>
+                추가
+              </Button>
+            </Link>
+          </MypageLayout.Footer>
+        </MypageForm>
+      </ReviewContentsBox>
     </MypageLayout>
   );
 }
+const ReviewContentsBox = styled.div`
+  max-width: 1080px;
+  min-height: 960px;
+`;
