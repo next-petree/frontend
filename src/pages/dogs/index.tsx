@@ -7,13 +7,15 @@ import axios, { AxiosResponse } from 'axios';
 import Layout from 'components/common/Layout';
 import Board from 'components/common/board/Board';
 import Pagination from 'components/common/board/Pagination';
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, useCallback } from 'react';
 import { Page, Pageable } from 'pageable-response';
 import DogCard from './DogCard';
-import { E_Dog_Gender, E_Dog_Status } from './constatns';
+import { E_Dog_Gender, E_Dog_Status, E_dog_size, E_is_available, E_is_verified } from './constatns';
 import DetailModal from './Detail';
 import { styled } from 'styled-components';
 import SearchModal from './SearchModal';
+import { useSelector } from 'react-redux';
+import { filterDogState } from '../../store/slices/filterDog';
 
 export interface IDog {
   id: number;
@@ -38,6 +40,7 @@ const Dogs: FC = () => {
   const [selectedDogInfo, setSelectedDogInfo] = useState<DogDetailProp | undefined>();
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
+  const { dogId, isVerified, isAvailable, gender, size } = useSelector(filterDogState);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
     first: false,
@@ -49,30 +52,38 @@ const Dogs: FC = () => {
     fetchDogs({ page: page - 1 });
   }, [page]);
 
-  const fetchDogs = async ({ keyword = '', page = 0 }) => {
-    try {
-      const {
-        data: {
-          data: { content, totalPages, first, last, number },
-        },
-      } = await axios.get<AxiosResponse<Pageable<IDog[]>>>('/dogs', {
-        params: {
-          page,
-          keyword,
-        },
-      });
+  const fetchDogs = useCallback(
+    async ({ keyword = '', page = 0 }) => {
+      try {
+        const {
+          data: {
+            data: { content, totalPages, first, last, number },
+          },
+        } = await axios.get<AxiosResponse<Pageable<IDog[]>>>('/dogs', {
+          params: {
+            page,
+            keyword,
+            dogTypeId: dogId && dogId.length ? dogId[0].id : '',
+            verification: isVerified === E_is_verified.IS_VERIFIED && 'yes',
+            isAvailable: isAvailable === E_is_available.IS_AVAILABLE && 'true',
+            gender: gender !== E_Dog_Gender.ALL ? gender : '',
+            size: size !== E_dog_size.ALL ? size : '',
+          },
+        });
 
-      setDogs(content);
-      setPageInfo({
-        totalPages: totalPages,
-        first: first,
-        last: last,
-        number: number,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+        setDogs(content);
+        setPageInfo({
+          totalPages: totalPages,
+          first: first,
+          last: last,
+          number: number,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    [dogId, isVerified, isAvailable, gender, size],
+  );
 
   const handleDetail = async (id: number) => {
     setSelectedDogId(id);

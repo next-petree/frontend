@@ -25,7 +25,10 @@ const DogCard = ({
   onClick,
 }: Props) => {
   return (
-    <Card onClick={() => onClick(id)}>
+    <Card
+      onClick={() => status === E_Dog_Status.AVAILABLE && onClick(id)}
+      className={`${status !== E_Dog_Status.AVAILABLE ? 'disabled' : ''}`}
+    >
       <ImageContainer>
         <Image src={imgUrl} alt="img" />
         {status !== E_Dog_Status.AVAILABLE && <Mask>{dogStatusMap[status]}</Mask>}
@@ -61,7 +64,7 @@ const Card = styled.div`
   padding: 20px 20px 30px 20px;
   color: ${({ theme }) => theme.colors.black333};
   font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
-  cursor: pointer;
+  cursor: ${(props) => (props.className === 'disabled' ? 'not-allowed' : 'pointer')};
 `;
 const ImageContainer = styled.div`
   position: relative;
