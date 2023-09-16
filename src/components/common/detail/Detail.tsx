@@ -306,7 +306,7 @@ export default function Detail(props: Props) {
       />
       {modalInfo && (
         <DetailModal
-          style={{ top: window.scrollY, left: '50%', transform: 'translate(-50%, 20%)' }}
+          style={{ top: window.scrollY, left: '50%', transform: 'translate(-50%, 15%)' }}
           info={modalInfo}
           onClose={() => {
             setModalInfo(null);
