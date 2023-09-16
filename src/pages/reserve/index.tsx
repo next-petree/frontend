@@ -9,6 +9,7 @@ import AgreeBox from './apply';
 import CompletedMessage from './completed';
 import { API_PATHS, CONSTANTS } from '../../constants';
 import DefaultLayout from 'layout/DefaultLayout';
+import { Toast, ToastOpen } from 'components/common/Toast';
 
 const TextButton = styled.span`
   cursor: pointer;
@@ -74,12 +75,22 @@ export default function Login() {
     );
   }
   return islogin && dogProfile ? (
-    <CardBoxLayout bg={BGIMG} title={'분양 신청하기'}>
-      {step === Step.Profile ? <ProfileBox nextStep={() => setStep(Step.Apply)} dogProfile={dogProfile} /> : undefined}
-      {step === Step.Apply ? (
-        <AgreeBox nextStep={() => setStep(Step.Completed)} dogId={dogProfile.id} breederId={dogProfile.breederId} />
-      ) : undefined}
-    </CardBoxLayout>
+    <>
+      <CardBoxLayout bg={BGIMG} title={'분양 신청하기'}>
+        {step === Step.Profile ? (
+          <ProfileBox nextStep={() => setStep(Step.Apply)} dogProfile={dogProfile} />
+        ) : undefined}
+        {step === Step.Apply ? (
+          <AgreeBox
+            nextStep={() => setStep(Step.Completed)}
+            dogId={dogProfile.id}
+            breederId={dogProfile.breederId}
+            onAlert={(txt) => (ToastOpen !== '' ? ToastOpen(txt) : '')}
+          />
+        ) : undefined}
+      </CardBoxLayout>
+      <Toast />
+    </>
   ) : (
     <div style={{ height: '750px' }}></div>
   );

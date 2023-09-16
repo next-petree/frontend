@@ -45,13 +45,23 @@ const SubVisual = styled.div<{ $bg: string }>`
   background-image: url(${(props) => props.$bg});
   background-position: center;
 `;
-const SubTitle = styled.h2`
+const SubTitle = styled.h2<{ subtitle: string | undefined }>`
   margin: 0px auto 57px auto;
-  padding: 0;
+  padding: 0px 0px 0px 0px;
   font-weight: 500;
   font-size: 28px;
   line-height: 36px;
   width: 100%;
+  span {
+    display: block;
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 36px; /* 180% */
+    margin-top: 24px;
+  }
 `;
 
 interface IDefaultLayout {
@@ -68,7 +78,7 @@ export default function CardBoxLayout({ children, ...props }: IDefaultLayout & H
         <SubVisual $bg={props.bg} />
         <Box>
           <div>
-            <SubTitle>
+            <SubTitle subtitle={props.subtitle}>
               {props.title}
               {props.subtitle ? <span>{props.subtitle}</span> : ''}
             </SubTitle>

@@ -70,6 +70,8 @@ export const API_PATHS = {
   user: (id: number) => `/adopters/${id}`,
   /** 분양 신청 */
   doMatching: () => `/me/matchings/`,
+  /** 브리더 인증 신청 */
+  doVeritication: () => `/verifications`,
 };
 
 /** 업로드 파일 확장자 */
@@ -167,7 +169,7 @@ export const PATHS = {
   },
   /** 브리더 인증받기 */
   breedercert: {
-    root: '/breedercert/:breeder/:admin',
+    root: '/breedercert/:breeder',
   },
   /** 유저 보기 */
   users: {

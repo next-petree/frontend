@@ -70,7 +70,12 @@ const ButtonWrap = styled.div`
     margin-left: 0px;
   }
 `;
-export default function Apply(props: { nextStep: () => void; breederId: number; dogId: number }) {
+export default function Apply(props: {
+  nextStep: () => void;
+  breederId: number;
+  dogId: number;
+  onAlert: (txt: string) => void;
+}) {
   const [because, setBecause] = useState('');
   const [mind, setMind] = useState('');
   const [canApply, setApply] = useState(false);
@@ -91,7 +96,8 @@ export default function Apply(props: { nextStep: () => void; breederId: number; 
       else props.nextStep();
     } catch (e) {
       const err = e as AxiosError;
-      console.log('error ::::', err.response?.data);
+      if (err.code === '403') props.onAlert('브리더 회원은 예약할 수 없습니다.');
+      console.log('error ::::', err);
     }
   };
   return (

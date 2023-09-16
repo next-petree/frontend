@@ -85,6 +85,19 @@ export default function Button({
     </Container>
   );
 }
+export function ButtonSubmit({
+  buttonSize = ButtonSize.XLARGE,
+  buttonColor = ButtonColor.MINT,
+  buttonStyle = ButtonStyle.DEFAULT,
+  children,
+  ...props
+}: IButton & HTMLAttributes<HTMLButtonElement>) {
+  return (
+    <Container type="submit" buttonSize={buttonSize} buttonColor={buttonColor} buttonStyle={buttonStyle} {...props}>
+      {children}
+    </Container>
+  );
+}
 
 const Container = styled.button<{ buttonSize: ButtonSize; buttonColor: ButtonColor; buttonStyle: ButtonStyle }>`
   display: flex;
