@@ -137,7 +137,14 @@ const Dogs: FC = () => {
         onClick={() => setSelectedDogId(undefined)}
       />
       {selectedDogId && <DetailModal info={selectedDogInfo} onClose={() => setSelectedDogId(undefined)} />}
-      {isSearching && <SearchModal onClose={() => setIsSearching(false)} setDogs={setDogs} setPageInfo={setPageInfo} />}
+      {isSearching && (
+        <SearchModal
+          onClose={() => setIsSearching(false)}
+          setDogs={setDogs}
+          setPageInfo={setPageInfo}
+          resetPage={() => setPage(1)}
+        />
+      )}
     </Layout>
   );
 };
