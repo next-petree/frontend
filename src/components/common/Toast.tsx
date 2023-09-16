@@ -61,7 +61,7 @@ function Toast() {
   });
   return (
     <ToastDiv className={(view && 'active') + ''}>
-      <p ref={pRef}>Some Text</p>
+      <p ref={pRef}>{text}</p>
     </ToastDiv>
   );
 }
