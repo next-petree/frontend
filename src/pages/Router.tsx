@@ -25,7 +25,6 @@ import Breed from './mypage/breed';
 import Modify from './mypage/modify';
 import Profile from './mypage/profile';
 
-import Review from './mypage/review';
 import NewBreed from './mypage/breed/new';
 import EditBreed from './mypage/breed/edit';
 import BreederDetail from './mypage/breeders/[id]';
@@ -36,7 +35,8 @@ import Dogs from './dogs';
 import Reviews from './mypage/breeders/reviews/reviews';
 import Reserve from './reserve';
 import BreederCert from './breedercert';
-import ReviewWriting from './mypage/breeders/reviews/edit';
+import Reviewsedit from './mypage/breeders/reviews/edit';
+import ReviewseditNew from './mypage/breeders/reviews/new';
 
 export default function Router() {
   const { isLoggedIn } = useLogin();
@@ -86,8 +86,8 @@ export default function Router() {
 
         <Route path={PATHS.mypage.adopt} element={<Adopt />} />
         <Route path={PATHS.mypage.reviews.root} element={<Reviews />} />
-        <Route path={PATHS.mypage.reviews.edit} element={<ReviewWriting />} />
-        <Route path={PATHS.mypage.reviews.new} element={<ReviewWriting />} />
+        <Route path={PATHS.mypage.reviews.edit} element={<Reviewsedit />} />
+        <Route path={PATHS.mypage.reviews.new} element={<ReviewseditNew />} />
         <Route path={PATHS.mypage.breed.root} element={<Breed />} />
         <Route path={PATHS.mypage.breed.new} element={<NewBreed />} />
         <Route path={PATHS.mypage.breed.edit} element={<EditBreed />} />

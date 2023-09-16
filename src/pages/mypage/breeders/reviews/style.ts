@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const ReviewBox = styled.div`
@@ -9,7 +10,7 @@ export const ReviewContentsBox = styled.div`
   min-height: 960px;
 `;
 
-export const PreviewBtn = styled.button`
+export const PreviewBtn = styled(Link)`
   color: #939393;
   text-align: center;
   font-family: Noto Sans KR;
@@ -171,4 +172,8 @@ export const ButtonWrap = styled.div`
   button {
     margin: 0 5px;
   }
+`;
+
+export const ListBoxLink = styled(Link)`
+  display: flex;
 `;

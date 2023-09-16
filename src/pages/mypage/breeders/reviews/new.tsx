@@ -3,7 +3,7 @@ import MypageForm from 'layout/MypageForm';
 import * as S from './style';
 import { useState } from 'react';
 import Button, { ButtonColor, ButtonSize } from 'components/common/button/Button';
-const ReviewWriting = () => {
+const ReviewseditNew = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
@@ -35,7 +35,7 @@ const ReviewWriting = () => {
           <MypageForm>
             <MypageLayout.Label>
               분양후기 관리
-              <S.PreviewBtn>
+              <S.PreviewBtn to={`/mypage/reviews`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <rect x="0.5" y="0.5" width="47" height="47" rx="7.5" fill="white" stroke="#AEAEAE" />
                   <path
@@ -136,4 +136,4 @@ const ReviewWriting = () => {
   );
 };
 
-export default ReviewWriting;
+export default ReviewseditNew;

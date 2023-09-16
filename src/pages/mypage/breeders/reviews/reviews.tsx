@@ -2,18 +2,31 @@ import Pagination from 'components/common/board/Pagination';
 import Button, { ButtonSize } from 'components/common/button/Button';
 import SearchInput from 'components/common/search/SearchInput';
 import MypageLayout from 'layout/MypageLayout';
-import { API_PATHS } from '@constants';
+import { API_PATHS } from '../../../../constants';
 import { Link } from 'react-router-dom';
-import { useMemo, useState } from 'react';
-import { Page } from 'pageable-response';
+import { useEffect, useState } from 'react';
+import { Page, Pageable } from 'pageable-response';
 import MypageForm from 'layout/MypageForm';
 import SelectOption from 'components/common/select/SelectOption';
 import { styled } from 'styled-components';
-import EXEOG from 'assets/images/reviews/dog_01.png';
+import * as S from './style';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 interface Option {
   value: string;
   label: string;
 }
+export interface Reviews {
+  id: number;
+  dogId: number;
+  name: string;
+  dogTypeName: string;
+  gender: 'FEMALE' | 'MALE';
+  writeDate: string;
+  title: string;
+  content: string;
+  imgUrl: string;
+}
+
 const options: Option[] = [
   { value: '전체', label: '전체' },
   { value: '견종', label: '견종' },
@@ -22,6 +35,7 @@ const options: Option[] = [
 ];
 const Reviews = () => {
   const [page, setPage] = useState(1);
+  const [myDogs, setMyDogs] = useState<Reviews[]>([]);
   const [pageInfo, setPageInfo] = useState<Page>({
     totalPages: 0,
     first: false,
@@ -32,6 +46,29 @@ const Reviews = () => {
   const handleOptionSelect = (value: string) => {
     setSelectedOption(value);
   };
+  const fetchReviews = async (page: number) => {
+    try {
+      const { data } = await axios<AxiosResponse<Pageable<Reviews[]>>>(API_PATHS.getAdopter, {
+        params: {
+          page: page - 1,
+        },
+      });
+      setPageInfo({
+        totalPages: data.data.totalPages,
+        first: data.data.first,
+        last: data.data.last,
+        number: data.data.number,
+      });
+      setMyDogs(data.data.content);
+    } catch (error: unknown) {
+      const err = error as AxiosError;
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    fetchReviews(page);
+  }, [page]);
+  console.log(myDogs);
   return (
     <MypageLayout>
       <ReviewBox>
@@ -54,66 +91,25 @@ const Reviews = () => {
             </MypageLayout.ContentsHeaders>
             <MypageLayout.Content>
               <ListBox>
-                <li>
-                  <ListImg src={EXEOG} />
-                  <ListContentsBox>
-                    <h3 className="titlle">럭키를 분양받아 너무 기쁩니다!</h3>
-                    <div className="desc">
-                      <div className="name">이름</div> <div>럭키</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">견종</div> <div>시바견</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">성별</div> <div>수컷</div>
-                    </div>
-                  </ListContentsBox>
-                </li>
-                <li>
-                  <ListImg src={EXEOG} />
-                  <ListContentsBox>
-                    <h3 className="titlle">럭키를 분양받아 너무 기쁩니다!</h3>
-                    <div className="desc">
-                      <div className="name">이름</div> <div>럭키</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">견종</div> <div>시바견</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">성별</div> <div>수컷</div>
-                    </div>
-                  </ListContentsBox>
-                </li>
-                <li>
-                  <ListImg src={EXEOG} />
-                  <ListContentsBox>
-                    <h3 className="titlle">럭키를 분양받아 너무 기쁩니다!</h3>
-                    <div className="desc">
-                      <div className="name">이름</div> <div>럭키</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">견종</div> <div>시바견</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">성별</div> <div>수컷</div>
-                    </div>
-                  </ListContentsBox>
-                </li>{' '}
-                <li>
-                  <ListImg src={EXEOG} />
-                  <ListContentsBox>
-                    <h3 className="titlle">럭키를 분양받아 너무 기쁩니다!</h3>
-                    <div className="desc">
-                      <div className="name">이름</div> <div>럭키</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">견종</div> <div>시바견</div>
-                    </div>
-                    <div className="desc">
-                      <div className="name">성별</div> <div>수컷</div>
-                    </div>
-                  </ListContentsBox>
-                </li>
+                {myDogs.map((dog) => (
+                  <li key={dog.id}>
+                    <S.ListBoxLink to={`/mypage/reviews/${dog.dogId}`}>
+                      <ListImg src={dog.imgUrl} />
+                      <ListContentsBox>
+                        <h3 className="title">{dog.title}</h3>
+                        <div className="desc">
+                          <div className="name">이름</div> <div>{dog.name}</div>
+                        </div>
+                        <div className="desc">
+                          <div className="name">견종</div> <div>{dog.dogTypeName}</div>
+                        </div>
+                        <div className="desc">
+                          <div className="name">성별</div> <div>{dog.gender === 'FEMALE' ? '암컷' : '수컷'}</div>
+                        </div>
+                      </ListContentsBox>
+                    </S.ListBoxLink>
+                  </li>
+                ))}
               </ListBox>
             </MypageLayout.Content>
             <MypageLayout.Footer>
@@ -126,7 +122,7 @@ const Reviews = () => {
                 onChange={(page) => setPage(page)}
               />
               <Link
-                to=""
+                to="/mypage/reviews/new"
                 style={{
                   position: 'absolute',
                   right: 0,

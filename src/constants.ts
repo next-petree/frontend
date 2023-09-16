@@ -72,6 +72,8 @@ export const API_PATHS = {
   doMatching: () => `/me/matchings/`,
   /** 브리더 인증 신청 */
   doVeritication: () => `/verifications`,
+  // 분양후기
+  getAdopter: '/adopter/reviews',
 };
 
 /** 업로드 파일 확장자 */
