@@ -93,8 +93,8 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
       } = await axios.get(
         `/dogs?
         ${dogId && dogId.length ? `dogTypeId=${dogId[0].id}` : ''}
-        ${isVerified !== E_is_verified.ALL ? '&verification=true' : ''}
-        ${isAvailable !== E_is_available.ALL ? '&isAvaiable=true' : ''}
+        ${isVerified !== E_is_verified.ALL ? '&verification=yes' : ''}
+        ${isAvailable !== E_is_available.ALL ? '&isAvailable=true' : ''}
         ${gender !== E_Dog_Gender.ALL ? `&gender=${gender}` : ''}
         ${size !== E_dog_size.ALL ? `&size=${size}` : ''}
         `,
@@ -135,7 +135,21 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
           }}
         />
       </div>
-      <HashtagBox>{dogId?.map((v, i) => <Hashtag key={i}>#{v.name}</Hashtag>)}</HashtagBox>
+      <HashtagBox>
+        {dogId?.map((v, i) => (
+          <Hashtag key={i}>
+            #{v.name}
+            <DeleteBtn
+              onClick={() => {
+                setDogTypeIdList([]);
+                dispatch(setDogId(undefined));
+              }}
+            >
+              x
+            </DeleteBtn>
+          </Hashtag>
+        ))}
+      </HashtagBox>
       <Section>
         <SectionTitle>브리더 인증 여부</SectionTitle>
         <Selection>
@@ -235,11 +249,11 @@ const Modal = styled.div`
   height: 920px;
   top: 280px;
   padding: 86px 112px;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 4px 20px 0px #00000017;
   padding: 112px 83px;
   border-radius: 32px;
-  color: #333;
+  color:  ${({ theme }) => theme.colors.black333};
   font-family: Noto Sans KR;
 `;
 
@@ -311,4 +325,15 @@ const CancleBtn = styled.button`
   color: #fff;
   background: #2f2f2f;
   border: none;
+`;
+
+export const DeleteBtn = styled.button`
+  ${commonBtnStyle}
+  height: auto;
+  width: 20px;
+  border: none;
+  font-size: 20px;
+  &:hover {
+    color: #59d0ce;
+  }
 `;

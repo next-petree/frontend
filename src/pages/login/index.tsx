@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button, { ButtonSize, ButtonColor } from 'components/common/button/Button';
 import Input from 'components/common/input/InputButton';
 import LOGO from 'assets/images/logo_login.svg';
@@ -42,6 +42,12 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (!localStorage.getItem('petree_atk')) {
+      window.alert('로그인이 필요합니다');
+    }
+  }, []);
 
   const handleSubmit = () => {
     if (email === '' || password === '') {

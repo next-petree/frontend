@@ -4,9 +4,9 @@
  */
 
 import { styled, css } from 'styled-components';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, CSSProperties } from 'react';
 import BadgeSvg from 'assets/images/badge.svg';
-import { E_Dog_Gender, dogGenderMap } from './constatns';
+import { E_Dog_Gender, E_Dog_Status, dogGenderMap } from './constatns';
 import { DogDetailProp } from '.';
 import { Link } from 'react-router-dom';
 import CloseBtnSvg from 'assets/CloseBtn.svg';
@@ -14,9 +14,10 @@ import CloseBtnSvg from 'assets/CloseBtn.svg';
 interface Props {
   info: DogDetailProp | undefined;
   onClose: () => void;
+  style?: CSSProperties;
 }
 
-const Detail: FC<Props> = ({ info, onClose }) => {
+const DetailModal: FC<Props> = ({ info, onClose, style }) => {
   const [selectedImgId, setSelectedImgId] = useState<number>(0);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const Detail: FC<Props> = ({ info, onClose }) => {
   }, [onClose]);
 
   return (
-    <Modal>
+    <Modal style={style}>
       <CloseBtn src={CloseBtnSvg} alt="closeBtn" onClick={onClose} />
       <Top>
         <Left>
@@ -63,7 +64,12 @@ const Detail: FC<Props> = ({ info, onClose }) => {
               )}
             </P>
           </RightDetail>
-          <Button to={`/reserve/${info?.id}`}>예약하기</Button>
+          <Button
+            to={info?.status === E_Dog_Status.AVAILABLE ? `/reserve/${info?.id}` : ''}
+            className={info?.status !== E_Dog_Status.AVAILABLE ? 'disabled' : ''}
+          >
+            예약하기
+          </Button>
         </Right>
       </Top>
       <Bottom>
@@ -74,7 +80,7 @@ const Detail: FC<Props> = ({ info, onClose }) => {
   );
 };
 
-export default Detail;
+export default DetailModal;
 
 const commonImgStyle = css`
   cursor: pointer;
@@ -164,15 +170,17 @@ const Button = styled(Link)`
   border-radius: 1rem;
   width: 120px;
   height: 52px;
-  background: #35d8d5;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   font-size: 16px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: ${(props) => (props.className === 'disabled' ? 'not-allowed' : 'pointer')};
+  background: ${(props) => (props.className === 'disabled' ? 'grey' : '#4ec1bf')};
 `;
+
 const Bottom = styled.div`
   margin-top: 37px;
 `;

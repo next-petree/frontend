@@ -26,7 +26,6 @@ export const filterDogSlice = createSlice({
   initialState,
   reducers: {
     setDogId(state, {payload}) {
-      console.log(payload,'-----')
       state.dogId = payload;
     },
     setIsVerified(state, {payload}) {

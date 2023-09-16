@@ -11,6 +11,7 @@ import { inputRegexs } from 'utils/Regex';
 import { useNavigate } from 'react-router-dom';
 import MajorSelect, { BreedSelectType } from 'components/common/select/MajorSelect';
 import { useModal } from 'hooks/useModal';
+import { DeleteBtn } from '../dogs/SearchModal';
 
 enum TabTypeEnum {
   DEFAULT,
@@ -402,7 +403,26 @@ export default function Step2() {
                   handleGetDogId(v);
                 }}
               />
-              <HashtagBox>{dogTypeIdList?.map((v, i) => <Hashtag key={i}>#{v.name}</Hashtag>)}</HashtagBox>
+              <HashtagBox>
+                {dogTypeIdList?.map((v, i) => (
+                  <Hashtag key={i}>
+                    #{v.name}
+                    <DeleteBtn
+                      onClick={() => {
+                        setDogTypeIdList((prev) => {
+                          if (Array.isArray(prev)) {
+                            const newList = [...prev];
+                            newList?.splice(i, 1);
+                            return newList;
+                          }
+                        });
+                      }}
+                    >
+                      x
+                    </DeleteBtn>
+                  </Hashtag>
+                ))}
+              </HashtagBox>
             </label>
           )}
 

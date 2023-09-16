@@ -1,3 +1,5 @@
+import { E_Dog_Status } from '~/pages/dogs/constatns';
+
 export interface User {
   id: number;
   nickname: string;
@@ -21,7 +23,7 @@ export type Space = 'LIVING_ROOM' | 'BATH_ROOM' | 'YARD';
 
 export interface IBreederDetail extends User {
   mainBreedDtoResponseList: MajorBreed[];
-  possessionDogDtos: IBreederDog[];
+  simpleDogDtos: IBreederDog[];
 }
 
 interface MajorBreed {
@@ -36,7 +38,9 @@ interface IBreederDog {
   gender: string;
   management: string;
   name: string;
-  dogImgUrl: string | null;
+  imgUrl: string | null;
+  type: string;
+  status: E_Dog_Status;
 }
 
 export interface IBreederDogDetail {

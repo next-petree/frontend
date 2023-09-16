@@ -11,7 +11,7 @@ import { useState, useEffect, FC } from 'react';
 import { Page, Pageable } from 'pageable-response';
 import DogCard from './DogCard';
 import { E_Dog_Gender, E_Dog_Status } from './constatns';
-import Detail from './Detail';
+import DetailModal from './Detail';
 import { styled } from 'styled-components';
 import SearchModal from './SearchModal';
 
@@ -125,7 +125,7 @@ const Dogs: FC = () => {
         style={{ display: `${selectedDogId || isSearching ? 'block' : 'none'}` }}
         onClick={() => setSelectedDogId(undefined)}
       />
-      {selectedDogId && <Detail info={selectedDogInfo} onClose={() => setSelectedDogId(undefined)} />}
+      {selectedDogId && <DetailModal info={selectedDogInfo} onClose={() => setSelectedDogId(undefined)} />}
       {isSearching && <SearchModal onClose={() => setIsSearching(false)} setDogs={setDogs} setPageInfo={setPageInfo} />}
     </Layout>
   );
@@ -133,7 +133,7 @@ const Dogs: FC = () => {
 
 export default Dogs;
 
-const Mask = styled.div`
+export const Mask = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -146,7 +146,7 @@ const Title = styled.p`
   font-size: 36px;
   font-weight: 700;
   line-height: 40px;
-  color: #4ec1bf;
+  color: ${({ theme }) => theme.colors.accent};
   letter-spacing: -1.8px;
 `;
 
@@ -154,8 +154,8 @@ const SearchBtn = styled.button`
   border-radius: 1em;
   width: 120px;
   height: 52px;
-  background: #4ec1bf;
-  color: #fff;
+  background: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.white};
   font-family: Noto Sans KR;
   font-size: 16px;
   font-weight: 700;

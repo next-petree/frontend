@@ -59,7 +59,7 @@ const Card = styled.div`
   border-radius: 1rem;
   box-shadow: 0px 4px 20px 0px #00000017;
   padding: 20px 20px 30px 20px;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black333};
   font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
   cursor: pointer;
 `;
@@ -84,7 +84,7 @@ const Mask = styled.div`
   width: 100%;
   height: 100%;
   background: #0000004d;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   font-size: 25px;
   font-weight: 700;
   line-height: 40px;

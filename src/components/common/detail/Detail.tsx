@@ -1,12 +1,17 @@
 import { IBreederDetail, IUserDetail, User } from 'assets/types/User';
+import axios from 'axios';
 import Banner from 'components/common/banner/Banner';
 import ProfilePic from 'components/common/profile-pic/ProfilePic';
 import { useConsolelog } from 'hooks/useConsolelog';
+import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
+import DetailModal from '../../../pages/dogs/Detail';
+import { API_PATHS } from '../../../constants';
+import { E_Dog_Status, dogStatusMap } from '../../../pages/dogs/constatns';
 
 const Container = styled.div`
   margin: 15rem auto 3.5rem auto;
-  width: 50rem;
+  width: 1060px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -162,11 +167,32 @@ const HasDogsContainer = styled.div`
 interface Props extends User {
   envResponseDtos?: IUserDetail['envResponseDtos'];
   mainBreedDtoResponseList?: IBreederDetail['mainBreedDtoResponseList'];
-  possessionDogDtos?: IBreederDetail['possessionDogDtos'];
+  simpleDogDtos?: IBreederDetail['simpleDogDtos'];
 }
 
 export default function Detail(props: Props) {
   useConsolelog('Detail', props);
+  const [modalInfo, setModalInfo] = useState<any>();
+
+  useEffect(() => {
+    return () => closeDetailModal();
+  }, []);
+
+  const openDetailModal = async (id: number) => {
+    try {
+      const {
+        data: { data },
+      } = await axios.get(API_PATHS.myDogDetail(id));
+      setModalInfo(data);
+      document.body.style.overflow = 'hidden';
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const closeDetailModal = () => {
+    document.body.style.overflow = 'auto';
+  };
   return (
     <>
       <Banner />
@@ -232,7 +258,7 @@ export default function Detail(props: Props) {
           </>
         )}
       </Container>
-      {props.possessionDogDtos && (
+      {props.simpleDogDtos && (
         <Container
           style={{
             marginTop: '3rem',
@@ -240,28 +266,114 @@ export default function Detail(props: Props) {
         >
           <Title>보유 견종</Title>
           <HasDogsContainer>
-            {props.possessionDogDtos?.map((v) => (
-              <div key={v.id}>
-                <img src={v.dogImgUrl ?? ''} alt={v.name} />
+            {props.simpleDogDtos?.map((v) => (
+              <Info key={v.id}>
+                <ImageContainer>
+                  <img src={v.imgUrl ?? ''} alt={v.name} />
+                  {v.status !== E_Dog_Status.AVAILABLE && <Mask>{dogStatusMap[v.status]}</Mask>}
+                </ImageContainer>
                 <div>
                   <div>
-                    <span>이름:</span>
-                    <span>{v.name}</span>
+                    <Span>견종 :</Span>
+                    <Span>{v.type}</Span>
                   </div>
                   <div>
-                    <span>출생일:</span>
-                    <span>{new Date(v.birthDate).toLocaleDateString()}</span>
+                    <Span>이름 :</Span>
+                    <Span>{v.name}</Span>
                   </div>
                   <div>
-                    <span>성별:</span>
-                    <span>{v.gender === 'MALE' ? '수' : '암'}컷</span>
+                    <Span>출생일 :</Span>
+                    <Span>{v.birthDate}</Span>
                   </div>
                 </div>
-              </div>
+                <Button
+                  className={v.status !== E_Dog_Status.AVAILABLE ? 'disabled' : ''}
+                  onClick={() => v.status === E_Dog_Status.AVAILABLE && openDetailModal(v.id)}
+                >
+                  상세보기
+                </Button>
+              </Info>
             ))}
           </HasDogsContainer>
         </Container>
       )}
+      <ModalMask
+        style={{ top: window.scrollY, display: `${modalInfo ? 'block' : 'none'}` }}
+        onClick={() => {
+          setModalInfo(undefined);
+          closeDetailModal();
+        }}
+      />
+      {modalInfo && (
+        <DetailModal
+          style={{ top: window.scrollY, left: '50%', transform: 'translate(-50%, 20%)' }}
+          info={modalInfo}
+          onClose={() => {
+            setModalInfo(null);
+            closeDetailModal();
+          }}
+        />
+      )}
     </>
   );
 }
+
+const Info = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end !important;
+`;
+
+const Button = styled.button`
+  width: 120px;
+  height: 52px;
+  color: ${({ theme }) => theme.colors.white};
+  cursor: ${(props) => (props.className === 'disabled' ? 'not-allowed' : 'pointer')};
+  background: ${(props) => (props.className === 'disabled' ? 'grey' : '#4ec1bf')};
+  border-radius: 16px;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0em;
+  margin-top: 24px;
+`;
+
+const Span = styled.span`
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 0em;
+`;
+const ImageContainer = styled.div`
+  position: relative;
+  width: 240px;
+  heigt: 144px;
+  border-radius: 12px;
+  overflow: hidden;
+`;
+const Mask = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  background: #0000004d;
+  align-items: center;
+  justify-content: center !important;
+  font-family: ${({ theme }) => theme.fonts.NOTOSANSKR};
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.05em;
+`;
+
+const ModalMask = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #5a5a5a40;
+`;

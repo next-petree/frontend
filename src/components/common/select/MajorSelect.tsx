@@ -54,9 +54,15 @@ export default function MajorSelect({ onChange, style, maxNum = 3, ...props }: B
   };
 
   const onOptionLi = (breed: BreedSelectType) => {
+    closeDropdown();
+    setInputText('');
     if (isIncluded(breed.id)) {
       setSelected((prev) => prev.filter((e) => e.id !== breed.id));
     } else {
+      if (maxNum === 1) {
+        setSelected([{ name: breed.name, id: breed.id }]);
+        return;
+      }
       if (selected.length >= maxNum) return;
       setSelected((prev) => [...prev, { name: breed.name, id: breed.id }]);
     }
@@ -117,9 +123,9 @@ export default function MajorSelect({ onChange, style, maxNum = 3, ...props }: B
           {Array.isArray(searchResult) &&
             searchResult?.map((breed) => (
               <Option.Item key={breed.id} onClick={() => onOptionLi(breed)}>
-                {isIncluded(breed.id) && <span>V </span>}
+                {/* {isIncluded(breed.id) && <span>V </span>} */}
                 <Option.Text dangerouslySetInnerHTML={{ __html: markMatchingText(breed.name) }} />
-                {isIncluded(breed.id) && <button>X</button>}
+                {/* {isIncluded(breed.id) && <button>X</button>} */}
               </Option.Item>
             ))}
         </Option>

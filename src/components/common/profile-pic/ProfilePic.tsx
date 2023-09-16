@@ -14,7 +14,7 @@ const Image = styled.img<{ $verified: boolean }>`
   width: ${(props) => props.style?.width ?? '2rem'};
   height: ${(props) => props.style?.height ?? '2rem'};
   border-radius: 50%;
-  border: ${({ $verified }) => ($verified ? `0.2rem solid #23F39C` : 'none')};
+  border: ${({ $verified }) => ($verified ? `0.2rem solid #FF5757` : 'none')};
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
