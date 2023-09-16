@@ -130,7 +130,7 @@ const ReviewWriting = () => {
         </S.ReviewContentsBox>
       </S.ReviewBox>
       <S.ButtonWrap>
-        <Button buttonSize={ButtonSize.MEDIUM}>저장</Button>
+        <Button buttonSize={ButtonSize.MEDIUM}>수정</Button>
         <Button buttonSize={ButtonSize.MEDIUM} buttonColor={ButtonColor.BLACK}>
           삭제
         </Button>

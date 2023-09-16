@@ -10,7 +10,7 @@ export default function NewBreed() {
     <MypageLayout>
       <MypageForm>
         <MypageLayout.Header>
-          <MypageLayout.Label>보유견종 추가</MypageLayout.Label>
+          <MypageLayout.Label>보유견종 글쓰기</MypageLayout.Label>
           <Link
             to="/mypage/breed"
             style={{
