@@ -77,12 +77,12 @@ interface Props {
   setDogs: any;
   setPageInfo: any;
   onClose: () => void;
+  resetPage: () => void;
 }
 
-const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
+const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose, resetPage }) => {
   const { dogId, isAvailable, isVerified, gender, size } = useSelector(filterDogState);
   const dispatch = useDispatch();
-  const [dogTypeIdList, setDogTypeIdList] = useState<BreedSelectType[] | undefined>(dogId);
 
   const handleSearch = async () => {
     try {
@@ -92,7 +92,7 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
         },
       } = await axios.get(
         `/dogs?
-        ${dogId && dogId.length ? `dogTypeId=${dogId[0].id}` : ''}
+        ${dogId && dogId.length ? `&dogTypeId=${dogId[0].id}` : ''}
         ${isVerified !== E_is_verified.ALL ? '&verification=yes' : ''}
         ${isAvailable !== E_is_available.ALL ? '&isAvailable=true' : ''}
         ${gender !== E_Dog_Gender.ALL ? `&gender=${gender}` : ''}
@@ -108,6 +108,7 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
         number: number,
       });
       onClose();
+      resetPage();
     } catch (err) {
       console.error(err);
     }
@@ -130,8 +131,9 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
           maxNum={1}
           style={{ width: 430 }}
           onChange={(v) => {
-            dispatch(setDogId(v));
-            setDogTypeIdList(v);
+            if (v.length) {
+              dispatch(setDogId(v));
+            }
           }}
         />
       </div>
@@ -141,7 +143,6 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose }) => {
             #{v.name}
             <DeleteBtn
               onClick={() => {
-                setDogTypeIdList([]);
                 dispatch(setDogId(undefined));
               }}
             >
