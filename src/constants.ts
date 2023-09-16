@@ -109,7 +109,8 @@ export const PATHS = {
     /**분양 후기 관리 */
     reviews: {
       root: '/mypage/reviews',
-      edit: '/mypage/reviews/edit/:id',
+      edit: '/mypage/reviews/edit',
+      new: '/mypage/reviews/new',
     },
     /** 보유견종 관리 */
     breed: {
