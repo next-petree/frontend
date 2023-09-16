@@ -15,10 +15,6 @@ export const adoptmenuItem: ISidemenuItem[] = [
     path: PATHS.mypage.reviews.root,
   },
   {
-    name: '분양후기 관리 글쓰기',
-    path: PATHS.mypage.reviews.edit,
-  },
-  {
     name: '프로필 관리',
     path: PATHS.mypage.profile,
   },

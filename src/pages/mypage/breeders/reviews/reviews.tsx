@@ -28,10 +28,10 @@ export interface Reviews {
 }
 
 const options: Option[] = [
-  { value: '전체', label: '전체' },
-  { value: '견종', label: '견종' },
-  { value: '제목', label: '제목' },
-  { value: '강아지 이름', label: '강아지 이름' },
+  { value: 'all', label: '전체' },
+  { value: 'name', label: '견종' },
+  { value: 'type', label: '제목' },
+  { value: 'content', label: '강아지 이름' },
 ];
 const Reviews = () => {
   const [page, setPage] = useState(1);
@@ -42,15 +42,25 @@ const Reviews = () => {
     last: false,
     number: 0,
   });
+
   const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const handleOptionSelect = (value: string) => {
     setSelectedOption(value);
   };
+  const handleFormSubmit = (keyword: string) => {
+    console.log(keyword);
+    setSearchTerm(keyword);
+    fetchReviews(page);
+  };
+
   const fetchReviews = async (page: number) => {
     try {
       const { data } = await axios<AxiosResponse<Pageable<Reviews[]>>>(API_PATHS.getAdopter, {
         params: {
           page: page - 1,
+          searchType: selectedOption,
+          keyword: searchTerm,
         },
       });
       setPageInfo({
@@ -68,18 +78,13 @@ const Reviews = () => {
   useEffect(() => {
     fetchReviews(page);
   }, [page]);
-  console.log(myDogs);
   return (
     <MypageLayout>
       <ReviewBox>
         <ReviewContentsBox>
           <MypageForm>
             <MypageLayout.Label>분양후기 관리</MypageLayout.Label>
-            <MypageLayout.ContentsHeaders
-              style={{
-                marginBottom: '4rem',
-              }}
-            >
+            <MypageLayout.ContentsHeaders>
               <SelectOption
                 size="md"
                 placeholder="선택해주세요"
@@ -87,7 +92,7 @@ const Reviews = () => {
                 onSelect={handleOptionSelect}
                 options={options}
               />
-              <SearchInput placeholder="검색어를 입력해주세요." onSearch={(v) => console.log(v)} />
+              <SearchInput placeholder="검색어를 입력해주세요." onSearch={handleFormSubmit} />
             </MypageLayout.ContentsHeaders>
             <MypageLayout.Content>
               <ListBox>
@@ -176,7 +181,7 @@ const ListContentsBox = styled.div`
   font-size: 0;
   box-sizing: border-box;
   color: #333;
-  .titlle {
+  .title {
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
