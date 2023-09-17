@@ -214,7 +214,6 @@ export default function Login() {
   const [fileName, setName] = useState<string>('');
   const navigate = useNavigate();
   const imgInput = useRef<HTMLInputElement | null>(null);
-  const params = useParams();
   useEffect(() => {
     const key = localStorage.getItem(CONSTANTS.ACCESS_TOKEN);
     setLogin(!!key);
@@ -227,7 +226,6 @@ export default function Login() {
     const formData = new FormData();
     if (imgInput && imgInput.current?.files) {
       formData.append('verificationFiles', imgInput.current.files[0]);
-      formData.append('breederId', params.breeder + '');
       formData.append('certification', certType === 0 ? '반려동물종합관리사' : '반려동물행동교정사');
       const { data } = await axios.post(API_PATHS.doVeritication(), formData, {
         headers: {

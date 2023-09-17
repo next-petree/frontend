@@ -67,7 +67,7 @@ export default function GlobalNav({ isLoggedIn }: GlobalNavProps) {
       setMenuItems([
         {
           name: '브리더 인증받기',
-          path: PATHS.verification.root,
+          path: PATHS.breedercert.root,
         },
         {
           name: '강아지 모아보기',

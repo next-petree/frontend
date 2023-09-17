@@ -172,7 +172,7 @@ export const PATHS = {
   },
   /** 브리더 인증받기 */
   breedercert: {
-    root: '/breedercert/:breeder',
+    root: '/breedercert',
   },
   /** 유저 보기 */
   users: {
