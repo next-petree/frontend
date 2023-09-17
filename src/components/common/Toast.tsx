@@ -14,7 +14,7 @@ const ToastDiv = styled.div`
     opacity 0.3s 0s ease-in,
     top 0.3s 0s ease-in;
   background: #fff;
-  width: 479px;
+  min-width: 479px;
   padding: 40px 165px;
   border-radius: 32px;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.09);
@@ -61,7 +61,7 @@ function Toast() {
   });
   return (
     <ToastDiv className={(view && 'active') + ''}>
-      <p ref={pRef}>{text}</p>
+      <p ref={pRef} dangerouslySetInnerHTML={{ __html: text }} />
     </ToastDiv>
   );
 }

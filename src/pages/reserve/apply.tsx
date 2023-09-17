@@ -92,12 +92,16 @@ export default function Apply(props: {
         pledgeContent1: because,
         pledgeContent2: mind,
       });
-      if (data.status === 'ERROR' || data.status === 'FAIL') throw new Error('500 error');
-      else props.nextStep();
-    } catch (e) {
-      const err = e as AxiosError;
-      if (err.code === '403') props.onAlert('브리더 회원은 예약할 수 없습니다.');
-      console.log('error ::::', err);
+      console.log('data', data);
+      if (data.status === 'ERROR' || data.status === 'FAIL') {
+        if (data.data) window.alert(data.data);
+        else window.alert('잠시 후 다시 진행해주세요');
+      } else {
+        props.nextStep();
+      }
+    } catch (e: any) {
+      if (e.response?.data.status === 'FAIL') window.alert(e.response?.data.data);
+      console.log('error ::::', e);
     }
   };
   return (

@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import CardBoxLayout from 'layout/CardBoxLayout';
 import { API_PATHS, CONSTANTS } from '../../constants';
-import { Toast, ToastOpen } from 'components/common/Toast';
 import Radiobutton from 'components/common/radio/Radiobutton';
 
 const TextButton = styled.span`
@@ -224,6 +223,10 @@ export default function Login() {
   const SubmitForm = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
+    if (imgInput && imgInput.current?.files && imgInput.current?.files[0] == undefined) {
+      window.alert('첨부파일은 필수입니다');
+      return;
+    }
     if (imgInput && imgInput.current?.files) {
       formData.append('verificationFiles', imgInput.current.files[0]);
       formData.append('certification', certType === 0 ? '반려동물종합관리사' : '반려동물행동교정사');
@@ -232,12 +235,14 @@ export default function Login() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      if (data.status === 'ERROR' || data.status === 'FAIL') ToastOpen('잠시 후 다시 진행해주세요');
-      else {
+      if (data.status === 'ERROR' || data.status === 'FAIL') {
+        if (data.data.message) window.alert(data.data.message);
+        else window.alert('잠시 후 다시 진행해주세요');
+      } else {
         if (data.code === 400) {
-          if (ToastOpen !== '') ToastOpen('브리더 인증 요청은 브리더에게만 권한이 있습니다');
+          window.alert('브리더 인증 요청은 브리더에게만 권한이 있습니다');
         } else {
-          if (ToastOpen !== '') ToastOpen('제출되었습니다');
+          window.alert('제출되었습니다');
         }
       }
     }
@@ -336,7 +341,7 @@ export default function Login() {
               id="file"
               ref={imgInput}
               onChange={() => {
-                if (imgInput.current?.files) setName(imgInput.current.files[0].name);
+                if (imgInput.current?.files && imgInput.current.files[0]) setName(imgInput.current.files[0].name);
               }}
             />
             <Button buttonSize={ButtonSize.SMALL} buttonColor={ButtonColor.MINT} onClick={SubmitForm}>
@@ -357,7 +362,6 @@ export default function Login() {
       ) : (
         ''
       )}
-      <Toast />
     </>
   ) : (
     <div style={{ height: '750px' }}></div>

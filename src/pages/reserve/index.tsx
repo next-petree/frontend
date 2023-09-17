@@ -9,7 +9,6 @@ import AgreeBox from './apply';
 import CompletedMessage from './completed';
 import { API_PATHS, CONSTANTS } from '../../constants';
 import DefaultLayout from 'layout/DefaultLayout';
-import { Toast, ToastOpen } from 'components/common/Toast';
 
 const TextButton = styled.span`
   cursor: pointer;
@@ -85,11 +84,10 @@ export default function Login() {
             nextStep={() => setStep(Step.Completed)}
             dogId={dogProfile.id}
             breederId={dogProfile.breederId}
-            onAlert={(txt) => (ToastOpen !== '' ? ToastOpen(txt) : '')}
+            onAlert={(txt) => window.alert(txt)}
           />
         ) : undefined}
       </CardBoxLayout>
-      <Toast />
     </>
   ) : (
     <div style={{ height: '750px' }}></div>
