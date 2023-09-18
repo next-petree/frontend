@@ -91,7 +91,7 @@
 
 ## 💠 아키텍쳐 
 ---
-<img src="./petree-img/펫트리 아키텍쳐.jpg" >
+<img src="./petree-img/아키텍쳐.png" >
 
 ## 🏷️ Frontend 폴더 구조
 --- 
