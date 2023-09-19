@@ -1,58 +1,27 @@
-# syntax=docker/dockerfile:1.4
+FROM node:lts as build
 
-# 1. For build React app
-FROM node:lts AS development
+WORKDIR /app
 
-# Set working directory
-WORKDIR /app  
+COPY package.json .
+COPY package-lock.json ./package-lock.json
 
-# 
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-
-# Same as npm install
-RUN npm i --force
+RUN npm i
 
 COPY . .
 
-ENV CI=true
-ENV PORT=3000
-
-CMD [ "npm", "start" ]
-
-FROM development AS build
-
 RUN npm run build
 
+FROM nginx:stable-alpine
 
-FROM development as dev-envs
-RUN <<EOF
-apt-get update
-apt-get install -y --no-install-recommends git
-EOF
+# nginx의 기본 설정을 삭제하고 앱에서 설정한 파일을 복사
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
 
-RUN <<EOF
-useradd -s /bin/bash -m vscode
-groupadd docker
-usermod -aG docker vscode
-EOF
-# install Docker tools (cli, buildx, compose)
-COPY --from=gloursdocker/docker / /
-CMD [ "npm", "start" ]
+# 위 스테이지에서 생성한 빌드 결과를 nginx의 샘플 앱이 사용하던 폴더로 이동
+COPY --from=build /app/build /usr/share/nginx/html
 
-# 2. For Nginx setup
-FROM nginx:alpine
+EXPOSE 80
 
-# Copy config nginx
-COPY --from=build /app/default.conf /etc/nginx/conf.d/default.conf
+# nginx 실행
+CMD [ "nginx", "-g", "daemon off;" ] 
 
-WORKDIR /usr/share/nginx/html
-
-# Remove default nginx static assets
-RUN rm -rf ./*
-
-# Copy static assets from builder stage
-COPY --from=build /app/build .
-
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
