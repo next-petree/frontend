@@ -125,7 +125,7 @@ export default function Step2() {
       return;
     }
     try {
-      const { data: res } = await axios.get('/email/check', {
+      const { data: res } = await axios.get('api/email/check', {
         params: {
           email: userInfo.email,
         },
@@ -158,7 +158,7 @@ export default function Step2() {
     // }
 
     try {
-      const { data: res } = await axios.get('/nickname/check', {
+      const { data: res } = await axios.get('api/nickname/check', {
         params: {
           nickname: userInfo.nickname,
         },
@@ -189,7 +189,7 @@ export default function Step2() {
 
     try {
       await axios
-        .post(`/sms/send`, {
+        .post(`api/sms/send`, {
           to: userInfo.phoneNumber,
         })
         .then((res: any) => {
@@ -217,7 +217,7 @@ export default function Step2() {
 
     try {
       await axios
-        .post(`/sms/verify`, {
+        .post(`api/sms/verify`, {
           code: userInfo.verifyNumber,
           phoneNumber: userInfo.phoneNumber,
         })
@@ -248,7 +248,7 @@ export default function Step2() {
     ) {
       try {
         await axios
-          .post(`/signup`, {
+          .post(`api/signup`, {
             emailChecked: userInfo.emailChecked,
             nicknameChecked: userInfo.nicknameChecked,
             phoneNumberChecked: userInfo.verifyChecked,

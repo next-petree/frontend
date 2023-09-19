@@ -91,7 +91,7 @@ const SearchModal: FC<Props> = ({ setDogs, setPageInfo, onClose, resetPage }) =>
           data: { content, totalPages, first, last, number },
         },
       } = await axios.get(
-        `/dogs?
+        `api/dogs?
         ${dogId && dogId.length ? `&dogTypeId=${dogId[0].id}` : ''}
         ${isVerified !== E_is_verified.ALL ? '&verification=yes' : ''}
         ${isAvailable !== E_is_available.ALL ? '&isAvailable=true' : ''}

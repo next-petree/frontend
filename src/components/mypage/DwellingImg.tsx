@@ -48,7 +48,7 @@ export default function DwellingImg({ label }: IDweling) {
 
   const getResidential = async () => {
     try {
-      const { data: res } = await axios.get<ResidentialEnvironmentsResponse>('/adopter/residential-environments');
+      const { data: res } = await axios.get<ResidentialEnvironmentsResponse>('api/adopter/residential-environments');
       setImageList(res.data);
     } catch (e) {
       const err = e as any;

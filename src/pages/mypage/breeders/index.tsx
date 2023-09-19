@@ -58,7 +58,7 @@ export default function Breeders() {
   });
   const fetchBreeders = async ({ keyword = '', page = 0, verification = true }) => {
     try {
-      const { data: res } = await axios.get<AxiosResponse<Pageable<IBreeder[]>>>('/breeders', {
+      const { data: res } = await axios.get<AxiosResponse<Pageable<IBreeder[]>>>('api/breeders', {
         params: {
           page,
           keyword,

@@ -39,41 +39,41 @@ export const DATE_FORMAT = {
 /** API 경로 */
 export const API_PATHS = {
   /** 로그인 */
-  login: '/login',
+  login: 'api/login',
   /** 회원가입 */
-  signup2: '/signup/step-2',
+  signup2: 'api/signup/step-2',
   /** 로그아웃 */
-  logout: '/logout',
+  logout: 'api/logout',
   /** 이메일 찾기 */
-  findEmail: '/auth/find-email',
+  findEmail: 'api/auth/find-email',
   /** 이메일 찾기 완료*/
-  findEmailComplete: '/auth/find-email-complete',
+  findEmailComplete: 'api/auth/find-email-complete',
   /** 비밀번호 찾기 */
-  findPassword: '/auth/find-password',
+  findPassword: 'api/auth/find-password',
   /** 비밀번호 찾기 완료*/
-  findPasswordComplete: '/auth/find-password-complete',
+  findPasswordComplete: 'api/auth/find-password-complete',
   /** 비밀번호 바꾸기*/
-  findPasswordChange: '/auth/find-password-change',
+  findPasswordChange: 'api/auth/find-password-change',
   /** 비밀번호 바꾸기 완료*/
-  findPasswordDone: '/auth/find-password-done',
+  findPasswordDone: 'api/auth/find-password-done',
   /** 견종 검색 */
-  searchBreed: (keyword?: string) => `/dog-type/search${keyword ? `?keyword=${keyword}` : ''}`,
+  searchBreed: (keyword?: string) => `api/dog-type/search${keyword ? `?keyword=${keyword}` : ''}`,
   /** 보유 견종 다건 조회 */
-  myDogs: '/breeder/dogs',
+  myDogs: 'api/breeder/dogs',
   /** 보유 견종 단건 조회 */
-  myDog: (id: number) => `/breeder/dogs/${id}`,
+  myDog: (id: number) => `api/breeder/dogs/${id}`,
   /** 강아지 개별 상세정보 */
-  myDogDetail: (id: number) => `/dogs/${id}`,
+  myDogDetail: (id: number) => `api/dogs/${id}`,
   /** 브리더 단건 조회 */
-  breeder: (id: number) => `/breeders/${id}`,
+  breeder: (id: number) => `api/breeders/${id}`,
   /** 유저 단건 조회 */
-  user: (id: number) => `/adopters/${id}`,
+  user: (id: number) => `api/adopters/${id}`,
   /** 분양 신청 */
-  doMatching: () => `/me/matchings/`,
+  doMatching: () => `api/me/matchings/`,
   /** 브리더 인증 신청 */
-  doVeritication: () => `/verifications`,
+  doVeritication: () => `api/verifications`,
   // 분양후기
-  getAdopter: '/adopter/reviews',
+  getAdopter: 'api/adopter/reviews',
 };
 
 /** 업로드 파일 확장자 */

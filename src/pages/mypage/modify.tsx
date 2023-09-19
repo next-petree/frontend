@@ -89,7 +89,7 @@ export default function Modify() {
     }
 
     try {
-      const { data: res } = await axios.get('/nickname/check', {
+      const { data: res } = await axios.get('api/nickname/check', {
         params: {
           nickname: memberInfo?.nickname,
         },

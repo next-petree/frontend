@@ -18,7 +18,7 @@ export const useLogin = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post('/login', {
+      const { data } = await axios.post('api/login', {
         email,
         password,
       });
@@ -48,7 +48,7 @@ export const useLogin = () => {
   const logout = async () => {
     const token = localStorage.getItem(LOC_KEY);
     try {
-      const { data } = await axios.post('/login', {
+      const { data } = await axios.post('api/login', {
         Authentication: `Bearer ${token}`,
       });
 

@@ -60,7 +60,7 @@ export default function ProfileImg({ certification, onChange }: ProfileImgProps)
   const handleDelete = async () => {
     if (checkImage?.fileUrl !== undefined) {
       try {
-        axios.delete(`/me/profile/image/${profileImage?.id}`).then((res: any) => {
+        axios.delete(`api/me/profile/image/${profileImage?.id}`).then((res: any) => {
           if (res.status === 200) {
             open(res.data.data, {
               accept: {

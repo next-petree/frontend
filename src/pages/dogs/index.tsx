@@ -59,7 +59,7 @@ const Dogs: FC = () => {
           data: {
             data: { content, totalPages, first, last, number },
           },
-        } = await axios.get<AxiosResponse<Pageable<IDog[]>>>('/dogs', {
+        } = await axios.get<AxiosResponse<Pageable<IDog[]>>>('api/dogs', {
           params: {
             page,
             keyword,
@@ -90,7 +90,7 @@ const Dogs: FC = () => {
     try {
       const {
         data: { data },
-      } = await axios.get(`dogs/${id}`);
+      } = await axios.get(`api/dogs/${id}`);
       setSelectedDogInfo(data);
     } catch (err) {
       console.error(err);

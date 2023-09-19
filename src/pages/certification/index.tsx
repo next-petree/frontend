@@ -54,7 +54,7 @@ export default function Certification() {
 
   const fetchQuestions = async () => {
     try {
-      const { data: res } = await axios.get<QuestionResponse>('/basic-test/start');
+      const { data: res } = await axios.get<QuestionResponse>('api/basic-test/start');
 
       setQuestions(res.data.questions);
     } catch (e) {
@@ -65,7 +65,7 @@ export default function Certification() {
 
   const submitTest = async () => {
     try {
-      const { data } = await axios.post<SubmitResponse>('/basic-test/submit', { answers });
+      const { data } = await axios.post<SubmitResponse>('api/basic-test/submit', { answers });
 
       setTestResult(data);
       navigate('/certification/result');
