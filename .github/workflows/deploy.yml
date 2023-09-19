@@ -67,9 +67,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/react
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/react:latest
             docker stop react || true
-            docker run -d --rm --name react -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/react
+            docker run -d --rm --name react -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/react:latest
 
             # Notify Slack on successful deployment
       - name: Notify Success to Slack
