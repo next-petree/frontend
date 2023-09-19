@@ -61,7 +61,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/jmdb
 
       - name: Pull and restart Docker Container
-        uses: appleboy/ssh-action@v2 # SSH를 사용하여 Docker 컨테이너 관리
+        uses: appleboy/ssh-action@v1 # SSH를 사용하여 Docker 컨테이너 관리
         with:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           host: ${{ secrets.EC2_HOST }}
