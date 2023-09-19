@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci # node_modules를 캐시에서 불러오지 못한 경우만 npm ci 실행
+        run: npm install # node_modules를 캐시에서 불러오지 못한 경우만 npm ci 실행
 
       - name: Build and Test
         run: |
