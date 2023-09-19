@@ -1,27 +1,28 @@
-FROM node:lts as build
+# 1. For build React app
+FROM node:lts AS build
 
-WORKDIR /app
+# Set working directory
+WORKDIR /app  
 
-COPY package.json .
-COPY package-lock.json ./package-lock.json
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 
-RUN npm i
-
+# Install dependencies and build the React app
+RUN npm install --legacy-peer-deps
 COPY . .
-
 RUN npm run build
 
-FROM nginx:stable-alpine
+# 2. For Nginx setup
+FROM nginx:alpine
 
-# nginx의 기본 설정을 삭제하고 앱에서 설정한 파일을 복사
-RUN rm -rf /etc/nginx/conf.d
-COPY conf /etc/nginx
-
-# 위 스테이지에서 생성한 빌드 결과를 nginx의 샘플 앱이 사용하던 폴더로 이동
+# Copy the built application from the previous stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-EXPOSE 80
+# Remove default nginx static assets
+RUN rm -rf /usr/share/nginx/html/*
 
-# nginx 실행
-CMD [ "nginx", "-g", "daemon off;" ] 
+# Copy custom Nginx configuration (default.conf 파일을 복사)
+COPY default.conf /etc/nginx/conf.d/default.conf
 
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
