@@ -1,9 +1,15 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": ["./*"],
-      "@constants": ["constants.ts"],
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@api/*": ["./api/*"],
+            "@assets/*": ["./assets/*"],
+            "@component/*": ["./component/*"],
+            "@hooks/*": ["./hooks/*"],
+            "@pages/*": ["./pages/*"],
+            "@routes/*": ["./routes/*"],
+            "@store/*": ["./store/*"],
+            "@styles/*": ["./styles/*"]
+        }
     }
-  }
 }
