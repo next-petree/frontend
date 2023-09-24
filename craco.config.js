@@ -1,15 +1,27 @@
-const CracoAlias = require('craco-alias');
-
+const webpack = require("webpack");
+console.log(webpack.version);
 module.exports = {
-    plugins: [
-        {
-            plugin: CracoAlias,
-            options: {
-                source: 'tsconfig',
-                baseUrl: './src', // tsconfig.paths.json에 있는 baseUrl 경로값과 맞춰줍니다.
-                tsConfigPath: 'tsconfig.paths.json',
-                debug: false, // 에러가 날 경우 true로 바꾸고 디버깅 하면 대부분의의 문제해결!
-            },
-        },
+  devServer: {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    proxy: [
+      {
+        // 추가 예정
+        context: ["/auth", "/api"],
+        target: "http://3.38.172.15:8080",
+        changeOrigin: true,
+      },
     ],
+  },
+  babel: {
+    plugins: ["babel-plugin-styled-components"],
+  },
+  webpack: {
+    plugins: [
+      new webpack.DefinePlugin({
+        process: { env: {} },
+      }),
+    ],
+  },
 };
