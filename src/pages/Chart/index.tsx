@@ -1,15 +1,12 @@
-import React, { FC } from 'react';
-import Charts from '@component/Charts';
-import Content from '@pages/Layout/content';
+import React, { FC } from "react";
+import Charts from "@component/Charts";
 
 const ChartPage: FC = () => {
-    return (
-        <>
-            <Content title='차트페이지'>
-                <Charts />
-            </Content>
-        </>
-    );
+  return (
+    <>
+      <Charts />
+    </>
+  );
 };
 
 export default ChartPage;

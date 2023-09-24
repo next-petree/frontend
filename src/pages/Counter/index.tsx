@@ -1,15 +1,12 @@
-import React, { FC } from 'react';
-import Counter from '@component/Counter';
-import Content from '@pages/Layout/content';
+import React, { FC } from "react";
+import Counter from "@component/Counter";
 
 const CounterPage: FC = () => {
-    return (
-        <>
-            <Content title='카운터 페이지'>
-                <Counter />
-            </Content>
-        </>
-    );
+  return (
+    <>
+      <Counter />
+    </>
+  );
 };
 
 export default CounterPage;
