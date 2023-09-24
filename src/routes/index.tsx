@@ -1,20 +1,32 @@
+import LayoutPage from "@pages/Layout";
 import { lazy, FC } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useRoutes } from "react-router-dom";
 
-import Home from "../pages/Home";
-import ChartPage from "../pages/Chart";
-import CounterPage from "../pages/Counter";
-import PostBoardPage from "../pages/PostBoard";
-
-const RenderRouter = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<Home />}></Route>
-      <Route path='chart' element={<ChartPage />}></Route>
-      <Route path='counter' element={<CounterPage />}></Route>
-      <Route path='postBoard' element={<PostBoardPage />}></Route>
-    </Routes>
-  );
+const HomePage = lazy(() => import("../pages/Home"));
+const homeRoute = [
+  {
+    path: "home",
+    element: <HomePage />,
+  },
+];
+const RenderRouter: FC = () => {
+  return useRoutes([
+    {
+      path: "/",
+      element: <LayoutPage />,
+      children: [
+        ...homeRoute,
+        // { 404 페이지 제작시 작업할 예정
+        //   path: "*",
+        //   element: (
+        //     <AuthenticatedComponent>
+        //       <NotFoundPage />
+        //     </AuthenticatedComponent>
+        //   ),
+        // },
+      ],
+    },
+  ]);
 };
 
 export default RenderRouter;
