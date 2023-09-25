@@ -9,6 +9,15 @@ const homeRoute = [
     element: <HomePage />,
   },
 ];
+const BreederPublicProfilePage = lazy(
+  () => import("@pages/BreederPublicProfile/index"),
+);
+const BreederPublicProfileRoute = [
+  {
+    path: "breederpublicprofile",
+    element: <BreederPublicProfilePage />,
+  },
+];
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -16,6 +25,7 @@ const RenderRouter: FC = () => {
       element: <LayoutPage />,
       children: [
         ...homeRoute,
+        ...BreederPublicProfileRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
