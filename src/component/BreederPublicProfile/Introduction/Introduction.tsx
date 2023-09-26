@@ -2,23 +2,51 @@ import { Container } from "@mui/material";
 import * as S from "./IntroductionStyle";
 
 const Introduction = () => {
+  const data = {
+    userInfo: {
+      name: "김브리더",
+      address: "활동지역 경상남도 창원시 의창구",
+    },
+    introduction: {
+      text: "자기소개",
+      hashTags: [
+        "강아지에 진심",
+        "반려견 기초지식 통과자",
+        "반려견은 나의 가족",
+      ],
+      headLine: "강아지를 키우는 것에 있어 진심인 남자",
+    },
+    mainBreed: {
+      text: "주력견종",
+      dogProfiles: ["포메라니안", "치와와", "골든리트리버"],
+    },
+  };
+
   return (
     <S.Container>
       <S.UserInfo>
         <S.UserImage />
-        <S.UserName>김브리더</S.UserName>
-        <S.UserAddress>활동지역 경상남도 창원시 의창구</S.UserAddress>
+        <S.UserName>{data.userInfo.name}</S.UserName>
+        <S.UserAddress>{data.userInfo.address}</S.UserAddress>
       </S.UserInfo>
       <S.Introduce>
-        <S.IntroductionText>자기소개</S.IntroductionText>
-        <S.HashTag>#안녕</S.HashTag>
-        <S.HeadLine>강아지를 키우는 것에 있어 진심인 남자</S.HeadLine>
+        <S.IntroductionText>{data.introduction.text}</S.IntroductionText>
+        <S.HashTagsContainer>
+          {data.introduction.hashTags.map((hashTag, index) => (
+            <S.HashTag key={index}>#{hashTag}</S.HashTag>
+          ))}
+        </S.HashTagsContainer>
+        <S.HeadLine>{data.introduction.headLine}</S.HeadLine>
       </S.Introduce>
       <S.MainBreed>
-        <S.MainBreedText>주력견종</S.MainBreedText>
+        <S.MainBreedText>{data.mainBreed.text}</S.MainBreedText>
         <S.DogProfileContainer>
-          <S.DogImage />
-          <S.DogName>포메라니안</S.DogName>
+          {data.mainBreed.dogProfiles.map((dog, index) => (
+            <S.DogProfile key={index}>
+              <S.DogImage />
+              <S.DogName>{dog}</S.DogName>
+            </S.DogProfile>
+          ))}
         </S.DogProfileContainer>
       </S.MainBreed>
     </S.Container>

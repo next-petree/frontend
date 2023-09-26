@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   margin-top: 15%;
-  height: 40%;
+  height: 45%;
   border-radius: 40px;
-  background-color: #bbb;
+  background-color: #fff;
 `;
 
 //------------유저 정보란------------
@@ -61,10 +61,17 @@ export const IntroductionText = styled.div`
   margin-top: 3%;
 `;
 
+export const HashTagsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+`;
+
 export const HashTag = styled.div`
   display: flex;
   width: 30%;
-  height: 20%;
+  height: 70%;
   align-items: center;
   justify-content: center;
   margin-top: 3%;
@@ -74,7 +81,7 @@ export const HashTag = styled.div`
 
 export const HeadLine = styled.div`
   text-align: center;
-  margin-top: 3%;
+  margin-top: 7%;
 `;
 
 //------------주력견종란------------
@@ -95,10 +102,18 @@ export const MainBreedText = styled.div`
 
 export const DogProfileContainer = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 65%;
+`;
+
+export const DogProfile = styled.div`
+  display: flex;
   flex-direction: column;
-  width: 110px;
-  height: 150px;
-  margin-top: 3%;
+  width: 28%;
+  height: 190px;
+  margin-top: 15px;
   background-color: pink;
 `;
 
