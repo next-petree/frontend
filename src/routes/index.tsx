@@ -18,6 +18,31 @@ const signUpRoute: RouteObject[] = [
     element: <SignUpPage />,
   },
 ];
+
+// const TestPage = lazy(() => import("@pages/Test/index"));
+// const TestResultPage = lazy(() => import("@pages/Test/Result/index"));
+// const TestIntroducePage = lazy(() => import("@pages/Test/Introduce/index"));
+// const TestQuestionPage = lazy(() => import("@pages/Test/Question/index"));
+
+// const testRoute: RouteObject[] = [
+//   {
+//     path: "test",
+//     element: <TestPage />,
+//   },
+//   {
+//     path: "test/result",
+//     element: <TestResultPage />,
+//   },
+//   {
+//     path: "test/introduce",
+//     element: <TestIntroducePage />,
+//   },
+//   {
+//     path: "test/question",
+//     element: <TestQuestionPage />,
+//   },
+// ];
+
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -26,6 +51,7 @@ const RenderRouter: FC = () => {
       children: [
         ...homeRoute,
         ...signUpRoute,
+        // ...testRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
