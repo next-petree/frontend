@@ -9,8 +9,9 @@ const homeRoute = [
     element: <HomePage />,
   },
 ];
+
 const BreederPublicProfilePage = lazy(
-  () => import("@pages/BreederPublicProfile/index"),
+  () => import("@pages/PublicProfile/BreederPublicProfile/index"),
 );
 const BreederPublicProfileRoute = [
   {
@@ -18,6 +19,17 @@ const BreederPublicProfileRoute = [
     element: <BreederPublicProfilePage />,
   },
 ];
+
+const AdopterPublicProfilePage = lazy(
+  () => import("@pages/PublicProfile/AdopterPublicProfile/index"),
+);
+const AdopterPublicProfileRoute = [
+  {
+    path: "adopterpublicprofile",
+    element: <AdopterPublicProfilePage />,
+  },
+];
+
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -26,6 +38,7 @@ const RenderRouter: FC = () => {
       children: [
         ...homeRoute,
         ...BreederPublicProfileRoute,
+        ...AdopterPublicProfileRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (

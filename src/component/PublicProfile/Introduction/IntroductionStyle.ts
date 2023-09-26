@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  margin-top: 15%;
+  margin-top: 20%;
   height: 800px;
   border-radius: 40px;
   background-color: #fff;
@@ -30,7 +30,7 @@ export const UserName = styled.div`
   display: flex;
   height: 30px;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   align-items: center;
   justify-content: center;
@@ -61,7 +61,7 @@ export const Introduce = styled.div`
 
 export const IntroductionText = styled.div`
   text-align: center;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
 `;
 
@@ -86,52 +86,4 @@ export const HashTag = styled.div`
 export const HeadLine = styled.div`
   text-align: center;
   margin-top: 50px;
-`;
-
-//------------주력견종란------------
-export const MainBreed = styled.div`
-  display: flex;
-  width: 70%;
-  height: 35%;
-  margin: auto;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 2%;
-`;
-
-export const MainBreedText = styled.div`
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
-`;
-
-export const DogProfileContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 65%;
-`;
-
-export const DogProfile = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 28%;
-  height: 200px;
-  margin-top: 15px;
-`;
-
-export const DogImage = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  background-color: yellow;
-  margin-bottom: 10px;
-`;
-
-export const DogName = styled.div`
-  width: 100%;
-  height: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

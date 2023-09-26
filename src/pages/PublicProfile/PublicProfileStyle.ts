@@ -7,4 +7,5 @@ export const ContentContainer = styled.div`
   justify-content: center;
   width: 1200px;
   margin: auto;
+  // background-color: #555;
 `;
