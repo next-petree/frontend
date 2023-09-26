@@ -5,8 +5,6 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 65%;
-  height: 1800px;
+  width: 1200px;
   margin: auto;
-  background-color: blue;
 `;

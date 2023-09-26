@@ -5,7 +5,7 @@ const Introduction = () => {
   const data = {
     userInfo: {
       name: "김브리더",
-      address: "활동지역 경상남도 창원시 의창구",
+      address: " 경상남도 창원시 의창구",
     },
     introduction: {
       text: "자기소개",
@@ -27,7 +27,10 @@ const Introduction = () => {
       <S.UserInfo>
         <S.UserImage />
         <S.UserName>{data.userInfo.name}</S.UserName>
-        <S.UserAddress>{data.userInfo.address}</S.UserAddress>
+        <S.UserAddress>
+          <span>활동지역</span>
+          <span>{data.userInfo.address}</span>
+        </S.UserAddress>
       </S.UserInfo>
       <S.Introduce>
         <S.IntroductionText>{data.introduction.text}</S.IntroductionText>

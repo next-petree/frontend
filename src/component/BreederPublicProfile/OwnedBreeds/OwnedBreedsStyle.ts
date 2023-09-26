@@ -5,17 +5,17 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 800px;
   margin-top: 5%;
   margin-bottom: 8%;
-  height: 55%;
   border-radius: 40px;
-  background-color: #555;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 `;
 
 export const ContentBox = styled.div`
   width: 80%;
   height: 90%;
-  background-color: #eee;
 `;
 export const OwnedBreedsText = styled.div`
   font-size: 25px;
@@ -35,9 +35,8 @@ export const OwnedBreedsList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 31%;
   height: 300px;
-  background-color: pink;
 `;
 
 export const DogImage = styled.div`
