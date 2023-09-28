@@ -1,11 +1,11 @@
 import { Typography } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { Image } from "@component/0min/Image";
 import { Center } from "@component/0min/Center";
 import { Column } from "@component/0min/Column";
 
 import PetreeDogCatBirdHug from "@assets/0min/petree_dog_cat_bird_hug.png";
-import styled from "@emotion/styled";
 
 export const SignUpResult = () => {
   return (
