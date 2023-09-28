@@ -1,20 +1,25 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-// import { PropsWithChildren } from "react";
+import { CSSProperties } from "react";
 
-// export const Center = ({ children }: PropsWithChildren) => {
-//   return <S.Center>{children}</S.Center>;
-// };
+type CenterStyleProps = {
+  styles?: {
+    gap: CSSProperties["gap"];
+    horizontalAlign?: CSSProperties["alignItems"];
+    verticalAlign?: CSSProperties["justifyContent"];
+  };
+};
 
-export const Center = styled.div`
+export const Center = styled.div<CenterStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
 
-// const S = {
-//   Center: styled.div`
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   `,
-// };
+  ${({ styles }) =>
+    styles &&
+    css`
+      gap: ${styles.gap};
+      align-items: ${styles.verticalAlign && styles.verticalAlign};
+      justify-content: ${styles.horizontalAlign && styles.horizontalAlign};
+    `}
+`;
