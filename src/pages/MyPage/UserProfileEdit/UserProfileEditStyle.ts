@@ -6,6 +6,7 @@ export const ContentContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 1200px;
+  height: 100px;
   margin: auto;
-  //background-color: #555;
+  background-color: pink;
 `;

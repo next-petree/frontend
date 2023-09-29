@@ -1,4 +1,5 @@
 import * as S from "./OwnedBreedsStyle";
+
 const OwnedBreeds = () => {
   const dummyData = [
     { id: 1, breed: "포메라니안", name: "루카스", birthDay: "2023.09.26" },

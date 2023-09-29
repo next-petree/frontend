@@ -30,6 +30,16 @@ const AdopterPublicProfileRoute = [
   },
 ];
 
+const BreederProfileEditPage = lazy(
+  () => import("@pages/MyPage/UserProfileEdit/BreederProfileEdit/index"),
+);
+const BreederProfileEditRoute = [
+  {
+    path: "breederprofileedit",
+    element: <BreederProfileEditPage />,
+  },
+];
+
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -39,6 +49,7 @@ const RenderRouter: FC = () => {
         ...homeRoute,
         ...BreederPublicProfileRoute,
         ...AdopterPublicProfileRoute,
+        ...BreederProfileEditRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
