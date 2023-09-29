@@ -6,10 +6,19 @@ interface ImageProps {
   alt: string;
   width: number;
   height: number;
+  lazy?: boolean;
 }
 
-export const Image = ({ src, alt, width, height }: ImageProps) => {
-  return <S.Image src={src} alt={alt} width={width} height={height} />;
+export const Image = ({ src, alt, width, height, lazy = true }: ImageProps) => {
+  return (
+    <S.Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={lazy ? "lazy" : "eager"}
+    />
+  );
 };
 
 type ImageStyleProps = Pick<ImageProps, "width" | "height">;
