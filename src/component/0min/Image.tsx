@@ -1,13 +1,18 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-interface ImageProps {
+export interface ImageProps {
   src: string;
   alt: string;
   width: number;
   height: number;
   lazy?: boolean;
 }
+
+export type PartialImageProps = Omit<ImageProps, "width" | "height"> & {
+  width?: number;
+  height?: number;
+};
 
 export const Image = ({ src, alt, width, height, lazy = true }: ImageProps) => {
   return (
