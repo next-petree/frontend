@@ -8,8 +8,10 @@ const BreederProfileEdit: FC = () => {
   return (
     <S.ContentContainer>
       <LeftMenuBar />
-      <UserProfileEdit />
-      <PasswordUpdate />
+      <S.MainContent>
+        <UserProfileEdit />
+        <PasswordUpdate />
+      </S.MainContent>
     </S.ContentContainer>
   );
 };
