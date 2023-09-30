@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 
 type CenterStyleProps = {
   styles?: {
-    gap: CSSProperties["gap"];
+    gap?: CSSProperties["gap"];
     horizontalAlign?: CSSProperties["alignItems"];
     verticalAlign?: CSSProperties["justifyContent"];
   };
@@ -14,6 +14,7 @@ export const Center = styled.div<CenterStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   ${({ styles }) =>
     styles &&

@@ -11,6 +11,7 @@ type ColumnStyleProps = {
 };
 
 export const Column = styled.div<ColumnStyleProps>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
