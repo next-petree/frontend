@@ -44,10 +44,15 @@ const testRoute: RouteObject[] = [
 ];
 
 const SearchBreederPage = lazy(() => import("@pages/Search/Breeder/index"));
-const SearchBreederRoute = [
+const SearchAnimalPage = lazy(() => import("@pages/Search/Animal/index"));
+const SearchRoute = [
   {
     path: "search/breeder",
     element: <SearchBreederPage />,
+  },
+  {
+    path: "search/animal",
+    element: <SearchAnimalPage />,
   },
 ];
 
@@ -60,7 +65,7 @@ const RenderRouter: FC = () => {
         ...homeRoute,
         ...signUpRoute,
         ...testRoute,
-        ...SearchBreederRoute,
+        ...SearchRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
