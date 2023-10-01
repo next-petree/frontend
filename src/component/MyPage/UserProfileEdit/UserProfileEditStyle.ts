@@ -4,11 +4,12 @@ export const Container = styled.div`
   width: 1000px;
   height: 700px;
   border-radius: 20px;
-  background-color: #555;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 `;
 
 export const UserProfileEditLabel = styled.h1`
-  font-size: 2em;
+  font-size: 30px;
   margin: 80px 0 30px 30px;
 `;
 

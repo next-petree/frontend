@@ -8,8 +8,9 @@ export const Container = styled.div`
   height: 1000px;
   border-radius: 20px;
   overflow: hidden;
-  background-color: gray;
+  background-color: #fff;
   font-size: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 `;
 
 export const StyledLink = styled(Link)`

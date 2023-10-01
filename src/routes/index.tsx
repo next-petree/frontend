@@ -15,7 +15,7 @@ const BreederPublicProfilePage = lazy(
 );
 const BreederPublicProfileRoute = [
   {
-    path: "breederpublicprofile",
+    path: "breeder/public-profile",
     element: <BreederPublicProfilePage />,
   },
 ];
@@ -25,7 +25,7 @@ const AdopterPublicProfilePage = lazy(
 );
 const AdopterPublicProfileRoute = [
   {
-    path: "adopterpublicprofile",
+    path: "adopter/public-profile",
     element: <AdopterPublicProfilePage />,
   },
 ];
@@ -35,8 +35,29 @@ const BreederProfileEditPage = lazy(
 );
 const BreederProfileEditRoute = [
   {
-    path: "breederprofileedit",
+    path: "breeder/profile-edit",
     element: <BreederProfileEditPage />,
+  },
+];
+
+const BreederProfileManagementPage = lazy(
+  () =>
+    import("@pages/MyPage/UserProfileManagement/BreederProfileMangement/index"),
+);
+const BreederProfileManagementRoute = [
+  {
+    path: "breeder/profile-management",
+    element: <BreederProfileManagementPage />,
+  },
+];
+
+const BreedManagementPage = lazy(
+  () => import("@pages/MyPage/BreedManagement/index"),
+);
+const BreedManagementRoute = [
+  {
+    path: "breeder/breed-management",
+    element: <BreedManagementPage />,
   },
 ];
 
@@ -50,6 +71,8 @@ const RenderRouter: FC = () => {
         ...BreederPublicProfileRoute,
         ...AdopterPublicProfileRoute,
         ...BreederProfileEditRoute,
+        ...BreederProfileManagementRoute,
+        ...BreedManagementRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (

@@ -6,11 +6,12 @@ export const Container = styled.div`
   margin-top: 5%;
   margin-bottom: 8%;
   border-radius: 20px;
-  background-color: #555;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 `;
 
 export const PasswordUpdateLabel = styled.h1`
-  font-size: 2em;
+  font-size: 30px;
   margin: 80px 0 30px 30px;
 `;
 
@@ -29,12 +30,11 @@ const DivBox = styled.div`
 `;
 
 const Label = styled.label`
-  margin-right: 10px;
-  width: 200px;
+  width: 170px;
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 40%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #888;

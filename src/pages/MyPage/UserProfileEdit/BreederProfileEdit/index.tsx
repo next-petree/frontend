@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import * as S from "../UserProfileEditStyle";
+import * as S from "../../MyPageStyle";
 import LeftMenuBar from "@component/MyPage/LeftMenuBar/LeftMenuBar";
 import UserProfileEdit from "@component/MyPage/UserProfileEdit/UserProfileEdit";
 import PasswordUpdate from "@component/MyPage/PasswordUpdate/PasswordUpdate";
