@@ -1,7 +1,7 @@
 import * as S from "./ResidentialEnvironmentStyle";
 
 function ResidentialEnvironment() {
-  const data = {
+  const DummyData = {
     residentialEnvironment: {
       roomDivision: ["마당", "거실", "화장실"],
     },
@@ -10,7 +10,7 @@ function ResidentialEnvironment() {
     <S.Container>
       <S.ResidentialEnvironmentText>주거환경</S.ResidentialEnvironmentText>
       <S.ResidentialEnvironmentContainer>
-        {data.residentialEnvironment.roomDivision.map((Home, index) => (
+        {DummyData.residentialEnvironment.roomDivision.map((Home, index) => (
           <S.RoomDivision key={index}>
             <S.RoomDivisionImage />
             <S.RoomDivisionName>{Home}</S.RoomDivisionName>

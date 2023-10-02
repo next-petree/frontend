@@ -1,7 +1,7 @@
 import * as S from "./MainBreedStyle";
 
 const MainBreed = () => {
-  const data = {
+  const DummyData = {
     mainBreed: {
       dogProfiles: ["포메라니안", "치와와", "골든리트리버"],
     },
@@ -10,7 +10,7 @@ const MainBreed = () => {
     <S.Container>
       <S.MainBreedText>주력견종</S.MainBreedText>
       <S.DogProfileContainer>
-        {data.mainBreed.dogProfiles.map((dog, index) => (
+        {DummyData.mainBreed.dogProfiles.map((dog, index) => (
           <S.DogProfile key={index}>
             <S.DogImage />
             <S.DogName>{dog}</S.DogName>
