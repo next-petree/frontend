@@ -39,7 +39,11 @@ export const SearchBreederContent = () => {
         <SearchPageCard key={index}>
           <Column styles={{ gap: "12px" }}>
             <Column styles={{ gap: "20px" }}>
-              <SearchPageCard.Image src={GirlPNG} alt={"girl"} />
+              <SearchPageCard.Image
+                dimmedText={"예약 중"}
+                src={GirlPNG}
+                alt={"girl"}
+              />
               <Center styles={{ horizontalAlign: "start", gap: "12px" }}>
                 <SearchPageCard.Title>{value.nickname}</SearchPageCard.Title>
                 <SearchPageCard.SubTitle>
