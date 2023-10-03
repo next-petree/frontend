@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 
 type ColumnStyleProps = {
   styles?: {
-    gap: CSSProperties["gap"];
+    gap?: CSSProperties["gap"];
     horizontalAlign?: CSSProperties["alignItems"];
     verticalAlign?: CSSProperties["justifyContent"];
   };
