@@ -1,8 +1,10 @@
+import { Link as DefaultLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
   width: 1000px;
   height: 1100px;
+  margin-bottom: 8%;
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -38,6 +40,7 @@ export const MyPetManagementSelect = styled.select`
 export const MyPetMangementInput = styled.input`
   width: 350px;
   height: 50px;
+  border: 1px solid #000;
   border-radius: 10px;
   margin-right: 15px;
 `;
@@ -61,6 +64,14 @@ export const MyPetManagementSearchButton = styled(Button)`
 `;
 
 //메인 컨텐츠
+export const StyledLink = styled(DefaultLink)`
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+`;
+
 export const Main = styled.div`
   display: flex;
   flex-wrap: wrap;

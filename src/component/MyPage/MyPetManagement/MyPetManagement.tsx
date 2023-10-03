@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import * as S from "./MyPetManagementStyle";
 
 interface Pet {
@@ -216,7 +217,9 @@ const MyPetManagement = () => {
             </S.PageNation>
           </S.CenterContainer>
 
-          <S.PetAddButton>추가</S.PetAddButton>
+          <Link to="/breeder/breed-management/add">
+            <S.PetAddButton>추가</S.PetAddButton>
+          </Link>
         </S.Footer>
       </S.InnerContainer>
     </S.Container>

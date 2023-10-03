@@ -61,6 +61,26 @@ const BreedManagementRoute = [
   },
 ];
 
+const AddMyPetPage = lazy(
+  () => import("@pages/MyPage/BreedManagement/AddMyPetPage/index"),
+);
+const AddMyPetRoute = [
+  {
+    path: "breeder/breed-management/add",
+    element: <AddMyPetPage />,
+  },
+];
+
+const EditMyPetPage = lazy(
+  () => import("@pages/MyPage/BreedManagement/EditMyPetPage/index"),
+);
+const EditMyPetRoute = [
+  {
+    path: "breeder/breed-management/edit",
+    element: <EditMyPetPage />,
+  },
+];
+
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -73,6 +93,8 @@ const RenderRouter: FC = () => {
         ...BreederProfileEditRoute,
         ...BreederProfileManagementRoute,
         ...BreedManagementRoute,
+        ...AddMyPetRoute,
+        ...EditMyPetRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
