@@ -4,6 +4,7 @@ import { SearchPageCard } from "@component/Search/SearchPageCard";
 import DogPNG from "@assets/0min/dog.png";
 import { Column } from "@component/0min/Column";
 import { Typography } from "@mui/material";
+import { SearchAnimalModal } from "@component/Search/Animal/SearchAnimalModal";
 
 interface AnimalModel {
   id: number;
@@ -50,28 +51,37 @@ export const SearchAnimalContent = () => {
   return (
     <S.Grid>
       {mockDatas?.map((value, index) => (
-        <SearchPageCard key={index} styles={{ padding: "20px 20px 30px 20px" }}>
-          <Column styles={{ gap: "12px" }}>
-            <Column styles={{ gap: "20px", horizontalAlign: "start" }}>
-              <SearchPageCard.Image src={value.imgUrl} alt={"asd"} />
-              <SearchPageCard.Title>{value.name}</SearchPageCard.Title>
+        <SearchAnimalModal>
+          <SearchPageCard
+            key={index}
+            styles={{ padding: "20px 20px 30px 20px" }}
+          >
+            <Column styles={{ gap: "12px" }}>
+              <Column styles={{ gap: "20px", horizontalAlign: "start" }}>
+                <SearchPageCard.Image
+                  src={value.imgUrl}
+                  alt={"asd"}
+                  dimmedText={"예약 중"}
+                />
+                <SearchPageCard.Title>{value.name}</SearchPageCard.Title>
+              </Column>
+              <Column styles={{ gap: "4px", horizontalAlign: "start" }}>
+                <SearchPageCard.Content>
+                  견종: {value.type}
+                </SearchPageCard.Content>
+                <SearchPageCard.Content>
+                  성별: {value.gender.repeat(index + 1)}
+                </SearchPageCard.Content>
+                <SearchPageCard.Content>
+                  출생일: {value.birthDate.toLocaleDateString()}
+                </SearchPageCard.Content>
+              </Column>
+              <Typography align="right" noWrap width={"100%"}>
+                {value.breederNickName}님의 보유견종
+              </Typography>
             </Column>
-            <Column styles={{ gap: "4px", horizontalAlign: "start" }}>
-              <SearchPageCard.Content>
-                견종: {value.type}
-              </SearchPageCard.Content>
-              <SearchPageCard.Content>
-                성별: {value.gender.repeat(index + 1)}
-              </SearchPageCard.Content>
-              <SearchPageCard.Content>
-                출생일: {value.birthDate.toLocaleDateString()}
-              </SearchPageCard.Content>
-            </Column>
-            <Typography align="right" noWrap width={"100%"}>
-              {value.breederNickName}님의 보유견종
-            </Typography>
-          </Column>
-        </SearchPageCard>
+          </SearchPageCard>
+        </SearchAnimalModal>
       ))}
     </S.Grid>
   );
