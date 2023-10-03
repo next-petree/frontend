@@ -1,7 +1,11 @@
 import { Container } from "@mui/material";
 import * as S from "./ProfileManagementStyle";
 
-const ProfileManagement = () => {
+interface Props {
+  breeder?: boolean;
+}
+
+const ProfileManagement: React.FC<Props> = ({ breeder = false }) => {
   return (
     <S.Container>
       <S.Content>
@@ -12,9 +16,16 @@ const ProfileManagement = () => {
         <S.ProfileManagementLabel>프로필</S.ProfileManagementLabel>
 
         <S.AuthenticationStatusChecker>
-          <S.AuthenticationStatusCheckerLabel>
-            브리더 인증여부
-          </S.AuthenticationStatusCheckerLabel>
+          {breeder ? (
+            <S.AuthenticationStatusCheckerLabel>
+              브리더 인증여부
+            </S.AuthenticationStatusCheckerLabel>
+          ) : (
+            <S.AuthenticationStatusCheckerLabel>
+              분양희망자 인증여부
+            </S.AuthenticationStatusCheckerLabel>
+          )}
+
           <S.AuthenticationStatusCheckerInput />
         </S.AuthenticationStatusChecker>
 

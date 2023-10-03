@@ -69,11 +69,12 @@ export const UserTypeSelector = styled(FieldContainer)``;
 
 export const UserTypeSelectorLabel = styled(Label)``;
 
-export const UserTypeSelectorSelect = styled.select`
+export const UserTypeSelectorInput = styled.input`
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #888;
+  box-sizing: border-box;
 `;
 
 //이메일

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./AddOrEditMyPetStyle";
 
 interface Props {
-  editMode?: boolean;
+  EditMode?: boolean;
 }
 
-const AddOrEditMyPet: React.FC<Props> = ({ editMode = false }) => {
+const AddOrEditMyPet: React.FC<Props> = ({ EditMode = false }) => {
   const [years, setYears] = useState<number[]>([]);
   const [months, setMonths] = useState(
     Array.from({ length: 12 }, (_, i) => i + 1),
@@ -87,7 +87,7 @@ const AddOrEditMyPet: React.FC<Props> = ({ editMode = false }) => {
 
               <S.AdoptionStatus>
                 <S.AdoptionStatusLabel>분양상태</S.AdoptionStatusLabel>
-                {editMode ? (
+                {EditMode ? (
                   <S.AdoptionStatusInput as="select">
                     <option value="available">분양가능</option>
                     <option value="inProgress">분양진행중</option>
@@ -118,7 +118,7 @@ const AddOrEditMyPet: React.FC<Props> = ({ editMode = false }) => {
       </S.Container>
 
       <S.ButtonContainer>
-        {editMode ? (
+        {EditMode ? (
           <>
             <S.EditButton>수정</S.EditButton>
             <S.DeleteButton>삭제</S.DeleteButton>

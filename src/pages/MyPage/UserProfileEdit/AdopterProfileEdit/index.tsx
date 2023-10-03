@@ -4,16 +4,16 @@ import LeftMenuBar from "@component/MyPage/LeftMenuBar/LeftMenuBar";
 import UserProfileEdit from "@component/MyPage/UserProfileEdit/UserProfileEdit";
 import PasswordUpdate from "@component/MyPage/PasswordUpdate/PasswordUpdate";
 
-const BreederProfileEdit: FC = () => {
+const AdopterProfileEdit: FC = () => {
   return (
     <S.ContentContainer>
-      <LeftMenuBar breeder={true} />
+      <LeftMenuBar />
       <S.MainContent>
-        <UserProfileEdit breeder={true} />
+        <UserProfileEdit />
         <PasswordUpdate />
       </S.MainContent>
     </S.ContentContainer>
   );
 };
 
-export default BreederProfileEdit;
+export default AdopterProfileEdit;

@@ -40,14 +40,39 @@ const BreederProfileEditRoute = [
   },
 ];
 
+const AdopterProfileEditPage = lazy(
+  () => import("@pages/MyPage/UserProfileEdit/AdopterProfileEdit/index"),
+);
+const AdopterProfileEditRoute = [
+  {
+    path: "adopter/profile-edit",
+    element: <AdopterProfileEditPage />,
+  },
+];
+
 const BreederProfileManagementPage = lazy(
   () =>
-    import("@pages/MyPage/UserProfileManagement/BreederProfileMangement/index"),
+    import(
+      "@pages/MyPage/UserProfileManagement/BreederProfileManagement/index"
+    ),
 );
 const BreederProfileManagementRoute = [
   {
     path: "breeder/profile-management",
     element: <BreederProfileManagementPage />,
+  },
+];
+
+const AdopterProfileManagementPage = lazy(
+  () =>
+    import(
+      "@pages/MyPage/UserProfileManagement/AdopterProfileManagement/index"
+    ),
+);
+const AdopterProfileManagementRoute = [
+  {
+    path: "Adopter/profile-management",
+    element: <AdopterProfileManagementPage />,
   },
 ];
 
@@ -91,7 +116,9 @@ const RenderRouter: FC = () => {
         ...BreederPublicProfileRoute,
         ...AdopterPublicProfileRoute,
         ...BreederProfileEditRoute,
+        ...AdopterProfileEditRoute,
         ...BreederProfileManagementRoute,
+        ...AdopterProfileManagementRoute,
         ...BreedManagementRoute,
         ...AddMyPetRoute,
         ...EditMyPetRoute,

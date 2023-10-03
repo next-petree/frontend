@@ -8,7 +8,7 @@ const EditMyPet: FC = () => {
     <S.ContentContainer>
       <LeftMenuBar />
       <S.MainContent>
-        <AddOrEditMyPet editMode={true} />
+        <AddOrEditMyPet EditMode={true} />
       </S.MainContent>
     </S.ContentContainer>
   );

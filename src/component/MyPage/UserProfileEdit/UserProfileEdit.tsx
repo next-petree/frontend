@@ -1,6 +1,10 @@
 import * as S from "./UserProfileEditStyle";
 
-const UserProfileEdit = () => {
+interface Props {
+  breeder?: boolean;
+}
+
+const UserProfileEdit: React.FC<Props> = ({ breeder = false }) => {
   return (
     <S.Container>
       <S.UserProfileEditLabel>회원정보 수정</S.UserProfileEditLabel>
@@ -9,10 +13,11 @@ const UserProfileEdit = () => {
         <S.LeftContentArea>
           <S.UserTypeSelector>
             <S.UserTypeSelectorLabel>회원유형</S.UserTypeSelectorLabel>
-            <S.UserTypeSelectorSelect>
-              <option value="breeder">브리더</option>
-              <option value="adopter">분양희망자</option>
-            </S.UserTypeSelectorSelect>
+            {breeder ? (
+              <S.UserTypeSelectorInput value="브리더" readOnly />
+            ) : (
+              <S.UserTypeSelectorInput value="분양희망자" readOnly />
+            )}
           </S.UserTypeSelector>
 
           <S.UserEmail>
