@@ -5,6 +5,7 @@ import * as S from "@pages/Layout/style";
 import { Outlet, useLocation } from "react-router-dom";
 import { getGlobalState } from "utils/getGlobalState";
 import SuspendFallbackLoading from "@component/common/SuspendFallbackLoading";
+import LayoutPageHeader from "@pages/Layout/header";
 
 const LayoutPage: FC = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const LayoutPage: FC = () => {
   const { device, collapsed } = getGlobalState();
 
   useEffect(() => {
-    location.pathname === "/" && navigate("/home");
+    location.pathname === "/" && navigate("/");
   }, [navigate, location]);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const LayoutPage: FC = () => {
 
   return (
     <S.LayoutPageContainer>
+      <LayoutPageHeader />
       <S.LayoutPageContent>
         <Suspense fallback={<SuspendFallbackLoading />}>
           <Outlet />

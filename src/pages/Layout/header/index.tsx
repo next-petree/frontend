@@ -1,26 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { StyledNav } from './style';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import * as S from "./style";
+import ProfilePic from "@component/common/ProfilePicture";
+import { Logo } from "@component/common/Logo";
+import Button from "@component/common/Button";
+interface MenuItem {
+  name: string | React.ReactNode;
+  path: string;
+}
 
-const Header = () => {
+interface GlobalNavProps {
+  isLoggedIn?: boolean;
+}
+const LayoutPageHeader = ({ isLoggedIn }: GlobalNavProps) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([
+    {
+      name: "강아지 모아보기",
+      path: "/dogs",
+    },
+    {
+      name: "브리더 모아보기",
+      path: "/dogs/:id",
+    },
+  ]);
   return (
-    <StyledNav>
-      <h1>
-        <Link to={'/'}>logo</Link>
-      </h1>
-      <ul>
-        <li>
-          <Link to={'/counter'}>counter</Link>
-        </li>
-        <li>
-          <Link to={'/chart'}>chart</Link>
-        </li>
-        <li>
-          <Link to={'/postBoard'}>postBoard</Link>
-        </li>
-      </ul>
-    </StyledNav>
+    <S.Container>
+      <S.InnerContainer>
+        <Logo />
+        <S.Menus>
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <Link to={item.path}>{item.name}</Link>
+            </li>
+          ))}
+          <ProfilePic
+            mine
+            onClick={() => {
+              if (!isDropdownOpen) setIsDropdownOpen(true);
+            }}
+          />
+        </S.Menus>
+      </S.InnerContainer>
+    </S.Container>
   );
 };
 
-export default Header;
+export default LayoutPageHeader;

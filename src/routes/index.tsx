@@ -5,7 +5,7 @@ import { Routes, Route, Link, useRoutes } from "react-router-dom";
 const HomePage = lazy(() => import("@pages/Home/index"));
 const homeRoute = [
   {
-    path: "home",
+    path: "/",
     element: <HomePage />,
   },
 ];
