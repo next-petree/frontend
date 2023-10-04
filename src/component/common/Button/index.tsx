@@ -35,10 +35,4 @@ const Button = ({
   );
 };
 
-Button.defaultProps = {
-  fontSize: COLOR.white,
-  buttonSize: BTNSIZE.md,
-  backgroundColor: COLOR.primary,
-};
-
 export default Button;

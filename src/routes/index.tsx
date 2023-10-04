@@ -1,6 +1,6 @@
 import LayoutPage from "@pages/Layout";
-import { lazy, FC } from "react";
-import { Routes, Route, Link, useRoutes } from "react-router-dom";
+import { lazy } from "react";
+import { useRoutes } from "react-router-dom";
 
 const HomePage = lazy(() => import("@pages/Home/index"));
 const homeRoute = [
@@ -9,8 +9,8 @@ const homeRoute = [
     element: <HomePage />,
   },
 ];
-const RenderRouter: FC = () => {
-  return useRoutes([
+const RenderRouter = () =>
+  useRoutes([
     {
       path: "/",
       element: <LayoutPage />,
@@ -27,6 +27,4 @@ const RenderRouter: FC = () => {
       ],
     },
   ]);
-};
-
 export default RenderRouter;

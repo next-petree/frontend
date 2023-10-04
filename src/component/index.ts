@@ -1,6 +1,3 @@
-import PostBoard from './PostBoard';
-import Capture from './Capture';
-import Charts from './Charts';
-import Counter from './Counter';
+import PostBoard from "./PostBoard";
 
-export { PostBoard, Capture, Charts, Counter };
+export { PostBoard };

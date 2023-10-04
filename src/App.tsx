@@ -1,13 +1,22 @@
-import GlobalStyle from "./styles";
-import RenderRouter from "./routes";
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
+import RenderRouter from "./routes";
+import { IntlProvider } from "react-intl";
+import {
+  flattenMessages,
+  getIntlLocale,
+  getPrefixLocale,
+  local_KR,
+} from "locales";
+
+const App = () => {
   return (
     <>
-      <GlobalStyle />
-      <RenderRouter />
+      <BrowserRouter>
+        <RenderRouter />
+      </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;

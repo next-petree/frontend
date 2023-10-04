@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Container } from "@mui/material";
 
 export const LayoutPageContainer = styled.div`
   margin: 0 auto;

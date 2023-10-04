@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import GlobalStyle from "./styles";
+import { IntlProvider } from "react-intl";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <GlobalStyle />
     <RecoilRoot>
-      <Router>
-        <App />
-      </Router>
+      <App />
     </RecoilRoot>
   </React.StrictMode>
 );
