@@ -114,13 +114,13 @@ export const TitleAdoptionStatus = styled.div``;
 export const Content = styled.div`
   display: flex;
   width: 100%;
-  height: 150px;
+  height: 100px;
 `;
 
 export const ReviewTextArea = styled.div`
   display: flex;
   width: 100%;
-  height: 150px;
+  height: 100px;
   border-bottom: 1px solid #000;
   align-items: center;
 `;
@@ -137,6 +137,7 @@ export const Number = styled.div`
   font-size: 20px;
   width: 110px;
   height: 100%;
+  margin-right: 5px;
 `;
 
 export const BreederName = styled.div`
@@ -164,11 +165,7 @@ export const PetNameAndType = styled.div`
   font-size: 20px;
   width: 210px;
   height: 100%;
-  margin-right: 25px;
-`;
-
-export const DetailButton = styled(Button)`
-  margin-right: 45px;
+  margin-right: 9px;
 `;
 
 export const AdoptionStatus = styled.div`
@@ -178,7 +175,10 @@ export const AdoptionStatus = styled.div`
   font-size: 20px;
   width: 110px;
   height: 100%;
+  margin-right: 45px;
 `;
+
+export const DetailButton = styled(Button)``;
 
 //하단 컨텐츠
 export const Footer = styled.div`
