@@ -1,3 +1,7 @@
-import PostBoard from "./PostBoard";
+import React from "react";
 
-export { PostBoard };
+const index = () => {
+  return;
+};
+
+export default index;
