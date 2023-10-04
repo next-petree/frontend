@@ -150,17 +150,17 @@ const DummyData = {
 
 const MyReviewManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const petsPerPage = 4;
+  const reviewsPerPage = 4;
   const [visiblePets, setVisiblePets] = useState<Pet[]>([]);
 
   useEffect(() => {
-    const endIndex = currentPage * petsPerPage;
-    const startIndex = endIndex - petsPerPage;
+    const endIndex = currentPage * reviewsPerPage;
+    const startIndex = endIndex - reviewsPerPage;
     setVisiblePets(DummyData.MyPetData.slice(startIndex, endIndex));
   }, [currentPage]);
 
   const totalPets = DummyData.MyPetData.length;
-  const totalPages = Math.ceil(totalPets / petsPerPage);
+  const totalPages = Math.ceil(totalPets / reviewsPerPage);
 
   const changePage = (newPage: number) => {
     if (newPage < 1 || newPage > totalPages) return;

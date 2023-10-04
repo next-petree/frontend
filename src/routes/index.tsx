@@ -136,6 +136,28 @@ const EditMyReviewRoute = [
   },
 ];
 
+const BreederApplicationHistoryPage = lazy(
+  () =>
+    import("@pages/MyPage/ApplicationHistoy/BreederApplicationHistory/index"),
+);
+const BreederApplicationHistoryRoute = [
+  {
+    path: "breeder/application-history",
+    element: <BreederApplicationHistoryPage />,
+  },
+];
+
+const AdopterApplicationHistoryPage = lazy(
+  () =>
+    import("@pages/MyPage/ApplicationHistoy/AdopterApplictionHistory/index"),
+);
+const AdopterApplicationHistoryRoute = [
+  {
+    path: "adopter/application-history",
+    element: <AdopterApplicationHistoryPage />,
+  },
+];
+
 const DeleteAccountPage = lazy(
   () => import("@pages/MyPage/DeleteAccount/index"),
 );
@@ -165,6 +187,8 @@ const RenderRouter: FC = () => {
         ...EditMyPetRoute,
         ...AddMyReviewRoute,
         ...EditMyReviewRoute,
+        ...BreederApplicationHistoryRoute,
+        ...AdopterApplicationHistoryRoute,
         ...DeleteAccountRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
