@@ -23,13 +23,13 @@ export const Header = styled.div`
   margin-top: 80px;
 `;
 
-export const MyPetManagementLabel = styled.label`
+export const MyReviewManagementLabel = styled.label`
   font-size: 30px;
 `;
 
 export const HeaderContent = styled.div``;
 
-export const MyPetManagementSelect = styled.select`
+export const MyReviewManagementSelect = styled.select`
   width: 200px;
   height: 52px;
   text-align: center;
@@ -37,7 +37,7 @@ export const MyPetManagementSelect = styled.select`
   margin-right: 15px;
 `;
 
-export const MyPetMangementInput = styled.input`
+export const MyReviewMangementInput = styled.input`
   width: 350px;
   height: 50px;
   border: 1px solid #000;
@@ -59,7 +59,7 @@ const Button = styled.button`
   }
 `;
 
-export const MyPetManagementSearchButton = styled(Button)`
+export const MyReviewManagementSearchButton = styled(Button)`
   padding: 18px 40px;
 `;
 
@@ -82,27 +82,36 @@ export const Main = styled.div`
 `;
 
 export const Content = styled.div`
-  width: calc(25% - 20px);
-  height: 330px;
-  margin: 10px;
-  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  gap: 20px;
 `;
 
 export const PetImage = styled.div`
-  width: 100%;
+  width: 25%;
   height: 130px;
   background-color: yellow;
   border-radius: 15px;
 `;
 
+export const ReviewTextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ReviewTitle = styled.div`
+  font-size: 25px;
+  margin-bottom: 10px;
+`;
+
 export const PetName = styled.div`
-  font-size: 30px;
-  margin-top: 25px;
+  font-size: 20px;
 `;
 
 export const PetType = styled.div`
   font-size: 20px;
-  margin-top: 25px;
 `;
 
 export const PetGender = styled.div`

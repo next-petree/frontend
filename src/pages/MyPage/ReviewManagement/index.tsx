@@ -1,17 +1,17 @@
 import React, { FC } from "react";
-import * as S from "../../MyPageStyle";
+import * as S from "../MyPageStyle";
 import LeftMenuBar from "@component/MyPage/LeftMenuBar/LeftMenuBar";
-import AddOrEditMyPet from "@component/MyPage/MyPetManagement/AddOrEditMyPet/AddOrEditMyPet";
+import MyReviewManagement from "@component/MyPage/MyReviewManagement/MyReviewManagement";
 
-const AddMyPetPage: FC = () => {
+const ReviewManagement: FC = () => {
   return (
     <S.ContentContainer>
       <LeftMenuBar />
       <S.MainContent>
-        <AddOrEditMyPet />
+        <MyReviewManagement />
       </S.MainContent>
     </S.ContentContainer>
   );
 };
 
-export default AddMyPetPage;
+export default ReviewManagement;

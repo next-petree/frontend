@@ -86,8 +86,18 @@ const BreedManagementRoute = [
   },
 ];
 
+const ReviewManagementPage = lazy(
+  () => import("@pages/MyPage/ReviewManagement/index"),
+);
+const ReviewManagementRoute = [
+  {
+    path: "adopter/review-management",
+    element: <ReviewManagementPage />,
+  },
+];
+
 const AddMyPetPage = lazy(
-  () => import("@pages/MyPage/BreedManagement/AddMyPetPage/index"),
+  () => import("@pages/MyPage/BreedManagement/AddMyPet/index"),
 );
 const AddMyPetRoute = [
   {
@@ -97,12 +107,32 @@ const AddMyPetRoute = [
 ];
 
 const EditMyPetPage = lazy(
-  () => import("@pages/MyPage/BreedManagement/EditMyPetPage/index"),
+  () => import("@pages/MyPage/BreedManagement/EditMyPet/index"),
 );
 const EditMyPetRoute = [
   {
     path: "breeder/breed-management/edit",
     element: <EditMyPetPage />,
+  },
+];
+
+const AddMyReviewPage = lazy(
+  () => import("@pages/MyPage/ReviewManagement/AddMyReview/index"),
+);
+const AddMyReviewRoute = [
+  {
+    path: "adopter/review-management/add",
+    element: <AddMyReviewPage />,
+  },
+];
+
+const EditMyReviewPage = lazy(
+  () => import("@pages/MyPage/ReviewManagement/EditMyReview/index"),
+);
+const EditMyReviewRoute = [
+  {
+    path: "adopter/review-management/edit",
+    element: <EditMyReviewPage />,
   },
 ];
 
@@ -120,8 +150,11 @@ const RenderRouter: FC = () => {
         ...BreederProfileManagementRoute,
         ...AdopterProfileManagementRoute,
         ...BreedManagementRoute,
+        ...ReviewManagementRoute,
         ...AddMyPetRoute,
         ...EditMyPetRoute,
+        ...AddMyReviewRoute,
+        ...EditMyReviewRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (

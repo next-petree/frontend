@@ -28,7 +28,7 @@ const LeftMenuBar: React.FC<Props> = ({ breeder = false }) => {
           <S.StyledLink to="/adopter/application-history">
             분양신청내역
           </S.StyledLink>
-          <S.StyledLink to="/adopter/reviews-management">
+          <S.StyledLink to="/adopter/review-management">
             분양후기 관리
           </S.StyledLink>
           <S.StyledLink to="/adopter/profile-management">
