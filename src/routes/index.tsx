@@ -45,7 +45,7 @@ const testRoute: RouteObject[] = [
 
 const SearchBreederPage = lazy(() => import("@pages/Search/Breeder/index"));
 const SearchAnimalPage = lazy(() => import("@pages/Search/Animal/index"));
-const SearchRoute = [
+const SearchRoute: RouteObject[] = [
   {
     path: "search/breeder",
     element: <SearchBreederPage />,
@@ -53,6 +53,17 @@ const SearchRoute = [
   {
     path: "search/animal",
     element: <SearchAnimalPage />,
+  },
+];
+
+const BreederAuthorizationPage = lazy(
+  () => import("@pages/Breeder/Authorization/index"),
+);
+
+const BreederRoute: RouteObject[] = [
+  {
+    path: "breeder/authorization",
+    element: <BreederAuthorizationPage />,
   },
 ];
 
@@ -66,6 +77,7 @@ const RenderRouter: FC = () => {
         ...signUpRoute,
         ...testRoute,
         ...SearchRoute,
+        ...BreederRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
