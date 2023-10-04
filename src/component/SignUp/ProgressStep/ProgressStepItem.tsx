@@ -10,7 +10,7 @@ interface ProgressImteProps extends PropsWithChildren {
 
 export const ProgressItem = ({ children, hasStepLine }: ProgressImteProps) => {
   return (
-    <Column styles={{ gap: "9px" }}>
+    <S.ProgressItemContainer styles={{ gap: "9px" }}>
       <ProgressLine isShow={hasStepLine}>
         <S.ProgressItemOut>
           <S.ProgressItemIn>
@@ -19,13 +19,13 @@ export const ProgressItem = ({ children, hasStepLine }: ProgressImteProps) => {
         </S.ProgressItemOut>
       </ProgressLine>
       <Typography fontSize="14px">약관동의</Typography>
-    </Column>
+    </S.ProgressItemContainer>
   );
 };
 
 const S = {
-  ProgressItemContainer: styled.div`
-    max-width: 60px;
+  ProgressItemContainer: styled(Column)`
+    width: initial;
   `,
   ProgressItemOut: styled.div`
     box-sizing: border-box;
