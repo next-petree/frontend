@@ -35,7 +35,7 @@ const LeftMenuBar: React.FC<Props> = ({ breeder = false }) => {
             프로필 관리
           </S.StyledLink>
           <S.StyledLink to="/adopter/profile-edit">회원정보 수정</S.StyledLink>
-          <S.DeleteAccountLink to="/adopter/delete-account">
+          <S.DeleteAccountLink to="/delete-account">
             회원탈퇴
           </S.DeleteAccountLink>
         </>

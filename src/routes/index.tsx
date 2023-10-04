@@ -136,6 +136,16 @@ const EditMyReviewRoute = [
   },
 ];
 
+const DeleteAccountPage = lazy(
+  () => import("@pages/MyPage/DeleteAccount/index"),
+);
+const DeleteAccountRoute = [
+  {
+    path: "delete-account",
+    element: <DeleteAccountPage />,
+  },
+];
+
 const RenderRouter: FC = () => {
   return useRoutes([
     {
@@ -155,6 +165,7 @@ const RenderRouter: FC = () => {
         ...EditMyPetRoute,
         ...AddMyReviewRoute,
         ...EditMyReviewRoute,
+        ...DeleteAccountRoute,
         // { 404 페이지 제작시 작업할 예정
         //   path: "*",
         //   element: (
