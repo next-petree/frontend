@@ -1,11 +1,19 @@
-import React, { FC } from "react";
+import { HeroSection } from "./heroSection";
+import { JoinSection } from "./joinSection";
+import { ServiceSection } from "./serviceSection";
+import { StartSection } from "./startSection";
+import { TeamMissionSection } from "./teamMissionSection";
 
-const CounterPage: FC = () => {
+const Home = () => {
   return (
     <>
-      <div>home content</div>
+      <HeroSection />
+      <ServiceSection />
+      <TeamMissionSection />
+      <JoinSection />
+      <StartSection />
     </>
   );
 };
 
-export default CounterPage;
+export default Home;

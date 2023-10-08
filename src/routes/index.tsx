@@ -2,7 +2,7 @@ import LayoutPage from "@pages/Layout";
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 
-const HomePage = lazy(() => import("@pages/Home/index"));
+const HomePage = lazy(() => import("@pages/home/index"));
 const homeRoute = [
   {
     path: "/",

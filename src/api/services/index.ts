@@ -1,13 +1,8 @@
-import Client from "../index";
-
-export const fetchPostById = (param?: number) => {
-  return Client.credentialsInstance.get(
-    `https://jsonplaceholder.typicode.com/posts/${param}`
-  );
-};
-
-export const fetchAllPosts = () => {
-  return Client.credentialsInstance.get(
-    `https://jsonplaceholder.typicode.com/posts`
-  );
-};
+export { default as UserService } from "@api/services/userService";
+export { default as AdminVerifications } from "@api/services/adminVerifications";
+export { default as AdopterReview } from "@api/services/adopterReview";
+export { default as BreederDog } from "@api/services/breederDog";
+export { default as DogType } from "@api/services/dogType";
+export { default as Dogs } from "@api/services/dogs";
+export { default as MyPageMatching } from "@api/services/myPageMatching";
+export { default as MyPageProfile } from "@api/services/myPageProfile";

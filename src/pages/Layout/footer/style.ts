@@ -11,6 +11,8 @@ export const FooterEl = styled.footer`
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 62px 14px;
     border-bottom: 0.5px solid rgba(255, 255, 255, 0.53);
   }
@@ -20,7 +22,7 @@ export const IntroContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 16px;
   span {
     color: ${COLOR.white};
     font-size: 14px;
@@ -51,7 +53,7 @@ export const FooterItemLinks = styled.ul`
   flex-direction: column;
   gap: 8px;
   li.link {
-    color: ${({ theme }) => theme.colors.white};
+    color: ${COLOR.white};
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
@@ -62,6 +64,8 @@ export const FooterItemLinks = styled.ul`
 export const CopyRight = styled.div`
   padding: 24px 0;
   color: ${COLOR.white};
+  max-width: 1400px;
+  margin: 0 auto;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;

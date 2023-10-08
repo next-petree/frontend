@@ -6,6 +6,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { getGlobalState } from "utils/getGlobalState";
 import SuspendFallbackLoading from "@component/common/SuspendFallbackLoading";
 import LayoutPageHeader from "@pages/Layout/header";
+import Footer from "./footer";
 
 const LayoutPage: FC = () => {
   const location = useLocation();
@@ -32,6 +33,7 @@ const LayoutPage: FC = () => {
           <Outlet />
         </Suspense>
       </S.LayoutPageContent>
+      <Footer />
     </S.LayoutPageContainer>
   );
 };

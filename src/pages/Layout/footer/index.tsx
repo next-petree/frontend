@@ -1,9 +1,8 @@
 import React from "react";
 import * as S from "./style";
 import { Logo } from "@component/common/Logo";
-import { useIntl } from "react-intl";
+import { footerItems } from "@assets/constant/path";
 const Footer = () => {
-  const { formatMessage } = useIntl();
   return (
     <S.FooterEl>
       <div className="container">
@@ -19,7 +18,20 @@ const Footer = () => {
             최선을 다하겠습니다.
           </span>
         </S.IntroContainer>
-        <S.FooterItemList id="footer-item-list"></S.FooterItemList>
+        <S.FooterItemList id="footer-item-list">
+          {footerItems.map((item, index) => (
+            <li className="footer-item-title" key={index}>
+              {item.title}
+              <S.FooterItemLinks className="footer-item-links">
+                {item.links.map((content, index) => (
+                  <li className="link" key={index}>
+                    {content.name}
+                  </li>
+                ))}
+              </S.FooterItemLinks>
+            </li>
+          ))}
+        </S.FooterItemList>
       </div>
       <S.CopyRight>2023 Breeder Inc. All rights reserved </S.CopyRight>
     </S.FooterEl>
