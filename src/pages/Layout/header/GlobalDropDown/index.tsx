@@ -10,6 +10,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import ProfilePic from "@component/common/ProfilePicture";
+import Button from "@component/common/Button";
 interface DropDownProps {
   isLoggedIn?: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -44,7 +45,14 @@ const GlobalDropDown = ({ isLoggedIn, setOpen, role }: DropDownProps) => {
     setOpen(false);
   };
   return (
-    <DropDown>
+    <DropDown
+      ref={ref}
+      style={{
+        bottom: "-11rem",
+        right: 10,
+        padding: "1.38rem 1.63rem",
+      }}
+    >
       <S.ProfileContainer>
         <ProfilePic
           style={{
@@ -65,7 +73,33 @@ const GlobalDropDown = ({ isLoggedIn, setOpen, role }: DropDownProps) => {
           </span>
         )}
       </S.ProfileContainer>
-      <S.ButtonContainer></S.ButtonContainer>
+      <S.ButtonContainer>
+        <Button
+          style={{
+            width: "7.5rem",
+            height: "3.625rem",
+            fontSize: "1rem",
+            fontWeight: 700,
+          }}
+          onClick={firstButtonClicked}
+        >
+          {isLoggedIn ? "마이 페이지" : "로그인"}
+        </Button>
+        <Button
+          style={{
+            width: "7.5rem",
+            height: "3.625rem",
+            fontSize: "1rem",
+            backgroundColor: "#fff",
+            color: "#4EC1BF",
+            border: "1px solid #4EC1BF",
+            fontWeight: 700,
+          }}
+          onClick={secondButtonClicked}
+        >
+          {isLoggedIn ? "로그아웃" : "회원가입"}
+        </Button>
+      </S.ButtonContainer>
     </DropDown>
   );
 };

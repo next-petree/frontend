@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as S from "./style";
 import ProfilePic from "@component/common/ProfilePicture";
 import { Logo } from "@component/common/Logo";
+import GlobalDropDown from "./GlobalDropDown";
 interface MenuItem {
   name: string | React.ReactNode;
   path: string;
@@ -39,6 +40,12 @@ const LayoutPageHeader = ({ isLoggedIn }: GlobalNavProps) => {
               if (!isDropdownOpen) setIsDropdownOpen(true);
             }}
           />
+          {isDropdownOpen && (
+            <GlobalDropDown
+              setOpen={setIsDropdownOpen}
+              isLoggedIn={isLoggedIn}
+            />
+          )}
         </S.Menus>
       </S.InnerContainer>
     </S.Container>
