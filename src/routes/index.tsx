@@ -11,7 +11,7 @@ const homeRoute = [
 ];
 
 const BreederPublicProfilePage = lazy(
-  () => import("@pages/PublicProfile/BreederPublicProfile/index"),
+  () => import("@pages/PublicProfile/BreederPublicProfile/index")
 );
 const BreederPublicProfileRoute = [
   {
@@ -21,7 +21,7 @@ const BreederPublicProfileRoute = [
 ];
 
 const AdopterPublicProfilePage = lazy(
-  () => import("@pages/PublicProfile/AdopterPublicProfile/index"),
+  () => import("@pages/PublicProfile/AdopterPublicProfile/index")
 );
 const AdopterPublicProfileRoute = [
   {
@@ -31,7 +31,7 @@ const AdopterPublicProfileRoute = [
 ];
 
 const BreederProfileEditPage = lazy(
-  () => import("@pages/MyPage/UserProfileEdit/BreederProfileEdit/index"),
+  () => import("@pages/MyPage/UserProfileEdit/BreederProfileEdit/index")
 );
 const BreederProfileEditRoute = [
   {
@@ -41,7 +41,7 @@ const BreederProfileEditRoute = [
 ];
 
 const AdopterProfileEditPage = lazy(
-  () => import("@pages/MyPage/UserProfileEdit/AdopterProfileEdit/index"),
+  () => import("@pages/MyPage/UserProfileEdit/AdopterProfileEdit/index")
 );
 const AdopterProfileEditRoute = [
   {
@@ -52,9 +52,7 @@ const AdopterProfileEditRoute = [
 
 const BreederProfileManagementPage = lazy(
   () =>
-    import(
-      "@pages/MyPage/UserProfileManagement/BreederProfileManagement/index"
-    ),
+    import("@pages/MyPage/UserProfileManagement/BreederProfileManagement/index")
 );
 const BreederProfileManagementRoute = [
   {
@@ -65,9 +63,7 @@ const BreederProfileManagementRoute = [
 
 const AdopterProfileManagementPage = lazy(
   () =>
-    import(
-      "@pages/MyPage/UserProfileManagement/AdopterProfileManagement/index"
-    ),
+    import("@pages/MyPage/UserProfileManagement/AdopterProfileManagement/index")
 );
 const AdopterProfileManagementRoute = [
   {
@@ -77,7 +73,7 @@ const AdopterProfileManagementRoute = [
 ];
 
 const BreedManagementPage = lazy(
-  () => import("@pages/MyPage/BreedManagement/index"),
+  () => import("@pages/MyPage/BreedManagement/index")
 );
 const BreedManagementRoute = [
   {
@@ -87,7 +83,7 @@ const BreedManagementRoute = [
 ];
 
 const ReviewManagementPage = lazy(
-  () => import("@pages/MyPage/ReviewManagement/index"),
+  () => import("@pages/MyPage/ReviewManagement/index")
 );
 const ReviewManagementRoute = [
   {
@@ -97,7 +93,7 @@ const ReviewManagementRoute = [
 ];
 
 const AddMyPetPage = lazy(
-  () => import("@pages/MyPage/BreedManagement/AddMyPet/index"),
+  () => import("@pages/MyPage/BreedManagement/AddMyPet/index")
 );
 const AddMyPetRoute = [
   {
@@ -107,7 +103,7 @@ const AddMyPetRoute = [
 ];
 
 const EditMyPetPage = lazy(
-  () => import("@pages/MyPage/BreedManagement/EditMyPet/index"),
+  () => import("@pages/MyPage/BreedManagement/EditMyPet/index")
 );
 const EditMyPetRoute = [
   {
@@ -117,7 +113,7 @@ const EditMyPetRoute = [
 ];
 
 const AddMyReviewPage = lazy(
-  () => import("@pages/MyPage/ReviewManagement/AddMyReview/index"),
+  () => import("@pages/MyPage/ReviewManagement/AddMyReview/index")
 );
 const AddMyReviewRoute = [
   {
@@ -127,7 +123,7 @@ const AddMyReviewRoute = [
 ];
 
 const EditMyReviewPage = lazy(
-  () => import("@pages/MyPage/ReviewManagement/EditMyReview/index"),
+  () => import("@pages/MyPage/ReviewManagement/EditMyReview/index")
 );
 const EditMyReviewRoute = [
   {
@@ -137,8 +133,7 @@ const EditMyReviewRoute = [
 ];
 
 const BreederApplicationHistoryPage = lazy(
-  () =>
-    import("@pages/MyPage/ApplicationHistoy/BreederApplicationHistory/index"),
+  () => import("@pages/MyPage/ApplicationHistoy/BreederApplicationHistory")
 );
 const BreederApplicationHistoryRoute = [
   {
@@ -148,8 +143,7 @@ const BreederApplicationHistoryRoute = [
 ];
 
 const AdopterApplicationHistoryPage = lazy(
-  () =>
-    import("@pages/MyPage/ApplicationHistoy/AdopterApplictionHistory/index"),
+  () => import("@pages/MyPage/ApplicationHistoy/AdopterApplictionHistory/index")
 );
 const AdopterApplicationHistoryRoute = [
   {
@@ -159,7 +153,7 @@ const AdopterApplicationHistoryRoute = [
 ];
 
 const DeleteAccountPage = lazy(
-  () => import("@pages/MyPage/DeleteAccount/index"),
+  () => import("@pages/MyPage/DeleteAccount/index")
 );
 const DeleteAccountRoute = [
   {
@@ -168,8 +162,8 @@ const DeleteAccountRoute = [
   },
 ];
 
-const RenderRouter: FC = () => {
-  return useRoutes([
+const RenderRouter = () =>
+  useRoutes([
     {
       path: "/",
       element: <LayoutPage />,
