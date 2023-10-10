@@ -18,18 +18,5 @@ export default function Checkbox({
   size,
   onChange,
 }: ICheckbox & HTMLAttributes<HTMLInputElement>) {
-  return (
-    <S.Container>
-      <S.LabelText size={size}>{text}</S.LabelText>
-      <S.Box
-        id={text}
-        size={size}
-        type="radio"
-        name={name}
-        checked={value}
-        onChange={onChange}
-      />
-      <S.Label htmlFor={text} size={size} checked={value}></S.Label>
-    </S.Container>
-  );
+  return <S.Container></S.Container>;
 }

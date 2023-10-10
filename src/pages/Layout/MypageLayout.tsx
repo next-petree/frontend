@@ -1,27 +1,20 @@
-import React, { HTMLAttributes } from 'react';
-import styled from 'styled-components';
-import LogoPow from 'assets/images/mypage/subbanner/logo_paw_brown.svg';
-import LogoText from 'assets/images/mypage/subbanner/logo_text_brown.svg';
-import Background from 'assets/images/mypage/subbanner/sub_banner_background.png';
-import BackgroundAvif from 'assets/images/mypage/subbanner/sub_banner_background.avif';
-import BackgroundWebp from 'assets/images/mypage/subbanner/sub_banner_background.webp';
-import SideMenuButton from 'components/mypage/SideMenuButton';
-import { adoptmenuItem, breedmenuItem } from 'components/mypage/sidemenuItem';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useJwtInfo } from 'hooks/useJwtInfo';
-import Picture from 'components/common/Picture';
+import React, { HTMLAttributes } from "react";
+import styled from "styled-components";
+import LogoPow from "assets/images/mypage/subbanner/logo_paw_brown.svg";
+import LogoText from "assets/images/mypage/subbanner/logo_text_brown.svg";
+import Background from "assets/images/mypage/subbanner/sub_banner_background.png";
+import BackgroundAvif from "assets/images/mypage/subbanner/sub_banner_background.avif";
+import BackgroundWebp from "assets/images/mypage/subbanner/sub_banner_background.webp";
+import Picture from "@component/common/PictureEl";
 
 interface IMypageLayout {
   children: React.ReactNode;
 }
 
-export default function MypageLayout({ children, ...props }: IMypageLayout & HTMLAttributes<HTMLDivElement>) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const pathname = location.pathname;
-  const { role } = useJwtInfo();
-  const menuList = role === 'BREEDER' ? breedmenuItem : adoptmenuItem;
-
+export default function MypageLayout({
+  children,
+  ...props
+}: IMypageLayout & HTMLAttributes<HTMLDivElement>) {
   return (
     <Container {...props}>
       <HeaderWrap>
@@ -39,18 +32,6 @@ export default function MypageLayout({ children, ...props }: IMypageLayout & HTM
       </HeaderWrap>
       <ContainerWrap>
         <SideMenu className="side-menu">
-          {menuList.map((v, i) => (
-            <SideMenuButton
-              key={i}
-              label={v.name}
-              state={pathname === v.path}
-              onClick={() => navigate(v.path)}
-              style={{
-                borderTopLeftRadius: i === 0 ? '1rem' : '0',
-                borderTopRightRadius: i === 0 ? '1rem' : '0',
-              }}
-            />
-          ))}
           <Gap />
           <Button>회원탈퇴</Button>
         </SideMenu>
@@ -148,7 +129,13 @@ const Gap = styled.div`
   flex: 1;
 `;
 
-MypageLayout.Label = function Label({ subText, children }: { subText?: string; children: React.ReactNode }) {
+MypageLayout.Label = function Label({
+  subText,
+  children,
+}: {
+  subText?: string;
+  children: React.ReactNode;
+}) {
   return (
     <LabelWrap>
       <h4>{children}</h4>
