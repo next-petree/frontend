@@ -63,8 +63,8 @@ export default function Breedercert() {
         <S.FormSection>
           <h2>자격증 제출</h2>
           <div className="radios">
-            <Radiobutton />
-            <Radiobutton />
+            {/* <Radiobutton />
+            <Radiobutton /> */}
           </div>
           <div className="filebox">
             <input className="upload-name" placeholder="첨부파일" />

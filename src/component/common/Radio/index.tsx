@@ -6,7 +6,7 @@ interface ICheckbox {
   name: string;
   text: string;
   value: boolean;
-  size?: string;
+  size: string;
   onChange?: any;
 }
 

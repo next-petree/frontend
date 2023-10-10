@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./style"
 import Picture from "@component/common/PictureEl";
 import HeroImage from "assets/images/main/hero.png";
 import HeroImageAvif from "assets/images/main/hero.avif";

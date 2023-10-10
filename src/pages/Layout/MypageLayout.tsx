@@ -1,15 +1,17 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import SideMenuButton from '@component/MyPage/SideMenuButton/SideMenuButton';
+// import { adoptmenuItem, breedmenuItem } from '@constant/sideMenu';
+// import { useJwtInfo } from '@hooks/index';
+import Picture from '@component/common/PictureEl';
 import LogoPow from 'assets/images/mypage/subbanner/logo_paw_brown.svg';
 import LogoText from 'assets/images/mypage/subbanner/logo_text_brown.svg';
 import Background from 'assets/images/mypage/subbanner/sub_banner_background.png';
 import BackgroundAvif from 'assets/images/mypage/subbanner/sub_banner_background.avif';
 import BackgroundWebp from 'assets/images/mypage/subbanner/sub_banner_background.webp';
-import SideMenuButton from 'components/mypage/SideMenuButton';
-import { adoptmenuItem, breedmenuItem } from 'components/mypage/sidemenuItem';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useJwtInfo } from 'hooks/useJwtInfo';
-import Picture from 'components/common/Picture';
+
+
 
 interface IMypageLayout {
   children: React.ReactNode;
@@ -19,8 +21,27 @@ export default function MypageLayout({ children, ...props }: IMypageLayout & HTM
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname;
-  const { role } = useJwtInfo();
-  const menuList = role === 'BREEDER' ? breedmenuItem : adoptmenuItem;
+  // const { role } = useJwtInfo();
+  // const menuList = role === 'BREEDER' ? breedmenuItem : adoptmenuItem;
+  /** JGW 토큰에 대한 정보가 없으므로 임시로 넣음 */
+  const menuList = [
+    {
+      name: '분양신청내역',
+      path: 'a',
+    },
+    {
+      name: '보유견종 관리',
+      path: 'a',
+    },
+    {
+      name: '프로필 관리',
+      path: 'a',
+    },
+    {
+      name: '회원정보 수정',
+      path: 'a',
+    },
+  ];
 
   return (
     <Container {...props}>
@@ -39,7 +60,7 @@ export default function MypageLayout({ children, ...props }: IMypageLayout & HTM
       </HeaderWrap>
       <ContainerWrap>
         <SideMenu className="side-menu">
-          {menuList.map((v, i) => (
+          {menuList.map((v:any, i:number) => (
             <SideMenuButton
               key={i}
               label={v.name}
