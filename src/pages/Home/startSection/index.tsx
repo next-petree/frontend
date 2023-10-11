@@ -1,5 +1,5 @@
 import * as S from "./style";
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 import BgImage from "assets/images/main/start_background.png";
 import BgImageAvif from "assets/images/main/start_background.avif";
 import BgImageWebp from "assets/images/main/start_background.webp";

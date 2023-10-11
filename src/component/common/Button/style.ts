@@ -4,7 +4,13 @@ import { ButtonProps } from ".";
 export const ButtonWrapper = styled.button<ButtonProps>`
   ${({ fontSize, buttonSize, backgroundColor, hoverColor }) => css`
     font-size: ${fontSize};
-    width: ${buttonSize};
+    width: ${buttonSize === "md"
+      ? "240px"
+      : buttonSize === "lg"
+      ? "280px"
+      : buttonSize === "sm"
+      ? "196px"
+      : "196px"};
     background-color: ${backgroundColor};
     color: white;
     cursor: pointer;

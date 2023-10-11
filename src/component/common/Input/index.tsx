@@ -16,13 +16,7 @@ const Input = ({
 }: TextInputProps) => (
   <S.InputWrapper>
     <S.Label>{label}</S.Label>
-    <Input
-      type={type}
-      size={size}
-      value={value}
-      onChange={onChange}
-      label={label}
-    />
+    <S.Input type={type} size={size} value={value} onChange={onChange} />
   </S.InputWrapper>
 );
 export default Input;

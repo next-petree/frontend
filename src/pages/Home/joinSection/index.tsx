@@ -5,7 +5,7 @@ import breaderWebp from "assets/images/main/join_breeder.webp";
 import buyer from "assets/images/main/join_hopeful_buyer.png";
 import buyerAvif from "assets/images/main/join_hopeful_buyer.avif";
 import buyerWebp from "assets/images/main/join_hopeful_buyer.webp";
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 
 import * as S from "./style";
 

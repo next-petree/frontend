@@ -1,8 +1,8 @@
 import { useState } from "react";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import Button from "@component/common/Button";
-import Checkbox from "@component/common/Checkbox";
+import Button from "@component/Common/Button";
+import Checkbox from "@component/Common/Checkbox";
 
 export default function ProfileContainer() {
   return (

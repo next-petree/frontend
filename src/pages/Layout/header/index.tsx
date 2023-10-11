@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as S from "./style";
-import ProfilePic from "@component/common/ProfilePicture";
-import { Logo } from "@component/common/Logo";
+import ProfilePic from "@component/Common/ProfilePicture";
+import { Logo } from "@component/Common/Logo";
 import GlobalDropDown from "./GlobalDropDown";
 interface MenuItem {
   name: string | React.ReactNode;

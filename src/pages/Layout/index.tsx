@@ -4,11 +4,11 @@ import { useNavigate } from "react-router";
 import * as S from "@pages/Layout/style";
 import { Outlet, useLocation } from "react-router-dom";
 import { getGlobalState } from "utils/getGlobalState";
-import SuspendFallbackLoading from "@component/common/SuspendFallbackLoading";
+import SuspendFallbackLoading from "@component/Common/SuspendFallbackLoading";
 import LayoutPageHeader from "@pages/Layout/header";
 import Footer from "./footer";
 
-const LayoutPage: FC = () => {
+const LayoutPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { onWindowResize } = useUserData();

@@ -7,13 +7,24 @@ export const InputWrapper = styled.div`
 
 export const Label = styled.label`
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  color: "#000000";
 `;
 
 export const Input = styled.input<{ size: "sm" | "md" | "lg" }>`
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
+  width: 21.25rem;
+  padding: 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: #f5f5f5 !important;
+  color: #000000;
+  &:focus {
+    box-shadow: none;
+    outline: none;
+    background-color: #f5f5f5;
+  }
   ${(props) => {
     switch (props.size) {
       case "lg":

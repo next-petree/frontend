@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./style";
-import Button from "@component/common/Button";
+import Button from "@component/Common/Button";
 export default function Apply() {
   return (
     <>

@@ -28,4 +28,4 @@ export enum Level {
   Gold,
 }
 
-export default function Login() {}
+export default function ReserveLogin() {}

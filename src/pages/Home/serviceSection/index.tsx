@@ -1,4 +1,4 @@
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 import TwoPuppys from "assets/images/main/service_left.png";
 import TwoPuppysAvif from "assets/images/main/service_left.avif";
 import TwoPuppysWebp from "assets/images/main/service_left.webp";

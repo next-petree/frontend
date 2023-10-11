@@ -1,7 +1,7 @@
 import { useState } from "react";
 import THUMB from "assets/images/reserve/complete_dog.png";
 import * as S from "./style";
-import Button from "@component/common/Button";
+import Button from "@component/Common/Button";
 
 export default function Completed(props: { nextStep: () => void }) {
   return (

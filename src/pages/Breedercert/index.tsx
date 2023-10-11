@@ -3,7 +3,7 @@ import CERT1 from "assets/images/breedercert/cert01.png";
 import CERT2 from "assets/images/breedercert/cert02.png";
 import * as S from "./style";
 import CardBoxLayout from "@pages/Layout/CardBoxLayout";
-import Button from "@component/common/Button";
+import Button from "@component/Common/Button";
 
 export default function Breedercert() {
   return (

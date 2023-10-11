@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./style";
-import { Logo } from "@component/common/Logo";
+import { Logo } from "@component/Common/Logo";
 import { footerItems } from "@assets/constant/path";
 const Footer = () => {
   return (

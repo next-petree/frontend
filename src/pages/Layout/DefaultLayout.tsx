@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import React, { HTMLAttributes } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 46.875rem;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -15,6 +15,9 @@ interface IDefaultLayout {
   children: React.ReactNode;
 }
 
-export default function DefaultLayout({ children, ...props }: IDefaultLayout & HTMLAttributes<HTMLDivElement>) {
+export default function DefaultLayout({
+  children,
+  ...props
+}: IDefaultLayout & HTMLAttributes<HTMLDivElement>) {
   return <Container {...props}>{children}</Container>;
 }

@@ -1,4 +1,4 @@
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 import * as S from "./style";
 import Background from "assets/images/main/team_mission_background.png";
 import BackgroundAvif from "assets/images/main/team_mission_background.avif";

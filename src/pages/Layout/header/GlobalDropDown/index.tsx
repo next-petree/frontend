@@ -1,4 +1,4 @@
-import DropDown from "@component/common/DropDown";
+import DropDown from "@component/Common/DropDown";
 import { useOutsideClick } from "@hooks/useQuickSiteClick";
 import React, {
   Dispatch,
@@ -9,8 +9,8 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
-import ProfilePic from "@component/common/ProfilePicture";
-import Button from "@component/common/Button";
+import ProfilePic from "@component/Common/ProfilePicture";
+import Button from "@component/Common/Button";
 interface DropDownProps {
   isLoggedIn?: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;

@@ -1,5 +1,5 @@
 import * as S from "./style";
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 import HeroImage from "assets/images/main/hero.png";
 import HeroImageAvif from "assets/images/main/hero.avif";
 import HeroImageWebp from "assets/images/main/hero.webp";

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { CircularProgress } from "@mui/material";
-import * as S from "component/common/SuspendFallbackLoading/style";
+import * as S from "@component/Common/SuspendFallbackLoading/style";
 
 interface SuspendFallbackLoadingProps {}
 

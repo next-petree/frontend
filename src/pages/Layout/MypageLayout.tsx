@@ -5,7 +5,7 @@ import LogoText from "assets/images/mypage/subbanner/logo_text_brown.svg";
 import Background from "assets/images/mypage/subbanner/sub_banner_background.png";
 import BackgroundAvif from "assets/images/mypage/subbanner/sub_banner_background.avif";
 import BackgroundWebp from "assets/images/mypage/subbanner/sub_banner_background.webp";
-import Picture from "@component/common/PictureEl";
+import Picture from "@component/Common/PictureEl";
 
 interface IMypageLayout {
   children: React.ReactNode;

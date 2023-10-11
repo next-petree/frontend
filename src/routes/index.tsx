@@ -18,7 +18,13 @@ const signUpRoute: RouteObject[] = [
     element: <SignUpPage />,
   },
 ];
-
+const LoginPage = lazy(() => import("@pages/Login/index"));
+const loginRoute = [
+  {
+    path: "login",
+    element: <LoginPage />,
+  },
+];
 const TestPage = lazy(() => import("@pages/Test/index"));
 const TestResultPage = lazy(() => import("@pages/Test/Result/index"));
 const TestIntroducePage = lazy(() => import("@pages/Test/Introduce/index"));
@@ -194,6 +200,45 @@ const DeleteAccountRoute = [
     element: <DeleteAccountPage />,
   },
 ];
+
+const FindEmail = lazy(() => import("@pages/Auth/find/email/index"));
+const FindEmailComplete = lazy(
+  () => import("@pages/Auth/find/email/complete/index")
+);
+const FindEmailPasswrod = lazy(() => import("@pages/Auth/find/password/index"));
+const FindEmailPasswrodComplete = lazy(
+  () => import("@pages/Auth/find/password/complete/")
+);
+const FindEmailPasswordChange = lazy(
+  () => import("@pages/Auth/find/password/change")
+);
+const FindEmailDONE = lazy(() => import("@pages/Auth/find/password/done"));
+const findEmailRoute = [
+  {
+    path: "/auth/find-email",
+    element: <FindEmail />,
+  },
+  {
+    path: "/auth/find-email-complete",
+    element: <FindEmailComplete />,
+  },
+  {
+    path: "/auth/find-password",
+    element: <FindEmailPasswrod />,
+  },
+  {
+    path: "/auth/find-password-complete",
+    element: <FindEmailPasswrodComplete />,
+  },
+  {
+    path: "/auth/find-password-change",
+    element: <FindEmailPasswordChange />,
+  },
+  {
+    path: "/auth/find-password-done",
+    element: <FindEmailDONE />,
+  },
+];
 const RenderRouter: FC = () =>
   useRoutes([
     {
@@ -201,6 +246,8 @@ const RenderRouter: FC = () =>
       element: <LayoutPage />,
       children: [
         ...homeRoute,
+        ...loginRoute,
+        ...findEmailRoute,
         ...BreederPublicProfileRoute,
         ...AdopterPublicProfileRoute,
         ...BreederProfileEditRoute,

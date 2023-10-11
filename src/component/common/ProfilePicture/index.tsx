@@ -8,7 +8,7 @@ import React, {
 import * as S from "./style";
 import ProfileSvg from "@assets/images/profile_small.svg";
 import { PROFILE_IMAGE_URL } from "@assets/constant/string";
-import { Badge } from "@component/common/Badge";
+import { Badge } from "@component/Common/Badge";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   verified?: boolean;
   mine?: boolean;
