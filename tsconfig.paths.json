@@ -2,8 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["./*"],
-      "@constants": ["constants.ts"],
+      "@api/*": ["./api/*"],
+      "@assets/*": ["./assets/*"],
+      "@component/*": ["./component/*"],
+      "@constant/*": ["./constant/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@pages/*": ["./pages/*"],
+      "@routes/*": ["./routes/*"],
+      "@store/*": ["./store/*"],
+      "@styles/*": ["./styles/*"]
     }
   }
 }
