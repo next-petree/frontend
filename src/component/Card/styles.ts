@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Card = styled.div`
+export const Card = styled.div`
   padding: 0px;
 
   width: 240px;
@@ -12,7 +12,7 @@ const Card = styled.div`
   gap: 24px;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 240px;
   height: 265px;
 
@@ -23,20 +23,20 @@ const Container = styled.div`
   gap: 24px;
 `;
 
-const DescContainer = styled.div`
+export const DescContainer = styled.div`
   min-width: 195px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 `;
 
-const Desc = styled.div`
+export const Desc = styled.div`
   width: 195px;
   display: flex;
   justify-content: space-between;
 `;
 
-const DescText = styled.p`
+export const DescText = styled.p`
   font-family: Noto Sans KR;
   font-size: 20px;
   font-weight: 500;
@@ -47,14 +47,14 @@ const DescText = styled.p`
   margin: 0;
 `;
 
-const ImageContainer = styled.div`
+export const ImageContainer = styled.div`
   width: 240px;
   height: 144px;
   position: relative;
   border-radius: 12px;
 `;
 
-const Gradient = styled.div`
+export const Gradient = styled.div`
   width: 100%;
   height: 100%;
   background-color: black;
@@ -66,7 +66,7 @@ const Gradient = styled.div`
   border-radius: 12px;
 `;
 
-const Image = styled.img<{ src: string }>`
+export const Image = styled.img<{ src: string }>`
   height: 144px;
   top: 0;
   left: 0;
@@ -74,7 +74,7 @@ const Image = styled.img<{ src: string }>`
   border-radius: 12px;
 `;
 
-const Status = styled.p`
+export const Status = styled.p`
   position: absolute;
   z-index: 999;
   margin: 0 auto;
@@ -92,7 +92,7 @@ const Status = styled.p`
   color: #ffffff;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 120px;
   height: 52px;
   padding: 29px, 327px;
@@ -108,54 +108,3 @@ const Button = styled.button`
   font-family: Noto Sans KR;
   cursor: pointer;
 `;
-
-interface IProp {
-  src: string;
-  name: string;
-  species: string;
-  DOB: string;
-  status?: string;
-}
-
-const DogCard = ({ src, name, species, DOB, status }: IProp) => {
-  return (
-    <Card>
-      <Container>
-        {status ? (
-          <ImageContainer>
-            <Gradient></Gradient>
-            <Image src={src} />
-            <Status>{status}</Status>
-          </ImageContainer>
-        ) : (
-          <ImageContainer>
-            <Image src={src} />
-          </ImageContainer>
-        )}
-        {/* <ImageContainer>
-          <img
-            src={src}
-            style={{ width: "100%", height: "100%", borderRadius: "12px" }}
-          />
-        </ImageContainer> */}
-        <DescContainer>
-          <Desc>
-            <DescText>견종:</DescText>
-            <DescText>{species}</DescText>
-          </Desc>
-          <Desc>
-            <DescText>이름:</DescText>
-            <DescText>{name}</DescText>
-          </Desc>
-          <Desc>
-            <DescText>출생일:</DescText>
-            <DescText>{DOB}</DescText>
-          </Desc>
-        </DescContainer>
-      </Container>
-      <Button>상세보기</Button>
-    </Card>
-  );
-};
-
-export default DogCard;
