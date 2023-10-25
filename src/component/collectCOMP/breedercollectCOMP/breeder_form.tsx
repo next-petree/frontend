@@ -8,6 +8,7 @@ const Container = styled.div`
   gap: 17px;
   height: 52px;
   margin: 0 auto;
+  margin-bottom: -2vh;
 `;
 
 const State = styled.span`

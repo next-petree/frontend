@@ -13,7 +13,7 @@ interface IDogyCollect {
 
 const SearchBtn = styled.button`
   align-self: flex-end;
-  margin-right: 6%;
+  margin-right: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,6 +26,8 @@ const SearchBtn = styled.button`
   font-weight: 600;
   font-size: 2rem;
   color: white;
+  margin-top: -1vh;
+  margin-bottom: -6vh;
 `;
 
 
