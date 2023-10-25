@@ -1,14 +1,12 @@
-import React from "react";
-
 import * as S from "./style";
-import { IMG1, IMG2, IMG3 } from "../../assets/images";
+import { IMG2, IMG3, IMG4, IMG5 } from "../../assets/images";
+import DogCard from "../../component/DogCard";
+import WhiteBox from "../../component/WhiteBox";
+import CustomLayout from "../layout/CustomLayout";
 
 const BreederDetails = () => {
   return (
-    <S.Wrapper>
-      <S.BannerContainer>
-        <img src={IMG1} alt="" />
-      </S.BannerContainer>
+    <CustomLayout height={2040}>
       <S.Frame62>
         <S.Frame122>
           <S.Frame178>
@@ -55,9 +53,54 @@ const BreederDetails = () => {
           </S.MainDogContainer>
         </S.Frame113>
       </S.Frame62>
-
-      <S.Rectangle4></S.Rectangle4>
-    </S.Wrapper>
+      <WhiteBox width={1060} height={780} top={284}></WhiteBox>
+      <WhiteBox width={1060} height={854} top={1114}>
+        <S.Frame63>
+          <S.Title>보유견종</S.Title>
+          <S.FlexBox>
+            <DogCard
+              src={IMG4}
+              name="루카스"
+              species="포메라니안"
+              DOB="2023.05.23"
+              status="분양완료"
+            />
+            <DogCard
+              src={IMG5}
+              name="아미"
+              species="골든리트리버"
+              DOB="2022.06.13"
+              status="예약중"
+            />
+            <DogCard
+              src={IMG5}
+              name="아미"
+              species="골든리트리버"
+              DOB="2022.06.13"
+              status="분양완료"
+            />
+            <DogCard
+              src={IMG4}
+              name="루카스"
+              species="포메라니안"
+              DOB="2023.05.23"
+            />
+            <DogCard
+              src={IMG5}
+              name="아미"
+              species="골든리트리버"
+              DOB="2022.06.13"
+            />
+            <DogCard
+              src={IMG5}
+              name="아미"
+              species="골든리트리버"
+              DOB="2022.06.13"
+            />
+          </S.FlexBox>
+        </S.Frame63>
+      </WhiteBox>
+    </CustomLayout>
   );
 };
 

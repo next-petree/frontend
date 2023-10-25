@@ -20,7 +20,6 @@ export const BannerContainer = styled.div`
 export const Frame62 = styled.div`
   position: absolute;
   box-sizing: border-box;
-
   width: 968px;
   height: 793px;
   top: 206px;
@@ -71,22 +70,6 @@ export const Frame113 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const Rectangle4 = styled.div`
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 1060px;
-  height: 780px;
-  left: 430px;
-  top: 284px;
-
-  background: #ffffff;
-
-  /* shadow */
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
-  border-radius: 32px;
 `;
 
 export const Frame178_1 = styled.div`
@@ -212,4 +195,42 @@ export const MainDogName = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Frame63 = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+
+  padding: 44px 69px;
+
+  z-index: 999;
+`;
+
+export const FlexBox = styled.div`
+  padding: 26px 0;
+  /* width: 100%; */
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 36px;
+`;
+
+export const Title = styled.div`
+  font-family: Noto Sans KR;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  padding: 0 69px;
 `;
