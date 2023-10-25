@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   margin: 0;
-  border: 1px solid black;
 `;
 export const TestHeader = styled.div`
   margin: 0;
@@ -12,18 +11,17 @@ export const TestHeader = styled.div`
 `;
 export const TitleWrapper = styled.div`
   margin: 0;
-  border: 1px solid red;
   text-align: center;
 `;
 export const FirstTitle = styled.h4`
   margin: 0;
-  border: 1px solid orange;
-  font-size: 20px;
+  font-size: 40px;
+  font-weight: 350;
 `;
 export const SecondTitle = styled.h3`
   margin: 0;
-  border: 1px solid yellow;
-  font-size: 30px;
+  font-size: 60px;
+  font-weight: 500;
 `;
 export const TestInfoWrapper = styled.div`
   margin: 0 auto;
@@ -36,14 +34,16 @@ export const TestInfoWrapper = styled.div`
 export const StartTestBtnWrap = styled.div`
   display: flex;
   justify-content: center;
+  padding: 40px 0 60px;
 `;
 export const StartTestBtn = styled.button`
-  background-color: #4ec1bf;
+  background-color: #35d8d5;
   border: none;
-  padding: 12px 120px;
+  width: 480px;
+  height: 52px;
   color: #fff;
   font-weight: 700;
-  font-size: 12px;
-  border-radius: 12px;
+  font-size: 18px;
+  border-radius: 16px;
   cursor: pointer;
 `;

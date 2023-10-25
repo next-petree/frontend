@@ -92,6 +92,7 @@ function BasicTest() {
           ))}
         </TestInfoWrapper>
         <StartTestBtnWrap>
+          {/* 로그인 여부 확인 후 테스트 페이지 이동 */}
           <StartTestBtn>테스트 실시</StartTestBtn>
         </StartTestBtnWrap>
       </Wrapper>
