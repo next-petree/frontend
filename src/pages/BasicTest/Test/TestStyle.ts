@@ -53,12 +53,15 @@ export const MoveBtnWrap = styled.div`
     font-size: 18px;
     font-weight: 400;
   }
+  :nth-child(2):hover {
+    background: #35d8d5;
+  }
 `;
 export const PreBtn = styled.button`
   background: #b7b7b7;
 `;
 export const NextBtn = styled.button`
-  background: #35d8d5;
+  background: #4ec1bf;
 `;
 export const BGImg = styled.img`
   position: absolute;
