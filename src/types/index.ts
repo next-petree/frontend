@@ -3,6 +3,7 @@ export interface IWBProps {
   width: number;
   height: number;
   top: number;
+  left: number;
   children?: React.ReactNode;
 }
 
