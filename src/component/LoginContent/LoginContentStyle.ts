@@ -1,104 +1,160 @@
 import styled from "styled-components";
+import petTreeIconImage from "../../assets/icons/pets_black_24dp.jpg";
 
-export const ContentArea = styled.div`
-  width: 80%;
+export const Container = styled.div`
+  width: 1000px;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+`;
+
+export const ContentArea = styled.div`
+  width: 330px;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+`;
+
+export const PetTreeTitleArea = styled.div`
+  display: flex;
+  gap: 22px;
 `;
 
 export const PetTreeIcon = styled.div`
-  width: 100px;
+  width: 72px;
+  height: 72px;
+  background: url(${petTreeIconImage});
+`;
+
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+  color: #4fd4d2;
+  font-family: "LotteriaChab";
+  font-size: 40px;
+  font-weight: 400;
+`;
+
+export const SubTitle1 = styled.div`
+  display: flex;
+  align-items: center;
   height: 100px;
-  background: url(../../assets/icons/pets_black_24dp.jpg);
-  background-size: cover;
-  margin-bottom: 20px;
+  color: #4fd4d2;
+  font-family: Noto Sans KR;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -2px;
 `;
 
-export const Title = styled.h1`
-  font-size: 30px;
-`;
-
-export const SubTitle1 = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-`;
-
-export const SubTitle2 = styled.h3`
-  font-size: 20px;
-  margin-bottom: 20px;
+export const SubTitle2 = styled.div`
+  height: 70px;
+  color: #000;
+  font-family: Noto Sans KR;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.96px;
 `;
 
 const FormArea = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
+  width: 332px;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
 `;
 
-export const EmailFormArea = styled(FormArea)``;
-export const PassWordFormArea = styled(FormArea)``;
+export const EmailFormArea = styled(FormArea)`
+  display: flex;
+  gap: 30px;
+  margin-bottom: 15px;
+`;
+export const PassWordFormArea = styled(FormArea)`
+  display: flex;
+  gap: 20px;
+`;
 
 const Text = styled.p`
   font-size: 16px;
-  margin-bottom: 5px;
+  font-family: Noto Sans KR;
 `;
 
-export const EmailText = styled(Text)``;
-export const PassWordText = styled(Text)``;
+export const EmailText = styled(Text)`
+  width: 50px;
+`;
+export const PassWordText = styled(Text)`
+  width: 60px;
+`;
 
 const InputForm = styled.input`
-  width: 100%;
+  width: 240px;
+  height: 20px;
   padding: 10px;
   font-size: 16px;
+  background-color: #f5f5f5;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
 `;
 
 export const EmailInputForm = styled(InputForm)``;
 export const PassWordForm = styled(InputForm)`
-  type: password; // 비밀번호 필드로 설정
+  // type: password;
 `;
 
 export const FindIdOrPassWordArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  font-size: 16px;
+  font-family: Noto Sans KR;
 `;
 
 export const FindIdButton = styled.button`
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Noto Sans KR;
 `;
 export const FindPassWordButton = styled.button`
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Noto Sans KR;
 `;
 
 export const LoginOrSignUpButtonArea = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export const BasicLoginButton = styled.button`
-  width: 100%;
+  width: 240px;
+  height: 40px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #2d9cdb;
-  color: white;
+  background-color: #4ec1bf;
+  color: #fff;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+  font-family: Noto Sans KR;
 `;
 
 export const KakaoLoginButton = styled(BasicLoginButton)`
-  background-color: #ffe812;
-  color: black;
+  background-color: #fee500;
+  color: #060606;
 `;
 
 export const SignUpButtonArea = styled.div`
@@ -106,12 +162,15 @@ export const SignUpButtonArea = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  font-size: 16px;
+  font-family: Noto Sans KR;
 `;
 
 export const SignUpButton = styled.button`
   background-color: transparent;
   border: none;
-  color: #2d9cdb;
   cursor: pointer;
+  font-size: 16px;
   margin-left: 5px;
+  font-family: Noto Sans KR;
 `;

@@ -1,6 +1,8 @@
 import React from "react";
 import {
+  Container,
   ContentArea,
+  PetTreeTitleArea,
   PetTreeIcon,
   Title,
   SubTitle1,
@@ -23,13 +25,16 @@ import {
 
 const LoginContent = () => {
   return (
-    <>
-      <ContentArea>
-        <PetTreeIcon></PetTreeIcon>
+    <Container>
+      <PetTreeTitleArea>
+        <PetTreeIcon />
         <Title>펫트리</Title>
-        <SubTitle1>반려동물, 새로운 당신의 가족입니다</SubTitle1>
-        <SubTitle2>또 하나의 가족 반려동물을 분양하세요</SubTitle2>
+      </PetTreeTitleArea>
 
+      <SubTitle1>반려동물, 새로운 당신의 가족입니다</SubTitle1>
+      <SubTitle2>또 하나의 가족 반려동물을 분양하세요</SubTitle2>
+
+      <ContentArea>
         <EmailFormArea>
           <EmailText>이메일</EmailText>
           <EmailInputForm></EmailInputForm>
@@ -54,7 +59,7 @@ const LoginContent = () => {
           </SignUpButtonArea>
         </LoginOrSignUpButtonArea>
       </ContentArea>
-    </>
+    </Container>
   );
 };
 
