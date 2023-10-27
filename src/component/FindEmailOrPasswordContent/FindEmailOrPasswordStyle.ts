@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const FindEmailTitle = styled.div`
+export const FindEmailOrPasswordTitle = styled.div`
   color: #000;
   font-family: Noto Sans KR;
   font-size: 32px;

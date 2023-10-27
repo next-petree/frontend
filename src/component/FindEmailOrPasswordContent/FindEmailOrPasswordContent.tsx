@@ -2,7 +2,7 @@ import React from "react";
 import {
   Container,
   ContentArea,
-  FindEmailTitle,
+  FindEmailOrPasswordTitle,
   CharacterImage,
   InnerContentArea,
   NameFormArea,
@@ -29,9 +29,9 @@ type Props = {
 const FindEmailOrPasswordContent = ({ pageType }: Props) => {
   return (
     <Container>
-      <FindEmailTitle>
+      <FindEmailOrPasswordTitle>
         {pageType === "findemail" ? "이메일 찾기" : "비밀번호 찾기"}
-      </FindEmailTitle>
+      </FindEmailOrPasswordTitle>
       <ContentArea>
         <CharacterImage />
         <InnerContentArea>

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../component/Header/Header";
-import FindEmailOrPassWordContent from "../../component/FindEmailOrPassword/FindEmailOrPassword";
+import FindEmailOrPassWordContent from "../../component/FindEmailOrPasswordContent/FindEmailOrPasswordContent";
 
 const FindEmail = () => {
   return (
