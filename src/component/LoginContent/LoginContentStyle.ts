@@ -2,18 +2,10 @@ import styled from "styled-components";
 import petTreeIconImage from "../../assets/icons/pets_black_24dp.jpg";
 
 export const Container = styled.div`
-  width: 1000px;
   display: flex;
-  margin: 0 auto;
+  margin: 150px auto 0 auto;
   flex-direction: column;
   align-items: center;
-`;
-
-export const ContentArea = styled.div`
-  width: 330px;
-  display: flex;
-  margin: 0 auto;
-  flex-direction: column;
 `;
 
 export const PetTreeTitleArea = styled.div`
@@ -60,6 +52,13 @@ export const SubTitle2 = styled.div`
   letter-spacing: -0.96px;
 `;
 
+export const ContentArea = styled.div`
+  width: 330px;
+  display: flex;
+  margin-right: 65px;
+  flex-direction: column;
+`;
+
 const FormArea = styled.div`
   display: flex;
   width: 332px;
@@ -92,11 +91,11 @@ export const PassWordText = styled(Text)`
 
 const InputForm = styled.input`
   width: 240px;
-  height: 20px;
+  height: 25px;
   padding: 10px;
   font-size: 16px;
   background-color: #f5f5f5;
-  border: 1px solid #ccc;
+  border: 0px;
   border-radius: 10px;
 `;
 
@@ -111,7 +110,7 @@ export const FindIdOrPassWordArea = styled.div`
   align-items: center;
   margin-left: auto;
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   font-size: 16px;
   font-family: Noto Sans KR;
 `;
@@ -140,7 +139,7 @@ export const LoginOrSignUpButtonArea = styled.div`
 
 export const BasicLoginButton = styled.button`
   width: 240px;
-  height: 40px;
+  height: 45px;
   padding: 10px;
   margin-bottom: 10px;
   background-color: #4ec1bf;
@@ -155,6 +154,7 @@ export const BasicLoginButton = styled.button`
 export const KakaoLoginButton = styled(BasicLoginButton)`
   background-color: #fee500;
   color: #060606;
+  margin-top: 10px;
 `;
 
 export const SignUpButtonArea = styled.div`
