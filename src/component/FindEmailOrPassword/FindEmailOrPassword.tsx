@@ -15,16 +15,23 @@ import {
   PhoneNumberCheckForm,
   PhoneNumberSendButton,
   PhoneNumberCheckButton,
-  FindPassWordButtonArea,
-  FindPassWordButton,
+  FindPasswordButtonArea,
+  FindPasswordButton,
+  FindEmailButton,
   CheckButtonArea,
   CheckButton,
-} from "./FindEmailContentStyle";
+} from "./FindEmailOrPasswordStyle";
 
-const FindEmailContent = () => {
+type Props = {
+  pageType: "findemail" | "findpassword";
+};
+
+const FindEmailOrPasswordContent = ({ pageType }: Props) => {
   return (
     <Container>
-      <FindEmailTitle>이메일 찾기</FindEmailTitle>
+      <FindEmailTitle>
+        {pageType === "findemail" ? "이메일 찾기" : "비밀번호 찾기"}
+      </FindEmailTitle>
       <ContentArea>
         <CharacterImage />
         <InnerContentArea>
@@ -44,9 +51,15 @@ const FindEmailContent = () => {
             <PhoneNumberCheckButton>인증 확인</PhoneNumberCheckButton>
           </PhoneNumberCheckFormArea>
 
-          <FindPassWordButtonArea>
-            <FindPassWordButton>비밀번호 찾기</FindPassWordButton>
-          </FindPassWordButtonArea>
+          <FindPasswordButtonArea>
+            {pageType === "findemail" ? (
+              <FindPasswordButton to="/findpassword">
+                비밀번호 찾기
+              </FindPasswordButton>
+            ) : (
+              <FindEmailButton to="/findemail">이메일 찾기</FindEmailButton>
+            )}
+          </FindPasswordButtonArea>
         </InnerContentArea>
       </ContentArea>
 
@@ -57,4 +70,4 @@ const FindEmailContent = () => {
   );
 };
 
-export default FindEmailContent;
+export default FindEmailOrPasswordContent;

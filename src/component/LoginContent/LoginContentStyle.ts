@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import petTreeIconImage from "../../assets/icons/pets_black_24dp.jpg";
 
 export const Container = styled.div`
@@ -113,19 +115,26 @@ export const FindIdOrPassWordArea = styled.div`
   font-family: Noto Sans KR;
 `;
 
-export const FindIdButton = styled.button`
+export const FindIdButton = styled(Link)`
   background-color: transparent;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
   font-family: Noto Sans KR;
+  color: inherit;
+  margin-right: 5px;
 `;
-export const FindPassWordButton = styled.button`
+export const FindPassWordButton = styled(Link)`
   background-color: transparent;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
   font-family: Noto Sans KR;
+  color: inherit;
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 
 export const LoginOrSignUpButtonArea = styled.div`

@@ -45,8 +45,8 @@ const LoginContent = () => {
         </PassWordFormArea>
 
         <FindIdOrPassWordArea>
-          <FindIdButton>아이디</FindIdButton> /
-          <FindPassWordButton>비밀번호</FindPassWordButton>
+          <FindIdButton to="/findemail">아이디</FindIdButton> /
+          <FindPassWordButton to="/findpassword">비밀번호</FindPassWordButton>
           찾기
         </FindIdOrPassWordArea>
 

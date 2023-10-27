@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import characterImage from "../../assets/icons/Group.jpg";
 
 export const Container = styled.div`
@@ -101,17 +102,28 @@ export const PhoneNumberCheckButton = styled(Button)`
   background-color: #b7b7b7;
 `;
 
-export const FindPassWordButtonArea = styled.div`
+export const FindPasswordButtonArea = styled.div`
   text-align: center;
   margin-top: 20px;
   margin-left: 150px;
 `;
 
-export const FindPassWordButton = styled.button`
-  background: none;
+export const FindPasswordButton = styled(Link)`
+  background-color: transparent;
+  text-decoration: none;
   border: none;
   cursor: pointer;
-  color: #000;
+  color: inherit;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+`;
+
+export const FindEmailButton = styled(Link)`
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
   font-family: Noto Sans KR;
   font-size: 16px;
 `;
