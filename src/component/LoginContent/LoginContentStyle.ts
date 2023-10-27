@@ -100,9 +100,7 @@ const InputForm = styled.input`
 `;
 
 export const EmailInputForm = styled(InputForm)``;
-export const PassWordForm = styled(InputForm)`
-  // type: password;
-`;
+export const PassWordForm = styled(InputForm)``;
 
 export const FindIdOrPassWordArea = styled.div`
   display: flex;
