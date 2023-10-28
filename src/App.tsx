@@ -5,6 +5,8 @@ import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
 import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
 import FindPasswordResult from "./pages/FindPasswordResult/FindPasswordResult";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import ChangePasswordResult from "./pages/ChangePasswordResult/ChangePasswordResult";
 
 function App() {
   return (
@@ -14,7 +16,12 @@ function App() {
         <Route path="/findemail" element={<FindEmail />} />
         <Route path="/findpassword" element={<FindPassword />} />
         <Route path="/findemailresult" element={<FindEmailResult />} />
-        <Route path="/findPasswordresult" element={<FindPasswordResult />} />
+        <Route path="/findpasswordresult" element={<FindPasswordResult />} />
+        <Route path="/changepassword" element={<ChangePassword />} />
+        <Route
+          path="/changepasswordresult"
+          element={<ChangePasswordResult />}
+        />
       </Routes>
     </>
   );
