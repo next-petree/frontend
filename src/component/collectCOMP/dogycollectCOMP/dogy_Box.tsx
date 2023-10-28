@@ -1,5 +1,15 @@
 import styled from "styled-components";
-import { BoxWrapper, Dermyimg, Doginfo, ImgBox, LitteBadge, Name, Nameline, Poss, Span } from "../box_styled";
+import {
+  BoxWrapper,
+  Dermyimg,
+  Doginfo,
+  ImgBox,
+  LitteBadge,
+  Name,
+  Nameline,
+  Poss,
+  Span,
+} from "../../../styles/collect_box_styled";
 
 export default function DogyBox() {
   return (

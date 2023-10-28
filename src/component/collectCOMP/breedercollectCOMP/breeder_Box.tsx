@@ -1,9 +1,15 @@
-import { Badge, BoxWrapper, Dermyimg, Distance, ImgBox, MajorDog, Name, Nameline } from "../box_styled";
+import {
+  Badge,
+  BoxWrapper,
+  Dermyimg,
+  Distance,
+  ImgBox,
+  MajorDog,
+  Name,
+  Nameline,
+} from "../../../styles/collect_box_styled";
 
-
-
-
-export default function BreederBox() {
+export default function BreederBox(page: any) {
   return (
     <BoxWrapper>
       <ImgBox>
@@ -33,7 +39,7 @@ export default function BreederBox() {
       </ImgBox>
       <Nameline>
         <Name>김민준</Name>
-        <Distance>{"(14km)"}</Distance>
+        <Distance>{`${page.page}km`}</Distance>
       </Nameline>
 
       <MajorDog>주력견종: 푸들, 말티즈, 치와와..</MajorDog>

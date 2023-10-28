@@ -1,17 +1,18 @@
-
 import BreederForm from "./breeder_form";
 import BreederBox from "./breeder_Box";
+import {
+  BoxContainer,
+  MainBox,
+  Title,
+  Wrapper,
+} from "../../../styles/collect_main_styled";
 import Pagenation from "../pagenation";
-import { BoxContainer, MainBox, Title, Wrapper } from "../main_styled";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-interface IBreederCollect {
-  param:String | undefined;
-}
-
-
-
-export default function BC_Main({param}:IBreederCollect) {
-  console.log(param)
+export default function BC_Main() {
+  const param = useParams();
+  const [page, setPage] = useState(Number(param.pageId));
   return (
     <Wrapper>
       <MainBox>
@@ -19,11 +20,16 @@ export default function BC_Main({param}:IBreederCollect) {
         <BreederForm />
         <BoxContainer>
           {[1, 1, 1, 1, 1, 1, 1, 1].map((box, i) => (
-            <BreederBox key={i} />
+            <BreederBox key={i} page={param.pageId} />
           ))}
         </BoxContainer>
       </MainBox>
-      <Pagenation />
+      <Pagenation
+        page={page}
+        totalPage={28}
+        setPage={setPage}
+        name={"breeders"}
+      />
     </Wrapper>
   );
 }

@@ -3,13 +3,13 @@ import { useState } from "react";
 import DogyBox from "./dogy_Box";
 import Pagenation from "../pagenation";
 import SearchFilter from "./dogy_searchfilter";
-import { BoxContainer, MainBox, Title, Wrapper } from "../main_styled";
-
-interface IDogyCollect {
-  param: String | undefined;
-}
-
-
+import {
+  BoxContainer,
+  MainBox,
+  Title,
+  Wrapper,
+} from "../../../styles/collect_main_styled";
+import { useParams } from "react-router-dom";
 
 const SearchBtn = styled.button`
   align-self: flex-end;
@@ -30,10 +30,10 @@ const SearchBtn = styled.button`
   margin-bottom: -6vh;
 `;
 
-
-export default function DC_main({ param }: IDogyCollect) {
-  console.log(param);
+export default function DC_main() {
+  const param = useParams();
   const [onSearch, setOnSearch] = useState(false);
+  const [page, setPage] = useState(Number(param.pageId));
   return (
     <Wrapper>
       <MainBox>
@@ -45,7 +45,7 @@ export default function DC_main({ param }: IDogyCollect) {
           ))}
         </BoxContainer>
       </MainBox>
-      <Pagenation />
+      <Pagenation page={page} totalPage={30} setPage={setPage} name={"dogys"} />
       {onSearch ? <SearchFilter /> : null}
     </Wrapper>
   );

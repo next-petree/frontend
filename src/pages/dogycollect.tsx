@@ -8,6 +8,6 @@ export default function DogyCollect() {
   const params = useParams();
  
   return (
-    <DC_main param={params.dogy_collect_Id}/>
+    <DC_main />
   );
 }
