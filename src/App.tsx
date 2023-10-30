@@ -4,6 +4,7 @@ import Info from './pages/BasicTest/Info/Info';
 import Test from './pages/BasicTest/Test/Test';
 import Result from './pages/BasicTest/Result/Result';
 import Answer from './pages/BasicTest/Answer/Answer';
+import Certify from './pages/Certify/Certify';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/basictest" element={<Test />}></Route>
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
+        <Route path="/certify" element={<Certify />}></Route>
       </Routes>
     </>
   );
