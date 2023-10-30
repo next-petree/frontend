@@ -24,7 +24,12 @@ export const ScoreTitle = styled.p`
   line-height: 57.92px;
   margin: 0;
 `;
-export const ScoreWrapper = styled.div``;
+export const ScoreWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 export const ScoreDiv = styled.div`
   font-size: 80px;
   font-weight: 500;

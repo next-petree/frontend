@@ -32,7 +32,7 @@ export default function Result() {
           <ScoreDiv>
             <Score>60</Score>점
           </ScoreDiv>
-          <ScoreImg></ScoreImg>
+          <ScoreImg src={Result1} />
         </ScoreWrapper>
         {/* 70점 이상이 합격? */}
         {/* 합격이면 합격 뱃지 보여야됨!! */}
