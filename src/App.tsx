@@ -1,5 +1,5 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
+import CustomerDetails from "./pages/customer-details/CustomerDetails";
 import Login from "./pages/Login/Login";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
@@ -27,6 +27,7 @@ function App() {
         <Route path="/changepasswordresult" element={<ChangePasswordResult />} />
         {/* 예시: <Route path='/example' element={<ExampleComponent />} /> */}
         {/* 위와 같은 방식으로 필요한 라우트를 추가하실 수 있습니다. */}
+        <Route path="customer-details" element={<CustomerDetails />} />
         <Route path="/basictestinfo" element={<Info />}></Route>
         <Route path="/basictest" element={<Test />}></Route>
         <Route path="/result" element={<Result />}></Route>
