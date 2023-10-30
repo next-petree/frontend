@@ -9,13 +9,13 @@ import {
   TestInfoWrapper,
   StartTestBtnWrap,
   StartTestBtn,
-} from './InfoStyle';
-import TestInfo1 from '../../../assets/images/TestInfo1.png';
-import TestInfo2 from '../../../assets/images/TestInfo2.png';
-import TestInfo3 from '../../../assets/images/TestInfo3.png';
-import TestInfo4 from '../../../assets/images/TestInfo4.png';
-import TestInfo5 from '../../../assets/images/TestInfo5.png';
-import TestInformation from '../component/InfoComp/TestInformation';
+} from './TestDescriptionStyle';
+import TestInfo1 from '../../assets/images/TestInfo1.png';
+import TestInfo2 from '../../assets/images/TestInfo2.png';
+import TestInfo3 from '../../assets/images/TestInfo3.png';
+import TestInfo4 from '../../assets/images/TestInfo4.png';
+import TestInfo5 from '../../assets/images/TestInfo5.png';
+import TestDescComp from './TestDescriptionComp/TestDescComp';
 
 const info = [
   {
@@ -77,18 +77,17 @@ function BasicTest() {
   return (
     <>
       <Wrapper>
-        <TestHeader></TestHeader>
         <TitleWrapper>
           <FirstTitle>반려동물에 대한 지식과 이해를 높이기 위한</FirstTitle>
           <SecondTitle>2023년 반려인 지식 문제은행 안내</SecondTitle>
         </TitleWrapper>
         <TestInfoWrapper>
           {info.map((value, i) => (
-            <TestInformation
+            <TestDescComp
               img={value.img}
               title={value.title}
               text={value.text}
-            ></TestInformation>
+            ></TestDescComp>
           ))}
         </TestInfoWrapper>
         <StartTestBtnWrap>
