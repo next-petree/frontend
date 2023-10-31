@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { post } from "../../api/api";
+
 import {
   Container,
   ContentArea,
@@ -7,12 +9,12 @@ import {
   Title,
   SubTitle1,
   SubTitle2,
-  EmailFormArea,
+  EmailInputArea,
   EmailText,
-  EmailInputForm,
-  PassWordFormArea,
+  EmailInput,
+  PassWordInputArea,
   PassWordText,
-  PassWordForm,
+  PassWordInput,
   FindIdOrPassWordArea,
   FindIdButton,
   FindPassWordButton,
@@ -23,7 +25,45 @@ import {
   SignUpButton,
 } from "./LoginContentStyle";
 
+type LoginResponse = {
+  status: string;
+  data: {
+    grantType: string;
+    accessToken: string;
+    accessTokenExpireTime: string;
+    refreshToken: string;
+    refreshTokenExpireTime: string;
+    profileImgUrl: string | null;
+  };
+};
+
 const LoginContent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const requestBody = {
+        email: email,
+        password: password,
+      };
+
+      const response = await post<LoginResponse>("/api/login", requestBody);
+
+      if (response.data.status === "SUCCESS") {
+        console.log("로그인 성공", response.data);
+
+        localStorage.setItem("accessToken", response.data.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.data.refreshToken);
+      }
+    } catch (error: any) {
+      console.error(
+        "로그인 에러:",
+        error.response ? error.response.data : error.message,
+      );
+    }
+  };
+
   return (
     <Container>
       <PetTreeTitleArea>
@@ -35,14 +75,20 @@ const LoginContent = () => {
       <SubTitle2>또 하나의 가족 반려동물을 분양하세요</SubTitle2>
 
       <ContentArea>
-        <EmailFormArea>
+        <EmailInputArea>
           <EmailText>이메일</EmailText>
-          <EmailInputForm></EmailInputForm>
-        </EmailFormArea>
-        <PassWordFormArea>
+          <EmailInput
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          ></EmailInput>
+        </EmailInputArea>
+        <PassWordInputArea>
           <PassWordText>비밀번호</PassWordText>
-          <PassWordForm></PassWordForm>
-        </PassWordFormArea>
+          <PassWordInput
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          ></PassWordInput>
+        </PassWordInputArea>
 
         <FindIdOrPassWordArea>
           <FindIdButton to="/findemail">아이디</FindIdButton> /
@@ -51,7 +97,7 @@ const LoginContent = () => {
         </FindIdOrPassWordArea>
 
         <LoginOrSignUpButtonArea>
-          <BasicLoginButton>로그인</BasicLoginButton>
+          <BasicLoginButton onClick={handleLogin}>로그인</BasicLoginButton>
           <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
           <SignUpButtonArea>
             아직 회원이 아니라면?

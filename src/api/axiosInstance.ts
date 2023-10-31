@@ -9,7 +9,7 @@ instance.interceptors.request.use(
   config => {
     const token = getToken("accessToken");
     if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
