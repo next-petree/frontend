@@ -1,12 +1,6 @@
 // 코드 파일
 import React from 'react';
-import {
-  Wrapper,
-  TitleWrap,
-  ImgWrap,
-  Title,
-  Text,
-} from './TestInformationStyle';
+import { Wrapper, TitleWrap, ImgWrap, Title, Text } from './TestDescCompStyle';
 
 type TestInfoProps = {
   title: string;
