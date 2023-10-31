@@ -13,7 +13,7 @@ import {
 
 import { IDCProps } from "../../types";
 
-const DogCard = ({ src, name, species, DOB, status }: IDCProps) => {
+const DogCard = ({ src, name, species, DOB, status, onClick }: IDCProps) => {
   return (
     <Card>
       <Container>
@@ -43,7 +43,7 @@ const DogCard = ({ src, name, species, DOB, status }: IDCProps) => {
           </Desc>
         </DescContainer>
       </Container>
-      <Button>상세보기</Button>
+      <Button onClick={onClick}>상세보기</Button>
     </Card>
   );
 };
