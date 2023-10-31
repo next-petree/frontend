@@ -33,6 +33,7 @@ type ApiResponse = {
   status: "SUCCESS" | "FAIL";
   data: {
     email?: string;
+    password?: string;
     code?: string;
   };
 };
@@ -57,7 +58,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       }
     } catch (error) {
       console.error("SMS 발송 에러:", error);
-      alert("문자 발송 중 오류가 발생하였습니다.");
+      alert("전화번호를 정확히 입력해주세요.");
     }
   };
 
@@ -93,7 +94,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       }
     } catch (error) {
       console.error("SMS 인증 에러:", error);
-      alert("인증 중 오류가 발생하였습니다.");
+      alert("인증번호를 정확히 입력해주세요.");
     }
   };
 
@@ -120,6 +121,30 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
     }
   };
 
+  const findPassword = async () => {
+    try {
+      const response = await post<ApiResponse>("/api/pwd/reset", {
+        email: nickname,
+        phoneNumberChecked,
+        phoneNumber: phoneNumber,
+      });
+
+      if (response.data.status === "SUCCESS") {
+        navigate("/findpasswordresult", {
+          state: { password: response.data.data.password },
+        });
+      } else if (
+        response.data.status === "FAIL" &&
+        typeof response.data.data !== "string"
+      ) {
+        alert(response.data.data.code);
+      }
+    } catch (error) {
+      console.error("비밀번호 찾기 에러:", error);
+      alert("비밀번호 찾기 중 오류가 발생하였습니다.");
+    }
+  };
+
   return (
     <Container>
       <FindEmailOrPasswordTitle>
@@ -129,7 +154,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         <CharacterImage />
         <InnerContentArea>
           <NameInputArea>
-            <NameText>이름</NameText>
+            <NameText>{pageType === "findemail" ? "이름" : "이메일"}</NameText>
             <NameInput
               value={nickname}
               onChange={e => setNickname(e.target.value)}
@@ -170,7 +195,11 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       </ContentArea>
 
       <CheckButtonArea>
-        <CheckButton onClick={findEmail}>확인</CheckButton>
+        {pageType === "findemail" ? (
+          <CheckButton onClick={findEmail}>확인</CheckButton>
+        ) : (
+          <CheckButton onClick={findPassword}>확인</CheckButton>
+        )}
       </CheckButtonArea>
     </Container>
   );
