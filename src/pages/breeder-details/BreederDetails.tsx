@@ -53,8 +53,8 @@ const BreederDetails = () => {
           </S.MainDogContainer>
         </S.Frame113>
       </S.Frame62>
-      <WhiteBox width={1060} height={780} top={284}></WhiteBox>
-      <WhiteBox width={1060} height={854} top={1114}>
+      <WhiteBox width={1060} height={780} top={284} left={430}></WhiteBox>
+      <WhiteBox width={1060} height={854} top={1114} left={430}>
         <S.Frame63>
           <S.Title>보유견종</S.Title>
           <S.FlexBox>

@@ -4,9 +4,10 @@ import { Wrapper } from "./styles";
 const WhiteBox = (props: IWBProps) => {
   return (
     <Wrapper
-      customWidth={props.width}
-      customHeight={props.height}
-      customTop={props.top}
+      customwidth={props.width}
+      customheight={props.height}
+      customtop={props.top}
+      customLeft={props.left}
     >
       {props.children}
     </Wrapper>
