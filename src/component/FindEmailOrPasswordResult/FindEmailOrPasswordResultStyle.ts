@@ -24,7 +24,7 @@ export const ResultTitle = styled.div`
   margin: 40px 0 40px 0;
 `;
 
-export const ResultFormArea = styled.div`
+export const ResultInputArea = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20px;
@@ -41,7 +41,7 @@ export const ResultText = styled.div`
   margin-right: 25px;
 `;
 
-export const ResultForm = styled.input`
+export const ResultInput = styled.input`
   width: 240px;
   height: 25px;
   padding: 10px;

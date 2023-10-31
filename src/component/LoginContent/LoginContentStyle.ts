@@ -61,7 +61,7 @@ export const ContentArea = styled.div`
   flex-direction: column;
 `;
 
-const FormArea = styled.div`
+const InputArea = styled.div`
   display: flex;
   width: 332px;
   flex-direction: row;
@@ -69,12 +69,12 @@ const FormArea = styled.div`
   align-items: center;
 `;
 
-export const EmailFormArea = styled(FormArea)`
+export const EmailInputArea = styled(InputArea)`
   display: flex;
   gap: 30px;
   margin-bottom: 15px;
 `;
-export const PassWordFormArea = styled(FormArea)`
+export const PassWordInputArea = styled(InputArea)`
   display: flex;
   gap: 20px;
 `;
@@ -91,7 +91,7 @@ export const PassWordText = styled(Text)`
   width: 60px;
 `;
 
-const InputForm = styled.input`
+const Input = styled.input`
   width: 240px;
   height: 25px;
   padding: 10px;
@@ -101,8 +101,8 @@ const InputForm = styled.input`
   border-radius: 10px;
 `;
 
-export const EmailInputForm = styled(InputForm)``;
-export const PassWordForm = styled(InputForm)``;
+export const EmailInput = styled(Input)``;
+export const PassWordInput = styled(Input)``;
 
 export const FindIdOrPassWordArea = styled.div`
   display: flex;
