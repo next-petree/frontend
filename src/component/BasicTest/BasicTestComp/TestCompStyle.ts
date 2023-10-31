@@ -9,7 +9,7 @@ export const TestTitle = styled.h3`
   box-shadow: 0.5px 1px 3px 0.5px rgba(58, 58, 58, 0.4);
 `;
 export const TestWrap = styled.div`
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,19 +27,22 @@ export const Question = styled.p`
 `;
 export const ExampleWrap = styled.div`
   width: 100%;
+  height: auto;
+  padding: 30px;
   display: grid;
   place-items: center;
   gap: 20px;
-  button:hover {
-    border: 1px solid #39e57e;
-    background: #dcfadb;
-  }
-  button:focus {
-    border: 1px solid #39e57e;
-    background: #dcfadb;
-  }
+  // button:hover {
+  //   border: 1px solid #39e57e;
+  //   background: #dcfadb;
+  // }
+  // button:focus {
+  //   border: 1px solid #39e57e;
+  //   background: #dcfadb;
+  // }
 `;
-export const Example = styled.button`
+
+export const ExampleLabel = styled.label`
   color: blue;
   width: 90%;
   height: 60px;
@@ -50,4 +53,16 @@ export const Example = styled.button`
   border: 1px solid #ccc;
   border-radius: 20px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Example = styled.input`
+  display: none;
+
+  &:checked + ${ExampleLabel} {
+    border: 1px solid #39e57e;
+    background: #dcfadb;
+  }
 `;

@@ -1,6 +1,18 @@
 //스타일 파일
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+export const TestDescCompWrapper = styled.div`
+  animation: ${fadeIn} 0.5s forwards;
+`;
 export const Wrapper = styled.div`
   margin: 8px 0;
   width: 1386px;
@@ -13,7 +25,6 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   content-align: center;
   padding: 20px 44px;
-  transition: opacity 0.5s ease-in-out;
 `;
 
 export const ImgWrap = styled.img`

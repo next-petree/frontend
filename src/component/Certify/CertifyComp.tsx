@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useModal from '../AlertModal/AlertModal';
+import { post } from '../../api/api';
 import PetreeBrown from '../../assets/images/PetreeBrown.png';
 import PetreeIconBrown from '../../assets/images/PetreeIconBrown.png';
 import Cert1 from '../../assets/images/Cert1.png';
@@ -21,6 +22,14 @@ import {
   FileBox,
 } from './CertifyStyle';
 import CertifyComp1 from './CertifyComp1/CertifyComp1';
+
+type CertificationResponse = {
+  status: string;
+  data: {
+    certification: string;
+    verificationFiles: string;
+  };
+};
 
 export default function CertifyComp() {
   const { isModalVisible, showModal, hideModal } = useModal();
@@ -65,6 +74,29 @@ export default function CertifyComp() {
     setCertificateType(e.target.value);
   };
 
+  const postFile = async () => {
+    try {
+      // const formData = new FormData();
+      // formData.append('certification', certificateType.replace(/ /g, ''));
+      // formData.append('verificationFiles', selectedFile || '');
+
+      const response = await post<CertificationResponse>('/api/verifications', {
+        certification: certificateType.replace(/ /g, ''),
+        verificationFiles: selectedFile || '',
+      });
+
+      if (response.data.status === 'SUCCESS') {
+        console.log(response.data);
+        setModalMessage('제출되었습니다');
+        showModal();
+      } else {
+        setModalMessage('브리더가 아닙니다.');
+        showModal();
+      }
+    } catch (error: any) {
+      console.error('There was an error!', error);
+    }
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -73,20 +105,7 @@ export default function CertifyComp() {
       formData.append('certification', certificateType);
       formData.append('verificationFiles', selectedFile);
 
-      axios
-        .post('http://3.37.230.170:8080/api/verifications', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setModalMessage('제출되었습니다');
-          showModal();
-        })
-        .catch((error) => {
-          console.error('There was an error!', error);
-        });
+      postFile();
     } else {
       if (!selectedFile) {
         setModalMessage('브리더 자격증을 업로드 하세요');
@@ -96,6 +115,7 @@ export default function CertifyComp() {
       showModal();
     }
   };
+
   return (
     <>
       <PetreeIcon src={PetreeIconBrown}></PetreeIcon>

@@ -1,6 +1,13 @@
 // 코드 파일
 import React from 'react';
-import { Wrapper, TitleWrap, ImgWrap, Title, Text } from './TestDescCompStyle';
+import {
+  TestDescCompWrapper,
+  Wrapper,
+  TitleWrap,
+  ImgWrap,
+  Title,
+  Text,
+} from './TestDescCompStyle';
 
 type TestInfoProps = {
   title: string;
@@ -10,13 +17,15 @@ type TestInfoProps = {
 
 function TestInformation(props: TestInfoProps) {
   return (
-    <Wrapper>
-      <ImgWrap src={props.img}></ImgWrap>
-      <TitleWrap>
-        <Title>{props.title}</Title>
-        <Text>{props.text}</Text>
-      </TitleWrap>
-    </Wrapper>
+    <TestDescCompWrapper>
+      <Wrapper>
+        <ImgWrap src={props.img}></ImgWrap>
+        <TitleWrap>
+          <Title>{props.title}</Title>
+          <Text>{props.text}</Text>
+        </TitleWrap>
+      </Wrapper>
+    </TestDescCompWrapper>
   );
 }
 export default TestInformation;

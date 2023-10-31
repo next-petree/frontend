@@ -74,14 +74,14 @@ const info = [
   },
 ];
 
-function BasicTest() {
+function TestDescription() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setCurrentIndex((prevIndex) => prevIndex + 1);
-    }, 1500);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, [currentIndex]);
@@ -119,4 +119,4 @@ function BasicTest() {
     </>
   );
 }
-export default BasicTest;
+export default TestDescription;

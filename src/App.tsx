@@ -34,11 +34,11 @@ function App() {
 
         <Route path="/breeder-details" element={<BreederDetails />} />
         <Route path="customer-details" element={<CustomerDetails />} />
-        <Route path="/test-description" element={<TestDesc />}></Route>
-        <Route path="/basic-test" element={<Test />}></Route>
-        <Route path="/result" element={<Result />}></Route>
-        <Route path="/answer" element={<Answer />}></Route>
-        <Route path="/certify" element={<Certify />}></Route>
+        <Route path="/test-description" element={<TestDesc />} />
+        <Route path="/basic-test" element={<Test />} />
+        <Route path="/result" element={<Result />} />
+        <Route path="/answer" element={<Answer />} />
+        <Route path="/certify" element={<Certify />} />
       </Routes>
     </>
   );

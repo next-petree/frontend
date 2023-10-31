@@ -7,6 +7,7 @@ import {
   Question,
   ExampleWrap,
   Example,
+  ExampleLabel,
 } from './TestCompStyle';
 
 type TestProps = {
@@ -26,7 +27,18 @@ function TestComp(props: TestProps) {
       <Question>{props.Question}</Question>
       <ExampleWrap>
         {exam.map((v, i) => (
-          <Example key={i}>{v}</Example>
+          <React.Fragment key={i}>
+            <Example
+              id={`example-${i}`}
+              type="radio"
+              name="example"
+              value={v}
+              onChange={(event) => props.onAnswer(event.target.value)}
+            ></Example>
+            <ExampleLabel htmlFor={`example-${i}`}>
+              {props.Example[i]}
+            </ExampleLabel>
+          </React.Fragment>
         ))}
       </ExampleWrap>
     </TestWrap>

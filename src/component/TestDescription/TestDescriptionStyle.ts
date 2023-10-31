@@ -27,6 +27,7 @@ export const SecondTitle = styled.h3`
 `;
 export const TestInfoWrapper = styled.div`
   margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
