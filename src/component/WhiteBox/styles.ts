@@ -4,12 +4,13 @@ export const Wrapper = styled.div<{
   customwidth: number;
   customheight: number;
   customtop: number;
+  customLeft: number;
 }>`
   box-sizing: border-box;
   position: absolute;
   width: ${(props) => `${props.customwidth}px`};
   height: ${(props) => `${props.customheight}px`};
-  left: 430px;
+  left: ${(props) => `${props.customLeft}px`};
   top: ${(props) => `${props.customtop}px`};
   background: #ffffff;
   /* shadow */

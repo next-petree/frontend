@@ -7,6 +7,7 @@ const WhiteBox = (props: IWBProps) => {
       customwidth={props.width}
       customheight={props.height}
       customtop={props.top}
+      customLeft={props.left}
     >
       {props.children}
     </Wrapper>
