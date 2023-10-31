@@ -1,7 +1,9 @@
 //스타일 파일
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  padding-top: 80px;
   margin: 0;
 `;
 export const TestHeader = styled.div`
@@ -36,14 +38,18 @@ export const StartTestBtnWrap = styled.div`
   justify-content: center;
   padding: 40px 0 60px;
 `;
-export const StartTestBtn = styled.button`
+export const StartTestBtn = styled(Link)`
+  text-align: center;
   background-color: #35d8d5;
+  text-decoration: none;
   border: none;
-  width: 480px;
-  height: 52px;
+  padding: 20px 150px;
   color: #fff;
   font-weight: 700;
   font-size: 18px;
   border-radius: 16px;
   cursor: pointer;
+  :hover {
+    background: #35d8d5;
+  }
 `;

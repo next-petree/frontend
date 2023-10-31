@@ -1,11 +1,11 @@
-import CustomLayout from "../Layout/CustomLayout";
-import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import CustomAvatar from "../../component/Avatar/CustomAvatar";
-import PrimaryButton from "../../component/Button/PrimaryButton";
+import CustomLayout from '../Layout/CustomLayout';
+import WhiteBox from '../../component/WhiteBox/WhiteBox';
+import CustomAvatar from '../../component/Avatar/CustomAvatar';
+import PrimaryButton from '../../component/Button/PrimaryButton';
 
-import * as S from "./styles";
-import { IMG2 } from "../../assets/images";
-import { desc } from "../../constants";
+import * as S from './styles';
+import { IMG2 } from '../../assets/images';
+import { desc } from '../../constants';
 
 const CustomerDetails = () => {
   return (
@@ -48,7 +48,7 @@ const CustomerDetails = () => {
           </S.GroupItem>
         </S.Group>
       </S.BottomContainer>
-      <WhiteBox width={1060} height={811} top={279}></WhiteBox>
+      <WhiteBox width={1060} height={811} top={279} left={300}></WhiteBox>
     </CustomLayout>
   );
 };

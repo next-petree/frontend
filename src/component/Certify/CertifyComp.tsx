@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import useModal from '../AlertModal/AlertModal';
 import PetreeBrown from '../../assets/images/PetreeBrown.png';
 import PetreeIconBrown from '../../assets/images/PetreeIconBrown.png';
-import Header from '../Header/Header';
 import Cert1 from '../../assets/images/Cert1.png';
 import Cert2 from '../../assets/images/Cert2.png';
+import certification1 from '../../assets/images/certification1.png';
+import certification2 from '../../assets/images/certification2.png';
 import {
   Petree,
   PetreeIcon,
@@ -20,6 +23,12 @@ import {
 import CertifyComp1 from './CertifyComp1/CertifyComp1';
 
 export default function CertifyComp() {
+  const { isModalVisible, showModal, hideModal } = useModal();
+  const [modalMessage, setModalMessage] = useState('');
+  const [selectedFileName, setSelectedFileName] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [certificateType, setCertificateType] = useState('');
+
   const data = [
     {
       img: Cert1,
@@ -30,6 +39,7 @@ export default function CertifyComp() {
       desc3: '반려동물종합관리사의 취득방법은 한국애견연맹 규정에 의합니다.',
       type: ' 등록 민간자격',
       num: '2017-004402호',
+      descImg: certification1,
     },
     {
       img: Cert2,
@@ -40,12 +50,78 @@ export default function CertifyComp() {
       desc3: '반려동물행동교정사의 취득방법은 한국애견연맹 규정에 의합니다.',
       type: ' 등록 민간자격',
       num: '2022-004084호',
+      descImg: certification2,
     },
   ];
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFileName(e.target.files[0].name);
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCertificateType(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (selectedFile && certificateType) {
+      const formData = new FormData();
+      formData.append('certification', certificateType);
+      formData.append('verificationFiles', selectedFile);
+
+      axios
+        .post('http://3.37.230.170:8080/api/verifications', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setModalMessage('제출되었습니다');
+          showModal();
+        })
+        .catch((error) => {
+          console.error('There was an error!', error);
+        });
+    } else {
+      if (!selectedFile) {
+        setModalMessage('브리더 자격증을 업로드 하세요');
+      } else if (!certificateType) {
+        setModalMessage('자격증을 선택하세요');
+      }
+      showModal();
+    }
+  };
   return (
     <>
       <PetreeIcon src={PetreeIconBrown}></PetreeIcon>
       <Petree src={PetreeBrown}></Petree>
+      {isModalVisible && (
+        <div
+          style={{
+            width: '409px',
+            height: '109px',
+            borderRadius: '32px',
+            background: '#fff',
+            position: 'fixed',
+            top: '10%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+            boxShadow: '1px 1px 4px 1px rgba(0, 0, 0, 0.1)',
+            fontSize: '20px',
+          }}
+        >
+          {modalMessage}
+        </div>
+      )}
       <CertifyModal>
         <div>
           <Title>브리더 인증</Title>
@@ -65,26 +141,46 @@ export default function CertifyComp() {
               desc3={v.desc3}
               type={v.type}
               num={v.num}
+              descImg={v.descImg}
             ></CertifyComp1>
           );
         })}
         <FormWrap>
           <FormTitle>자격증 제출</FormTitle>
-          <Form id="submit">
+          <Form id="submit" onSubmit={handleSubmit}>
             <InputWrap>
               <label>
                 반려동물 종합관리사
-                <input type="radio" name="certificate" />
+                <input
+                  type="radio"
+                  name="certificate"
+                  value="반려동물 종합관리사"
+                  onChange={handleRadioChange}
+                />
               </label>
               <label>
                 반려동물 행동교정사
-                <input type="radio" name="certificate" />
+                <input
+                  type="radio"
+                  name="certificate"
+                  value="반려동물 행동교정사"
+                  onChange={handleRadioChange}
+                />
               </label>
             </InputWrap>
             <FileBox className="filebox">
-              <label htmlFor="file">파일찾기</label>
-              {/* 파일명 들어가게 해야됨! */}
-              <input type="file" id="file" />
+              {selectedFileName ? (
+                <label htmlFor="file">{selectedFileName}</label> // 선택된 파일명 보여주기
+              ) : (
+                <label htmlFor="file">파일찾기</label> // 파일이 선택되지 않은 경우 "파일찾기" 보여주기
+              )}
+              <input
+                type="file"
+                id="file"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />{' '}
+              {/* 선택된 파일 이름 보여주기 */}
             </FileBox>
             <SubmitBtn type="submit" value="제출하기" />
           </Form>

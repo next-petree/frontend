@@ -1,8 +1,8 @@
-import * as S from "./styles";
-import { IMG2, IMG3, IMG4, IMG5 } from "../../assets/images";
-import DogCard from "../../component/Card/DogCard";
-import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import CustomLayout from "../layout/CustomLayout";
+import * as S from './styles';
+import { IMG2, IMG3, IMG4, IMG5 } from '../../assets/images';
+import DogCard from '../../component/Card/DogCard';
+import WhiteBox from '../../component/WhiteBox/WhiteBox';
+import CustomLayout from '../Layout/CustomLayout';
 
 const BreederDetails = () => {
   return (

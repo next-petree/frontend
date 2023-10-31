@@ -1,19 +1,19 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import BreederDetails from "./pages/breeder-details/BreederDetails";
-import CustomerDetails from "./pages/customer-details/CustomerDetails";
-import Login from "./pages/Login/Login";
-import FindEmail from "./pages/FindEmail/FindEmail";
-import FindPassword from "./pages/FindPassword/FindPassWord";
-import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
-import FindPasswordResult from "./pages/FindPasswordResult/FindPasswordResult";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
-import ChangePasswordResult from "./pages/ChangePasswordResult/ChangePasswordResult";
-import TestDesc from "./pages/BasicTest/TestDesc/TestDesc";
-import Test from "./pages/BasicTest/Test/Test";
-import Result from "./pages/BasicTest/Result/Result";
-import Answer from "./pages/BasicTest/Answer/Answer";
-import Certify from "./pages/Certify/Certify";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import BreederDetails from './pages/breeder-details/BreederDetails';
+import CustomerDetails from './pages/Customer-details/CustomerDetails';
+import Login from './pages/Login/Login';
+import FindEmail from './pages/FindEmail/FindEmail';
+import FindPassword from './pages/FindPassword/FindPassWord';
+import FindEmailResult from './pages/FindEmailResult/FindEmailResult';
+import FindPasswordResult from './pages/FindPasswordResult/FindPasswordResult';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import ChangePasswordResult from './pages/ChangePasswordResult/ChangePasswordResult';
+import TestDesc from './pages/BasicTest/TestDesc/TestDesc';
+import Test from './pages/BasicTest/Test/Test';
+import Result from './pages/BasicTest/Result/Result';
+import Answer from './pages/BasicTest/Answer/Answer';
+import Certify from './pages/Certify/Certify';
 
 function App() {
   return (
