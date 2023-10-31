@@ -6,7 +6,7 @@ import {
   AnswerBox,
   CorrectAnswer,
   PickedAnswer,
-} from './AnswerCompStyle';
+} from './AnswerComp1Style';
 type AnswerProps = {
   num: string;
 };
