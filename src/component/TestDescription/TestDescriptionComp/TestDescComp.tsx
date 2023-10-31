@@ -9,7 +9,6 @@ type TestInfoProps = {
 };
 
 function TestInformation(props: TestInfoProps) {
-  console.log(props);
   return (
     <Wrapper>
       <ImgWrap src={props.img}></ImgWrap>

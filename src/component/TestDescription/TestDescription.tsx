@@ -1,5 +1,6 @@
 // 코드 파일
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import {
   Wrapper,
   TestHeader,
@@ -74,6 +75,23 @@ const info = [
 ];
 
 function BasicTest() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex === info.length) {
+      setShowButton(true);
+    }
+  }, [currentIndex]);
+
   return (
     <>
       <Wrapper>
@@ -82,18 +100,21 @@ function BasicTest() {
           <SecondTitle>2023년 반려인 지식 문제은행 안내</SecondTitle>
         </TitleWrapper>
         <TestInfoWrapper>
-          {info.map((value, i) => (
+          {info.slice(0, currentIndex).map((value, i) => (
             <TestDescComp
+              key={i}
               img={value.img}
               title={value.title}
               text={value.text}
-            ></TestDescComp>
+            />
           ))}
         </TestInfoWrapper>
-        <StartTestBtnWrap>
-          {/* 로그인 여부 확인 후 테스트 페이지 이동 */}
-          <StartTestBtn to="/basic-test">테스트 실시</StartTestBtn>
-        </StartTestBtnWrap>
+        {showButton && (
+          <StartTestBtnWrap>
+            {/* 로그인 여부 확인 후 테스트 페이지 이동 */}
+            <StartTestBtn to="/basic-test">테스트 실시</StartTestBtn>
+          </StartTestBtnWrap>
+        )}
       </Wrapper>
     </>
   );

@@ -13,7 +13,9 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   content-align: center;
   padding: 20px 44px;
+  transition: opacity 0.5s ease-in-out;
 `;
+
 export const ImgWrap = styled.img`
   width: 180px;
   height: 180px;
