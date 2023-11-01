@@ -13,9 +13,14 @@ export interface IDCProps {
   species: string;
   DOB: string;
   status?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface ICLProps {
   children: React.ReactNode;
   height: number;
+}
+
+export interface IDMProps {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }

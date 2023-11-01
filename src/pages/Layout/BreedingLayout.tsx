@@ -2,7 +2,7 @@ import Banner from "../../component/Banner/Banner";
 import { ICLProps } from "../../types";
 import { Wrapper } from "./styles";
 
-const CustomLayout = ({ height, children }: ICLProps) => {
+const BreedingLayout = ({ height, children }: ICLProps) => {
   return (
     <Wrapper height={height}>
       <Banner />
@@ -11,4 +11,4 @@ const CustomLayout = ({ height, children }: ICLProps) => {
   );
 };
 
-export default CustomLayout;
+export default BreedingLayout;
