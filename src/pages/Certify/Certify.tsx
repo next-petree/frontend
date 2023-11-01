@@ -1,7 +1,7 @@
-import React from 'react';
-import Header from '../../component/Header/Header';
-import CustomLayout from '../Layout/CustomLayout';
-import CertifyComp from '../../component/Certify/CertifyComp';
+import React from "react";
+import Header from "../../component/Header/Header";
+import CustomLayout from "../layout/BreedingLayout";
+import CertifyComp from "../../component/Certify/CertifyComp";
 
 export default function Certify() {
   return (

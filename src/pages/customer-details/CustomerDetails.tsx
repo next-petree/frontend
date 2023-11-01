@@ -1,4 +1,4 @@
-import CustomLayout from "../Layout/CustomLayout";
+import BreedingLayout from "../layout/BreedingLayout";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 import PrimaryButton from "../../component/Button/PrimaryButton";
@@ -9,7 +9,7 @@ import { desc } from "../../constants";
 
 const CustomerDetails = () => {
   return (
-    <CustomLayout height={1148}>
+    <BreedingLayout height={1148}>
       <S.TopContainer>
         <S.AvatarContainer>
           <CustomAvatar isQualifiedCustomer />
@@ -48,8 +48,8 @@ const CustomerDetails = () => {
           </S.GroupItem>
         </S.Group>
       </S.BottomContainer>
-      <WhiteBox width={1060} height={811} top={279}></WhiteBox>
-    </CustomLayout>
+      <WhiteBox width={1060} height={811} top={279} left={430}></WhiteBox>
+    </BreedingLayout>
   );
 };
 
