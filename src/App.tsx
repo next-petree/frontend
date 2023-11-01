@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/intro" element={<IntroPage />} />
+        <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/findemail" element={<FindEmail />} />
         <Route path="/findpassword" element={<FindPassword />} />

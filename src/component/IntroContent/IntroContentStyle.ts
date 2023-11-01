@@ -205,9 +205,15 @@ export const LeftContent = styled.div`
 export const LeftImage = styled.div`
   width: 480px;
   height: 340px;
-  background: url(${LeftDogImage}) no-repeat center;
-  border-radius: 15px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url(${LeftDogImage}) center / cover no-repeat;
+  border-radius: 30px;
   margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
 
 export const LeftHashTag = styled.div`
@@ -252,9 +258,15 @@ export const RightContent = styled.div`
 export const RightImage = styled.div`
   width: 480px;
   height: 340px;
-  background: url(${RightDogImage}) no-repeat center;
-  border-radius: 15px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url(${RightDogImage}) center / cover no-repeat;
+  border-radius: 30px;
   margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
 
 export const RightHashTag = styled.div`
