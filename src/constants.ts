@@ -44,3 +44,6 @@ export const dogCardData = [
     DOB: "2022.06.13",
   },
 ];
+
+export const BASE_URL = "http://3.37.230.170:8080";
+export const BREEDERS_URL = "/api/breeders";

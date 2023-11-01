@@ -8,8 +8,12 @@ import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomLayout from "../layout/BreedingLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 
+import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
+
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
+  const id = 1;
+  const { data: breeder, isLoading, isError } = useGetBreederDetailQuery(id);
 
   return (
     <CustomLayout height={2040}>
@@ -21,10 +25,10 @@ const BreederDetails = () => {
                 <img src={IMG2} alt="" />
               </S.IconContainer>
             </S.Frame178_1>
-            <S.Name>김브리더</S.Name>
+            <S.Name>{breeder.data.nickname}</S.Name>
             <S.AddressContainer>
               <p>활동지역</p>
-              <p>경상남도 창원시 의창구</p>
+              <p>{breeder.data.address1}</p>
             </S.AddressContainer>
           </S.Frame178>
           <S.Frame179>
@@ -64,8 +68,9 @@ const BreederDetails = () => {
         <S.Frame63>
           <S.Title>보유견종</S.Title>
           <S.FlexBox>
-            {dogCardData.map((card) => (
+            {dogCardData.map((card, index) => (
               <DogCard
+                key={index}
                 src={card.src}
                 name={card.name}
                 species={card.species}
