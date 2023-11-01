@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../../component/Header/Header";
-import FindEmailOrPasswordResult from "../../component/FindEmailOrPasswordResult/FindEmailOrPasswordResult";
+import FindEmailResultContent from "../../component/FindEmailOrPasswordResult/FindEmailOrPasswordResult";
 
 const FindEmailResult = () => {
   return (
     <>
       <Header />
-      <FindEmailOrPasswordResult pageType="findemailresult" />
+      <FindEmailResultContent pageType="findemailresult" />
     </>
   );
 };

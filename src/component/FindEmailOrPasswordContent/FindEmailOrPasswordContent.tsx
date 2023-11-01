@@ -130,8 +130,8 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       });
 
       if (response.data.status === "SUCCESS") {
-        navigate("/findpasswordresult", {
-          state: { password: response.data.data.password },
+        navigate("/changepassword", {
+          state: { password: response.data.data },
         });
       } else if (
         response.data.status === "FAIL" &&
@@ -141,6 +141,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       }
     } catch (error) {
       console.error("비밀번호 찾기 에러:", error);
+
       alert("비밀번호 찾기 중 오류가 발생하였습니다.");
     }
   };

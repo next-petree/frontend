@@ -11,7 +11,6 @@ import {
   ButtonArea,
   LoginPageButton,
   FindPassword,
-  FindEmail,
 } from "./FindEmailOrPasswordResultStyle";
 
 type Props = {
@@ -36,10 +35,8 @@ const FindEmailOrPasswordResult = ({ pageType }: Props) => {
       </ResultInputArea>
       <ButtonArea>
         <LoginPageButton to="/login">로그인</LoginPageButton>
-        {pageType === "findemailresult" ? (
+        {pageType === "findemailresult" && (
           <FindPassword to="/findpassword">비밀번호 찾기</FindPassword>
-        ) : (
-          <FindEmail to="/findemail">이메일 찾기</FindEmail>
         )}
       </ButtonArea>
     </Container>

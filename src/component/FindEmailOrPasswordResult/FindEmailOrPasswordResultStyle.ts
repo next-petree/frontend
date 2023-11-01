@@ -37,7 +37,7 @@ export const ResultText = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.6px;
-  width: 60px;
+  width: 67px;
   margin-right: 25px;
 `;
 
@@ -81,9 +81,5 @@ export const LoginPageButton = styled(Link)`
 `;
 
 export const FindPassword = styled(Link)`
-  ${Button}
-`;
-
-export const FindEmail = styled(Link)`
   ${Button}
 `;
