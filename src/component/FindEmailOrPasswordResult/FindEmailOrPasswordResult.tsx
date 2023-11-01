@@ -1,15 +1,16 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
 import {
   Container,
   CharacterImage,
   ResultTitle,
-  ResultFormArea,
+  ResultInputArea,
   ResultText,
-  ResultForm,
+  ResultInput,
   ButtonArea,
   LoginPageButton,
   FindPassword,
-  FindEmail,
 } from "./FindEmailOrPasswordResultStyle";
 
 type Props = {
@@ -17,6 +18,9 @@ type Props = {
 };
 
 const FindEmailOrPasswordResult = ({ pageType }: Props) => {
+  const location = useLocation();
+  const emailFromState = location.state?.email || "";
+
   return (
     <Container>
       <CharacterImage />
@@ -25,16 +29,14 @@ const FindEmailOrPasswordResult = ({ pageType }: Props) => {
           ? "이메일 찾기 완료"
           : "비밀번호 찾기 완료"}
       </ResultTitle>
-      <ResultFormArea>
+      <ResultInputArea>
         <ResultText>이메일</ResultText>
-        <ResultForm type="text" disabled></ResultForm>
-      </ResultFormArea>
+        <ResultInput type="text" disabled value={emailFromState}></ResultInput>
+      </ResultInputArea>
       <ButtonArea>
         <LoginPageButton to="/login">로그인</LoginPageButton>
-        {pageType === "findemailresult" ? (
+        {pageType === "findemailresult" && (
           <FindPassword to="/findpassword">비밀번호 찾기</FindPassword>
-        ) : (
-          <FindEmail to="/findemail">이메일 찾기</FindEmail>
         )}
       </ButtonArea>
     </Container>

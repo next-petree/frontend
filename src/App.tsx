@@ -18,29 +18,23 @@ import Test from "./pages/BasicTest/Test/Test";
 import Result from "./pages/BasicTest/Result/Result";
 import Answer from "./pages/BasicTest/Answer/Answer";
 import Certify from "./pages/Certify/Certify";
+import IntroPage from "./pages/IntroPage/IntroPage";
+
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/findemail" element={<FindEmail />} />
         <Route path="/findpassword" element={<FindPassword />} />
         <Route path="/findemailresult" element={<FindEmailResult />} />
-        <Route path="/findpasswordresult" element={<FindPasswordResult />} />
         <Route path="/changepassword" element={<ChangePassword />} />
         <Route
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
-        {/* 예시: <Route path='/example' element={<ExampleComponent />} /> */}
-        {/* 위와 같은 방식으로 필요한 라우트를 추가하실 수 있습니다. */}
-
-        <Route path="breeding-register" element={<BreedingRegister />} />
-        <Route path="register-fillout" element={<RegisterFillOut />} />
-        <Route path="register-complete" element={<BreedingComplete />} />
-
-        <Route path="/breeder-details" element={<BreederDetails />} />
         <Route path="customer-details" element={<CustomerDetails />} />
         <Route path="/test-description" element={<TestDesc />}></Route>
         <Route path="/basic-test" element={<Test />}></Route>
