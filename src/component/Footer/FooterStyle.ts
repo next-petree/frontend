@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import petTreeLogo from "../../assets/images/pets_black_24dp.png";
-import petTreeTextImage from "../../assets/images/펫트리.png";
+import petTreeLogo from "../../assets/images/PetreeIconWhite.png";
+import petTreeTextImage from "../../assets/images/PetreeTitleBig.png";
 import copyRightLogo from "../../assets/images/Copyright.png";
 
 export const Container = styled.footer`
@@ -61,6 +61,7 @@ export const InnerText = styled.p`
   color: #fff;
   font-size: 14px;
   font-style: normal;
+  font-family: Noto Sans KR;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: -0.5px;
@@ -101,6 +102,7 @@ export const PagesMenu = styled.ul`
   font-style: normal;
   font-weight: 900;
   line-height: 26px;
+  margin-left: 10px;
 `;
 
 export const PagesLink = styled(Link)`
@@ -117,7 +119,6 @@ export const BottomArea = styled.div`
   justify-content: center;
   width: 100%;
   height: 50px;
-  margin-top: 10px;
 `;
 
 export const CopyRightLogo = styled.div`
