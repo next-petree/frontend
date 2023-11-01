@@ -7,8 +7,20 @@ export interface IWBProps {
   children?: React.ReactNode;
 }
 
-// Custom Layout
+export interface IDCProps {
+  src: string;
+  name: string;
+  species: string;
+  DOB: string;
+  status?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export interface ICLProps {
   children: React.ReactNode;
   height: number;
+}
+
+export interface IDMProps {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }

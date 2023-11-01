@@ -7,6 +7,7 @@ export const CustomBanner = styled.div`
   left: 0px;
   top: 0px;
 `;
+<<<<<<< HEAD
 
 export const IconContainer = styled.div`
   /* Auto layout */
@@ -62,3 +63,5 @@ export const Text = styled.div`
   order: 1;
   flex-grow: 0;
 `;
+=======
+>>>>>>> 7bf8a408468ea528f8835e98cdc6b3a9e7ad3fb3
