@@ -39,7 +39,7 @@ export const StartTestBtnWrap = styled.div`
   justify-content: center;
   padding: 40px 0 60px;
 `;
-export const StartTestBtn = styled(Link)`
+export const StartTestBtn = styled.button`
   text-align: center;
   background-color: #35d8d5;
   text-decoration: none;

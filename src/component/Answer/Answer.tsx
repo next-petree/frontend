@@ -8,26 +8,7 @@ import {
   Btn,
 } from './AnswerStyle';
 import AnswerComp1 from './AnswerComp1/AnswerComp1';
-
-type QuestionType = {
-  id: number;
-  questionText: string;
-  choices: Array<{ id: number; choiceText: string }>;
-}[];
-
-type AnswersType = {
-  questionId: number;
-  selectedChoiceId: number;
-}[];
-type ResultType = {
-  explanations: {
-    questionId: number;
-    explanationText: string;
-    correctChoiceId: number;
-  }[];
-  passed: boolean;
-  score: number;
-};
+import { QuestionType, AnswersType, ResultType } from '../../types/index';
 
 export default function AnswerComp() {
   const navigate = useNavigate();
@@ -44,8 +25,6 @@ export default function AnswerComp() {
   function moveBack() {
     navigate(-1);
   }
-  console.log('storedQuestions', storedQuestions);
-  console.log('storedResult', storedResult.explanations);
 
   return (
     <Wrapper>
@@ -55,6 +34,9 @@ export default function AnswerComp() {
         {storedQuestions.map((question, index) => {
           const result = storedResult.explanations.find(
             (res) => res.questionId === question.id
+          );
+          const userAnswer = storedUserAnswers.find(
+            (answer) => answer.questionId === question.id
           );
           return (
             <AnswerComp1
@@ -66,6 +48,7 @@ export default function AnswerComp() {
               choices={question.choices}
               solution={result?.explanationText || ''}
               correctChoiceId={result?.correctChoiceId}
+              selectedChoiceId={userAnswer?.selectedChoiceId} // selectedChoiceId를 props로 전달
             />
           );
         })}

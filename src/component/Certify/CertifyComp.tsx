@@ -22,14 +22,7 @@ import {
   FileBox,
 } from './CertifyStyle';
 import CertifyComp1 from './CertifyComp1/CertifyComp1';
-
-type CertificationResponse = {
-  status: string;
-  data: {
-    certification: string;
-    verificationFiles: string;
-  };
-};
+import { CertificationResponse } from '../../types/index';
 
 export default function CertifyComp() {
   const { isModalVisible, showModal, hideModal } = useModal();
@@ -72,27 +65,40 @@ export default function CertifyComp() {
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertificateType(e.target.value);
+    console.log(e.target.value.replace(/ /g, ''));
   };
 
   const postFile = async () => {
     try {
-      // const formData = new FormData();
-      // formData.append('certification', certificateType.replace(/ /g, ''));
-      // formData.append('verificationFiles', selectedFile || '');
+      const formData = new FormData();
+      formData.append('certification', certificateType.replace(/ /g, ''));
+      formData.append('verificationFiles', selectedFile || '');
 
-      const response = await post<CertificationResponse>('/api/verifications', {
-        certification: certificateType.replace(/ /g, ''),
-        verificationFiles: selectedFile || '',
-      });
+      const response = await post<CertificationResponse>(
+        '/api/verifications',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
       if (response.data.status === 'SUCCESS') {
-        console.log(response.data);
         setModalMessage('제출되었습니다');
+        showModal();
+      } else if (
+        response.data.data.message === '이미 해당 자격증을 업로드했습니다.'
+      ) {
+        setModalMessage('이미 해당 자격증을 업로드 했습니다.');
         showModal();
       } else {
         setModalMessage('브리더가 아닙니다.');
         showModal();
       }
+
+      console.log('자격증 : ', certificateType.replace(/ /g, ''));
+      console.log('파일 : ', selectedFile?.name);
     } catch (error: any) {
       console.error('There was an error!', error);
     }

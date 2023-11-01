@@ -1,19 +1,18 @@
 import React from 'react';
 import { Question, ExamAnswer, Solution, AnswerBox } from './AnswerComp1Style';
-
-type AnswerProps = {
-  id: number;
-  num: number;
-  questionId: number;
-  question: string;
-  choices: Array<{ id: number; choiceText: string }>;
-  solution: string;
-  correctChoiceId: number | undefined; // correctChoiceId의 타입을 `number | undefined`로 변경
-};
+import { AnswerProps } from '../../../types/index';
 
 export default function AnswerComp1(props: AnswerProps) {
-  const { id, questionId, num, question, choices, solution, correctChoiceId } =
-    props;
+  const {
+    id,
+    questionId,
+    num,
+    question,
+    choices,
+    solution,
+    correctChoiceId,
+    selectedChoiceId, // selectedChoiceId 추가
+  } = props;
   const choiceLabels = ['①', '②', '③', '④', '⑤'];
 
   return (
@@ -24,7 +23,13 @@ export default function AnswerComp1(props: AnswerProps) {
       {choices.map((choice, i) => (
         <ExamAnswer
           key={choice.id}
-          style={choice.id === correctChoiceId ? { color: '#4EC1BF' } : {}}
+          style={
+            choice.id === correctChoiceId
+              ? { color: '#4EC1BF' }
+              : choice.id === selectedChoiceId
+              ? { color: '#000' }
+              : {}
+          }
         >
           {choiceLabels[i]} {choice.choiceText}
         </ExamAnswer>

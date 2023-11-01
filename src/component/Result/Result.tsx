@@ -34,7 +34,6 @@ export default function ResultComp() {
   const [passed, setPassed] = useState<boolean>(false);
   useEffect(() => {
     const storedResult = JSON.parse(localStorage.getItem('result') || '[]');
-    console.log('storedResult', storedResult);
     setScore(storedResult.score);
     setPassed(storedResult.passed);
   }, []);
