@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./styles/GlobalStyles";
 import GlobalFont from "./styles/GlobalFont";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -13,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <GlobalFont />
       <App />
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 reportWebVitals();

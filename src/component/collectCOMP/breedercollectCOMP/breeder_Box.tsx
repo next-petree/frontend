@@ -3,18 +3,28 @@ import {
   BoxWrapper,
   Dermyimg,
   Distance,
+  Img,
   ImgBox,
   MajorDog,
   Name,
   Nameline,
 } from "../../../styles/collect_box_styled";
 
-export default function BreederBox(page: any) {
+interface IBreederBox {
+  id:number;
+  nickname:string;
+  distance:number | null;
+  types:string[];
+  profileImagUrl: string | null;
+  verified:boolean;
+}
+
+export default function BreederBox({id,nickname,distance,types,profileImagUrl,verified}: IBreederBox) {
   return (
     <BoxWrapper>
       <ImgBox>
-        <Dermyimg />
-        <Badge>
+      {profileImagUrl ? <Img src={profileImagUrl}/> : <Dermyimg />}
+        {verified ?<Badge>
           <svg
             width="20"
             height="20"
@@ -35,14 +45,14 @@ export default function BreederBox(page: any) {
               fill="#918181"
             />
           </svg>
-        </Badge>
+        </Badge> : null}
       </ImgBox>
       <Nameline>
-        <Name>김민준</Name>
-        <Distance>{`${page.page}km`}</Distance>
+        <Name>{nickname}</Name>
+        <Distance>{distance ? distance : null}</Distance>
       </Nameline>
 
-      <MajorDog>주력견종: 푸들, 말티즈, 치와와..</MajorDog>
+      <MajorDog>{`주력견종: ${types.map(t => " "+ t)}`.slice(0,19) + "..."}</MajorDog>
     </BoxWrapper>
   );
 }

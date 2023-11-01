@@ -50,7 +50,7 @@ export default function Pagenation({
         onClick={() => {
           setPage(page - 1);
           setCurrPage(page - 2);
-          navi(`/${name}/${page - 1}`)
+          navi(`/${name}/${page-1}`)
         }}
         disabled={page === 1}
       >
@@ -72,7 +72,7 @@ export default function Pagenation({
           <Btn
             key={i + 1}
             current={page === firstNum + i ? "page" : null}
-            onClick={() => {setPage(firstNum + i); navi(`/${name}/${firstNum + i}`)}}
+            onClick={() => {setPage(firstNum + i); navi(`/${name}/${firstNum + i }`)}}
           >
             {firstNum + i}{" "}
           </Btn>
@@ -86,7 +86,7 @@ export default function Pagenation({
         onClick={() => {
           setPage(page + 1);
           setCurrPage(page);
-          navi(`/${name}/${page + 1}`)
+          navi(`/${name}/${page+1}`)
         }}
         disabled={page === totalPage}
       >

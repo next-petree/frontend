@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import BreederAuthToggle from "./breeder_auth_toggle";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { IForms, IParams } from "./BC_main";
+import AutoInput from "../auto_complete_input";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +17,7 @@ const Container = styled.div`
 `;
 
 const State = styled.span`
+  width: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,29 +49,46 @@ const Input = styled.input`
   }
 `;
 const Btn = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 120px;
-    height: 52px;
-    border: none;
-    border-radius: 12px;
-    background-color: #35D8D5;
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 600;
-    font-size: 2.5rem;
-    color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background-color: #35d8d5;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: white;
 `;
 
-export default function BreederForm() {
+
+
+
+export default function BreederForm({forms, setForms,setOnSearch}:IParams) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    watch
+  } = useForm();
+  const onValid = ({keyword}:any) => {
+    setForms({...forms, keyword})
+    reset();
+    setOnSearch(true);
+  };
   return (
     <Container>
-      <BreederAuthToggle />
-      <State>인증 브리더만 보기</State>
-      <Form>
-        <Input placeholder="원하시는 견종을 입력해주세요" />
+      <BreederAuthToggle forms={forms} setForms={setForms} setOnSearch={setOnSearch} />
+      <State>{forms.auth ? "인증 브리더만 보기" : "모든 브리더 보기"}</State>
+      <Form onSubmit={handleSubmit(onValid)}>
+        <AutoInput register={register("keyword")} type="text" setValue={setValue} watch={watch}/>
         <Btn>검색</Btn>
       </Form>
+      
     </Container>
   );
 }

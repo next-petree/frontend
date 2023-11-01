@@ -39,3 +39,18 @@ export const BoxContainer = styled.div`
   width: 100%; //
   height: fit-content; //
 `;
+
+export const No_return = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 79px;
+  width: 100%;
+  height: 70vh;
+  div {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 4.5rem;
+    color: #4ec1bf;
+  }
+`;

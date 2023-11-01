@@ -1,4 +1,9 @@
 import { styled } from "styled-components";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { dogfilters } from "./filter_data";
+import AutoInput from "../auto_complete_input";
+import { IDogyFilterParams } from "./DC_main";
 
 const Overlay = styled.div`
   position: fixed;
@@ -33,6 +38,7 @@ const Form = styled.form`
 const Title = styled.h1`
   font-size: 3.5rem;
   display: flex;
+  align-items: center;
 `;
 const Input = styled.input`
   width: 22vw;
@@ -64,28 +70,21 @@ const Buttons = styled.div`
   display: flex;
   gap: 0.8vw;
 `;
-const Btn = styled.button<{ isCheck: boolean }>`
-  width: 7.5vw;
+const Btn = styled.div<{ $isCheck: boolean | undefined; $isLong: boolean }>`
+  width: ${(props) => (props.$isLong ? "17vw" : "7.5vw")};
   height: 7vh;
-  border: ${(props) => (props.isCheck ? "none" : "1px solid #4EC1BF")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: ${(props) => (props.$isCheck ? "none" : "1px solid #4EC1BF")};
   border-radius: 12px;
-  background-color: ${(props) => (props.isCheck ? "#4EC1BF" : "white")};
+  background-color: ${(props) => (props.$isCheck ? "#4EC1BF" : "white")};
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 2rem;
-  color: ${(props) => (props.isCheck ? "white" : " #4EC1BF")};
+  color: ${(props) => (props.$isCheck ? "white" : " #4EC1BF")};
 `;
-const LongBtn = styled.button<{ isCheck: boolean }>`
-  width: 17vw;
-  height: 7vh;
-  border: ${(props) => (props.isCheck ? "none" : "1px solid #4EC1BF")};
-  border-radius: 12px;
-  background-color: ${(props) => (props.isCheck ? "#4EC1BF" : "white")};
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 2rem;
-  color: ${(props) => (props.isCheck ? "white" : " #4EC1BF")};
-`;
+
 const Span = styled.span`
   font-size: 2.5rem;
   font-weight: 600;
@@ -99,68 +98,117 @@ const Confirms = styled.div`
   margin-top: 1vw;
 `;
 
-const ConfirmBtn = styled.button<{ isYes: boolean }>`
+const ConfirmBtn = styled.button<{ $isYes: boolean }>`
   width: 17vw;
   height: 7vh;
   border: none;
   border-radius: 12px;
-  background-color: ${(props) => (props.isYes ? "#4EC1BF" : "black")};
+  background-color: ${(props) => (props.$isYes ? "#4EC1BF" : "black")};
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 2rem;
   color: white;
 `;
 
-export default function SearchFilter() {
+
+
+interface IParams2 {
+  setOnSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  category: IDogyFilterParams;
+  setCategory: React.Dispatch<React.SetStateAction<IDogyFilterParams>>;
+  setOnUseFilter:React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SearchFilter({
+  setOnSearch,
+  category,
+  setCategory,
+  setOnUseFilter
+}: IParams2) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm();
+  const [dogtype, setDogtype] = useState(0);
+  const onClose = () => {
+    setOnSearch((prev) => !prev);
+  };
+  const onValid = (data: any) => {
+    setOnUseFilter(true);
+    if(data.keyword === "")
+    {
+      setDogtype(0);
+    }
+    else if (data.keyword != "" && dogtype === 0) {
+      setDogtype(-1)
+    }
+    setCategory({ ...category,dogtype});
+    onClose();
+  };
+  const onCategorySet = (data1: any, data2: any) => {
+    if (data1 === "verification") {
+      setCategory({ ...category, verification: data2 });
+    } else if (data1 === "isAvailable") {
+      setCategory({ ...category, isAvailable: data2 });
+    } else if (data1 === "gender") {
+      setCategory({ ...category, gender: data2 });
+    } else if (data1 === "size") {
+      setCategory({ ...category, size: data2 });
+    }
+  };
+  const onCategoryCheck = (data1: any, data2: any) => {
+    if (data1 === "verification") {
+      return Boolean(category.verification === data2);
+    } else if (data1 === "isAvailable") {
+      return Boolean(category.isAvailable === data2);
+    } else if (data1 === "gender") {
+      return Boolean(category.gender === data2);
+    } else if (data1 === "size") {
+      return Boolean(category.size === data2);
+    }
+  };
+
   return (
     <Overlay>
       <FilterContainer>
-        <Form>
+        <Form onSubmit={handleSubmit(onValid)}>
           <Title>
             필터{" "}
-            <Input
-              title="견종입력"
-              placeholder="원하시는 견종을 입력해주세요"
+            <AutoInput
+              register={register("keyword")}
+              type="text"
+              setValue={setValue}
+              watch={watch}
+              setDogtype={setDogtype}
             />
           </Title>
           <Checks>
-            <Check title="브리더인증">
-              <Span>브리더 인증 여부</Span>
-              <Buttons>
-                <Btn isCheck={true}>전체</Btn>
-                <Btn isCheck={false}>인증 O</Btn>
-              </Buttons>
-            </Check>
-            <Check title="분양가능">
-              <Span>분양 가능 여부</Span>
-              <Buttons>
-                <LongBtn isCheck={true}>전체</LongBtn>
-                <LongBtn isCheck={false}>분양 가능 강아지</LongBtn>
-              </Buttons>
-            </Check>
-            <Check title="성별">
-              <Span>성별</Span>
-              <Buttons>
-                <Btn isCheck={true}>전체</Btn>
-                <Btn isCheck={false}>수컷</Btn>
-                <Btn isCheck={false}>암컷</Btn>
-              </Buttons>
-            </Check>
-            <Check title="크기">
-              <Span>크기</Span>
-              <Buttons>
-                <Btn isCheck={true}>전체</Btn>
-                <Btn isCheck={false}>초소형</Btn>
-                <Btn isCheck={false}>소형</Btn>
-                <Btn isCheck={false}>중형</Btn>
-                <Btn isCheck={false}>대형</Btn>
-                <Btn isCheck={false}>그 외</Btn>
-              </Buttons>
-            </Check>
+            {dogfilters.map((dogfilter) => (
+              <Check key={dogfilter.id}>
+                <Span>{dogfilter.name}</Span>
+                <Buttons>
+                  {dogfilter.category.map((btn) => (
+                    <Btn
+                      key={btn.key}
+                      onClick={() => onCategorySet(dogfilter.value, btn.value)}
+                      $isCheck={onCategoryCheck(dogfilter.value, btn.value)}
+                      $isLong={dogfilter.isLong}
+                    >
+                      {btn.str}
+                    </Btn>
+                  ))}
+                </Buttons>
+              </Check>
+            ))}
           </Checks>
           <Confirms>
-            <ConfirmBtn isYes={true}>검색</ConfirmBtn>
-            <ConfirmBtn isYes={false}>취소</ConfirmBtn>
+            <ConfirmBtn $isYes={true}>검색</ConfirmBtn>
+            <ConfirmBtn onClick={onClose} $isYes={false}>
+              취소
+            </ConfirmBtn>
           </Confirms>
         </Form>
       </FilterContainer>

@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import { useState } from "react";
 import {
   BoxWrapper,
   Dermyimg,
   Doginfo,
+  Img,
   ImgBox,
   LitteBadge,
   Name,
@@ -10,25 +11,38 @@ import {
   Poss,
   Span,
 } from "../../../styles/collect_box_styled";
+import { DogsContent } from "../../../types/dogscollect_types";
 
-export default function DogyBox() {
+
+
+export default function DogyBox({
+  id,
+  name,
+  type,
+  gender,
+  status,
+  birthDate,
+  imgUrl,
+  breederNickName,
+  isBreederVerified,
+}:DogsContent) {
+  const [Gender, setGender] = useState("")
   return (
     <BoxWrapper>
       <ImgBox>
-        <Dermyimg />
+        <Img src={imgUrl} alt=""/>
       </ImgBox>
       <Nameline>
-        <Name>레미</Name>
+        <Name>{name}</Name>
       </Nameline>
-
       <Doginfo>
-        <Span>견종: 말티즈</Span>
-        <Span>성별: 수컷</Span>
-        <Span>출생일: 2017.05.17</Span>
+        <Span>견종: {type}</Span>
+        <Span>성별: {gender === "MALE" ? "수컷" : gender === "FEMALE" ? "암컷" : "알 수 없음"}</Span>
+        <Span>출생일: {birthDate}</Span>
       </Doginfo>
       <Poss>
-        <Span>민준님의 보유견종</Span>
-        <LitteBadge>
+        <Span>{breederNickName}님의 보유견종</Span>
+        {isBreederVerified ? <LitteBadge>
           <svg
             width="15"
             height="15"
@@ -49,7 +63,7 @@ export default function DogyBox() {
               fill="#918181"
             />
           </svg>
-        </LitteBadge>
+        </LitteBadge> : null}
       </Poss>
     </BoxWrapper>
   );
