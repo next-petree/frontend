@@ -5,14 +5,14 @@ import { IMG2, IMG3 } from "../../assets/images";
 import { dogCardData } from "../../constants";
 import DogCard from "../../component/Card/DogCard";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import CustomLayout from "../layout/BreedingLayout";
+import BreedingLayout from "../Layout/BreedingLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
 
   return (
-    <CustomLayout height={2040}>
+    <BreedingLayout height={2040}>
       <S.Frame62>
         <S.Frame122>
           <S.Frame178>
@@ -64,14 +64,14 @@ const BreederDetails = () => {
         <S.Frame63>
           <S.Title>보유견종</S.Title>
           <S.FlexBox>
-            {dogCardData.map((card) => (
+            {dogCardData.map(card => (
               <DogCard
                 src={card.src}
                 name={card.name}
                 species={card.species}
                 DOB={card.DOB}
                 status={card.status}
-                onClick={() => setIsModalOpenClicked((prev) => !prev)}
+                onClick={() => setIsModalOpenClicked(prev => !prev)}
               />
             ))}
           </S.FlexBox>
@@ -91,7 +91,7 @@ const BreederDetails = () => {
           <DetailModal onClick={() => setIsModalOpenClicked(false)} />
         </div>
       )}
-    </CustomLayout>
+    </BreedingLayout>
   );
 };
 

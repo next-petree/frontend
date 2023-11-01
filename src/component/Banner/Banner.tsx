@@ -1,5 +1,5 @@
 import { IMG1 } from "../../assets/images";
-<<<<<<< HEAD
+
 import * as S from "./styles";
 
 const Banner = () => {
@@ -73,15 +73,6 @@ const Banner = () => {
       </S.IconContainer>
       <img src={IMG1} alt="" />
     </S.CustomBanner>
-=======
-import { CustomBanner } from "./styles";
-
-const Banner = () => {
-  return (
-    <CustomBanner>
-      <img src={IMG1} alt="" />
-    </CustomBanner>
->>>>>>> 7bf8a408468ea528f8835e98cdc6b3a9e7ad3fb3
   );
 };
 
