@@ -1,3 +1,8 @@
+export const dogdetailInfo =
+  "온순한 포메라니안입니다. 4개월 정도 되었고 활달하고 강아지 껌을 \n좋아합니다. 장난치는 것을 좋아합니다. 털관리를 자주 해야합니다.";
+export const agreementInfo =
+  "본인은 분양신청서를 작성함에 있어 브리더가 해당 서류를 열람하도록 동의합니다. \n또한, 법적 문제 발생 시 사전 통보 없이 관련 서류를 경찰 또는 법 집행 당국에 제출할 수 있음을 인지하고 동의합니다.";
+
 import { IMG2, IMG3, IMG4, IMG5 } from "./assets/images";
 
 export const desc =
