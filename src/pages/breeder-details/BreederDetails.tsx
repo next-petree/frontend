@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import * as S from "./styles";
 import { IMG2, IMG3 } from "../../assets/images";
@@ -10,16 +10,6 @@ import DetailModal from "../../component/DetailModal/DetailModal";
 
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
-
-  // const handleModalOpen = () => {
-  //   console.log("open");
-
-  //   setIsModalOpenClicked((prev) => !prev);
-  // };
-
-  useEffect(() => {
-    console.log("modal");
-  }, [isModalOpenClicked]);
 
   return (
     <CustomLayout height={2040}>
