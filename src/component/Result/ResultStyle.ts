@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div``;
@@ -61,9 +62,9 @@ export const BtnWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  button {
-    width: 320px;
-    height: 52px;
+  a {
+    text-decoration: none;
+    padding: 13px 125px;
     border: none;
     border-radius: 16px;
     font-size: 18px;
@@ -75,9 +76,9 @@ export const BtnWrapper = styled.div`
     background: #35d8d5;
   }
 `;
-export const RestartBtn = styled.button`
+export const RestartBtn = styled(Link)`
   background: #4ec1bf;
 `;
-export const AnswerBtn = styled.button`
+export const AnswerBtn = styled(Link)`
   background: #2f2f2f;
 `;

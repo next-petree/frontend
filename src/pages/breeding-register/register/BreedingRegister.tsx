@@ -20,7 +20,7 @@ const BreedingRegister = () => {
   const navigate = useNavigate();
 
   const handleAgreementClick = () => {
-    setIsAgreeChecked((prev) => !prev);
+    setIsAgreeChecked(prev => !prev);
   };
 
   const handleNextButtonClick = () => {

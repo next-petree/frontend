@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import CustomLayout from "../../CustomLayout/CustomLayout";
+import CustomLayout from "../../Layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./styles";
 
@@ -30,7 +29,7 @@ const RegisterFillOut = () => {
                 name="reason"
                 placeholder="분양하려는 사유를 작성해주세요"
                 value={firstTextarea}
-                onChange={(e) => setFirstTextarea(e.target.value)}
+                onChange={e => setFirstTextarea(e.target.value)}
               />
               <S.FormBoxTextareaContainer top={120}>
                 <S.TextLength>{firstTextarea.length}/2000</S.TextLength>
@@ -45,7 +44,7 @@ const RegisterFillOut = () => {
                 name="reason"
                 placeholder="분양 이유와 마음가짐을 작성해주세요"
                 value={secondTextarea}
-                onChange={(e) => setSecondTextarea(e.target.value)}
+                onChange={e => setSecondTextarea(e.target.value)}
               />
               <S.FormBoxTextareaContainer top={374}>
                 <S.TextLength>{secondTextarea.length}/2000</S.TextLength>

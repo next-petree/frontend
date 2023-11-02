@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 import * as S from "./styles";
@@ -10,6 +11,7 @@ import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
 import { IDogProps } from "../../types";
+
 
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
