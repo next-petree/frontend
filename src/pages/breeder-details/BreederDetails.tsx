@@ -15,17 +15,19 @@ const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
   const [selectedDogId, setSelectedDogId] = useState<number>();
 
-  const id = 1;
+  // const id = 4;
   const {
     data: breeder,
     isLoading: loadingBreeder,
     isError,
-  } = useGetBreederDetailQuery(id);
+  } = useGetBreederDetailQuery(1);
 
   const handleDetailbuttonClick = (dogId: number) => {
     setSelectedDogId(dogId);
     setIsModalOpenClicked(true);
   };
+
+  console.log(breeder);
 
   return (
     <CustomLayout height={2040}>
@@ -34,27 +36,27 @@ const BreederDetails = () => {
           <S.Frame178>
             <S.Frame178_1>
               <S.IconContainer>
-                {breeder?.data.profileImgUrl ? (
-                  breeder?.data.verified ? (
+                {breeder?.data?.profileImgUrl ? (
+                  breeder?.data?.verified ? (
                     <CustomAvatar
                       isQualifiedBreeder
-                      imgSrc={breeder?.data.profileImgUrl}
+                      imgSrc={breeder?.data?.profileImgUrl}
                     />
                   ) : (
-                    <CustomAvatar imgSrc={breeder?.data.profileImgUrl} />
+                    <CustomAvatar imgSrc={breeder?.data?.profileImgUrl} />
                   )
-                ) : breeder?.data.verified ? (
+                ) : breeder?.data?.verified ? (
                   <CustomAvatar isQualifiedBreeder />
                 ) : (
                   <CustomAvatar />
                 )}
               </S.IconContainer>
             </S.Frame178_1>
-            <S.Name>{breeder?.data.nickname}</S.Name>
+            <S.Name>{breeder?.data?.nickname}</S.Name>
           </S.Frame178>
           <S.AddressContainer>
             <p>활동지역</p>
-            <p>{breeder?.data.address1}</p>
+            <p>{breeder?.data?.address1}</p>
           </S.AddressContainer>
           <S.Frame179>
             <S.IntroHeading>자기소개</S.IntroHeading>
@@ -63,9 +65,9 @@ const BreederDetails = () => {
               <PrimaryButton>#반려견 기초지식 테스트 통과자</PrimaryButton>
               <PrimaryButton>#반려견은 나의 가족</PrimaryButton>
             </S.ButtonGroup>
-            {breeder?.data.selfIntroduction ? (
+            {breeder?.data?.selfIntroduction ? (
               <S.DescContainer>
-                {breeder?.data.selfIntroduction}
+                {breeder?.data?.selfIntroduction}
               </S.DescContainer>
             ) : (
               <S.DescContainer>
@@ -80,7 +82,7 @@ const BreederDetails = () => {
           <S.TitleContainer>주력견종</S.TitleContainer>
           <S.MainDogContainer>
             {!loadingBreeder &&
-              breeder?.data.mainBreedDtoResponseList.map((dog: IDogProps) => (
+              breeder?.data?.mainBreedDtoResponseList.map((dog: any) => (
                 <S.MainDog key={dog.id}>
                   <S.CustomImage src={dog.imgUrl} alt={dog.name} />
                   <S.MainDogName>{dog.name}</S.MainDogName>
@@ -95,7 +97,7 @@ const BreederDetails = () => {
           <S.Title>보유견종</S.Title>
           <S.FlexBox>
             {!loadingBreeder &&
-              breeder?.data.simpleDogDtos.map((dog: IDogProps) => (
+              breeder?.data?.simpleDogDtos.map((dog: any) => (
                 <DogCard
                   key={dog.id}
                   src={dog.imgUrl}
