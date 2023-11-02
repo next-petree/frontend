@@ -118,6 +118,7 @@ function TestDescription() {
         {/* 로그인 모달 추가 */}
         {showLoginModal && (
           <LoginModal
+            top={'8'}
             onLogin={() => setIsLoggedIn(true)}
             onClose={() => setShowLoginModal(false)}
             errorMessage={errorMessage} // 에러 메시지 prop 전달

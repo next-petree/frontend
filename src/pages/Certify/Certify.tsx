@@ -1,13 +1,13 @@
-import React from "react";
-import Header from "../../component/Header/Header";
-import CustomLayout from "../Layout/CustomLayout";
-import CertifyComp from "../../component/Certify/CertifyComp";
+import React from 'react';
+import Header from '../../component/Header/Header';
+import CustomLayout2 from '../Layout/CustomLayout2';
+import CertifyComp from '../../component/Certify/CertifyComp';
 
 export default function Certify() {
   return (
-    <CustomLayout height={1800}>
+    <CustomLayout2 height={1800}>
       <Header></Header>
       <CertifyComp></CertifyComp>
-    </CustomLayout>
+    </CustomLayout2>
   );
 }

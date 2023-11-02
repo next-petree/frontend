@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CustomBanner = styled.div`
   position: absolute;
@@ -7,6 +7,13 @@ export const CustomBanner = styled.div`
   left: 0px;
   top: 0px;
 `;
+export const LogoWrapper = styled.div`
+  position: absolute;
+  top: 13vh;
+  left: 15vw;
+`;
+export const LogoIcon = styled.img``;
+export const Logo = styled.img``;
 
 export const IconContainer = styled.div`
   display: flex;
