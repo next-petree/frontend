@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { post, get } from '../../api/api';
+import React, { useState } from "react";
+import { post, get } from "../../api/api";
 
 import {
   Container,
@@ -23,7 +23,7 @@ import {
   KakaoLoginButton,
   SignUpButtonArea,
   SignUpButton,
-} from './LoginContentStyle';
+} from "./LoginContentStyle";
 
 type LoginResponse = {
   status: string;
@@ -38,17 +38,11 @@ type LoginResponse = {
 };
 
 const LoginContent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API;
-
-  const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback';
-
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleKakaoLogin = () => {
-    console.log('KAKAO LOGIN BUTTON CLICK');
+    console.log("KAKAO LOGIN BUTTON CLICK");
     window.location.href = KAKAO_AUTH_URL;
   };
 
@@ -67,21 +61,21 @@ const LoginContent = () => {
 
       const response = await post<LoginResponse>("/login", requestBody);
 
-      if (response.data.status === 'SUCCESS') {
-        console.log('로그인 성공', response.data);
-        alert('로그인에 성공했습니다!');
+      if (response.data.status === "SUCCESS") {
+        console.log("로그인 성공", response.data);
+        alert("로그인에 성공했습니다!");
 
-        localStorage.setItem('accessToken', response.data.data.accessToken);
-        localStorage.setItem('refreshToken', response.data.data.refreshToken);
-      } else if (response.data.status === 'FAIL') {
+        localStorage.setItem("accessToken", response.data.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.data.refreshToken);
+      } else if (response.data.status === "FAIL") {
         alert(response.data.data);
       }
     } catch (error: any) {
       console.error(
-        '로그인 에러:',
+        "로그인 에러:",
         error.response ? error.response.data : error.message
       );
-      alert('로그인 과정에서 오류가 발생했습니다.');
+      alert("로그인 과정에서 오류가 발생했습니다.");
     }
   };
 
