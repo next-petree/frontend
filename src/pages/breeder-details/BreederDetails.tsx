@@ -1,17 +1,14 @@
-
 import { useState } from "react";
 
 import * as S from "./styles";
 import PrimaryButton from "../../component/Button/PrimaryButton";
 import DogCard from "../../component/Card/DogCard";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import CustomLayout from "../CustomLayout/CustomLayout";
+import CustomLayout from "../Layout/CustomLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
-import { IDogProps } from "../../types";
-
 
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
