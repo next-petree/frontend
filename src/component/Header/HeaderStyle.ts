@@ -16,7 +16,7 @@ export const Container = styled.div`
   backdrop-filter: blur(5px);
 `;
 
-export const TitleArea = styled.div`
+export const TitleArea = styled(Link)`
   display: flex;
   align-items: center;
   gap: 11px;

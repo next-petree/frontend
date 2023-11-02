@@ -39,16 +39,16 @@ export const InnerContentArea = styled.div`
   margin-top: 30px;
 `;
 
-const FormArea = styled.div`
+const InputArea = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const NameFormArea = styled(FormArea)``;
+export const NameInputArea = styled(InputArea)``;
 
-export const PhoneNumberFormArea = styled(FormArea)``;
+export const PhoneNumberInputArea = styled(InputArea)``;
 
-export const PhoneNumberCheckFormArea = styled(FormArea)`
+export const PhoneNumberCheckInputArea = styled(InputArea)`
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
@@ -67,7 +67,7 @@ export const NameText = styled.p`
 
 export const PhoneNumberText = styled(NameText)``;
 
-const Form = styled.input`
+const Input = styled.input`
   width: 240px;
   height: 25px;
   padding: 10px;
@@ -77,11 +77,11 @@ const Form = styled.input`
   border-radius: 10px;
 `;
 
-export const NameForm = styled(Form)``;
+export const NameInput = styled(Input)``;
 
-export const PhoneNumberForm = styled(Form)``;
+export const PhoneNumberInput = styled(Input)``;
 
-export const PhoneNumberCheckForm = styled(Form)``;
+export const PhoneNumberCheckInput = styled(Input)``;
 
 const Button = styled.button`
   height: 45px;

@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 
+import { BreederBadge } from "../../assets/icons";
 import { IDMProps } from "../../types";
 import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
 import * as S from "./styles";
@@ -7,11 +9,17 @@ import * as S from "./styles";
 const DetailModal = ({ dogId, onClick }: IDMProps) => {
   const { data: dog } = useGetDogDetailQuery(dogId);
 
+  const navigate = useNavigate();
+
+  const handleReservationClick = () => {
+    navigate("/breeding-register", { state: dog });
+  };
+
   return (
     <S.ModalWrapper>
       <S.ModalContainer>
         <S.DetailInfoFlexBox>
-          <S.DogImage src={dog?.data.imagesUrl[0]} alt={dog?.name} />
+          <S.DogImage src={dog?.data.imagesUrl[0]} alt={dog?.data.name} />
           <S.DetailInfoContainer>
             <S.NameContainer>{dog?.data.name}</S.NameContainer>
             <S.DetailInfo>
@@ -21,6 +29,11 @@ const DetailModal = ({ dogId, onClick }: IDMProps) => {
               <S.DetailInfoText>
                 브리더명: {dog?.data.breederNickName}
               </S.DetailInfoText>
+              {dog?.data.isBreederVerified && (
+                <S.DetailInfoText>
+                  <BreederBadge width="24" height="24" /> 인증된 브리더
+                </S.DetailInfoText>
+              )}
             </S.DetailInfo>
           </S.DetailInfoContainer>
         </S.DetailInfoFlexBox>
@@ -41,7 +54,8 @@ const DetailModal = ({ dogId, onClick }: IDMProps) => {
               </S.SmallDogImageBox>
             ))}
           </S.DogImageGroup>
-          <S.Button>예약하기</S.Button>
+
+          <S.Button onClick={handleReservationClick}>예약하기</S.Button>
         </S.DetailInfoFlexBox>
         <S.DetailDescContainer>
           <S.DetailDescTitle>상세설명</S.DetailDescTitle>

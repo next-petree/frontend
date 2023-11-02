@@ -51,7 +51,6 @@ export const DetailInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* background: aqua; */
 `;
 
 export const DetailInfoFlexBox = styled.div`
