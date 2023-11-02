@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import useModal from '../AlertModal/AlertModal';
 import { post } from '../../api/api';
-import PetreeBrown from '../../assets/images/PetreeBrown.png';
-import PetreeIconBrown from '../../assets/images/PetreeIconBrown.png';
 import Cert1 from '../../assets/images/Cert1.png';
 import Cert2 from '../../assets/images/Cert2.png';
 import certification1 from '../../assets/images/certification1.png';
 import certification2 from '../../assets/images/certification2.png';
+import DecodeToken from '../../utils/DecodeJWT/DecodeJWT';
+import LoginModal from '../Modal/LoginModal';
 import {
-  Petree,
-  PetreeIcon,
   CertifyModal,
   Title,
   Desc,
@@ -27,9 +24,12 @@ import { CertificationResponse } from '../../types/index';
 export default function CertifyComp() {
   const { isModalVisible, showModal, hideModal } = useModal();
   const [modalMessage, setModalMessage] = useState('');
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [certificateType, setCertificateType] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const data = [
     {
@@ -55,19 +55,6 @@ export default function CertifyComp() {
       descImg: certification2,
     },
   ];
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFileName(e.target.files[0].name);
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-
-  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCertificateType(e.target.value);
-    console.log(e.target.value.replace(/ /g, ''));
-  };
-
   const postFile = async () => {
     try {
       const formData = new FormData();
@@ -75,7 +62,7 @@ export default function CertifyComp() {
       formData.append('verificationFiles', selectedFile || '');
 
       const response = await post<CertificationResponse>(
-        '/api/verifications',
+        '/verifications',
         formData,
         {
           headers: {
@@ -96,34 +83,75 @@ export default function CertifyComp() {
         setModalMessage('브리더가 아닙니다.');
         showModal();
       }
-
-      console.log('자격증 : ', certificateType.replace(/ /g, ''));
-      console.log('파일 : ', selectedFile?.name);
     } catch (error: any) {
       console.error('There was an error!', error);
     }
   };
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoggedIn(!!accessToken);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const handleStartTest = () => {
+      if (!isLoggedIn) {
+        window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+        setShowLoginModal(true);
+        setErrorMessage('서비스 이용을 위해 로그인을 하세요.'); // 에러 메시지 설정
+      } else {
+        const getUser = DecodeToken();
+        if (!getUser) {
+          window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+          setShowLoginModal(true);
+          setErrorMessage('서비스 이용을 위해 로그인을 하세요.'); // 에러 메시지 설정
+        }
+        if (getUser.role === 'BREEDER') {
+          if (selectedFile && certificateType) {
+            const formData = new FormData();
+            formData.append('certification', certificateType);
+            formData.append('verificationFiles', selectedFile);
 
-    if (selectedFile && certificateType) {
-      const formData = new FormData();
-      formData.append('certification', certificateType);
-      formData.append('verificationFiles', selectedFile);
-
-      postFile();
-    } else {
-      if (!selectedFile) {
-        setModalMessage('브리더 자격증을 업로드 하세요');
-      } else if (!certificateType) {
-        setModalMessage('자격증을 선택하세요');
+            postFile();
+          } else {
+            if (!selectedFile) {
+              setModalMessage('브리더 자격증을 업로드 하세요');
+            } else if (!certificateType) {
+              setModalMessage('자격증을 선택하세요');
+            }
+            showModal();
+          }
+        } else if (getUser.role === 'ADOPTER') {
+          window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+          setShowLoginModal(true);
+          setErrorMessage('브리더 계정이 아닙니다.'); // 에러 메시지 설정
+        }
       }
-      showModal();
+    };
+    handleStartTest();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFileName(e.target.files[0].name);
+      setSelectedFile(e.target.files[0]);
     }
+  };
+
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCertificateType(e.target.value);
   };
 
   return (
     <>
+      {showLoginModal && (
+        <LoginModal
+          top={'4'}
+          onLogin={() => setIsLoggedIn(true)}
+          onClose={() => setShowLoginModal(false)}
+          errorMessage={errorMessage} // 에러 메시지 prop 전달
+        />
+      )}
       {isModalVisible && (
         <div
           style={{
