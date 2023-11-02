@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 
-import CustomLayout from "../../layout/CustomLayout";
+import CustomLayout from "../../CustomLayout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 
 import { BreederBadge } from "../../../assets/icons";
@@ -25,6 +25,10 @@ const BreedingRegister = () => {
 
   const handleNextButtonClick = () => {
     navigate("/register-fillout");
+  };
+
+  const handleCancelClick = () => {
+    navigate(-1);
   };
 
   return (
@@ -86,7 +90,9 @@ const BreedingRegister = () => {
           >
             다음
           </S.Button>
-          <S.Button color="#2f2f2f">취소</S.Button>
+          <S.Button color="#2f2f2f" onClick={handleCancelClick}>
+            취소
+          </S.Button>
         </S.ButtonGroup>
       </S.InnerContainer>
       <WhiteBox width={1420} height={773} top={284} left={250}></WhiteBox>

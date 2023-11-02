@@ -36,7 +36,7 @@ export const Frame62 = styled.div`
 export const Frame122 = styled.div`
   width: 968px;
   height: 472px;
-  gap: 60px;
+  gap: 35px;
 
   display: flex;
   flex-direction: column;
@@ -45,11 +45,13 @@ export const Frame122 = styled.div`
 
 export const Frame178 = styled.div`
   width: 230px;
-  height: 222px;
+  height: 180px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  gap: 10px;
 `;
 
 export const Frame179 = styled.div`
@@ -97,10 +99,14 @@ export const Name = styled.div`
 
 export const AddressContainer = styled.div`
   width: 100%;
-  height: 23px;
+  height: 25px;
   gap: 16px;
 
+  margin-bottom: 10px;
+
   display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-family: Noto Sans KR;
   font-size: 16px;
@@ -208,8 +214,6 @@ export const Frame63 = styled.div`
 
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
 
   padding: 44px 69px;
 
@@ -217,11 +221,9 @@ export const Frame63 = styled.div`
 `;
 
 export const FlexBox = styled.div`
-  padding: 26px 0;
-  /* width: 100%; */
-  /* height: 100%; */
+  padding: 26px 65px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 36px;
 `;

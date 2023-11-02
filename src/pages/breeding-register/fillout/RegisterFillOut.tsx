@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomLayout from "../../Layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./styles";
@@ -7,6 +7,12 @@ import * as S from "./styles";
 const RegisterFillOut = () => {
   const [firstTextarea, setFirstTextarea] = useState("");
   const [secondTextarea, setSecondTextarea] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleCancelClick = () => {
+    navigate(-2);
+  };
 
   return (
     <CustomLayout height={1185}>
@@ -50,7 +56,7 @@ const RegisterFillOut = () => {
           <Link to={"/breeding-complete"}>
             <S.Button primary>예약신청</S.Button>
           </Link>
-          <S.Button>취소</S.Button>
+          <S.Button onClick={handleCancelClick}>취소</S.Button>
         </S.ButtonGroup>
       </S.InnerContainer>
       <WhiteBox top={284} left={250} width={1420} height={830}></WhiteBox>

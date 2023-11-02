@@ -1,11 +1,11 @@
-// WhiteBox types
+// ************ Components ************
 export interface IWBProps {
   width: number;
   height: number;
   top: number;
   left: number;
   children?: React.ReactNode;
-}
+} // white box
 
 export interface IDCProps {
   src: string;
@@ -14,12 +14,28 @@ export interface IDCProps {
   DOB: string;
   status?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+} // dog card
 
+export interface IPBProp {
+  children: React.ReactNode;
+} // primary button
+
+export interface IDMProps {
+  dogId: number | undefined;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+} // detail modal
+
+export interface ICAProps {
+  isQualifiedBreeder?: boolean;
+  isQualifiedCustomer?: boolean;
+  imgSrc?: string;
+} // custom avatar
+
+// ************ Pages ************
 export interface ICLProps {
   children: React.ReactNode;
   height: number;
-}
+} // custom layout
 
 // 테스트 페이지
 export type Choice = {

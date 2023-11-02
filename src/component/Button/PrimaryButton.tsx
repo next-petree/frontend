@@ -1,12 +1,9 @@
 import React from "react";
 
+import { IPBProp } from "../../types";
 import { Button } from "./styles";
 
-interface Props {
-  children: React.ReactNode;
-}
-
-const PrimaryButton: React.FC<Props> = ({ children }) => {
+const PrimaryButton: React.FC<IPBProp> = ({ children }) => {
   return <Button>{children}</Button>;
 };
 

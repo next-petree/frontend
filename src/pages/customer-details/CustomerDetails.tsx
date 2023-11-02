@@ -1,4 +1,3 @@
-
 import BreedingLayout from "../Layout/BreedingLayout";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
@@ -12,14 +11,9 @@ import { desc } from '../../constants';
 import { useGetAdopterQuery } from "../../features/api/adopterApiSlice";
 
 const CustomerDetails = () => {
-  const { data: adopter, isLoading, isError } = useGetAdopterQuery(3);
-
-  if (isError) {
-    alert("error");
-  }
+  const { data: adopter, isLoading, isError } = useGetAdopterQuery(4);
 
   return (
-
     <BreedingLayout height={1148}>
       {isLoading ? (
         <h1>loading...</h1>
@@ -28,11 +22,20 @@ const CustomerDetails = () => {
           <S.TopContainer>
             <S.AvatarContainer>
               {adopter?.data?.profileImgUrl ? (
+                adopter?.data?.verified ? (
+                  <CustomAvatar
+                    imgSrc={adopter?.data?.profileImgUrl}
+                    isQualifiedCustomer
+                  />
+                ) : (
+                  <CustomAvatar imgSrc={adopter?.data?.profileImgUrl} />
+                )
+              ) : adopter?.data?.verified ? (
                 <CustomAvatar isQualifiedCustomer />
               ) : (
-                <CustomAvatar isQualifiedCustomer />
+                <CustomAvatar />
               )}
-              <S.Name>{adopter.data?.nickname}</S.Name>
+              <S.Name>{adopter?.data?.nickname}</S.Name>
             </S.AvatarContainer>
             <S.IntroductionContainer>
               <S.Headline textsize={24}>자기소개</S.Headline>
@@ -84,7 +87,6 @@ const CustomerDetails = () => {
 
       <WhiteBox width={1060} height={811} top={279} left={430}></WhiteBox>
     </BreedingLayout>
-
   );
 };
 
