@@ -13,6 +13,7 @@ export interface IDCProps {
   species: string;
   DOB: string;
   status?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface ICLProps {
@@ -107,3 +108,21 @@ export type CertificationResponse = {
     verificationFiles: string;
   };
 };
+
+export interface IDog {
+  birthDate: string;
+  breederNickName: string;
+  gender: string;
+  id: number;
+  imgUrl: string;
+  isBreederVerified: boolean;
+  name: string;
+  status: string;
+  type: string;
+}
+
+export interface IDMProps {
+  dogId: number | undefined;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+

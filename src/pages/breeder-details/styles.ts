@@ -30,7 +30,7 @@ export const Frame62 = styled.div`
   flex-direction: column;
   align-items: center;
 
-  z-index: 999;
+  z-index: 1;
 `;
 
 export const Frame122 = styled.div`
@@ -154,6 +154,8 @@ export const DescContainer = styled.div`
   line-height: 29px;
   letter-spacing: -0.03em;
   text-align: center;
+
+  white-space: pre-wrap;
 `;
 
 export const TitleContainer = styled.div`
@@ -211,7 +213,7 @@ export const Frame63 = styled.div`
 
   padding: 44px 69px;
 
-  z-index: 999;
+  z-index: 1;
 `;
 
 export const FlexBox = styled.div`
@@ -233,4 +235,20 @@ export const Title = styled.div`
   text-align: left;
 
   padding: 0 69px;
+`;
+
+export const CustomImage = styled.img`
+  width: 144px;
+  height: 144px;
+  border-radius: 42px;
+  color: #d9d9d9;
+  object-fit: cover;
+`;
+
+export const ModalContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.25);
 `;

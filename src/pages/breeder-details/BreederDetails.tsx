@@ -1,24 +1,52 @@
-import * as S from './styles';
-import { IMG2, IMG3, IMG4, IMG5 } from '../../assets/images';
-import DogCard from '../../component/Card/DogCard';
-import WhiteBox from '../../component/WhiteBox/WhiteBox';
-import CustomLayout from '../Layout/CustomLayout';
+
+import { useState } from "react";
+
+import * as S from "./styles";
+import { IMG2 } from "../../assets/images";
+import DogCard from "../../component/Card/DogCard";
+import WhiteBox from "../../component/WhiteBox/WhiteBox";
+import BreedingLayout from "../Layout/BreedingLayout";
+import DetailModal from "../../component/DetailModal/DetailModal";
+
+import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
+import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
+import { IDog } from "../../types";
+
 
 const BreederDetails = () => {
+  const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
+  const [selectedDogId, setSelectedDogId] = useState<number>();
+
+  const id = 1;
+  const {
+    data: breeder,
+    isLoading: loadingBreeder,
+    isError,
+  } = useGetBreederDetailQuery(id);
+
+  const handleDetailbuttonClick = (dogId: number) => {
+    setSelectedDogId(dogId);
+    setIsModalOpenClicked(true);
+  };
+
   return (
-    <CustomLayout height={2040}>
+    <BreedingLayout height={2040}>
       <S.Frame62>
         <S.Frame122>
           <S.Frame178>
             <S.Frame178_1>
               <S.IconContainer>
-                <img src={IMG2} alt="" />
+                {breeder?.data.profileImgUrl ? (
+                  <img src={breeder?.data.profileImgUrl} alt="" />
+                ) : (
+                  <img src={IMG2} alt="" />
+                )}
               </S.IconContainer>
             </S.Frame178_1>
-            <S.Name>김브리더</S.Name>
+            <S.Name>{breeder?.data.nickname}</S.Name>
             <S.AddressContainer>
               <p>활동지역</p>
-              <p>경상남도 창원시 의창구</p>
+              <p>{breeder?.data.address1}</p>
             </S.AddressContainer>
           </S.Frame178>
           <S.Frame179>
@@ -28,28 +56,29 @@ const BreederDetails = () => {
               <S.Button>#반려견 기초지식 테스트 통과자</S.Button>
               <S.Button>#반려견은 나의 가족</S.Button>
             </S.ButtonGroup>
-            <S.DescContainer>
-              안녕하세요! 강아지를 키우는 것에 있어 진심인 학생입니다. 새로운
-              반려견을 분양받으면 먼저 분양을 받은 강아지와 함께 성심을 다하여
-              잘 키우겠습니다.
-            </S.DescContainer>
+            {breeder?.data.selfIntroduction ? (
+              <S.DescContainer>
+                {breeder?.data.selfIntroduction}
+              </S.DescContainer>
+            ) : (
+              <S.DescContainer>
+                안녕하세요! 강아지를 키우는 것에 있어 진심인 학생입니다.{"\n"}
+                새로운 반려견을 분양받으면 먼저 분양을 받은 강아지와 함께 성심을
+                다하여 잘 키우겠습니다.
+              </S.DescContainer>
+            )}
           </S.Frame179>
         </S.Frame122>
         <S.Frame113>
           <S.TitleContainer>주력견종</S.TitleContainer>
           <S.MainDogContainer>
-            <S.MainDog>
-              <img src={IMG3} />
-              <S.MainDogName>포메라니안</S.MainDogName>
-            </S.MainDog>
-            <S.MainDog>
-              <img src={IMG3} />
-              <S.MainDogName>포메라니안</S.MainDogName>
-            </S.MainDog>
-            <S.MainDog>
-              <img src={IMG3} />
-              <S.MainDogName>포메라니안</S.MainDogName>
-            </S.MainDog>
+            {!loadingBreeder &&
+              breeder?.data.mainBreedDtoResponseList.map((dog: IDog) => (
+                <S.MainDog key={dog.id}>
+                  <S.CustomImage src={dog.imgUrl} alt={dog.name} />
+                  <S.MainDogName>{dog.name}</S.MainDogName>
+                </S.MainDog>
+              ))}
           </S.MainDogContainer>
         </S.Frame113>
       </S.Frame62>
@@ -58,49 +87,32 @@ const BreederDetails = () => {
         <S.Frame63>
           <S.Title>보유견종</S.Title>
           <S.FlexBox>
-            <DogCard
-              src={IMG4}
-              name="루카스"
-              species="포메라니안"
-              DOB="2023.05.23"
-              status="분양완료"
-            />
-            <DogCard
-              src={IMG5}
-              name="아미"
-              species="골든리트리버"
-              DOB="2022.06.13"
-              status="예약중"
-            />
-            <DogCard
-              src={IMG5}
-              name="아미"
-              species="골든리트리버"
-              DOB="2022.06.13"
-              status="분양완료"
-            />
-            <DogCard
-              src={IMG4}
-              name="루카스"
-              species="포메라니안"
-              DOB="2023.05.23"
-            />
-            <DogCard
-              src={IMG5}
-              name="아미"
-              species="골든리트리버"
-              DOB="2022.06.13"
-            />
-            <DogCard
-              src={IMG5}
-              name="아미"
-              species="골든리트리버"
-              DOB="2022.06.13"
-            />
+            {!loadingBreeder &&
+              breeder?.data.simpleDogDtos.map((dog: IDog) => (
+                <DogCard
+                  key={dog.id}
+                  src={dog.imgUrl}
+                  name={dog.name}
+                  species={dog.type}
+                  DOB={dog.birthDate}
+                  status={dog.status}
+                  onClick={() => handleDetailbuttonClick(dog.id)}
+                />
+              ))}
           </S.FlexBox>
         </S.Frame63>
       </WhiteBox>
-    </CustomLayout>
+
+      {/* id를 넘겨주기 */}
+      {isModalOpenClicked && (
+        <S.ModalContainer>
+          <DetailModal
+            dogId={selectedDogId}
+            onClick={() => setIsModalOpenClicked(false)}
+          />
+        </S.ModalContainer>
+      )}
+    </BreedingLayout>
   );
 };
 

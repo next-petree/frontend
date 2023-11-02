@@ -24,7 +24,7 @@ import {
   MoveBtnWrap,
   PreBtn,
   NextBtn,
-} from './BasicTestStyle';
+} from "./BasicTestStyle";
 
 const BasicTest: React.FC = () => {
   const [testData, setTestData] = useState<Question[] | null>(null);
@@ -200,6 +200,7 @@ const BasicTest: React.FC = () => {
         </TitleWrap>
         <TestModalWrap>
           <TestTitle>반려견 기초 지식 테스트</TestTitle>
+
           {currentQuestion && (
             <>
               <TestComp

@@ -13,7 +13,7 @@ import {
 const Header = () => {
   return (
     <Container>
-      <TitleArea>
+      <TitleArea to="/">
         <TitleLogo />
         <TitleText />
       </TitleArea>

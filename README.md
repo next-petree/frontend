@@ -14,5 +14,7 @@
 
 ## start
 
-`yarn`
-`yarn start`
+`npm`
+`npm start`
+
+## 
