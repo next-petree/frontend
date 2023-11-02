@@ -14,7 +14,6 @@ const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
   const [selectedDogId, setSelectedDogId] = useState<number>();
 
-  // const id = 4;
   const {
     data: breeder,
     isLoading: loadingBreeder,
@@ -25,8 +24,6 @@ const BreederDetails = () => {
     setSelectedDogId(dogId);
     setIsModalOpenClicked(true);
   };
-
-  console.log(breeder);
 
   return (
     <CustomLayout height={2040}>
