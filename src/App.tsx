@@ -1,5 +1,6 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
+import BreederCollect from "./pages/breedercollect";
+import DogyCollect from "./pages/dogycollect";
 
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
@@ -25,6 +26,8 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/breeders/:pageId" element={<BreederCollect/>}/>
+        <Route path="/dogys/:pageId" element={<DogyCollect/>}/>
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/findemail" element={<FindEmail />} />
