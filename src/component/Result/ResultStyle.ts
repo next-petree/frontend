@@ -10,7 +10,7 @@ export const Header = styled.div`
 `;
 export const ResultWrapper = styled.div`
   text-align: center;
-  padding: 120px 0;
+  padding: 140px 0;
 `;
 export const ResultTitle = styled.h3`
   font-size: 50px;
