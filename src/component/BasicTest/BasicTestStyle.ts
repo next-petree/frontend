@@ -30,7 +30,7 @@ export const TestModalWrap = styled.div`
   background: #fff;
   box-shadow: 0.5px 1px 5px 0.5px rgba(0, 0, 0, 0.05);
   position: absolute;
-  top: 23%;
+  top: 25%;
 `;
 export const TestTitle = styled.h3`
   font-size: 24px;

@@ -124,8 +124,6 @@ export default function CertifyComp() {
 
   return (
     <>
-      <PetreeIcon src={PetreeIconBrown}></PetreeIcon>
-      <Petree src={PetreeBrown}></Petree>
       {isModalVisible && (
         <div
           style={{

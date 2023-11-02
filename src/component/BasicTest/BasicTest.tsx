@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get, post } from '../../api/api';
 import TestComp from './BasicTestComp/TestComp';
-import petfoot from '../../assets/images/pets_black_24dp.png';
-import petree from '../../assets/images/펫트리.png';
+import petfoot from '../../assets/icons/test_pets_black_24dp.png';
+import petree from '../../assets/images/test_petree.png';
 import TestBG from '../../assets/images/TestBG.png';
 import LoginModal from '../Modal/LoginModal';
-import base64 from 'base-64';
 import {
   Choice,
   Question,
@@ -24,7 +23,7 @@ import {
   MoveBtnWrap,
   PreBtn,
   NextBtn,
-} from "./BasicTestStyle";
+} from './BasicTestStyle';
 
 const BasicTest: React.FC = () => {
   const [testData, setTestData] = useState<Question[] | null>(null);

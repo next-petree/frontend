@@ -28,7 +28,7 @@ export const Question = styled.p`
 export const ExampleWrap = styled.div`
   width: 100%;
   height: auto;
-  padding: 30px;
+
   display: grid;
   place-items: center;
   gap: 20px;

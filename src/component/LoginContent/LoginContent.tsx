@@ -1,7 +1,5 @@
-
-import React, { useState } from "react";
-import { post } from "../../api/api";
-
+import React, { useState } from 'react';
+import { post, get } from '../../api/api';
 
 import {
   Container,
@@ -39,22 +37,20 @@ type LoginResponse = {
   };
 };
 
-type LoginResponse = {
-  status: string;
-  data: {
-    grantType: string;
-    accessToken: string;
-    accessTokenExpireTime: string;
-    refreshToken: string;
-    refreshTokenExpireTime: string;
-    profileImgUrl: string | null;
+const LoginContent = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API;
+
+  const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback';
+
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
+  const handleKakaoLogin = () => {
+    console.log('KAKAO LOGIN BUTTON CLICK');
+    window.location.href = KAKAO_AUTH_URL;
   };
-};
-
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
 
   const handleLogin = async () => {
     try {
@@ -63,27 +59,23 @@ type LoginResponse = {
         password: password,
       };
 
+      const response = await post<LoginResponse>('/api/login', requestBody);
 
-      const response = await post<LoginResponse>("/api/login", requestBody);
+      if (response.data.status === 'SUCCESS') {
+        console.log('로그인 성공', response.data);
+        alert('로그인에 성공했습니다!');
 
-      if (response.data.status === "SUCCESS") {
-        console.log("로그인 성공", response.data);
-        alert("로그인에 성공했습니다!");
-
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
-      } else if (response.data.status === "FAIL") {
-
+        localStorage.setItem('accessToken', response.data.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.data.refreshToken);
+      } else if (response.data.status === 'FAIL') {
         alert(response.data.data);
       }
     } catch (error: any) {
       console.error(
-
-        "로그인 에러:",
-        error.response ? error.response.data : error.message,
+        '로그인 에러:',
+        error.response ? error.response.data : error.message
       );
-      alert("로그인 과정에서 오류가 발생했습니다.");
-
+      alert('로그인 과정에서 오류가 발생했습니다.');
     }
   };
 
@@ -102,9 +94,7 @@ type LoginResponse = {
           <EmailText>이메일</EmailText>
           <EmailInput
             value={email}
-
-            onChange={e => setEmail(e.target.value)}
-
+            onChange={(e) => setEmail(e.target.value)}
           ></EmailInput>
         </EmailInputArea>
         <PassWordInputArea>
@@ -112,9 +102,7 @@ type LoginResponse = {
           <PassWordInput
             type="password"
             value={password}
-
-            onChange={e => setPassword(e.target.value)}
-
+            onChange={(e) => setPassword(e.target.value)}
           ></PassWordInput>
         </PassWordInputArea>
 
@@ -126,7 +114,10 @@ type LoginResponse = {
 
         <LoginOrSignUpButtonArea>
           <BasicLoginButton onClick={handleLogin}>로그인</BasicLoginButton>
-          <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
+          <KakaoLoginButton onClick={handleKakaoLogin}>
+            카카오 로그인
+          </KakaoLoginButton>
+
           <SignUpButtonArea>
             아직 회원이 아니라면?
             <SignUpButton>회원가입</SignUpButton>
