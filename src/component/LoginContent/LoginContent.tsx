@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { post } from "../../api/api";
+import { post, get } from "../../api/api";
 
 import {
   Container,
@@ -40,6 +40,17 @@ type LoginResponse = {
 const LoginContent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API;
+
+  const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
+
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
+  const handleKakaoLogin = () => {
+    console.log("KAKAO LOGIN BUTTON CLICK");
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
   const handleLogin = async () => {
     try {
@@ -103,7 +114,10 @@ const LoginContent = () => {
 
         <LoginOrSignUpButtonArea>
           <BasicLoginButton onClick={handleLogin}>로그인</BasicLoginButton>
-          <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
+          <KakaoLoginButton onClick={handleKakaoLogin}>
+            카카오 로그인
+          </KakaoLoginButton>
+
           <SignUpButtonArea>
             아직 회원이 아니라면?
             <SignUpButton>회원가입</SignUpButton>

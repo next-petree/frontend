@@ -37,3 +37,9 @@ export interface IDMProps {
   dogId: number | undefined;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
