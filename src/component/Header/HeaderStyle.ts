@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import petTreeIconImage from '../../assets/icons/header_pets_black_24dp.png';
-import petTreeTextImage from '../../assets/icons/header_petree.png';
-import userProfileImage from '../../assets/icons/Group 21.jpg';
+import petTreeIconImage from "../../assets/icons/header_pets_black_24dp.png";
+import petTreeTextImage from "../../assets/icons/header_petree.png";
+import userProfileImage from "../../assets/icons/Group 21.jpg";
 
 export const Container = styled.div`
   display: flex;

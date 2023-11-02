@@ -1,4 +1,3 @@
-import CustomLayout from "../Layout/CustomLayout";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 import PrimaryButton from "../../component/Button/PrimaryButton";
@@ -8,6 +7,7 @@ import { IMG2 } from "../../assets/images";
 import { desc } from "../../constants";
 
 import { useGetAdopterQuery } from "../../features/api/adopterApiSlice";
+import CustomLayout from "../Layout/CustomLayout";
 
 const CustomerDetails = () => {
   const { data: adopter, isLoading, isError } = useGetAdopterQuery(4);
