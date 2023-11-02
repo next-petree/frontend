@@ -49,6 +49,7 @@ function App() {
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
         <Route path="/certify" element={<Certify />}></Route>
+
       </Routes>
     </>
   );

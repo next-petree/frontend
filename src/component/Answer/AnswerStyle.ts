@@ -23,12 +23,13 @@ export const SubTitle = styled.h4`
 
 export const AnswerWrapper = styled.div`
   margin: 0 auto;
-  width: 90%;
+  width: 80%;
   display: grid;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(6, min-content);
   grid-auto-flow: column;
-  gap: 12px;
-  margin-bottom: 100px;
+  row-gap: 0;
+  column-gap: 120px;
+  margin-bottom: 50px;
 `;
 
 export const Btn = styled.button`

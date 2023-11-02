@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 import * as S from "./styles";
@@ -10,6 +11,7 @@ import DetailModal from "../../component/DetailModal/DetailModal";
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
 import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
 import { IDog } from "../../types";
+
 
 const BreederDetails = () => {
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);

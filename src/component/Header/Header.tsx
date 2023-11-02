@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   TitleArea,
@@ -8,7 +8,7 @@ import {
   NavigationMenu,
   NavigationLink,
   UserProfileImage,
-} from "./HeaderStyle";
+} from './HeaderStyle';
 
 const Header = () => {
   return (
@@ -20,7 +20,7 @@ const Header = () => {
 
       <HeaderContent>
         <NavigationMenu>
-          <NavigationLink to="/auth-test">인증 테스트</NavigationLink>
+          <NavigationLink to="/test-description">인증 테스트</NavigationLink>
           <NavigationLink to="/dogs">강아지 모아보기</NavigationLink>
           <NavigationLink to="/breeders">브리더모아보기</NavigationLink>
         </NavigationMenu>

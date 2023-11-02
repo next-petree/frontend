@@ -12,6 +12,8 @@ export const ExamAnswer = styled.p`
   font-size: 24px;
   margin: 0;
   color: #cccccc;
+  line-height: 40px;
+  font-weight: 500;
 `;
 export const CorrectAnswer = styled.p`
   font-size: 24px;

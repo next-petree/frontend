@@ -1,5 +1,7 @@
+
 import React, { useState } from "react";
 import { post } from "../../api/api";
+
 
 import {
   Container,
@@ -23,7 +25,7 @@ import {
   KakaoLoginButton,
   SignUpButtonArea,
   SignUpButton,
-} from "./LoginContentStyle";
+} from './LoginContentStyle';
 
 type LoginResponse = {
   status: string;
@@ -37,9 +39,22 @@ type LoginResponse = {
   };
 };
 
-const LoginContent = () => {
+type LoginResponse = {
+  status: string;
+  data: {
+    grantType: string;
+    accessToken: string;
+    accessTokenExpireTime: string;
+    refreshToken: string;
+    refreshTokenExpireTime: string;
+    profileImgUrl: string | null;
+  };
+};
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   const handleLogin = async () => {
     try {
@@ -47,6 +62,7 @@ const LoginContent = () => {
         email: email,
         password: password,
       };
+
 
       const response = await post<LoginResponse>("/api/login", requestBody);
 
@@ -57,14 +73,17 @@ const LoginContent = () => {
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
       } else if (response.data.status === "FAIL") {
+
         alert(response.data.data);
       }
     } catch (error: any) {
       console.error(
+
         "로그인 에러:",
         error.response ? error.response.data : error.message,
       );
       alert("로그인 과정에서 오류가 발생했습니다.");
+
     }
   };
 
@@ -83,7 +102,9 @@ const LoginContent = () => {
           <EmailText>이메일</EmailText>
           <EmailInput
             value={email}
+
             onChange={e => setEmail(e.target.value)}
+
           ></EmailInput>
         </EmailInputArea>
         <PassWordInputArea>
@@ -91,7 +112,9 @@ const LoginContent = () => {
           <PassWordInput
             type="password"
             value={password}
+
             onChange={e => setPassword(e.target.value)}
+
           ></PassWordInput>
         </PassWordInputArea>
 

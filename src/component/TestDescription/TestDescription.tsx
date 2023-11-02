@@ -1,5 +1,7 @@
 // 코드 파일
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Wrapper,
   TestHeader,
@@ -16,6 +18,7 @@ import TestInfo3 from '../../assets/images/TestInfo3.png';
 import TestInfo4 from '../../assets/images/TestInfo4.png';
 import TestInfo5 from '../../assets/images/TestInfo5.png';
 import TestDescComp from './TestDescriptionComp/TestDescComp';
+import LoginModal from '../Modal/LoginModal';
 
 const info = [
   {
@@ -73,29 +76,74 @@ const info = [
   },
 ];
 
-function BasicTest() {
+function TestDescription() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoggedIn(!!accessToken);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex === info.length) {
+      setShowButton(true);
+    }
+  }, [currentIndex]);
+
+  const handleStartTest = () => {
+    if (!isLoggedIn) {
+      window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+      setShowLoginModal(true);
+      setErrorMessage('서비스 이용을 위해 로그인을 하세요.'); // 에러 메시지 설정
+    } else {
+      navigate('/basic-test');
+    }
+  };
   return (
     <>
       <Wrapper>
+        {/* 로그인 모달 추가 */}
+        {showLoginModal && (
+          <LoginModal
+            onLogin={() => setIsLoggedIn(true)}
+            onClose={() => setShowLoginModal(false)}
+            errorMessage={errorMessage} // 에러 메시지 prop 전달
+          />
+        )}
         <TitleWrapper>
           <FirstTitle>반려동물에 대한 지식과 이해를 높이기 위한</FirstTitle>
           <SecondTitle>2023년 반려인 지식 문제은행 안내</SecondTitle>
         </TitleWrapper>
         <TestInfoWrapper>
-          {info.map((value, i) => (
+          {info.slice(0, currentIndex).map((value, i) => (
             <TestDescComp
+              key={i}
               img={value.img}
               title={value.title}
               text={value.text}
-            ></TestDescComp>
+            />
           ))}
         </TestInfoWrapper>
-        <StartTestBtnWrap>
-          {/* 로그인 여부 확인 후 테스트 페이지 이동 */}
-          <StartTestBtn>테스트 실시</StartTestBtn>
-        </StartTestBtnWrap>
+        {showButton && (
+          <StartTestBtnWrap>
+            <StartTestBtn onClick={handleStartTest}>테스트 실시</StartTestBtn>
+          </StartTestBtnWrap>
+        )}
       </Wrapper>
     </>
   );
 }
-export default BasicTest;
+export default TestDescription;

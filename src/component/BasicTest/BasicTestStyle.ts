@@ -21,7 +21,7 @@ export const TitleWrap = styled.div`
 `;
 export const TestModalWrap = styled.div`
   width: 600px;
-  height: 781px;
+  height: 70vh;
   border-radius: 40px;
   display: flex;
   justify-content: space-evenly;
@@ -30,7 +30,7 @@ export const TestModalWrap = styled.div`
   background: #fff;
   box-shadow: 0.5px 1px 5px 0.5px rgba(0, 0, 0, 0.05);
   position: absolute;
-  top: 18%;
+  top: 23%;
 `;
 export const TestTitle = styled.h3`
   font-size: 24px;
