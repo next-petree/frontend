@@ -7,8 +7,8 @@ import { Wrapper } from "./styles";
 const CustomLayout = ({ height, children }: ICLProps) => {
   return (
     <>
-      <Header />
       <Wrapper height={height}>
+        <Header />
         <Banner />
         {children}
       </Wrapper>
