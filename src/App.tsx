@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import BreederCollect from "./pages/breedercollect";
 import DogyCollect from "./pages/dogycollect";
-
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
 import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";

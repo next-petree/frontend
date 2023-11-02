@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../component/Header/Header";
-import CustomLayout from "../layout/BreedingLayout";
+import CustomLayout from "../Layout/BreedingLayout";
 import CertifyComp from "../../component/Certify/CertifyComp";
 
 export default function Certify() {

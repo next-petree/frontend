@@ -9,7 +9,6 @@ export const CustomBanner = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;
