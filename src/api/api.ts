@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios";
-import instance from "./axiosInstance";
+import { AxiosRequestConfig } from 'axios';
+import instance from './axiosInstance';
 
 // axios.get
 export const get = async <T>(url: string, config?: AxiosRequestConfig) => {
@@ -15,7 +15,7 @@ export const get = async <T>(url: string, config?: AxiosRequestConfig) => {
 export const post = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ) => {
   try {
     const response = await instance.post<T>(url, data, { ...config });
@@ -29,7 +29,7 @@ export const post = async <T>(
 export const patch = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ) => {
   try {
     const response = await instance.patch<T>(url, data, { ...config });
@@ -43,7 +43,7 @@ export const patch = async <T>(
 export const del = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ) => {
   try {
     const response = await instance.delete<T>(url, { data, ...config });

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import BreederCollect from "./pages/breedercollect";
-import DogyCollect from "./pages/dogycollect";
+import BreederCollect from "./pages/collects/breedercollect";
+import DogyCollect from "./pages/collects/dogycollect";
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
 import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
@@ -37,10 +37,6 @@ function App() {
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
-
-        {/* 예시: <Route path='/example' element={<ExampleComponent />} /> */}
-        {/* 위와 같은 방식으로 필요한 라우트를 추가하실 수 있습니다. */}
-
         <Route path="/breeder-details" element={<BreederDetails />} />
         <Route path="/customer-details" element={<CustomerDetails />} />
         <Route path="/breeding-register" element={<BreedingRegister />} />

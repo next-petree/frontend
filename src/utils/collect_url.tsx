@@ -8,7 +8,7 @@ interface IBreedersCollecturl {
 
 interface IDogsCollecturl {
   page: number;
-  category:IDogyFilterParams;
+  category: IDogyFilterParams;
 }
 
 export const BreedersCollecturl = ({ page, forms }: IBreedersCollecturl) => {
@@ -26,11 +26,10 @@ export const DogsTypeSearchurl = (keyword: string) => {
 };
 
 //dogs?page=0&dogTypeId=1&verification=yes&isAvailable=true&gender=MALE&size=SMALL
-export const DogsCollecturl = ({
-  page,
-  category
-}: IDogsCollecturl) => {
-  return `/dogs?page=${page - 1}${category.dogtype != 0 ? `&dogTypeId=${category.dogtype}` : ""}
+export const DogsCollecturl = ({ page, category }: IDogsCollecturl) => {
+  return `/dogs?page=${page - 1}${
+    category.dogtype != 0 ? `&dogTypeId=${category.dogtype}` : ""
+  }
   ${category.verification ? `&verification=yes` : ""}
   ${category.isAvailable ? `&isAvailable=true` : ""}
   ${category.gender != "" ? `&gender=${category.gender}` : ""}

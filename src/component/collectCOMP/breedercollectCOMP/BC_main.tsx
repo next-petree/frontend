@@ -6,13 +6,13 @@ import {
   No_return,
   Title,
   Wrapper,
-} from "../../../styles/collect_main_styled";
+} from "../styles_collect/collect_main_styled";
 import Pagenation from "../pagenation";
 import { useEffect, useState } from "react";
-import { BrowserRouter, useParams } from "react-router-dom";
-import axios from "../../../utils/config";
+import { useParams } from "react-router-dom";
 import { BreedersCollecturl } from "../../../utils/collect_url";
 import { IBreedersAPI } from "../../../types/breederscollect_type";
+import { get } from "../../../api/api";
 
 // 상태 관리 사용전 임시 interface/////////////////
 export interface IParams {
@@ -44,7 +44,7 @@ export default function BC_Main() {
       }
       console.log(page, forms);
       const url = BreedersCollecturl({ page, forms });
-      const response = await axios.get(url);
+      const response = await get<IBreedersAPI>(url);
       if (response.data.status === "FAIL") {
         throw "올바르지 못한 접근 입니다.";
       }

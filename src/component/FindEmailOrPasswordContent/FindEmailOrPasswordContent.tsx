@@ -33,7 +33,7 @@ type ApiResponse = {
   status: "SUCCESS" | "FAIL";
   data: {
     email?: string;
-    password?: string;
+
     code?: string;
   };
 };
@@ -47,7 +47,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const sendSMS = async () => {
     try {
-      const response = await post<ApiResponse>("/api/sms/send", {
+      const response = await post<ApiResponse>("/sms/send", {
         to: phoneNumber,
       });
 
@@ -58,7 +58,9 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       }
     } catch (error) {
       console.error("SMS 발송 에러:", error);
+
       alert("전화번호를 정확히 입력해주세요.");
+
     }
   };
 
@@ -78,7 +80,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const verifySMS = async () => {
     try {
-      const response = await post<ApiResponse>("/api/sms/verify", {
+      const response = await post<ApiResponse>("/sms/verify", {
         phoneNumber: phoneNumber,
         code: verificationCode,
       });
@@ -94,13 +96,15 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       }
     } catch (error) {
       console.error("SMS 인증 에러:", error);
+
       alert("인증번호를 정확히 입력해주세요.");
+
     }
   };
 
   const findEmail = async () => {
     try {
-      const response = await post<ApiResponse>("/api/email/find", {
+      const response = await post<ApiResponse>("/email/find", {
         nickname: nickname,
         phoneNumberChecked,
       });
@@ -121,9 +125,10 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
     }
   };
 
+
   const findPassword = async () => {
     try {
-      const response = await post<ApiResponse>("/api/pwd/reset", {
+      const response = await post<ApiResponse>("/pwd/reset", {
         email: nickname,
         phoneNumberChecked,
         phoneNumber: phoneNumber,
@@ -146,6 +151,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
     }
   };
 
+
   return (
     <Container>
       <FindEmailOrPasswordTitle>
@@ -155,7 +161,9 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         <CharacterImage />
         <InnerContentArea>
           <NameInputArea>
+
             <NameText>{pageType === "findemail" ? "이름" : "이메일"}</NameText>
+
             <NameInput
               value={nickname}
               onChange={e => setNickname(e.target.value)}
@@ -196,6 +204,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       </ContentArea>
 
       <CheckButtonArea>
+
         {pageType === "findemail" ? (
           <CheckButton onClick={findEmail}>확인</CheckButton>
         ) : (

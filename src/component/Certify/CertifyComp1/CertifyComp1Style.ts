@@ -42,3 +42,29 @@ export const Btn = styled.button`
   font-weight: 700;
   cursor: pointer;
 `;
+
+export const ModalWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow-y: auto;
+`;
+export const Modal = styled.div`
+  top: 0;
+  bottom: 10vh;
+  padding: 50px 20px 120px;
+  width: 861px;
+  height: 80vh; /* 화면 높이의 80%만큼 높이를 설정합니다. */
+  background: #fff;
+  border-radius: 32px;
+  position: relative;
+  overflow: auto;
+  z-index: 10000;
+`;
