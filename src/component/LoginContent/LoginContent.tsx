@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { post, get } from "../../api/api";
+import { post } from "../../api/api";
 
 import {
   Container,
@@ -46,11 +46,6 @@ const LoginContent = () => {
   const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
 
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
-
-  const handleKakaoLogin = () => {
-    console.log("KAKAO LOGIN BUTTON CLICK");
-    window.location.href = KAKAO_AUTH_URL;
-  };
 
   const handleLogin = async () => {
     try {
@@ -114,7 +109,9 @@ const LoginContent = () => {
 
         <LoginOrSignUpButtonArea>
           <BasicLoginButton onClick={handleLogin}>로그인</BasicLoginButton>
-          <KakaoLoginButton onClick={handleKakaoLogin}>
+          <KakaoLoginButton
+            onClick={() => (window.location.href = KAKAO_AUTH_URL)}
+          >
             카카오 로그인
           </KakaoLoginButton>
 
