@@ -126,3 +126,9 @@ export interface IDMProps {
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+

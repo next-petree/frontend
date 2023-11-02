@@ -7,6 +7,7 @@ import BreedingComplete from "./pages/breeding-register/complete/BreedingComplet
 import BreederDetails from "./pages/breeder-details/BreederDetails";
 import CustomerDetails from "./pages/customer-details/CustomerDetails";
 import Login from "./pages/Login/Login";
+import LoginCheckForKakao from "./pages/LoginCheckForKakao/LoginCheckForKakao";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
 import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/dogys/:pageId" element={<DogyCollect />} />
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
         <Route path="/findemail" element={<FindEmail />} />
         <Route path="/findpassword" element={<FindPassword />} />
         <Route path="/findemailresult" element={<FindEmailResult />} />
