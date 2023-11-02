@@ -27,6 +27,10 @@ const BreedingRegister = () => {
     navigate("/register-fillout");
   };
 
+  const handleCancelClick = () => {
+    navigate(-1);
+  };
+
   return (
     <CustomLayout height={1185}>
       <S.InnerContainer>
@@ -86,7 +90,9 @@ const BreedingRegister = () => {
           >
             다음
           </S.Button>
-          <S.Button color="#2f2f2f">취소</S.Button>
+          <S.Button color="#2f2f2f" onClick={handleCancelClick}>
+            취소
+          </S.Button>
         </S.ButtonGroup>
       </S.InnerContainer>
       <WhiteBox width={1420} height={773} top={284} left={250}></WhiteBox>
