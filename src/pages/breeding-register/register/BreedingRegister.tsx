@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 
-import CustomLayout from "../../layout/CustomLayout";
+import CustomLayout from "../../CustomLayout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 
 import { BreederBadge } from "../../../assets/icons";
@@ -20,7 +20,7 @@ const BreedingRegister = () => {
   const navigate = useNavigate();
 
   const handleAgreementClick = () => {
-    setIsAgreeChecked((prev) => !prev);
+    setIsAgreeChecked(prev => !prev);
   };
 
   const handleNextButtonClick = () => {
