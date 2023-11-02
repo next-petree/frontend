@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
-  margin: 100px 0;
+  margin: 2vh 0;
 `;
 export const MainBox = styled.div`
   display: flex;
@@ -53,4 +53,23 @@ export const No_return = styled.div`
     font-size: 4.5rem;
     color: #4ec1bf;
   }
+`;
+
+export const SearchBtn = styled.button`
+  align-self: flex-end;
+  margin-right: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background-color: #35d8d5;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: white;
+  margin-top: -1vh;
+  margin-bottom: -6vh;
 `;

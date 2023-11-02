@@ -6,8 +6,8 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import styled from "styled-components";
-import axios from "../../utils/config";
 import { DogsTypeurl } from "../../utils/collect_url";
+import { get } from "../../api/api";
 
 const SearchContainer = styled.div`
   width: 400px;
@@ -79,6 +79,11 @@ interface Iinput {
   setDogtype?:React.Dispatch<React.SetStateAction<number>>
 }
 
+interface IDogTypeAPI {
+  status: "SUCCESS" | "FAIL";
+  data:IType[];
+}
+
 interface IType {
   id: number;
   imgUrl: string;
@@ -100,7 +105,7 @@ export default function AutoInput({
   const fetchData = async () => {
     try {
       const url = DogsTypeurl();
-      const response = await axios.get(url);
+      const response = await get<IDogTypeAPI>(url);
       if (response.data.status === "FAIL") {
         throw "올바르지 못한 접근 입니다.";
       }
