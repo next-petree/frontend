@@ -1,8 +1,8 @@
 import Banner from "../../component/Banner/Banner";
-import { IBLProps } from "../../types";
+import { ICLProps } from "../../types";
 import { Wrapper } from "./styles";
 
-const CustomLayout = ({ height, children }: IBLProps) => {
+const CustomLayout = ({ height, children }: ICLProps) => {
   return (
     <Wrapper height={height}>
       <Banner />

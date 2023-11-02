@@ -32,10 +32,10 @@ export interface ICAProps {
 } // custom avatar
 
 // ************ Pages ************
-export interface IBLProps {
+export interface ICLProps {
   children: React.ReactNode;
   height: number;
-} // breeder layout
+} // custom layout
 
 export interface IDogProps {
   birthDate: string;

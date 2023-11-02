@@ -4,7 +4,7 @@ import * as S from "./styles";
 import PrimaryButton from "../../component/Button/PrimaryButton";
 import DogCard from "../../component/Card/DogCard";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import BreedingLayout from "../layout/BreedingLayout";
+import CustomLayout from "../CustomLayout/CustomLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
@@ -28,7 +28,7 @@ const BreederDetails = () => {
   };
 
   return (
-    <BreedingLayout height={2040}>
+    <CustomLayout height={2040}>
       <S.Frame62>
         <S.Frame122>
           <S.Frame178>
@@ -119,7 +119,7 @@ const BreederDetails = () => {
           />
         </S.ModalContainer>
       )}
-    </BreedingLayout>
+    </CustomLayout>
   );
 };
 

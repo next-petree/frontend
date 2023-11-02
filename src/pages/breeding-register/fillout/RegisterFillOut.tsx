@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import CustomLayout from "../../layout/CustomLayout";
+import CustomLayout from "../../CustomLayout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./styles";
 
