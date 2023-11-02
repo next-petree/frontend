@@ -1,4 +1,4 @@
-import BreedingLayout from "../CustomLayout/BreedingLayout";
+import BreedingLayout from "../Layout/BreedingLayout";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 import PrimaryButton from "../../component/Button/PrimaryButton";

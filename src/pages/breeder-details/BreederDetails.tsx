@@ -4,7 +4,7 @@ import * as S from "./styles";
 import { IMG2 } from "../../assets/images";
 import DogCard from "../../component/Card/DogCard";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
-import BreedingLayout from "../CustomLayout/BreedingLayout";
+import BreedingLayout from "../Layout/BreedingLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
