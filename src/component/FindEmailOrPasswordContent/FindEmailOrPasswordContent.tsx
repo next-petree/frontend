@@ -47,7 +47,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const sendSMS = async () => {
     try {
-      const response = await post<ApiResponse>("/api/sms/send", {
+      const response = await post<ApiResponse>("/sms/send", {
         to: phoneNumber,
       });
 
@@ -78,7 +78,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const verifySMS = async () => {
     try {
-      const response = await post<ApiResponse>("/api/sms/verify", {
+      const response = await post<ApiResponse>("/sms/verify", {
         phoneNumber: phoneNumber,
         code: verificationCode,
       });
@@ -100,7 +100,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const findEmail = async () => {
     try {
-      const response = await post<ApiResponse>("/api/email/find", {
+      const response = await post<ApiResponse>("/email/find", {
         nickname: nickname,
         phoneNumberChecked,
       });
@@ -123,7 +123,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
   const findPassword = async () => {
     try {
-      const response = await post<ApiResponse>("/api/pwd/reset", {
+      const response = await post<ApiResponse>("/pwd/reset", {
         email: nickname,
         phoneNumberChecked,
         phoneNumber: phoneNumber,

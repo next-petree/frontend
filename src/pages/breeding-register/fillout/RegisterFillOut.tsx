@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CustomLayout from "../../Layout/CustomLayout";
+import CustomLayout from "../../layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./styles";
 

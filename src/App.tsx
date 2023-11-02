@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import BreederCollect from "./pages/breedercollect";
-import DogyCollect from "./pages/dogycollect";
+import BreederCollect from "./pages/collects/breedercollect";
+import DogyCollect from "./pages/collects/dogycollect";
 
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
@@ -11,7 +11,6 @@ import Login from "./pages/Login/Login";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
 import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
-import FindPasswordResult from "./pages/FindPasswordResult/FindPasswordResult";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import ChangePasswordResult from "./pages/ChangePasswordResult/ChangePasswordResult";
 import TestDesc from "./pages/BasicTest/TestDesc/TestDesc";
@@ -21,13 +20,12 @@ import Answer from "./pages/BasicTest/Answer/Answer";
 import Certify from "./pages/Certify/Certify";
 import IntroPage from "./pages/IntroPage/IntroPage";
 
-
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/breeders/:pageId" element={<BreederCollect/>}/>
-        <Route path="/dogys/:pageId" element={<DogyCollect/>}/>
+        <Route path="/breeders/:pageId" element={<BreederCollect />} />
+        <Route path="/dogys/:pageId" element={<DogyCollect />} />
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/findemail" element={<FindEmail />} />
@@ -38,7 +36,7 @@ function App() {
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
-        <Route path="customer-details" element={<CustomerDetails />} />
+        <Route path="/customer-details" element={<CustomerDetails />} />
         <Route path="/test-description" element={<TestDesc />}></Route>
         <Route path="/basic-test" element={<Test />}></Route>
         <Route path="/result" element={<Result />}></Route>

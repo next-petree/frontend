@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 
-import CustomLayout from "../../Layout/CustomLayout";
+import CustomLayout from "../../layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 
 import { IMG2 } from "../../../assets/images";
