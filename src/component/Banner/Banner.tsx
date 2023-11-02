@@ -1,5 +1,4 @@
 import { IMG1 } from "../../assets/images";
-<<<<<<< HEAD
 import * as S from "./styles";
 
 const Banner = () => {
@@ -14,7 +13,7 @@ const Banner = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_2110_1924)">
+            <g clipPath="url(#clip0_2110_1924)">
               <path
                 d="M20.5087 53.9949C26.7119 53.9949 31.7405 48.9663 31.7405 42.7631C31.7405 36.5599 26.7119 31.5312 20.5087 31.5312C14.3055 31.5312 9.27686 36.5599 9.27686 42.7631C9.27686 48.9663 14.3055 53.9949 20.5087 53.9949Z"
                 fill="#A09185"
@@ -73,16 +72,18 @@ const Banner = () => {
       </S.IconContainer>
       <img src={IMG1} alt="" />
     </S.CustomBanner>
-=======
-import { CustomBanner } from "./styles";
-
-const Banner = () => {
-  return (
-    <CustomBanner>
-      <img src={IMG1} alt="" />
-    </CustomBanner>
->>>>>>> 7bf8a408468ea528f8835e98cdc6b3a9e7ad3fb3
   );
 };
+
+// import { CustomBanner } from "./styles";
+
+// const Banner = () => {
+//   return (
+//     <CustomBanner>
+//       <img src={IMG1} alt="" />
+//     </CustomBanner>
+// >>>>>>> 7bf8a408468ea528f8835e98cdc6b3a9e7ad3fb3
+//   );
+// };
 
 export default Banner;

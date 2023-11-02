@@ -1,86 +1,65 @@
+import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-import { IMG4 } from "../../assets/images";
+import { BreederBadge } from "../../assets/icons";
 import { IDMProps } from "../../types";
+import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
 import * as S from "./styles";
 
-const DetailModal = ({ onClick }: IDMProps) => {
+const DetailModal = ({ dogId, onClick }: IDMProps) => {
+  const { data: dog } = useGetDogDetailQuery(dogId);
+
+  const navigate = useNavigate();
+
+  const handleReservationClick = () => {
+    navigate("/breeding-register", { state: dog });
+  };
+
   return (
     <S.ModalWrapper>
       <S.ModalContainer>
         <S.DetailInfoFlexBox>
-          <S.DogImage src={IMG4} alt="" />
+          <S.DogImage src={dog?.data.imagesUrl[0]} alt={dog?.data.name} />
           <S.DetailInfoContainer>
-            <S.NameContainer>루카스</S.NameContainer>
+            <S.NameContainer>{dog?.data.name}</S.NameContainer>
             <S.DetailInfo>
-              <S.DetailInfoText>견종: 포메라니안</S.DetailInfoText>
-              <S.DetailInfoText>성별: 수컷</S.DetailInfoText>
-              <S.DetailInfoText>출생일: 2023.05.23</S.DetailInfoText>
-              <S.DetailInfoText>브리더명: 수현</S.DetailInfoText>
+              <S.DetailInfoText>견종: {dog?.data.type}</S.DetailInfoText>
+              <S.DetailInfoText>성별: {dog?.data.gender}</S.DetailInfoText>
+              <S.DetailInfoText>출생일: {dog?.data.birthDate}</S.DetailInfoText>
+              <S.DetailInfoText>
+                브리더명: {dog?.data.breederNickName}
+              </S.DetailInfoText>
+              {dog?.data.isBreederVerified && (
+                <S.DetailInfoText>
+                  <BreederBadge width="24" height="24" /> 인증된 브리더
+                </S.DetailInfoText>
+              )}
             </S.DetailInfo>
           </S.DetailInfoContainer>
         </S.DetailInfoFlexBox>
         <S.DetailInfoFlexBox>
           <S.DogImageGroup>
-            <S.SmallDogImageBox>
-              <img
-                src={IMG4}
-                alt=""
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                }}
-              />
-            </S.SmallDogImageBox>
-            <S.SmallDogImageBox>
-              <img
-                src={IMG4}
-                alt=""
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                }}
-              />
-            </S.SmallDogImageBox>
-            <S.SmallDogImageBox>
-              <img
-                src={IMG4}
-                alt=""
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                }}
-              />
-            </S.SmallDogImageBox>
-            <S.SmallDogImageBox>
-              <img
-                src={IMG4}
-                alt=""
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                }}
-              />
-            </S.SmallDogImageBox>
+            {dog?.data.imagesUrl.map((img: string, index: number) => (
+              <S.SmallDogImageBox key={index}>
+                <img
+                  src={img}
+                  alt=""
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                  }}
+                />
+              </S.SmallDogImageBox>
+            ))}
           </S.DogImageGroup>
-          <S.Button>예약하기</S.Button>
+
+          <S.Button onClick={handleReservationClick}>예약하기</S.Button>
         </S.DetailInfoFlexBox>
         <S.DetailDescContainer>
           <S.DetailDescTitle>상세설명</S.DetailDescTitle>
-          <S.DetailDesc>
-            온순한 시바견입니다.{"\n"}
-            2살 정도 되었고 활달하고 강아지 껌을 좋아합니다.{"\n"}
-            장난치는 것을 좋아합니다.{"\n"}
-            털관리를 자주 해야합니다.
-          </S.DetailDesc>
+          <S.DetailDesc>{dog?.data.management}</S.DetailDesc>
         </S.DetailDescContainer>
       </S.ModalContainer>
       <S.ClosebtnContainer onClick={onClick}>

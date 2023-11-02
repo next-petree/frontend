@@ -51,7 +51,6 @@ export const DetailInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* background: aqua; */
 `;
 
 export const DetailInfoFlexBox = styled.div`
@@ -111,6 +110,7 @@ export const DetailInfoText = styled.div`
 
 export const DogImageGroup = styled.div`
   display: flex;
+  min-width: 280px;
   gap: 20px;
 `;
 
