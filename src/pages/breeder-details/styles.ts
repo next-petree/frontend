@@ -50,8 +50,6 @@ export const Frame178 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: red;
 `;
 
 export const Frame179 = styled.div`
@@ -85,7 +83,6 @@ export const IconContainer = styled.div`
   height: 118.13px;
   top: 13.13px;
   left: 54px;
-  background: blue;
 `;
 
 export const Name = styled.div`
@@ -96,7 +93,6 @@ export const Name = styled.div`
   letter-spacing: 0em;
   text-align: left;
   padding-top: 10px;
-  background: green;
 `;
 
 export const AddressContainer = styled.div`
@@ -112,8 +108,6 @@ export const AddressContainer = styled.div`
   line-height: 23px;
   letter-spacing: 0em;
   text-align: left;
-
-  background: azure;
 `;
 
 export const IntroHeading = styled.div`
@@ -241,4 +235,20 @@ export const Title = styled.div`
   text-align: left;
 
   padding: 0 69px;
+`;
+
+export const CustomImage = styled.img`
+  width: 144px;
+  height: 144px;
+  border-radius: 42px;
+  color: #d9d9d9;
+  object-fit: cover;
+`;
+
+export const ModalContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.25);
 `;

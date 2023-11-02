@@ -111,6 +111,7 @@ export const DetailInfoText = styled.div`
 
 export const DogImageGroup = styled.div`
   display: flex;
+  min-width: 280px;
   gap: 20px;
 `;
 

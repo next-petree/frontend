@@ -21,6 +21,19 @@ export interface ICLProps {
   height: number;
 }
 
+export interface IDog {
+  birthDate: string;
+  breederNickName: string;
+  gender: string;
+  id: number;
+  imgUrl: string;
+  isBreederVerified: boolean;
+  name: string;
+  status: string;
+  type: string;
+}
+
 export interface IDMProps {
+  dogId: number | undefined;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
