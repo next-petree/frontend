@@ -32,6 +32,7 @@ const BasicTest: React.FC = () => {
     Array<{ questionId: number; selectedChoiceId: number }>
   >([]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedExample, setSelectedExample] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 상태 변수
   const [showLoginModal, setShowLoginModal] = useState(false); // 로그인 모달을 보여줄지 여부를 결정하는 상태 변수
   const [errorMessage, setErrorMessage] = useState<string>(''); // 에러 메시지를 관리하는 상태 변수
@@ -101,6 +102,7 @@ const BasicTest: React.FC = () => {
 
       if (selectedChoice) {
         setSelectedAnswer(selectedChoice.id);
+        setSelectedExample(selectedChoice.id); // 선택한 Example 업데이트
       }
     }
   };
@@ -160,12 +162,12 @@ const BasicTest: React.FC = () => {
           }
         } else {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
-          setSelectedAnswer(null); // 선택한 답변 초기화
+          setSelectedAnswer(null);
+          setSelectedExample(null); // 선택된 Example 초기화
         }
       }
     }
   };
-
   const handlePrev = () => {
     if (!isLoggedIn) {
       setShowLoginModal(true);
@@ -209,6 +211,7 @@ const BasicTest: React.FC = () => {
                   (choice) => choice.choiceText
                 )}
                 onAnswer={handleAnswer}
+                selectedExample={selectedExample}
               ></TestComp>
               <MoveBtnWrap>
                 {isPrevButtonVisible ? (

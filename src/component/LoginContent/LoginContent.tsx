@@ -52,8 +52,6 @@ const LoginContent = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
-  
-
   const handleLogin = async () => {
     try {
       const requestBody = {
@@ -61,7 +59,7 @@ const LoginContent = () => {
         password: password,
       };
 
-      const response = await post<LoginResponse>("/login", requestBody);
+      const response = await post<LoginResponse>('/api/login', requestBody);
 
       if (response.data.status === 'SUCCESS') {
         console.log('로그인 성공', response.data);
