@@ -1,21 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 
 import CustomLayout from "../../layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 
-import { IMG2 } from "../../../assets/images";
-import { dogdetailInfo, agreementInfo } from "../../../constants";
+import { BreederBadge } from "../../../assets/icons";
+
+import { agreementInfo } from "../../../constants";
 import * as S from "./styles";
 
 const BreedingRegister = () => {
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
 
+  const location = useLocation();
+
+  const { data } = location.state;
+
   const navigate = useNavigate();
 
   const handleAgreementClick = () => {
-    setIsAgreeChecked((prev) => !prev);
+    setIsAgreeChecked(prev => !prev);
   };
 
   const handleNextButtonClick = () => {
@@ -30,7 +35,7 @@ const BreedingRegister = () => {
           <S.InfoInnerContainer>
             <S.DogInfoContainer>
               <img
-                src={IMG2}
+                src={data.imagesUrl[0]}
                 alt="강아지"
                 style={{
                   width: "251px",
@@ -41,19 +46,26 @@ const BreedingRegister = () => {
               />
               <S.DogInfoInnerContainer>
                 {/* Dog Name */}
-                <S.DogNameContainer>루카스</S.DogNameContainer>
+                <S.DogNameContainer>{data.name}</S.DogNameContainer>
                 {/* Box for information */}
                 <S.DogInfoBox>
-                  <S.DogInfoBoxItem>견종: 포메라니안</S.DogInfoBoxItem>
-                  <S.DogInfoBoxItem>성별: 수컷</S.DogInfoBoxItem>
-                  <S.DogInfoBoxItem>출생일: 2023.05.23</S.DogInfoBoxItem>
-                  <S.DogInfoBoxItem>브리더명: 수현</S.DogInfoBoxItem>
+                  <S.DogInfoBoxItem>견종: {data.type}</S.DogInfoBoxItem>
+                  <S.DogInfoBoxItem>성별: {data.gender}</S.DogInfoBoxItem>
+                  <S.DogInfoBoxItem>출생일: {data.birthDate}</S.DogInfoBoxItem>
+                  <S.DogInfoBoxItem>
+                    브리더명: {data.breederNickName}
+                  </S.DogInfoBoxItem>
+                  {data.isBreederVerified && (
+                    <S.DogInfoBoxItem>
+                      <BreederBadge width="24" height="24" /> 인증된 브리더
+                    </S.DogInfoBoxItem>
+                  )}
                 </S.DogInfoBox>
               </S.DogInfoInnerContainer>
             </S.DogInfoContainer>
             <S.DogDescContainer>
               <S.DogDescTitleBox>상세설명</S.DogDescTitleBox>
-              <S.DogDescBox>{dogdetailInfo}</S.DogDescBox>
+              <S.DogDescBox>{data.management}</S.DogDescBox>
             </S.DogDescContainer>
           </S.InfoInnerContainer>
         </S.InfoContainer>

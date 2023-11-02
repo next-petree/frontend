@@ -16,7 +16,7 @@ export const CertifyModal = styled.div`
   position: absolute;
   width: 968px;
   height: 1248px;
-  top: 206px;
+  top: 17%;
   left: calc(50% - 1168px / 2);
   padding: 100px;
   display: flex;

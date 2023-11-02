@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import BreederCollect from "./pages/collects/breedercollect";
 import DogyCollect from "./pages/collects/dogycollect";
-
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
 import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
@@ -36,7 +35,11 @@ function App() {
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
+        <Route path="/breeder-details" element={<BreederDetails />} />
         <Route path="/customer-details" element={<CustomerDetails />} />
+        <Route path="/breeding-register" element={<BreedingRegister />} />
+        <Route path="/register-fillout" element={<RegisterFillOut />} />
+        <Route path="/breeding-complete" element={<BreedingComplete />} />
         <Route path="/test-description" element={<TestDesc />}></Route>
         <Route path="/basic-test" element={<Test />}></Route>
         <Route path="/result" element={<Result />}></Route>

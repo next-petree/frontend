@@ -66,7 +66,7 @@ const CustomAvatar = ({ isQualifiedBreeder, isQualifiedCustomer }: IProps) => {
         <Container>
           <BadgeContainer>
             <BadgeInnerContainer>
-              <BreederBadge />
+              <BreederBadge width="40" height="40" />
             </BadgeInnerContainer>
           </BadgeContainer>
         </Container>

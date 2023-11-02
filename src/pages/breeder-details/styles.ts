@@ -236,3 +236,19 @@ export const Title = styled.div`
 
   padding: 0 69px;
 `;
+
+export const CustomImage = styled.img`
+  width: 144px;
+  height: 144px;
+  border-radius: 42px;
+  color: #d9d9d9;
+  object-fit: cover;
+`;
+
+export const ModalContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.25);
+`;
