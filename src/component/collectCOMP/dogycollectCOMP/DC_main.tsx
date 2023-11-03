@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import DogyBox from "./dogy_Box";
 import Pagenation from "../pagenation";
 import SearchFilter from "./dogy_searchfilter";
+import DetailModal from "../../DetailModal/DetailModal";
 import {
   BoxContainer,
   MainBox,
@@ -15,7 +15,6 @@ import { useParams } from "react-router-dom";
 import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/collect_url";
 import { IDogsAPI } from "../../../types/dogscollect_types";
 import { get } from "../../../api/api";
-
 
 ////////////////////////////////
 export interface IDogyFilterParams {
@@ -42,6 +41,8 @@ export default function DC_main() {
     size: "",
   });
   const [dogs, setdogs] = useState<IDogsAPI>();
+  const [dogBoxClicked, setDogBoxClicked] = useState(false);
+  const [selectedId, setSelectedId] = useState<number>();
   ///////////////////////////////////////////////////////////
 
   const getDogs = async () => {
@@ -64,6 +65,11 @@ export default function DC_main() {
     }
   };
 
+  const handleDetailClick = (id: number) => {
+    setDogBoxClicked(true);
+    setSelectedId(id);
+  };
+
   useEffect(() => {
     getDogs();
   }, [category, page]);
@@ -79,18 +85,24 @@ export default function DC_main() {
             {dogs?.data.totalElements != 0 ? (
               <BoxContainer>
                 {dogs?.data.content.map((box) => (
-                  <DogyBox
+                  <div
                     key={box.id}
-                    id={box.id}
-                    name={box.name}
-                    type={box.type}
-                    gender={box.gender}
-                    status={box.status}
-                    birthDate={box.birthDate}
-                    imgUrl={box.imgUrl}
-                    breederNickName={box.breederNickName}
-                    isBreederVerified={box.isBreederVerified}
-                  />
+                    style={{ width: "100%", height: "100%" }}
+                    onClick={() => handleDetailClick(box.id)}
+                  >
+                    <DogyBox
+                      key={box.id}
+                      id={box.id}
+                      name={box.name}
+                      type={box.type}
+                      gender={box.gender}
+                      status={box.status}
+                      birthDate={box.birthDate}
+                      imgUrl={box.imgUrl}
+                      breederNickName={box.breederNickName}
+                      isBreederVerified={box.isBreederVerified}
+                    />
+                  </div>
                 ))}
               </BoxContainer>
             ) : (
@@ -115,6 +127,14 @@ export default function DC_main() {
           setOnUseFilter={setOnUseFilter}
         />
       ) : null}
+      {dogBoxClicked && (
+        <DetailModal
+          customTop="21%"
+          customLeft="26%"
+          dogId={selectedId}
+          onClick={() => setDogBoxClicked(false)}
+        />
+      )}
     </Wrapper>
   );
 }

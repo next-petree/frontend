@@ -21,6 +21,8 @@ export interface IPBProp {
 } // primary button
 
 export interface IDMProps {
+  customTop: string;
+  customLeft: string;
   dogId: number | undefined;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 } // detail modal
@@ -147,4 +149,3 @@ declare global {
     Kakao: any;
   }
 }
-

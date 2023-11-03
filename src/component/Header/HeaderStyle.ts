@@ -6,6 +6,9 @@ import petTreeTextImage from "../../assets/icons/header_petree.png";
 import userProfileImage from "../../assets/icons/Group 21.jpg";
 
 export const Container = styled.div`
+  position: relative;
+  top: 0;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;

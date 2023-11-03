@@ -112,6 +112,8 @@ const BreederDetails = () => {
       {isModalOpenClicked && (
         <S.ModalContainer>
           <DetailModal
+            customTop="1140px"
+            customLeft="520px"
             dogId={selectedDogId}
             onClick={() => setIsModalOpenClicked(false)}
           />

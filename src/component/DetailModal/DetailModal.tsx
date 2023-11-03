@@ -6,7 +6,7 @@ import { IDMProps } from "../../types";
 import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
 import * as S from "./styles";
 
-const DetailModal = ({ dogId, onClick }: IDMProps) => {
+const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
   const { data: dog } = useGetDogDetailQuery(dogId);
 
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const DetailModal = ({ dogId, onClick }: IDMProps) => {
   };
 
   return (
-    <S.ModalWrapper>
+    <S.ModalWrapper customtop={customTop} customleft={customLeft}>
       <S.ModalContainer>
         <S.DetailInfoFlexBox>
           <S.DogImage src={dog?.data.imagesUrl[0]} alt={dog?.data.name} />
