@@ -11,6 +11,8 @@ const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
 
   const navigate = useNavigate();
 
+  console.log(dog);
+
   const handleReservationClick = () => {
     navigate("/breeding-register", { state: dog });
   };
@@ -57,7 +59,12 @@ const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
             ))}
           </S.DogImageGroup>
 
-          <S.Button onClick={handleReservationClick}>예약하기</S.Button>
+          <S.Button
+            onClick={handleReservationClick}
+            disabled={dog?.data?.status !== "AVAILABLE"}
+          >
+            예약하기
+          </S.Button>
         </S.DetailInfoFlexBox>
         <S.DetailDescContainer>
           <S.DetailDescTitle>상세설명</S.DetailDescTitle>

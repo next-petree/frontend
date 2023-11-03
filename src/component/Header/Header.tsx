@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   TitleArea,
@@ -13,10 +13,21 @@ import {
 import NavDropdown from "../Dropdown/NavDropdown";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isCilcked, setIsCilcked] = useState<boolean>(false);
   const handleClick = () => {
     setIsCilcked((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("accessToken") &&
+      localStorage.getItem("refreshToken")
+    ) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <Container>
       <TitleArea to="/">
@@ -34,7 +45,7 @@ const Header = () => {
         </div>
       </HeaderContent>
 
-      {isCilcked && <NavDropdown />}
+      {isCilcked && <NavDropdown loggedIn={isLoggedIn} />}
     </Container>
   );
 };
