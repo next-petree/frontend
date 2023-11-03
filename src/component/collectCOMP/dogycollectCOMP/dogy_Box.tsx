@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {
+  AlreadyImg,
+  Availtext,
   BoxWrapper,
   Dermyimg,
   Doginfo,
@@ -24,11 +26,22 @@ export default function DogyBox({
   breederNickName,
   isBreederVerified,
 }: DogsContent) {
-  const [Gender, setGender] = useState("");
   return (
     <BoxWrapper>
       <ImgBox>
-        <Img src={imgUrl} alt="" />
+        {status === "AVAILABLE" ? (
+          <Img src={imgUrl} alt="" />
+        ) : status === "UNDERWAY" ? (
+          <>
+            <AlreadyImg src={imgUrl} alt="" />
+            <Availtext>예약 중</Availtext>
+          </>
+        ) : (
+          <>
+            <AlreadyImg src={imgUrl} alt="" />
+            <Availtext>분양 완료</Availtext>
+          </>
+        )}
       </ImgBox>
       <Nameline>
         <Name>{name}</Name>
