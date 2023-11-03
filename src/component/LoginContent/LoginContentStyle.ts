@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import petTreeIconImage from '../../assets/icons/header_pets_black_24dp.png';
+import petTreeIconImage from '../../assets/icons/pets_black_24dp.png';
 
 export const Container = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const PetTreeTitleArea = styled.div`
 export const PetTreeIcon = styled.div`
   width: 72px;
   height: 72px;
-  background: url(${petTreeIconImage});
+  background: url(${petTreeIconImage})center / cover no-repeat;
 `;
 
 export const Title = styled.div`
@@ -85,10 +85,10 @@ const Text = styled.p`
 `;
 
 export const EmailText = styled(Text)`
-  width: 50px;
+  width: 65px;
 `;
 export const PassWordText = styled(Text)`
-  width: 60px;
+  width: 75px;
 `;
 
 const Input = styled.input`

@@ -20,16 +20,15 @@ export const ImgBox = styled.div`
   position: relative;
 `;
 export const Img = styled.img`
-  width: 100%;
-  /* min-width: 160px; */
-  height: 140px;
+  width: 12vw;
+  height: 7.2vw;
   border-radius: 12px;
   background-color: aliceblue;
   object-fit: cover;
 `;
 export const Dermyimg = styled.div`
-  width: 180px;
-  height: 87px;
+  width: 12vw;
+  height: 7.2vw;
   border-radius: 12px;
   background-color: slategray;
 `;
@@ -40,8 +39,8 @@ export const Badge = styled.span`
 `;
 export const Nameline = styled.div`
   display: flex;
-  width: 86%;
-  min-width: 180px;
+  align-items: center;
+  width: 180px;
 `;
 export const Name = styled.span`
   /* width: 220px; */
@@ -52,11 +51,10 @@ export const Name = styled.span`
   color: #333333;
 `;
 export const Distance = styled.span`
-  margin-left: 5px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
+  margin-top: 2px;
+  margin-left: 0.7vw;
+  font-size: 2rem;
   color: #333333;
   font-weight: 600;
 `;

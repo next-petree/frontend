@@ -16,6 +16,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   onLogin,
   onClose,
   errorMessage,
+  top,
 }) => {
   const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -31,7 +32,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
         onClose();
       }
     };
-
     // 이벤트 리스너를 등록합니다.
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -71,7 +71,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
     localStorage.getItem('accessToken') && localStorage.getItem('refreshToken');
 
   return (
-    <Modal ref={modalRef}>
+    <Modal ref={modalRef} style={{ top: `${top}%` }}>
       <Wrapper>
         <Img src={Icon} />
         <Title>{errorMessage}</Title>

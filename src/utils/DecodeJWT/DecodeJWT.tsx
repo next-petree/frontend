@@ -1,14 +1,25 @@
-import base64 from 'base-64';
+export default function DecodeToken() {
+  // accessToken 가져오기
+  const token = localStorage.getItem('accessToken')?.replace('Bearer ', '');
+  // token이 없으면 알림 표시
+  if (!token) {
+    console.log('토큰이 없습니다.');
+    return;
+  }
+  const base64Payload = token.split('.')[1];
 
-const accessToken = localStorage.getItem('accessToken');
-const refreshToken = localStorage.getItem('refreshToken');
+  const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/');
 
-if (accessToken) {
-  const decodedAccessToken = base64.decode(accessToken);
-  console.log('Decoded Access Token:', decodedAccessToken);
-}
-
-if (refreshToken) {
-  const decodedRefreshToken = base64.decode(refreshToken);
-  console.log('Decoded Refresh Token:', decodedRefreshToken);
+  const decodedJWT = JSON.parse(
+    decodeURIComponent(
+      window
+        .atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    )
+  );
+  return decodedJWT;
 }
