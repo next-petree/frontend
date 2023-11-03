@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
   position: relative;
   width: 1920px;
+  /* width: 100vw; */
   height: 2040px;
   overflow-y: scroll;
   background: #ffffff;
@@ -23,8 +24,9 @@ export const Frame62 = styled.div`
   width: 968px;
   height: 793px;
   top: 206px;
-  left: 476px;
+  left: 436px;
   gap: 70px;
+  /* background-color: aqua; */
 
   display: flex;
   flex-direction: column;
@@ -117,14 +119,15 @@ export const AddressContainer = styled.div`
 `;
 
 export const IntroHeading = styled.div`
-  width: 104px;
+  min-width: 140px;
   height: 36px;
   font-family: Noto Sans KR;
   font-size: 28px;
   font-weight: 500;
   line-height: 36px;
   letter-spacing: 0em;
-  text-align: left;
+  text-align: center;
+  background-color: red;
 `;
 
 export const ButtonGroup = styled.div`
