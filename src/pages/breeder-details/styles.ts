@@ -127,11 +127,10 @@ export const IntroHeading = styled.div`
   line-height: 36px;
   letter-spacing: 0em;
   text-align: center;
-  background-color: red;
 `;
 
 export const ButtonGroup = styled.div`
-  width: 699px;
+  width: 720px;
   height: 48px;
   gap: 16px;
   display: flex;

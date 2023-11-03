@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-// import { useMakeReservationMutation } from "../../../features/api/adopterApiSlice";
 import { post } from "../../../api/api";
 import CustomLayout from "../../Layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
@@ -11,13 +10,9 @@ const RegisterFillOut = () => {
   const [firstTextarea, setFirstTextarea] = useState("");
   const [secondTextarea, setSecondTextarea] = useState("");
 
-  // const [dogInfo, setDogInfo] = useState<IDogInfo>();
   const [dogId, setDogId] = useState<number>();
   const [breederId, setBreederid] = useState<number>();
-
-  // const [makeReservation, { isLoading, isError }] =
-  //   useMakeReservationMutation();
-
+  const [imagesUrl, setImagesUrl] = useState<[string]>();
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -44,18 +39,18 @@ const RegisterFillOut = () => {
   useEffect(() => {
     setDogId(state.id);
     setBreederid(state.breederId);
+    setImagesUrl(state.imagesUrl[0]);
   }, []);
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const revervationData = {
       dogId,
       breederId,
       pledgeContent1: firstTextarea,
       pledgeContent2: secondTextarea,
     };
-
-    console.log(revervationData);
 
     try {
       const response = await post<IRegisterResponse>(
@@ -65,7 +60,7 @@ const RegisterFillOut = () => {
       if (response.data.status === "SUCCESS") {
         console.log("예약 성공", response.data);
         alert("예약에 성공했습니다!");
-        navigate("/breeding-complete");
+        navigate("/breeding-complete", { state: imagesUrl });
       } else if (response.data.status === "FAIL") {
         alert(response.data);
       }
