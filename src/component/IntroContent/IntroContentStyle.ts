@@ -115,8 +115,8 @@ export const IntroArea3 = styled.div`
 `;
 
 export const IntroArea3ContentBox = styled.div`
-  width: 570px;
-  height: 250px;
+  min-width: 570px;
+  min-height: 270px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -217,7 +217,7 @@ export const LeftImage = styled.div`
 `;
 
 export const LeftHashTag = styled.div`
-  width: 60px;
+  width: 15%;
   height: 30px;
   padding: 3px 20px;
   display: flex;
@@ -270,7 +270,7 @@ export const RightImage = styled.div`
 `;
 
 export const RightHashTag = styled.div`
-  width: 80px;
+  width: 20%;
   height: 30px;
   padding: 3px 20px;
   display: flex;
