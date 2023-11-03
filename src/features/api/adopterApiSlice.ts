@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { ADOPTER_URL } from "../../constants";
+import { ADOPTER_URL, RESERVATION_URL } from "../../constants";
 
 export const adopterApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
@@ -8,7 +8,15 @@ export const adopterApiSlice = apiSlice.injectEndpoints({
         url: `${ADOPTER_URL}/${id}`,
       }),
     }),
+    makeReservation: build.mutation({
+      query: (data) => ({
+        url: RESERVATION_URL,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAdopterQuery } = adopterApiSlice;
+export const { useGetAdopterQuery, useMakeReservationMutation } =
+  adopterApiSlice;

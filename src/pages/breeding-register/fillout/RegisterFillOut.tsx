@@ -1,5 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+// import { useMakeReservationMutation } from "../../../features/api/adopterApiSlice";
+import { post } from "../../../api/api";
 import CustomLayout from "../../Layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./styles";
@@ -8,10 +11,72 @@ const RegisterFillOut = () => {
   const [firstTextarea, setFirstTextarea] = useState("");
   const [secondTextarea, setSecondTextarea] = useState("");
 
+  // const [dogInfo, setDogInfo] = useState<IDogInfo>();
+  const [dogId, setDogId] = useState<number>();
+  const [breederId, setBreederid] = useState<number>();
+
+  // const [makeReservation, { isLoading, isError }] =
+  //   useMakeReservationMutation();
+
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const { state } = location;
 
   const handleCancelClick = () => {
     navigate(-2);
+  };
+
+  interface IReservation {
+    id: number;
+    breederId: number;
+    firstTextarea: string;
+    secodTextarea: string;
+  }
+
+  interface IRegisterResponse {
+    status: string;
+    data: string;
+    msg: string;
+  }
+
+  useEffect(() => {
+    setDogId(state.id);
+    setBreederid(state.breederId);
+  }, []);
+
+  const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const revervationData = {
+      dogId,
+      breederId,
+      pledgeContent1: firstTextarea,
+      pledgeContent2: secondTextarea,
+    };
+
+    console.log(revervationData);
+
+    try {
+      const response = await post<IRegisterResponse>(
+        "/me/matchings",
+        revervationData
+      );
+      if (response.data.status === "SUCCESS") {
+        console.log("예약 성공", response.data);
+        alert("예약에 성공했습니다!");
+      } else if (response.data.status === "FAIL") {
+        alert(response.data);
+      }
+    } catch (error: any) {
+      console.error(
+        "예약 에러:",
+        error.response ? error.response.data : error.message
+      );
+      alert("예약 과정에서 오류가 발생했습니다.");
+    }
+
+    navigate("/breeding-complete");
   };
 
   return (
@@ -19,17 +84,17 @@ const RegisterFillOut = () => {
       <S.InnerContainer>
         <S.InnerTopContainer>
           <S.TitleContainer>분양 신청하기</S.TitleContainer>
-          <S.FormContainer>
+          <S.FormContainer id="form" onSubmit={submitHandler}>
             <S.FormBox>
               <S.FormBoxQuestion>
-                1. 반려동물을 분양하려는 사유에 대해 간단히 작성하세요.
+                1. 반려동물을 분양하려는 사유에 대해 작성하세요.
               </S.FormBoxQuestion>
 
               <S.FormBoxTextarea
                 name="reason"
                 placeholder="분양하려는 사유를 작성해주세요"
                 value={firstTextarea}
-                onChange={e => setFirstTextarea(e.target.value)}
+                onChange={(e) => setFirstTextarea(e.target.value)}
               />
               <S.FormBoxTextareaContainer top={120}>
                 <S.TextLength>{firstTextarea.length}/2000</S.TextLength>
@@ -44,7 +109,7 @@ const RegisterFillOut = () => {
                 name="reason"
                 placeholder="분양 이유와 마음가짐을 작성해주세요"
                 value={secondTextarea}
-                onChange={e => setSecondTextarea(e.target.value)}
+                onChange={(e) => setSecondTextarea(e.target.value)}
               />
               <S.FormBoxTextareaContainer top={374}>
                 <S.TextLength>{secondTextarea.length}/2000</S.TextLength>
@@ -53,9 +118,9 @@ const RegisterFillOut = () => {
           </S.FormContainer>
         </S.InnerTopContainer>
         <S.ButtonGroup>
-          <Link to={"/breeding-complete"}>
-            <S.Button primary>예약신청</S.Button>
-          </Link>
+          <S.Button primary type="submit" form="form">
+            예약신청
+          </S.Button>
           <S.Button onClick={handleCancelClick}>취소</S.Button>
         </S.ButtonGroup>
       </S.InnerContainer>

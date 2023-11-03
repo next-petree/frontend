@@ -9,8 +9,10 @@ import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
+import { useParams } from "react-router-dom";
 
 const BreederDetails = () => {
+  const { id } = useParams();
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
   const [selectedDogId, setSelectedDogId] = useState<number>();
 
@@ -18,7 +20,7 @@ const BreederDetails = () => {
     data: breeder,
     isLoading: loadingBreeder,
     isError,
-  } = useGetBreederDetailQuery(1);
+  } = useGetBreederDetailQuery(id);
 
   const handleDetailbuttonClick = (dogId: number) => {
     setSelectedDogId(dogId);
@@ -112,7 +114,7 @@ const BreederDetails = () => {
       {isModalOpenClicked && (
         <S.ModalContainer>
           <DetailModal
-            customTop="1140px"
+            customTop="1090px"
             customLeft="520px"
             dogId={selectedDogId}
             onClick={() => setIsModalOpenClicked(false)}

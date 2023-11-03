@@ -20,11 +20,11 @@ const BreedingRegister = () => {
   const navigate = useNavigate();
 
   const handleAgreementClick = () => {
-    setIsAgreeChecked(prev => !prev);
+    setIsAgreeChecked((prev) => !prev);
   };
 
   const handleNextButtonClick = () => {
-    navigate("/register-fillout");
+    navigate("/register-fillout", { state: data });
   };
 
   const handleCancelClick = () => {
