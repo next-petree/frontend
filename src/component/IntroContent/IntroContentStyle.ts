@@ -119,6 +119,7 @@ export const IntroArea3ContentBox = styled.div`
   min-height: 270px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   padding: 24px 60px 24px 60px;
   border-radius: 30px;
@@ -205,11 +206,12 @@ export const LeftContent = styled.div`
 export const LeftImage = styled.div`
   width: 480px;
   height: 340px;
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.1) 100%
-    ),
+  background: 
+  // linear-gradient(
+  //     0deg,
+  //     rgba(255, 255, 255, 0.1) 0%,
+  //     rgba(255, 255, 255, 0.1) 100%
+  //   ),
     url(${LeftDogImage}) center / cover no-repeat;
   border-radius: 30px;
   margin-bottom: 20px;
