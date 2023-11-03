@@ -10,6 +10,7 @@ import {
   SearchBtn,
   Title,
   Wrapper,
+  BoxWrapper,
 } from "../styles_collect/collect_main_styled";
 import { useParams } from "react-router-dom";
 import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/collect_url";
@@ -85,9 +86,8 @@ export default function DC_main() {
             {dogs?.data.totalElements != 0 ? (
               <BoxContainer>
                 {dogs?.data.content.map((box) => (
-                  <div
+                  <BoxWrapper
                     key={box.id}
-                    style={{ width: "100%", height: "100%" }}
                     onClick={() => handleDetailClick(box.id)}
                   >
                     <DogyBox
@@ -102,7 +102,7 @@ export default function DC_main() {
                       breederNickName={box.breederNickName}
                       isBreederVerified={box.isBreederVerified}
                     />
-                  </div>
+                  </BoxWrapper>
                 ))}
               </BoxContainer>
             ) : (

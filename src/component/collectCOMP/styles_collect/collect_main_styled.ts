@@ -74,3 +74,8 @@ export const SearchBtn = styled.button`
   margin-top: -1vh;
   margin-bottom: -6vh;
 `;
+
+export const BoxWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;

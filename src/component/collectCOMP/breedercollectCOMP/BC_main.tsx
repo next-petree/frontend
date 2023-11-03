@@ -6,6 +6,7 @@ import {
   No_return,
   Title,
   Wrapper,
+  BoxWrapper,
 } from "../styles_collect/collect_main_styled";
 import Pagenation from "../pagenation";
 import { useEffect, useState } from "react";
@@ -76,15 +77,17 @@ export default function BC_Main() {
             {breeders?.data.totalElements != 0 ? (
               <BoxContainer>
                 {breeders?.data.content.map((breeder, i) => (
-                  <BreederBox
-                    key={breeder.id}
-                    id={breeder.id}
-                    nickname={breeder.nickname}
-                    distance={breeder.distance}
-                    types={breeder.types}
-                    profileImagUrl={breeder.profileImagUrl}
-                    verified={breeder.verified}
-                  />
+                  <BoxWrapper>
+                    <BreederBox
+                      key={breeder.id}
+                      id={breeder.id}
+                      nickname={breeder.nickname}
+                      distance={breeder.distance}
+                      types={breeder.types}
+                      profileImagUrl={breeder.profileImagUrl}
+                      verified={breeder.verified}
+                    />
+                  </BoxWrapper>
                 ))}
               </BoxContainer>
             ) : (
