@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const InnerContainer = styled.div`
   // width, height => not fixed
@@ -92,7 +92,7 @@ export const TextLength = styled.span`
   right: 22px;
   bottom: 19px;
 
-  font-family: 'Noto Sans KR';
+  font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

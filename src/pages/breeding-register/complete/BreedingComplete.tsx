@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+import Header from "../../../component/Header/Header";
 import { IMG3 } from "../../../assets/images";
 import * as S from "./styles";
 
@@ -12,6 +13,7 @@ const BreedingComplete = () => {
 
   return (
     <S.Wrapper>
+      <Header />
       <S.TopContainer>
         <img src={IMG3} alt="" />
         <S.TopContainerText>

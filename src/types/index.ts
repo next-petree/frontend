@@ -21,6 +21,8 @@ export interface IPBProp {
 } // primary button
 
 export interface IDMProps {
+  customTop: string;
+  customLeft: string;
   dogId: number | undefined;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 } // detail modal
@@ -148,3 +150,17 @@ declare global {
     Kakao: any;
   }
 }
+
+// interface IDogInfo {
+//   birthDate: string;
+//   breederId: number;
+//   breederNickName: string;
+//   gender: string;
+//   id: number;
+//   imagesUrl: [string];
+//   isBreederVerified: boolean;
+//   management: string;
+//   name: string;
+//   status: string;
+//   type: string;
+// }
