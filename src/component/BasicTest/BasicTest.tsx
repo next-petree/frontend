@@ -202,8 +202,6 @@ const BasicTest: React.FC = () => {
           </div>
         </TitleWrap>
         <TestModalWrap>
-          <TestTitle>반려견 기초 지식 테스트</TestTitle>
-
           {currentQuestion && (
             <>
               <TestComp
