@@ -65,6 +65,7 @@ const RegisterFillOut = () => {
       if (response.data.status === "SUCCESS") {
         console.log("예약 성공", response.data);
         alert("예약에 성공했습니다!");
+        navigate("/breeding-complete");
       } else if (response.data.status === "FAIL") {
         alert(response.data);
       }
@@ -75,8 +76,6 @@ const RegisterFillOut = () => {
       );
       alert("예약 과정에서 오류가 발생했습니다.");
     }
-
-    navigate("/breeding-complete");
   };
 
   return (
