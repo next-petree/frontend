@@ -34,8 +34,8 @@ export default function BreederBox({
         {verified ? (
           <Badge>
             <svg
-              width="20"
-              height="20"
+              width=""
+              height=""
               viewBox="0 0 33 38"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
