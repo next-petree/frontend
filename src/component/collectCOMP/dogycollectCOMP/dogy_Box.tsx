@@ -34,16 +34,16 @@ export default function DogyBox({
         <Name>{name}</Name>
       </Nameline>
       <Doginfo>
-        <Span>견종: {type}</Span>
+        <Span>견종 : {type}</Span>
         <Span>
-          성별:{" "}
+          성별 :{" "}
           {gender === "MALE"
             ? "수컷"
             : gender === "FEMALE"
             ? "암컷"
             : "알 수 없음"}
         </Span>
-        <Span>출생일: {birthDate}</Span>
+        <Span>출생일 : {birthDate}</Span>
       </Doginfo>
       <Poss>
         <Span>{breederNickName}님의 보유견종</Span>
