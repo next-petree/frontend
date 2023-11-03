@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
 import { getToken } from "../../api/token";
 
@@ -18,6 +18,7 @@ interface KakaoLoginResponse {
 
 const KakaoCallback = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get("code");
@@ -31,13 +32,6 @@ const KakaoCallback = () => {
     const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
     const token = getToken("accessToken");
 
-    console.log(
-      "Request URL:",
-      `${REACT_APP_API_URL}/api/oauth/kakao/callback?code=${code}`,
-    );
-    4;
-    console.log("Authorization header:", `Bearer ${token}`);
-
     try {
       const response = await get<KakaoLoginResponse>(
         `${REACT_APP_API_URL}/api/oauth/kakao/callback?code=${code}`,
@@ -50,7 +44,7 @@ const KakaoCallback = () => {
       if (response.data.status === "SUCCESS") {
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        window.location.href = "/";
+        navigate("/");
       }
     } catch (error) {
       console.error("Kakao login error:", error);
