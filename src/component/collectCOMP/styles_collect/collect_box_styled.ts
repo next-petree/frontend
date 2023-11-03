@@ -26,6 +26,33 @@ export const Img = styled.img`
   background-color: aliceblue;
   object-fit: cover;
 `;
+
+export const AlreadyImg = styled.img`
+  position: relative;
+  width: 12vw;
+  height: 7.2vw;
+  border-radius: 12px;
+  object-fit: cover;
+`;
+
+export const Availtext = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 3rem;
+  color: white;
+
+`;
+
 export const Dermyimg = styled.div`
   width: 12vw;
   height: 7.2vw;
@@ -74,7 +101,6 @@ export const LitteBadge = styled.span`
   align-items: center;
   width: 1.2vw;
   height: 1.2vw;
-  
 `;
 
 export const Doginfo = styled.div`
