@@ -36,6 +36,8 @@ export const Badge = styled.span`
   position: absolute;
   bottom: 5px;
   right: 5px;
+  width: 2vw;
+  height: 2vw;
 `;
 export const Nameline = styled.div`
   display: flex;
@@ -70,6 +72,9 @@ export const LitteBadge = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 1.2vw;
+  height: 1.2vw;
+  
 `;
 
 export const Doginfo = styled.div`
