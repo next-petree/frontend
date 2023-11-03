@@ -12,7 +12,7 @@ const RegisterFillOut = () => {
 
   const [dogId, setDogId] = useState<number>();
   const [breederId, setBreederid] = useState<number>();
-  const [imagesUrl, setImagesUrl] = useState<[string]>();
+  const [imagesUrl, setImagesUrl] = useState<string>();
   const navigate = useNavigate();
 
   const location = useLocation();
