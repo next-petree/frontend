@@ -77,9 +77,7 @@ export default function Pagenation({
             {firstNum + i}{" "}
           </Btn>
         ) : (
-          <Btn key={i + 1} disabled>
-            ...
-          </Btn>
+          null
         )
       )}
       <Btn
