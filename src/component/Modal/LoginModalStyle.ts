@@ -4,7 +4,6 @@ export const Modal = styled.div`
   width: 300px;
   height: 168px;
   position: absolute;
-  top: 8%;
   right: 12%;
 
   background: #fff;

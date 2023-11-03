@@ -32,6 +32,7 @@ const BasicTest: React.FC = () => {
     Array<{ questionId: number; selectedChoiceId: number }>
   >([]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedExample, setSelectedExample] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 상태 변수
   const [showLoginModal, setShowLoginModal] = useState(false); // 로그인 모달을 보여줄지 여부를 결정하는 상태 변수
   const [errorMessage, setErrorMessage] = useState<string>(''); // 에러 메시지를 관리하는 상태 변수
@@ -44,13 +45,10 @@ const BasicTest: React.FC = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     setIsLoggedIn(!!accessToken);
-  }, []);
-
-  useEffect(() => {
     // 로컬 스토리지에서 데이터 불러오기
     const getTest = async () => {
       try {
-        const response = await get<TestResponse>('/api/basic-test/start');
+        const response = await get<TestResponse>('/basic-test/start');
 
         if (response.data.status === 'SUCCESS') {
           // 로컬 스토리지에 문제 데이터 저장
@@ -101,6 +99,7 @@ const BasicTest: React.FC = () => {
 
       if (selectedChoice) {
         setSelectedAnswer(selectedChoice.id);
+        setSelectedExample(selectedChoice.id); // 선택한 Example 업데이트
       }
     }
   };
@@ -111,57 +110,59 @@ const BasicTest: React.FC = () => {
       return;
     }
     if (selectedAnswer !== null && testData) {
-      if (selectedAnswer !== null && testData) {
-        const currentQuestionId = testData[currentQuestionIndex].id;
-        const existingAnswerIndex = userAnswers.findIndex(
-          (answer) => answer.questionId === currentQuestionId
-        );
-        let newUserAnswers;
-        if (existingAnswerIndex !== -1) {
-          // 이미 같은 questionId를 가진 답변이 있으면 selectedChoiceId 갱신
-          newUserAnswers = [...userAnswers];
-          newUserAnswers[existingAnswerIndex].selectedChoiceId = selectedAnswer;
-        } else {
-          // 같은 questionId를 가진 답변이 없으면 새 답변 추가
-          newUserAnswers = [
-            ...userAnswers,
-            {
-              questionId: currentQuestionId,
-              selectedChoiceId: selectedAnswer,
-            },
-          ];
-        }
+      const currentQuestionId = testData[currentQuestionIndex].id;
+      const existingAnswerIndex = userAnswers.findIndex(
+        (answer) => answer.questionId === currentQuestionId
+      );
+      let newUserAnswers;
+      if (existingAnswerIndex !== -1) {
+        // 이미 같은 questionId를 가진 답변이 있으면 selectedChoiceId 갱신
+        newUserAnswers = [...userAnswers];
+        newUserAnswers[existingAnswerIndex].selectedChoiceId = selectedAnswer;
+      } else {
+        // 같은 questionId를 가진 답변이 없으면 새 답변 추가
+        newUserAnswers = [
+          ...userAnswers,
+          {
+            questionId: currentQuestionId,
+            selectedChoiceId: selectedAnswer,
+          },
+        ];
+      }
 
-        setUserAnswers(newUserAnswers);
-        localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
+      setUserAnswers(newUserAnswers);
+      localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
 
-        if (currentQuestionIndex + 1 >= testData.length) {
-          try {
-            const response = await post<ResultResponse>(
-              '/api/basic-test/submit',
-              {
-                answers: newUserAnswers,
-              }
-            );
-            localStorage.setItem('result', JSON.stringify(response.data));
-            navigate('/result');
-          } catch (error: any) {
-            if (
-              error.response &&
-              error.response?.data &&
-              (error.response?.data?.data === '분양희망자 회원이 아닙니다.' ||
-                error.response?.data?.data === '해당 회원을 찾을 수 없습니다.')
-            ) {
-              setErrorMessage('분양 희망자 회원이 아닙니다.'); // 에러 메시지 설정
-              setShowLoginModal(true); // 로그인 모달 보여주기
-            } else {
-              setErrorMessage('답변 제출 과정에서 오류가 발생했습니다.'); // 기본 에러 메시지 설정
-            }
+      if (currentQuestionIndex + 1 >= testData.length) {
+        try {
+          const response = await post<ResultResponse>('/basic-test/submit', {
+            answers: newUserAnswers,
+          });
+          localStorage.setItem('result', JSON.stringify(response.data));
+          navigate('/result');
+        } catch (error: any) {
+          console.log('error', error);
+          if (
+            error.response &&
+            error.response?.data &&
+            error.response?.data?.data === '분양희망자 회원이 아닙니다.'
+          ) {
+            window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+            setErrorMessage('분양 희망자 회원이 아닙니다.'); // 에러 메시지 설정
+            setShowLoginModal(true); // 로그인 모달 보여주기
+          } else if (
+            error.response?.data?.data === '해당 회원을 찾을 수 없습니다.'
+          ) {
+            setErrorMessage('해당 회원을 찾을 수 없습니다.'); // 에러 메시지 설정
+            setShowLoginModal(true); // 로그인 모달 보여주기
+          } else {
+            setErrorMessage('답변 제출 과정에서 오류가 발생했습니다.'); // 기본 에러 메시지 설정
           }
-        } else {
-          setCurrentQuestionIndex(currentQuestionIndex + 1);
-          setSelectedAnswer(null); // 선택한 답변 초기화
         }
+      } else {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedAnswer(null);
+        setSelectedExample(null); // 선택된 Example 초기화
       }
     }
   };
@@ -184,6 +185,7 @@ const BasicTest: React.FC = () => {
       {/* 로그인 모달 추가 */}
       {errorMessage && (
         <LoginModal
+          top={'8'}
           onLogin={() => {
             setIsLoggedIn(true);
             setErrorMessage(''); // 로그인에 성공하면 에러 메시지 초기화
@@ -194,8 +196,10 @@ const BasicTest: React.FC = () => {
       )}
       <TestWrapper>
         <TitleWrap>
-          <img src={petfoot} />
-          <img src={petree}></img>
+          <div>
+            <img src={petfoot} />
+            <img src={petree}></img>
+          </div>
         </TitleWrap>
         <TestModalWrap>
           <TestTitle>반려견 기초 지식 테스트</TestTitle>
@@ -209,6 +213,7 @@ const BasicTest: React.FC = () => {
                   (choice) => choice.choiceText
                 )}
                 onAnswer={handleAnswer}
+                selectedExample={selectedExample}
               ></TestComp>
               <MoveBtnWrap>
                 {isPrevButtonVisible ? (

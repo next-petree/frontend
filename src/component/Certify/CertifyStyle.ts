@@ -14,10 +14,10 @@ export const Petree = styled.img``;
 export const CertifyModal = styled.div`
   background: #fff;
   position: absolute;
-  width: 968px;
+  width: 1168px;
   height: 1248px;
   top: 17%;
-  left: calc(50% - 1168px / 2);
+  left: calc(50% - 1368px / 2);
   padding: 100px;
   display: flex;
   flex-direction: column;
@@ -35,6 +35,7 @@ export const Title = styled.h4`
 `;
 export const Desc = styled.p`
   font-size: 20px;
+  padding-top: 20px;
 `;
 
 export const FormWrap = styled.div``;

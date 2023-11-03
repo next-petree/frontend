@@ -75,6 +75,7 @@ export interface LoginModalProps {
   onLogin: () => void;
   onClose: () => void;
   errorMessage: string;
+  top: string;
 }
 
 export type LogoutResponse = {
@@ -147,4 +148,3 @@ declare global {
     Kakao: any;
   }
 }
-

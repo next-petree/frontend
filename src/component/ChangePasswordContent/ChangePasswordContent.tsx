@@ -21,12 +21,12 @@ const ChangePasswordContent = () => {
       <PasswordInputArea>
         <NewPasswordArea>
           <NewPasswordText>새 비밀번호</NewPasswordText>
-          <NewPasswordInput></NewPasswordInput>
+          <NewPasswordInput type="password"></NewPasswordInput>
         </NewPasswordArea>
 
         <CheckPasswordArea>
           <CheckPasswordText>비밀번호 확인</CheckPasswordText>
-          <CheckPasswordInput></CheckPasswordInput>
+          <CheckPasswordInput type="password"></CheckPasswordInput>
         </CheckPasswordArea>
       </PasswordInputArea>
 

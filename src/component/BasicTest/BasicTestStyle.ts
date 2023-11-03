@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 100vh;
   text-align: center;
 `;
 
@@ -12,16 +13,21 @@ export const TestWrapper = styled.div`
 `;
 
 export const TitleWrap = styled.div`
-  height: 278px;
+  height: 25vh;
   width: 100%;
   background: #4ec1bf;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  div {
+    top: 5vh;
+    position: absolute;
+  }
 `;
 export const TestModalWrap = styled.div`
   width: 600px;
-  height: 70vh;
+  height: 78vh;
   border-radius: 40px;
   display: flex;
   justify-content: space-evenly;
@@ -30,7 +36,7 @@ export const TestModalWrap = styled.div`
   background: #fff;
   box-shadow: 0.5px 1px 5px 0.5px rgba(0, 0, 0, 0.05);
   position: absolute;
-  top: 25%;
+  top: 24%;
 `;
 export const TestTitle = styled.h3`
   font-size: 24px;

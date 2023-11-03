@@ -14,8 +14,8 @@ export const TestDescCompWrapper = styled.div`
   animation: ${fadeIn} 0.5s forwards;
 `;
 export const Wrapper = styled.div`
-  margin: 8px 0;
-  width: 1386px;
+  margin: 12px 0;
+  width: 80vw;
   height: 220px;
   box-shadow: 0.5px 1px 7px 0.5px rgba(58, 58, 58, 0.1);
   border-radius: 24px;
