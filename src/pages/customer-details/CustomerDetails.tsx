@@ -1,12 +1,10 @@
-
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 import PrimaryButton from "../../component/Button/PrimaryButton";
 
-
-import * as S from './styles';
-import { IMG2 } from '../../assets/images';
-import { desc } from '../../constants';
+import * as S from "./styles";
+import { IMG2 } from "../../assets/images";
+import { desc } from "../../constants";
 
 import { useGetAdopterQuery } from "../../features/api/adopterApiSlice";
 import CustomLayout from "../Layout/CustomLayout";

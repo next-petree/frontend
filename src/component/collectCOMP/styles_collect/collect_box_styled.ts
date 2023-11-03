@@ -12,7 +12,7 @@ export const BoxWrapper = styled.div`
   height: 90%;
   border-radius: 12px;
   box-shadow: 0px 4px 20px 0px #00000017;
-  &:hover{
+  &:hover {
     box-shadow: 0px 4px 20px 0px #00000053;
   }
 `;
@@ -24,6 +24,7 @@ export const Img = styled.img`
   height: 7.2vw;
   border-radius: 12px;
   background-color: aliceblue;
+  object-fit: cover;
 `;
 export const Dermyimg = styled.div`
   width: 12vw;
@@ -44,12 +45,12 @@ export const Nameline = styled.div`
   width: 180px;
 `;
 export const Name = styled.span`
+  /* width: 220px; */
   font-family: "Noto Sans KR", sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   text-align: left;
   color: #333333;
-
 `;
 export const Distance = styled.span`
   display: flex;
@@ -76,11 +77,11 @@ export const LitteBadge = styled.span`
   
 `;
 
-
 export const Doginfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 85%;
+  min-width: 180px;
   gap: 2px;
 `;
 
@@ -92,7 +93,8 @@ export const Span = styled.div`
 `;
 
 export const Poss = styled.div`
-  width: 180px;
+  width: 90%;
+  /* min-width: 170px; */
   display: flex;
   flex-direction: row-reverse;
   gap: 2px;

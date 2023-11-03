@@ -16,6 +16,7 @@ export const LogoIcon = styled.img``;
 export const Logo = styled.img``;
 
 export const IconContainer = styled.div`
+  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;

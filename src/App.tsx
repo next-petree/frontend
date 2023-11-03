@@ -37,7 +37,7 @@ function App() {
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
-        <Route path="/breeder-details" element={<BreederDetails />} />
+        <Route path="/breeder/:id" element={<BreederDetails />} />
         <Route path="/customer-details" element={<CustomerDetails />} />
         <Route path="/breeding-register" element={<BreedingRegister />} />
         <Route path="/register-fillout" element={<RegisterFillOut />} />

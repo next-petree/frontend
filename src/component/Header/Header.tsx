@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Container,
   TitleArea,
@@ -8,7 +8,7 @@ import {
   NavigationMenu,
   NavigationLink,
   UserProfileImage,
-} from './HeaderStyle';
+} from "./HeaderStyle";
 
 const Header = () => {
   return (

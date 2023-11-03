@@ -6,10 +6,12 @@ import {
   No_return,
   Title,
   Wrapper,
+  BoxWrapper,
 } from "../styles_collect/collect_main_styled";
 import Pagenation from "../pagenation";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BreedersCollecturl } from "../../../utils/collect_url";
 import { IBreedersAPI } from "../../../types/breederscollect_type";
 import { get } from "../../../api/api";
@@ -32,6 +34,7 @@ export default function BC_Main() {
   const [onSearch, setOnSearch] = useState(false);
   const [page, setPage] = useState(Number(param.pageId));
   const [loading, setLoading] = useState(false);
+  const [isBoxClicked, setIsBoxClicked] = useState(false);
   ////////////////////////////////////////////////
   const [forms, setForms] = useState<IForms>({ keyword: "", auth: false });
   const [breeders, setBreeders] = useState<IBreedersAPI>();
@@ -60,6 +63,8 @@ export default function BC_Main() {
     getBreeders();
   }, [forms, page]);
 
+  const handleBoxClick = (breederId: number) => {};
+
   return (
     <Wrapper>
       <MainBox>
@@ -76,15 +81,24 @@ export default function BC_Main() {
             {breeders?.data.totalElements != 0 ? (
               <BoxContainer>
                 {breeders?.data.content.map((breeder, i) => (
-                  <BreederBox
+                  <Link
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      textDecoration: "none",
+                    }}
+                    to={`/breeder/${breeder.id}`}
                     key={breeder.id}
-                    id={breeder.id}
-                    nickname={breeder.nickname}
-                    distance={breeder.distance}
-                    types={breeder.types}
-                    profileImagUrl={breeder.profileImagUrl}
-                    verified={breeder.verified}
-                  />
+                  >
+                    <BreederBox
+                      id={breeder.id}
+                      nickname={breeder.nickname}
+                      distance={breeder.distance}
+                      types={breeder.types}
+                      profileImagUrl={breeder.profileImagUrl}
+                      verified={breeder.verified}
+                    />
+                  </Link>
                 ))}
               </BoxContainer>
             ) : (

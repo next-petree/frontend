@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +17,7 @@ export const MainBox = styled.div`
   border-radius: 32px;
   width: 74vw; //
   height: fit-content;
-  padding: 5% 3%; //
+  padding: 4% 3% 5% 3%; //
   min-width: 1075px;
   min-height: 725px;
   box-shadow: 0px 4px 6px 0px #00000017;
@@ -28,7 +29,7 @@ export const Title = styled.h1`
   color: #4ec1bf;
 `;
 export const BoxContainer = styled.div`
-  margin-top: 79px;
+  margin-top: 100px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr;
@@ -41,7 +42,7 @@ export const BoxContainer = styled.div`
 `;
 
 export const No_return = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 79px;
@@ -72,4 +73,9 @@ export const SearchBtn = styled.button`
   color: white;
   margin-top: -1vh;
   margin-bottom: -6vh;
+`;
+
+export const BoxWrapper = styled.div`
+  width: 100%;
+  height: 100%;
 `;
