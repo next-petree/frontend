@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   text-align: center;
 `;
 
@@ -27,7 +27,7 @@ export const TitleWrap = styled.div`
 `;
 export const TestModalWrap = styled.div`
   width: 600px;
-  height: 78vh;
+  height: 80vh;
   border-radius: 40px;
   display: flex;
   justify-content: space-evenly;
