@@ -17,11 +17,11 @@ const DogCard = ({ src, name, species, DOB, status, onClick }: IDCProps) => {
   return (
     <Card>
       <Container>
-        {status ? (
+        {status !== "AVAILABLE" ? (
           <ImageContainer>
             <Gradient></Gradient>
             <Image src={src} />
-            <Status>{status}</Status>
+            <Status>{status === "Done" ? "분양완료" : "분양중"}</Status>
           </ImageContainer>
         ) : (
           <ImageContainer>
@@ -43,7 +43,9 @@ const DogCard = ({ src, name, species, DOB, status, onClick }: IDCProps) => {
           </Desc>
         </DescContainer>
       </Container>
-      <Button onClick={onClick}>상세보기</Button>
+      <Button onClick={onClick} disabled={status !== "AVAILABLE"}>
+        상세보기
+      </Button>
     </Card>
   );
 };

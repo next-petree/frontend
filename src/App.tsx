@@ -19,6 +19,7 @@ import Result from "./pages/BasicTest/Result/Result";
 import Answer from "./pages/BasicTest/Answer/Answer";
 import Certify from "./pages/Certify/Certify";
 import IntroPage from "./pages/IntroPage/IntroPage";
+import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -37,11 +38,13 @@ function App() {
           path="/changepasswordresult"
           element={<ChangePasswordResult />}
         />
+        <Route path="" element={<PrivateRoute />}>
+          <Route path="/breeding-register" element={<BreedingRegister />} />
+          <Route path="/register-fillout" element={<RegisterFillOut />} />
+          <Route path="/breeding-complete" element={<BreedingComplete />} />
+        </Route>
         <Route path="/breeder/:id" element={<BreederDetails />} />
         <Route path="/customer-details" element={<CustomerDetails />} />
-        <Route path="/breeding-register" element={<BreedingRegister />} />
-        <Route path="/register-fillout" element={<RegisterFillOut />} />
-        <Route path="/breeding-complete" element={<BreedingComplete />} />
         <Route path="/test-description" element={<TestDesc />}></Route>
         <Route path="/basic-test" element={<Test />}></Route>
         <Route path="/result" element={<Result />}></Route>

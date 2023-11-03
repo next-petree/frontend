@@ -7,17 +7,25 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 
-export const TopContainer = styled.div`
-  position: absolute;
-  top: 279px;
-  left: 780px;
+export const CustomImage = styled.img`
+  width: 288px;
+  height: 264px;
+  object-fit: cover;
+  border-radius: 20px;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
+  gap: 30px;
 `;
 
-export const TopContainerText = styled.div`
+export const TextBox = styled.div`
   font-family: Noto Sans KR;
   font-size: 20px;
   font-weight: 400;
@@ -28,25 +36,7 @@ export const TopContainerText = styled.div`
   white-space: pre-wrap;
 `;
 
-export const BottomContainer = styled.div`
-  width: 349px;
-  height: 58px;
-  position: absolute;
-  top: 653px;
-  left: 785px;
-
-  font-family: Noto Sans KR;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 29px;
-  letter-spacing: -0.03em;
-  text-align: center;
-  color: #000000;
-
-  white-space: pre-wrap;
-`;
-
-export const BoldText = styled.span`
+export const CustomSpan = styled.span`
   font-family: Noto Sans KR;
   font-size: 20px;
   font-weight: 700;
@@ -56,16 +46,11 @@ export const BoldText = styled.span`
   color: #000000;
 `;
 
-export const ButtonContainer = styled.div`
-  position: absolute;
-  top: 761px;
-  left: 841px;
-`;
-
 export const Button = styled.button`
   width: 240px;
   height: 52px;
   padding: 29px, 327px;
+  margin-top: 10px;
   border-radius: 16px;
   background: #4ec1bf;
   font-family: Noto Sans KR;

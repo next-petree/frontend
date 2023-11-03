@@ -48,6 +48,7 @@ export default function BC_Main() {
       console.log(page, forms);
       const url = BreedersCollecturl({ page, forms });
       const response = await get<IBreedersAPI>(url);
+
       if (response.data.status === "FAIL") {
         throw "올바르지 못한 접근 입니다.";
       }
