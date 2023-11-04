@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-export const ModalWrapper = styled.div`
+export const ModalWrapper = styled.div<{
+  customtop: string;
+  customleft: string;
+}>`
   width: 900px;
   height: 822px;
   position: absolute;
-  top: 1140px;
-  left: 520px;
+  /* top: 1140px; */
+  top: ${(props) => props.customtop};
+  /* left: 520px; */
+  left: ${(props) => props.customleft};
   z-index: 3;
 `;
 
@@ -129,14 +134,18 @@ export const Button = styled.button`
   border: none;
   border-radius: 16px;
   gap: 10px;
-  background-color: #4ec1bf;
-  color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   line-height: 23px;
   letter-spacing: 0em;
   font-family: Noto Sans KR;
   cursor: pointer;
+  background: #4ec1bf;
+  color: #ffffff;
+
+  &:disabled {
+    background: #b7b7b7;
+  }
 `;
 
 export const DetailDescContainer = styled.div`

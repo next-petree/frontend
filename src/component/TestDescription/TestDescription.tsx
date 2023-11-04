@@ -1,5 +1,4 @@
 // 코드 파일
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -19,6 +18,7 @@ import TestInfo4 from '../../assets/images/TestInfo4.png';
 import TestInfo5 from '../../assets/images/TestInfo5.png';
 import TestDescComp from './TestDescriptionComp/TestDescComp';
 import LoginModal from '../Modal/LoginModal';
+import DecodeToken from '../../utils/DecodeJWT/DecodeJWT';
 
 const info = [
   {
@@ -85,11 +85,6 @@ function TestDescription() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    setIsLoggedIn(!!accessToken);
-  }, []);
-
-  useEffect(() => {
     const timeout = setTimeout(() => {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }, 1000);
@@ -103,13 +98,34 @@ function TestDescription() {
     }
   }, [currentIndex]);
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoggedIn(!!accessToken);
+  }, []);
+
   const handleStartTest = () => {
     if (!isLoggedIn) {
       window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
       setShowLoginModal(true);
       setErrorMessage('서비스 이용을 위해 로그인을 하세요.'); // 에러 메시지 설정
     } else {
-      navigate('/basic-test');
+      const getUser = DecodeToken();
+      if (!getUser) {
+        window.scroll({ top: 0, behavior: 'smooth' });
+        setShowLoginModal(true);
+        setErrorMessage('서비스 이용을 위해 로그인을 하세요.');
+      }
+      if (getUser.role === 'ADOPTER') {
+        navigate('/basic-test');
+      } else if (getUser.role === 'BREEDER') {
+        window.scroll({ top: 0, behavior: 'smooth' });
+        setShowLoginModal(true);
+        setErrorMessage('분양 희망자 회원이 아닙니다.');
+      } else {
+        window.scroll({ top: 0, behavior: 'smooth' });
+        setShowLoginModal(true);
+        setErrorMessage('서비스 이용을 위해 로그인을 하세요.');
+      }
     }
   };
   return (

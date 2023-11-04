@@ -9,24 +9,23 @@ import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
 import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
+import { useParams } from "react-router-dom";
 
 const BreederDetails = () => {
+  const { id } = useParams();
   const [isModalOpenClicked, setIsModalOpenClicked] = useState(false);
   const [selectedDogId, setSelectedDogId] = useState<number>();
 
-  // const id = 4;
   const {
     data: breeder,
     isLoading: loadingBreeder,
     isError,
-  } = useGetBreederDetailQuery(1);
+  } = useGetBreederDetailQuery(id);
 
   const handleDetailbuttonClick = (dogId: number) => {
     setSelectedDogId(dogId);
     setIsModalOpenClicked(true);
   };
-
-  console.log(breeder);
 
   return (
     <CustomLayout height={2040}>
@@ -90,8 +89,8 @@ const BreederDetails = () => {
           </S.MainDogContainer>
         </S.Frame113>
       </S.Frame62>
-      <WhiteBox width={1060} height={780} top={284} left={430}></WhiteBox>
-      <WhiteBox width={1060} height={854} top={1114} left={430}>
+      <WhiteBox width={1060} height={780} top={284} left={390}></WhiteBox>
+      <WhiteBox width={1060} height={854} top={1114} left={390}>
         <S.Frame63>
           <S.Title>보유견종</S.Title>
           <S.FlexBox>
@@ -115,6 +114,8 @@ const BreederDetails = () => {
       {isModalOpenClicked && (
         <S.ModalContainer>
           <DetailModal
+            customTop="1090px"
+            customLeft="520px"
             dogId={selectedDogId}
             onClick={() => setIsModalOpenClicked(false)}
           />

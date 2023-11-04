@@ -18,7 +18,7 @@ export const PetTreeTitleArea = styled.div`
 export const PetTreeIcon = styled.div`
   width: 72px;
   height: 72px;
-  background: url(${petTreeIconImage})center / cover no-repeat;
+  background: url(${petTreeIconImage}) center / cover no-repeat;
 `;
 
 export const Title = styled.div`

@@ -145,10 +145,15 @@ const BasicTest: React.FC = () => {
           if (
             error.response &&
             error.response?.data &&
-            (error.response?.data?.data === '분양희망자 회원이 아닙니다.' ||
-              error.response?.data?.data === '해당 회원을 찾을 수 없습니다.')
+            error.response?.data?.data === '분양희망자 회원이 아닙니다.'
           ) {
+            window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
             setErrorMessage('분양 희망자 회원이 아닙니다.'); // 에러 메시지 설정
+            setShowLoginModal(true); // 로그인 모달 보여주기
+          } else if (
+            error.response?.data?.data === '해당 회원을 찾을 수 없습니다.'
+          ) {
+            setErrorMessage('해당 회원을 찾을 수 없습니다.'); // 에러 메시지 설정
             setShowLoginModal(true); // 로그인 모달 보여주기
           } else {
             setErrorMessage('답변 제출 과정에서 오류가 발생했습니다.'); // 기본 에러 메시지 설정
@@ -191,12 +196,12 @@ const BasicTest: React.FC = () => {
       )}
       <TestWrapper>
         <TitleWrap>
-          <img src={petfoot} />
-          <img src={petree}></img>
+          <div>
+            <img src={petfoot} />
+            <img src={petree}></img>
+          </div>
         </TitleWrap>
         <TestModalWrap>
-          <TestTitle>반려견 기초 지식 테스트</TestTitle>
-
           {currentQuestion && (
             <>
               <TestComp

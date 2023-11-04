@@ -32,7 +32,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
         onClose();
       }
     };
-
     // 이벤트 리스너를 등록합니다.
     document.addEventListener('mousedown', handleClickOutside);
     return () => {

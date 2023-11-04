@@ -107,4 +107,7 @@ export const Button = styled.button`
   letter-spacing: 0em;
   font-family: Noto Sans KR;
   cursor: pointer;
+  &:disabled {
+    background: #b7b7b7;
+  }
 `;

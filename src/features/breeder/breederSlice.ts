@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 export interface IBreederState {
   id: number;
@@ -10,7 +11,7 @@ export interface IBreederState {
   verified: boolean;
   distance: number;
   types: string[];
-  profileImagUrl: string;
+  profileImagUrl?: string;
 }
 
 const initialState: IBreederState = {
@@ -28,7 +29,16 @@ const initialState: IBreederState = {
 export const breederSlice = createSlice({
   name: "breeder",
   initialState,
-  reducers: {},
+  reducers: {
+    setProfileImg: (state, action: PayloadAction<string>) => {
+      state.profileImagUrl = action.payload;
+    },
+  },
 });
+
+export const { setProfileImg } = breederSlice.actions;
+
+export const selectBreederProfile = (state: RootState) =>
+  state.breeder.profileImagUrl;
 
 export default breederSlice.reducer;
