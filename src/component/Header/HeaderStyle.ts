@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 import petTreeIconImage from "../../assets/icons/header_pets_black_24dp.png";
@@ -61,11 +61,20 @@ export const NavigationLink = styled(Link)`
   margin-right: 20px;
 `;
 
-export const UserProfileImage = styled.div`
+export const UserProfileImage = styled.div<{
+  imgSrc?: string;
+}>`
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  background: url(${userProfileImage}) no-repeat center;
+  ${(props) =>
+    props.imgSrc
+      ? css`
+          background: url(${props.imgSrc}) no-repeat center;
+        `
+      : css`
+          background: url(${userProfileImage}) no-repeat center;
+        `}
   background-size: contain;
 `;

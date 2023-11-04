@@ -37,7 +37,10 @@ export const BottomBox = styled.div`
   gap: 8px;
 `;
 
-export const UserProfileImage = styled.div<{ imgSrc?: string }>`
+
+export const UserProfileImage = styled.div<{
+  imgSrc?: string;
+}>`
   width: 32px;
   height: 32px;
   border-radius: 50%;

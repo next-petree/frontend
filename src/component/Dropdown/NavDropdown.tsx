@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
 
 import * as S from "./styles";
-import { useState } from "react";
+
 
 interface ILogoutResponse {
   data: string;
