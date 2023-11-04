@@ -67,8 +67,9 @@ export const UserProfileImage = styled.div<{
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  cursor: pointer;
   object-fit: cover;
-  ${(props) =>
+  ${props =>
     props.imgSrc
       ? css`
           background: url(${props.imgSrc}) no-repeat center;

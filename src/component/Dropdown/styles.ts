@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import userProfileImage from "../../assets/icons/Group 21.jpg";
 
 export const Wrapper = styled.div`
-  width: 300px;
-  height: 168px;
+  width: 280px;
+  height: 120px;
   padding: 22px 26px;
   border-radius: 32px;
 
@@ -23,7 +23,9 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TopBox = styled.div`
@@ -37,7 +39,6 @@ export const BottomBox = styled.div`
   gap: 8px;
 `;
 
-
 export const UserProfileImage = styled.div<{
   imgSrc?: string;
 }>`
@@ -46,7 +47,7 @@ export const UserProfileImage = styled.div<{
   border-radius: 50%;
   object-fit: cover;
 
-  ${(props) =>
+  ${props =>
     props.imgSrc
       ? css`
           background: url(${props.imgSrc}) no-repeat center;
@@ -61,7 +62,7 @@ export const UserProfileImage = styled.div<{
 export const TextBox = styled.div`
   font-family: Noto Sans KR;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
@@ -74,9 +75,10 @@ export const Button = styled.button<{ primary?: boolean }>`
   height: 58px;
   border-radius: 16px;
   gap: 10px;
+  font-size: 16px;
   color: #ffffff;
   cursor: pointer;
-  ${(props) =>
+  ${props =>
     props.primary
       ? css`
           background: #4ec1bf;

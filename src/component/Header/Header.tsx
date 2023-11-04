@@ -16,7 +16,6 @@ import {
 import NavDropdown from "../Dropdown/NavDropdown";
 import DecodeToken from "../../utils/DecodeJWT/DecodeJWT";
 
-
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isCilcked, setIsCilcked] = useState<boolean>(false);
@@ -25,7 +24,7 @@ const Header = () => {
   console.log(profileImg);
 
   const handleClick = () => {
-    setIsCilcked((prev) => !prev);
+    setIsCilcked(prev => !prev);
   };
 
   const decodedData = DecodeToken();
@@ -68,7 +67,6 @@ const Header = () => {
       {isCilcked && (
         <NavDropdown profileUrl={profileImg} loggedIn={isLoggedIn} />
       )}
-
     </Container>
   );
 };
