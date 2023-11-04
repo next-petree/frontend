@@ -3,7 +3,6 @@ import { get } from "../../api/api";
 
 import * as S from "./styles";
 
-
 interface ILogoutResponse {
   data: string;
   status: string;
@@ -14,34 +13,27 @@ interface IDropdownProps {
   loggedIn?: boolean;
 }
 
-const NavDropdown = ({ profileUrl, loggedIn }: IDropdownProps) => {
+const NavDropdown = ({ loggedIn }: IDropdownProps) => {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    if (!loggedIn) {
-      navigate("/login");
-    } else {
-      alert("이미 로그인 상태입니다.");
-    }
+    navigate("/login");
   };
+
   const handleLogoutClick = async () => {
-    if (loggedIn) {
-      try {
-        const res = await get<ILogoutResponse>("/logout");
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        if (res.data.status === "SUCCESS") {
-          alert(res.data.data);
-          navigate("/login");
-        }
-      } catch (error: any) {
-        console.error(
-          "로그아웃 에러:",
-          error.response ? error.response.data : error.message
-        );
+    try {
+      const res = await get<ILogoutResponse>("/logout");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      if (res.data.status === "SUCCESS") {
+        alert(res.data.data);
+        navigate("/login");
       }
-    } else {
-      alert("로그인이 되어 있지 않습니다.");
+    } catch (error: any) {
+      console.error(
+        "로그아웃 에러:",
+        error.response ? error.response.data : error.message,
+      );
     }
   };
 
@@ -49,17 +41,21 @@ const NavDropdown = ({ profileUrl, loggedIn }: IDropdownProps) => {
     <S.Wrapper>
       <S.Container>
         <S.TopBox>
-          <S.UserProfileImage imgSrc={profileUrl}></S.UserProfileImage>
           <S.TextBox>
-            서비스 이용을 위해{"\n"}
-            로그인을 하세요.
+            {loggedIn
+              ? "서비스 종료를 위해 로그아웃 하세요."
+              : "서비스 이용을 위해 로그인 하세요."}
           </S.TextBox>
         </S.TopBox>
         <S.BottomBox>
-          <S.Button primary onClick={handleLoginClick}>
-            로그인
-          </S.Button>
-          <S.Button onClick={handleLogoutClick}>로그아웃</S.Button>
+          {!loggedIn && (
+            <S.Button primary onClick={handleLoginClick}>
+              로그인
+            </S.Button>
+          )}
+          {loggedIn && (
+            <S.Button onClick={handleLogoutClick}>로그아웃</S.Button>
+          )}
         </S.BottomBox>
       </S.Container>
     </S.Wrapper>
