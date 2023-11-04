@@ -3,6 +3,7 @@ import { get } from "../../api/api";
 
 import * as S from "./styles";
 
+
 interface ILogoutResponse {
   data: string;
   status: string;

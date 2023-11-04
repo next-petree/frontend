@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { selectBreederProfile } from "../../features/breeder/breederSlice";
+
 import {
   Container,
   TitleArea,
@@ -14,6 +15,7 @@ import {
 
 import NavDropdown from "../Dropdown/NavDropdown";
 import DecodeToken from "../../utils/DecodeJWT/DecodeJWT";
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -66,6 +68,7 @@ const Header = () => {
       {isCilcked && (
         <NavDropdown profileUrl={profileImg} loggedIn={isLoggedIn} />
       )}
+
     </Container>
   );
 };

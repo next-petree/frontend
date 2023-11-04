@@ -37,6 +37,7 @@ export const BottomBox = styled.div`
   gap: 8px;
 `;
 
+
 export const UserProfileImage = styled.div<{
   imgSrc?: string;
 }>`
