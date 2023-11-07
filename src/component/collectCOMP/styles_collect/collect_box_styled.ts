@@ -39,7 +39,7 @@ export const Availtext = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
