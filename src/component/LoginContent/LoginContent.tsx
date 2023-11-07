@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
+import alertList from "../../utils/swal";
 import { setProfileImg } from "../../features/breeder/breederSlice";
 
 import {
@@ -27,6 +28,7 @@ import {
   SignUpButtonArea,
   SignUpButton,
 } from "./LoginContentStyle";
+import Swal from "sweetalert2";
 
 type LoginResponse = {
   status: string;
@@ -65,8 +67,7 @@ const LoginContent = () => {
       console.log(response);
 
       if (response.data.status === "SUCCESS") {
-        console.log("로그인 성공", response.data);
-        alert("로그인에 성공했습니다!");
+        await Swal.fire(alertList.successMessage("로그인에 성공했습니다."));
 
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
@@ -74,12 +75,12 @@ const LoginContent = () => {
         dispath(setProfileImg(response.data.data.profileImgUrl!));
         navigate("/");
       } else if (response.data.status === "FAIL") {
-        alert(response.data.data);
+        await Swal.fire(alertList.errorMessage(`${response.data.data}`));
       }
     } catch (error: any) {
       console.error(
         "로그인 에러:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
       alert("로그인 과정에서 오류가 발생했습니다.");
     }
@@ -100,7 +101,7 @@ const LoginContent = () => {
           <EmailText>이메일</EmailText>
           <EmailInput
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           ></EmailInput>
         </EmailInputArea>
         <PassWordInputArea>
@@ -108,7 +109,7 @@ const LoginContent = () => {
           <PassWordInput
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           ></PassWordInput>
         </PassWordInputArea>
 

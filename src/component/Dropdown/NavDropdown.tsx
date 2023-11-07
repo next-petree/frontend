@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
+import alertList from "../../utils/swal";
 
 import * as S from "./styles";
+import Swal from "sweetalert2";
 
 interface ILogoutResponse {
   data: string;
@@ -26,7 +28,10 @@ const NavDropdown = ({ loggedIn }: IDropdownProps) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       if (res.data.status === "SUCCESS") {
-        alert(res.data.data);
+        await Swal.fire({
+          ...alertList.successMessage(`${res.data.data}`),
+          width: "350px",
+        });
         navigate("/login");
       }
     } catch (error: any) {
