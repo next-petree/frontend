@@ -70,7 +70,7 @@ const Banner = () => {
           </S.Text>
         </S.InnerContainer>
       </S.IconContainer>
-      <img src={IMG1} alt="" />
+      <S.Image src={IMG1} alt="" />
     </S.CustomBanner>
   );
 };
