@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import BreederCollect from "./pages/collects/breedercollect";
-import DogyCollect from "./pages/collects/dogycollect";
+import BreederCollect from "./pages/Collects/breedercollect";
+import DogyCollect from "./pages/Collects/dogycollect";
 import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
 import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
 import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
@@ -20,6 +20,7 @@ import Answer from "./pages/BasicTest/Answer/Answer";
 import Certify from "./pages/Certify/Certify";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
+import MyPage from "./pages/MyPage/mypage";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
         <Route path="/certify" element={<Certify />}></Route>
+        <Route path="/mypage" element={<MyPage/>}></Route>
       </Routes>
     </>
   );
