@@ -5,7 +5,7 @@ export const BoxsContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: fit-content;
-  margin-top: 284px;
+  margin-top: 30.65vh;
   background: none;
   gap: 1.5vw;
   margin-bottom: 20vh;
