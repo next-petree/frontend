@@ -20,7 +20,7 @@ import Answer from "./pages/BasicTest/Answer/Answer";
 import Certify from "./pages/Certify/Certify";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
-import MyPage from "./pages/MyPage/mypage";
+import ModifyAuth from "./pages/MyPage/modifyauth";
 
 function App() {
   return (
@@ -51,7 +51,7 @@ function App() {
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
         <Route path="/certify" element={<Certify />}></Route>
-        <Route path="/mypage" element={<MyPage/>}></Route>
+        <Route path="/mypage/modifyauth" element={<ModifyAuth/>}></Route>
       </Routes>
     </>
   );

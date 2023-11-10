@@ -3,14 +3,24 @@ import { styled } from "styled-components";
 export const NavBarContainer = styled.div`
   background-color: white;
   width: 16vw;
-  height: 80vh;
+  height: 113vh;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 20px;
   z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 1vh;
+  :first-child{
+    &:hover{
+      border-radius: 20px 20px  0 0;
+    }
+  }
+  :last-child {
+    &:hover{
+      border-radius: 0 0 20px 20px;
+    }
+  }
+  
 `;
 
 export const Main = styled.div`
@@ -21,11 +31,14 @@ export const Main = styled.div`
 
 export const CategoryContainer = styled.div`
   width: 100%;
-  height: 8.5%;
+  height: 8%;
   padding: 1.5vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover{
+    background-color: #f5f5f5;
+  }
 `;
 
 export const Category = styled.div`
@@ -36,9 +49,12 @@ export const Category = styled.div`
 
 export const AuthDeleteContainer = styled.div`
   width: 100%;
-  height: 8.5%;
+  height: 8%;
   padding: 1.5vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;

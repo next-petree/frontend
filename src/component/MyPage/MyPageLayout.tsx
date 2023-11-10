@@ -1,23 +1,17 @@
 import styled from "styled-components";
 import Navbar from "./Navbar/Navbar";
 import { BoxsContainer } from "./styles";
+import ModifyAuthContent from "./ModifyAuthContent/ModifyAuthContent";
 
+interface IMypage {
+  where: string;
+}
 
-
-const Content = styled.div`
-  background-color: white;
-  width: 55vw;
-  height: 10vw;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
-  border-radius: 32px;
-  z-index: 100;
-`;
-
-const MyPageLayout = () => {
+const MyPageLayout = ({ where }: IMypage) => {
   return (
     <BoxsContainer>
-      <Navbar/>
-      <Content>aa</Content>
+      <Navbar />
+      {where === "ModifyAuth" ? <ModifyAuthContent /> : null}
     </BoxsContainer>
   );
 };
