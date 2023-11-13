@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import ModifyAuthForm from "./Forms/ModifyAuthForm";
+import ModifyAuthForm from "./ModifyAuth_Forms/ModifyAuthForm";
 import ChangePassword from "../../../pages/ChangePassword/ChangePassword";
-import ChangePwForm from "./Forms/ChangePwForm";
+import ChangePwForm from "./ModifyAuth_Forms/ChangePwForm";
 
 const Wrapper = styled.div`
   display: flex;

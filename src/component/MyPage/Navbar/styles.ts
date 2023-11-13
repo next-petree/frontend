@@ -10,33 +10,27 @@ export const NavBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  :first-child{
-    &:hover{
-      border-radius: 20px 20px  0 0;
+  :first-child {
+    &:hover {
+      border-radius: 20px 20px 0 0;
     }
   }
-  :last-child {
-    &:hover{
-      border-radius: 0 0 20px 20px;
-    }
-  }
-  
 `;
 
 export const Main = styled.div`
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 `;
 
-
-export const CategoryContainer = styled.div`
+export const CategoryContainer = styled.div<{isHere:boolean}>`
   width: 100%;
   height: 8%;
   padding: 1.5vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover{
+  background-color: ${props => props.isHere ? "#f5f5f5" : ""};
+  &:hover {
     background-color: #f5f5f5;
   }
 `;
@@ -56,5 +50,6 @@ export const AuthDeleteContainer = styled.div`
   align-items: center;
   &:hover {
     background-color: #f5f5f5;
+    border-radius: 0 0 20px 20px;
   }
 `;
