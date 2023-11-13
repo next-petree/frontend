@@ -67,7 +67,7 @@ export const Input = styled.input<{ islen: string }>`
       : null};
   height: 48px;
   border-radius: 12px;
-  background-color: #fefefe;
+  background-color: #f5f5f5;
   padding-left: 14px;
   ::placeholder {
     font-family: "Noto Sans KR", sans-serif;

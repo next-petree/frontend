@@ -21,6 +21,7 @@ import Certify from "./pages/Certify/Certify";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import ModifyAuth from "./pages/MyPage/modifyauth";
+import Profile from "./pages/MyPage/profile";
 
 function App() {
   return (
@@ -51,7 +52,8 @@ function App() {
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
         <Route path="/certify" element={<Certify />}></Route>
-        <Route path="/mypage/modifyauth" element={<ModifyAuth/>}></Route>
+        <Route path="/mypage/modifyauth" element={<ModifyAuth />}></Route>
+        <Route path="/mypage/profile" element={<Profile />}></Route>
       </Routes>
     </>
   );
