@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
+import alertList from "../../utils/swal";
+import Swal from "sweetalert2";
 
 import {
   Container,
@@ -52,15 +54,16 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       });
 
       if (response.status === 200) {
-        alert("인증 번호가 발송되었습니다.");
+        await Swal.fire(alertList.successMessage("인증번호가 발송되었습니다."));
       } else {
-        alert("문자 발송에 실패하였습니다.");
+        await Swal.fire(
+          alertList.errorMessage("인증번호 발송에 실패했습니다."),
+        );
       }
     } catch (error) {
-      console.error("SMS 발송 에러:", error);
-
-      alert("전화번호를 정확히 입력해주세요.");
-
+      await Swal.fire(
+        alertList.errorMessage("전화번호를 정확히 입력해주세요."),
+      );
     }
   };
 
@@ -86,19 +89,18 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       });
 
       if (response.data.status === "SUCCESS") {
-        alert("인증에 성공하였습니다!");
+        await Swal.fire(alertList.successMessage("인증에 성공했습니다."));
         setPhoneNumberChecked(true);
       } else if (
         response.data.status === "FAIL" &&
         typeof response.data.data !== "string"
       ) {
-        alert(response.data.data.code);
+        await Swal.fire(alertList.errorMessage(`${response.data.data.code}`));
       }
     } catch (error) {
-      console.error("SMS 인증 에러:", error);
-
-      alert("인증번호를 정확히 입력해주세요.");
-
+      await Swal.fire(
+        alertList.errorMessage("인증과정에서 에러가 발생했습니다."),
+      );
     }
   };
 
@@ -110,21 +112,21 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       });
 
       if (response.data.status === "SUCCESS") {
-        navigate("/findemailresult", {
+        navigate("/find-email-result", {
           state: { email: response.data.data.email },
         });
       } else if (
         response.data.status === "FAIL" &&
         typeof response.data.data !== "string"
       ) {
-        alert(response.data.data.code);
+        await Swal.fire(alertList.errorMessage(`${response.data.data.code}`));
       }
     } catch (error) {
-      console.error("이메일 찾기 에러:", error);
-      alert("이메일 찾기 중 오류가 발생하였습니다.");
+      await Swal.fire(
+        alertList.errorMessage("이메일 찾기 중 에러가 발생했습니다"),
+      );
     }
   };
-
 
   const findPassword = async () => {
     try {
@@ -135,22 +137,21 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
       });
 
       if (response.data.status === "SUCCESS") {
-        navigate("/changepassword", {
+        navigate("/change-password", {
           state: { password: response.data.data },
         });
       } else if (
         response.data.status === "FAIL" &&
         typeof response.data.data !== "string"
       ) {
-        alert(response.data.data.code);
+        await Swal.fire(alertList.errorMessage(`${response.data.data.code}`));
       }
     } catch (error) {
-      console.error("비밀번호 찾기 에러:", error);
-
-      alert("비밀번호 찾기 중 오류가 발생하였습니다.");
+      await Swal.fire(
+        alertList.errorMessage("비밀번호 찾기 중 에러가 발생했습니다"),
+      );
     }
   };
-
 
   return (
     <Container>
@@ -161,7 +162,6 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         <CharacterImage />
         <InnerContentArea>
           <NameInputArea>
-
             <NameText>{pageType === "findemail" ? "이름" : "이메일"}</NameText>
 
             <NameInput
@@ -193,18 +193,17 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
 
           <FindPasswordButtonArea>
             {pageType === "findemail" ? (
-              <FindPasswordButton to="/findpassword">
+              <FindPasswordButton to="/find-password">
                 비밀번호 찾기
               </FindPasswordButton>
             ) : (
-              <FindEmailButton to="/findemail">이메일 찾기</FindEmailButton>
+              <FindEmailButton to="/find-email">이메일 찾기</FindEmailButton>
             )}
           </FindPasswordButtonArea>
         </InnerContentArea>
       </ContentArea>
 
       <CheckButtonArea>
-
         {pageType === "findemail" ? (
           <CheckButton onClick={findEmail}>확인</CheckButton>
         ) : (

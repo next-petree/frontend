@@ -8,6 +8,7 @@ import BreederDetails from "./pages/breeder-details/BreederDetails";
 import CustomerDetails from "./pages/customer-details/CustomerDetails";
 import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/LoginCheckForKakao/LoginCheckForKakao";
+import Register from "./pages/Register/Register";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
 import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
@@ -32,12 +33,13 @@ function App() {
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
-        <Route path="/findemail" element={<FindEmail />} />
-        <Route path="/findpassword" element={<FindPassword />} />
-        <Route path="/findemailresult" element={<FindEmailResult />} />
-        <Route path="/changepassword" element={<ChangePassword />} />
+        <Route path="register" element={<Register />} />
+        <Route path="/find-email" element={<FindEmail />} />
+        <Route path="/find-password" element={<FindPassword />} />
+        <Route path="/find-email-result" element={<FindEmailResult />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route
-          path="/changepasswordresult"
+          path="/change-password-result"
           element={<ChangePasswordResult />}
         />
         <Route path="" element={<PrivateRoute />}>
