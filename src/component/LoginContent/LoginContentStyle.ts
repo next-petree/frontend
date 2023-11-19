@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import petTreeIconImage from '../../assets/icons/pets_black_24dp.png';
+import petTreeIconImage from "../../assets/icons/pets_black_24dp.png";
 
 export const Container = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   color: #4fd4d2;
-  font-family: 'LotteriaChab';
+  font-family: "LotteriaChab";
   font-size: 40px;
   font-weight: 400;
 `;
@@ -173,8 +173,9 @@ export const SignUpButtonArea = styled.div`
   font-family: Noto Sans KR;
 `;
 
-export const SignUpButton = styled.button`
+export const SignUpButton = styled(Link)`
   background-color: transparent;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   font-size: 16px;

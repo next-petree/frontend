@@ -36,7 +36,7 @@ const FindEmailOrPasswordResult = ({ pageType }: Props) => {
       <ButtonArea>
         <LoginPageButton to="/login">로그인</LoginPageButton>
         {pageType === "findemailresult" && (
-          <FindPassword to="/findpassword">비밀번호 찾기</FindPassword>
+          <FindPassword to="/find-password">비밀번호 찾기</FindPassword>
         )}
       </ButtonArea>
     </Container>
