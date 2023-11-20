@@ -179,6 +179,7 @@ export const SignUpButton = styled(Link)`
   border: none;
   cursor: pointer;
   font-size: 16px;
+  color: inherit;
   margin-left: 5px;
   font-family: Noto Sans KR;
 `;
