@@ -82,7 +82,9 @@ const LoginContent = () => {
         "로그인 에러:",
         error.response ? error.response.data : error.message,
       );
-      alert("로그인 과정에서 오류가 발생했습니다.");
+      await Swal.fire(
+        alertList.errorMessage("로그인 과정에서 오류가 발생했습니다."),
+      );
     }
   };
 

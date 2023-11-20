@@ -158,11 +158,12 @@ export const NextButton = styled.button`
   padding: 13px 25px;
   border: none;
   border-radius: 16px;
-  background-color: #35d8d5;
+  background-color: #4ec1bf;
   color: #fff;
   font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;

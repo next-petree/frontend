@@ -29,11 +29,11 @@ const SelectButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 270px;
+  width: 240px;
   padding: 13px 25px;
   border: none;
   border-radius: 16px;
-  background-color: #35d8d5;
+  background-color: #4ec1bf;
   color: #fff;
   font-family: Noto Sans KR;
   font-size: 18px;
@@ -73,7 +73,7 @@ const InfomationText = styled.div`
 const ShortInput = styled.input`
   width: 200px;
   height: 20px;
-  padding: 10px;
+  padding: 13px 25px;
   border: none;
   border-radius: 12px;
   background-color: #f5f5f5;
@@ -87,9 +87,9 @@ const ShortInput = styled.input`
 `;
 
 const LongInput = styled.input`
-  width: 310px;
+  width: 320px;
   height: 20px;
-  padding: 10px;
+  padding: 13px 25px;
   border: none;
   border-radius: 12px;
   background-color: #f5f5f5;
@@ -103,9 +103,9 @@ const LongInput = styled.input`
 `;
 
 const CheckButton = styled.button`
-  width: 100px;
-  height: 40px;
-  padding: 7px;
+  width: 110px;
+  height: 45px;
+  padding: 13px 25px;
   border: none;
   border-radius: 12px;
   background-color: #4ec1bf;
@@ -306,7 +306,7 @@ export const RegisterButton = styled.button`
   padding: 13px 25px;
   border: none;
   border-radius: 16px;
-  background-color: #35d8d5;
+  background-color: #4ec1bf;
   color: #fff;
   font-family: Noto Sans KR;
   font-size: 18px;
