@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -156,7 +155,7 @@ export const NextButton = styled.button`
   align-items: center;
   justify-content: center;
   width: 240px;
-  padding: 17px 20px;
+  padding: 13px 25px;
   border: none;
   border-radius: 16px;
   background-color: #35d8d5;
