@@ -1,19 +1,21 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-function useModal() {
+const useModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState('');
 
-  const showModal = () => {
+  const showModal = useCallback((content: any) => {
     setIsModalVisible(true);
+    setModalContent(content);
     document.body.style.overflow = 'hidden'; // 모달이 열렸을 때 뒷배경 스크롤 막기
-  };
+  }, []);
 
-  const hideModal = () => {
+  const hideModal = useCallback(() => {
     setIsModalVisible(false);
     document.body.style.overflow = 'auto'; // 모달이 닫혔을 때 뒷배경 스크롤 허용
-  };
+  }, []);
 
-  return { isModalVisible, showModal, hideModal };
-}
+  return { isModalVisible, showModal, hideModal, modalContent };
+};
 
 export default useModal;

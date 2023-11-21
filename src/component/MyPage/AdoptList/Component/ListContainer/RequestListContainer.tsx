@@ -11,6 +11,7 @@ import {
   DisNone,
   DropDownWrap,
   Selected,
+  PageNationWrap,
 } from './RequestListStyle';
 import arrowDown from '../../../../../assets/images/arrowDown.png';
 import TableComp from '../TableComponent/TableComp';
@@ -23,7 +24,6 @@ export const Container = styled.div`
   border-radius: 32px;
   padding: 4vw 3vw 2.5vw;
   z-index: 100;
-  border: 1px solid green;
 `;
 type Column = {
   Header: string;
@@ -37,10 +37,10 @@ type dataType = {
 };
 
 const RequestListContainer = () => {
-  const [fontSize, setFontSize] = useState('12px');
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('내역을 검색하세요');
   const [select, setSelect] = useState('항목을 선택해주세요');
+
   const headerData: Column[] = [
     { accessor: 'name', Header: '분양희망자' },
     { accessor: 'breed', Header: '강아지(견종명)' },
@@ -164,6 +164,17 @@ const RequestListContainer = () => {
             <Button onClick={getValue}>검색</Button>
           </SearchWrap>
           <TableComp columns={Theaders} data={items}></TableComp>
+          <PageNationWrap>
+            <div>
+              <button>&lt;</button>
+              <button>1</button>
+              <button>2</button>
+              <button>3</button>
+              <button>4</button>
+              <button>5</button>
+              <button>&gt;</button>
+            </div>
+          </PageNationWrap>
         </>
       ) : location.pathname === '/adoptlist/adopter' ? (
         <div>Adopter</div>

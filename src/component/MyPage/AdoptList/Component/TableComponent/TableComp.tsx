@@ -1,13 +1,6 @@
 import { useTable } from 'react-table';
-import {
-  Table,
-  THead,
-  TBody,
-  DetailButton,
-  Tr,
-  Th,
-  Td,
-} from './TableCompStyle';
+import RowModal from '../Modal/Breeder/BreederRowModal';
+import { Table, THead, TBody, Tr, Th, Td } from './TableCompStyle';
 
 type dataType = {
   name: string;
@@ -30,7 +23,6 @@ const TableComp = ({
 }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
-
   return (
     <Table {...getTableProps()}>
       <THead>
@@ -50,7 +42,6 @@ const TableComp = ({
         {rows.map((row, i) => {
           prepareRow(row);
           return (
-            // getRowProps는 각 row data를 호출해낸다
             <Tr
               {...row.getRowProps()}
               style={
@@ -61,12 +52,13 @@ const TableComp = ({
             >
               <Td>{i + 1}</Td>
               {row.cells.map((cell) => (
-                // getCellProps는 각 cell data를 호출해낸다
                 <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
               ))}
-              <Td>
-                <DetailButton>상세보기</DetailButton>
-              </Td>
+              <RowModal
+                index={i}
+                breed={row.original.breed}
+                bday={row.original.bday}
+              />
             </Tr>
           );
         })}

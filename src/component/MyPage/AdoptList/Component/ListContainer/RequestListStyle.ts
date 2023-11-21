@@ -77,3 +77,24 @@ export const Button = styled.button`
   height: 50px;
   cursor: pointer;
 `;
+export const PageNationWrap = styled.div`
+  text-align: center;
+  margin: 20px;
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    button {
+      cursor: pointer;
+      background: #fff;
+      width: 25px;
+      height: 25px;
+      border: 1px solid #dfe3e8;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+`;

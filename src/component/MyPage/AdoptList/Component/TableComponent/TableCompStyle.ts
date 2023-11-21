@@ -39,13 +39,3 @@ export const Th = styled.th`
 export const Td = styled.td`
   width: 16%;
 `;
-export const DetailButton = styled.button`
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  background: #4ec1bf;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 15px;
-  cursor: pointer;
-`;
