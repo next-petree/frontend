@@ -1,4 +1,25 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
+import {
+  TitleWrap,
+  Title,
+  SubTitle,
+  SearchWrap,
+  DropDown,
+  Input,
+  Button,
+  Table,
+  THead,
+  TBody,
+  DetailButton,
+  Tr,
+  DisNone,
+  DropDownWrap,
+  Selected,
+  Th,
+  Td,
+} from './RequestListStyle';
+import arrowDown from '../../../assets/images/arrowDown.png';
 
 export const Container = styled.div`
   background-color: white;
@@ -12,41 +33,109 @@ export const Container = styled.div`
 `;
 
 const RequestListContainer = () => {
+  const [fontSize, setFontSize] = useState('12px');
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('내용을 입력하세요');
+
+  const handleInputChange = (event: any) => {
+    const value = event.target.value;
+    if (value !== '내용을 입력하세요') {
+      setInputValue(value);
+    }
+  };
+
+  function DropOpen() {
+    if (isOpen === false) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }
   return (
     <Container>
       {location.pathname === '/adoptlist/breeder' ? (
         <>
-          <div>
-            <h3>분양신청내역</h3>
-            <p>분양 승인 시, 분양희망자의 연락처가 공개됩니다.</p>
-          </div>
-          <div>
-            <div>검색</div>
-            <div>인풋창</div>
-            <button>검색</button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>분양 희망자</th>
-                <th>출생일</th>
-                <th>강아지(견종명)</th>
-                <th>분양상태</th>
-                <th>신청내역</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1-1</th>
-                <th>1-2</th>
-              </tr>
-              <tr>
-                <th>2-1</th>
-                <th>2-2</th>
-              </tr>
-            </tbody>
-          </table>
+          <TitleWrap>
+            <Title>분양신청내역</Title>
+            <SubTitle>분양 승인 시, 분양희망자의 연락처가 공개됩니다.</SubTitle>
+          </TitleWrap>
+          <SearchWrap>
+            <DropDown>
+              <Selected
+                onClick={() => {
+                  DropOpen();
+                }}
+              >
+                <div>항목을 선택해주세요</div>
+                <img src={arrowDown} />
+              </Selected>
+              {isOpen ? (
+                <DropDownWrap>
+                  <div className="sel">전체</div>
+                  <div className="sel">견종</div>
+                  <div className="sel">강아지 이름</div>
+                </DropDownWrap>
+              ) : (
+                <DisNone>
+                  <div className="sel">전체</div>
+                  <div className="sel">견종</div>
+                  <div className="sel">강아지 이름</div>
+                </DisNone>
+              )}
+            </DropDown>
+            <Input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+            ></Input>
+            <Button>검색</Button>
+          </SearchWrap>
+          <Table>
+            <THead>
+              <Tr>
+                <Th>No</Th>
+                <Th>분양 희망자</Th>
+                <Th>출생일</Th>
+                <Th>강아지(견종명)</Th>
+                <Th>분양상태</Th>
+                <Th>신청내역</Th>
+              </Tr>
+            </THead>
+            <TBody>
+              <Tr>
+                <Td>1</Td>
+                <Td>종욱</Td>
+                <Td>2020-01-01</Td>
+                <Td>아리(구미호)</Td>
+                <Td>분양 승인</Td>
+                <Td>
+                  <DetailButton
+                    onClick={() => {
+                      console.log('상세보기');
+                    }}
+                  >
+                    상세보기
+                  </DetailButton>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>1</Td>
+                <Td>종욱</Td>
+                <Td>2020-01-01</Td>
+                <Td>아리(구미호)</Td>
+                <Td>분양 승인</Td>
+                <Td>
+                  <DetailButton
+                    onClick={() => {
+                      console.log('상세보기');
+                    }}
+                  >
+                    상세보기
+                  </DetailButton>
+                </Td>
+              </Tr>
+            </TBody>
+          </Table>
         </>
       ) : location.pathname === '/adoptlist/adopter' ? (
         <div>Adopter</div>

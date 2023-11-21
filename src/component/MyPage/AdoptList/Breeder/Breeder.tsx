@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import BreederForm from './BreederForm';
 import RequestListContainer from '../RequestListContainer';
 
 const Wrapper = styled.div`
@@ -13,7 +12,6 @@ const Wrapper = styled.div`
 export default function AdoptListBreeder() {
   return (
     <Wrapper>
-      {/* <BreederForm /> */}
       <RequestListContainer />
     </Wrapper>
   );
