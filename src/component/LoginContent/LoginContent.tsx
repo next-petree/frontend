@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
 import alertList from "../../utils/swal";
+import Swal from "sweetalert2";
 import { setProfileImg } from "../../features/breeder/breederSlice";
 
 import {
@@ -28,7 +29,6 @@ import {
   SignUpButtonArea,
   SignUpButton,
 } from "./LoginContentStyle";
-import Swal from "sweetalert2";
 
 type LoginResponse = {
   status: string;
@@ -82,7 +82,9 @@ const LoginContent = () => {
         "로그인 에러:",
         error.response ? error.response.data : error.message,
       );
-      alert("로그인 과정에서 오류가 발생했습니다.");
+      await Swal.fire(
+        alertList.errorMessage("로그인 과정에서 오류가 발생했습니다."),
+      );
     }
   };
 
@@ -114,8 +116,8 @@ const LoginContent = () => {
         </PassWordInputArea>
 
         <FindIdOrPassWordArea>
-          <FindIdButton to="/findemail">아이디</FindIdButton> /
-          <FindPassWordButton to="/findpassword">비밀번호</FindPassWordButton>
+          <FindIdButton to="/find-email">아이디</FindIdButton> /
+          <FindPassWordButton to="/find-password">비밀번호</FindPassWordButton>
           찾기
         </FindIdOrPassWordArea>
 
@@ -129,7 +131,7 @@ const LoginContent = () => {
 
           <SignUpButtonArea>
             아직 회원이 아니라면?
-            <SignUpButton>회원가입</SignUpButton>
+            <SignUpButton to="/register">회원가입</SignUpButton>
           </SignUpButtonArea>
         </LoginOrSignUpButtonArea>
       </ContentArea>
