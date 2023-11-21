@@ -7,6 +7,7 @@ import certification1 from '../../assets/images/certification1.png';
 import certification2 from '../../assets/images/certification2.png';
 import DecodeToken from '../../utils/DecodeJWT/DecodeJWT';
 import LoginModal from '../Modal/LoginModal';
+import alertList from '../../utils/swal';
 import {
   CertifyModal,
   Title,
@@ -79,8 +80,11 @@ export default function CertifyComp() {
       ) {
         setModalMessage('이미 해당 자격증을 업로드 했습니다.');
         showModal();
+        alertList.successMessage('자격증 제출했음 ㅋㅎ');
       } else {
         setModalMessage('브리더가 아닙니다.');
+        //alert swal로 바꾸기!!!!!!!!!!!!!!!!!!
+        alertList.errorMessage('브리더가 아님!!');
         showModal();
       }
     } catch (error: any) {

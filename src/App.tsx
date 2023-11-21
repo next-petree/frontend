@@ -24,6 +24,9 @@ import IntroPage from "./pages/IntroPage/IntroPage";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import ModifyAuth from "./pages/MyPage/modifyauth";
 import Profile from "./pages/MyPage/profile";
+import Breeder from './pages/AdoptionRequestList/Breeder/Breeder';
+import Adopter from './pages/AdoptionRequestList/Adopter/Adopter';
+
 
 function App() {
   return (
@@ -56,6 +59,8 @@ function App() {
         <Route path="/result" element={<Result />}></Route>
         <Route path="/answer" element={<Answer />}></Route>
         <Route path="/certify" element={<Certify />}></Route>
+        <Route path="/adoptlist/adopter" element={<Adopter />}></Route>
+        <Route path="/adoptlist/breeder" element={<Breeder />}></Route>
         <Route path="/mypage/modifyauth" element={<ModifyAuth />}></Route>
         <Route path="/mypage/profile" element={<Profile />}></Route>
       </Routes>

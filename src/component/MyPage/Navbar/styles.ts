@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const NavBarContainer = styled.div`
   background-color: white;
@@ -22,21 +22,21 @@ export const Main = styled.div`
   height: 100%;
 `;
 
-export const CategoryContainer = styled.div<{isHere:boolean}>`
+export const CategoryContainer = styled.div<{ isHere: boolean }>`
   width: 100%;
   height: 8%;
   padding: 1.5vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.isHere ? "#f5f5f5" : ""};
+  background-color: ${(props) => (props.isHere ? '#f5f5f5' : '')};
   &:hover {
     background-color: #f5f5f5;
   }
 `;
 
 export const Category = styled.div`
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 600;
   font-size: 2rem;
 `;
