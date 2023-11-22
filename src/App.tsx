@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/LoginCheckForKakao/LoginCheckForKakao";
 import Register from "./pages/Register/Register";
 import RegisterDetail from "./pages/Register/RegisterDetail";
+import SuccessRegister from "./pages/Register/SuccessRegister";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
 import FindEmailResult from "./pages/FindEmailResult/FindEmailResult";
@@ -34,6 +35,7 @@ function App() {
         <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
         <Route path="register" element={<Register />} />
         <Route path="register-detail" element={<RegisterDetail />} />
+        <Route path="success-register" element={<SuccessRegister />} />
         <Route path="/find-email" element={<FindEmail />} />
         <Route path="/find-password" element={<FindPassword />} />
         <Route path="/find-email-result" element={<FindEmailResult />} />
