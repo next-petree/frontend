@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dogfilters } from "./filter_data";
-import AutoInput from "../auto_complete_input";
+import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
 import { IDogyFilterParams } from "./DC_main";
 
 const Overlay = styled.div`

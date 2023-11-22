@@ -1,111 +1,54 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { styled } from "styled-components";
-
-export const Container = styled.div`
-  background-color: white;
-  width: 49vw;
-  height: fit-content;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
-  border-radius: 32px;
-  padding: 4vw 3vw 2.5vw;
-  z-index: 100;
-`;
-
-export const Form = styled.form`
-  padding-top: 3vh;
-  padding-left: 1vw;
-`;
-
-export const Infos = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3vh;
-`;
-
-export const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5vh;
-`;
-
-export const AvatarInfo = styled.div`
-  position: relative;
-`;
-export const Avatar = styled.img<{ isAuth: boolean }>`
-  width: 9vw;
-  height: 9vw;
-  border-radius: 100%;
-  background-color: whitesmoke;
-  border: 2px solid ${(props) => (props.isAuth ? "#FF6363" : "#23F39C")};
-`;
-export const Badge = styled.span`
-    position: absolute;
-    width: 2.2vw;
-    height: 2.5vw;
-    bottom: 0;
-    left: 7vw;
-`;
-export const Title = styled.h1`
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 3rem;
-`;
-
-export const Label = styled.label`
-  display: flex;
-  align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 2rem;
-`;
-export const Auth = styled.div`
-    width: 22vw;
-    height: 5vh;
-    background-color: #F5F5F5;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 600;
-    font-size: 1.5rem;
-    padding-left: 20px;
-`;
-export const Introduce = styled.textarea``;
-
-export const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12.5vw;
-  height: 52px;
-  border: none;
-  border-radius: 12px;
-  background-color: #35d8d5;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: white;
-`;
-export const Store = styled.div`
-  width: fit-content;
-  margin: 0 auto;
-  margin-top: 8vh;
-`;
+import {
+  Auth,
+  Avatar,
+  AvatarInfo,
+  Badge,
+  Button,
+  Checklen,
+  Container,
+  Form,
+  Info,
+  Infos,
+  Introduce,
+  Label,
+  Store,
+  Title,
+} from "./styles";
+import Swal from "sweetalert2";
+import alertList from "../../../../utils/swal";
 
 const ProfileForm = () => {
   const [isAuth, setIsAuth] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm();
+  const onValid = async () => {
+    const answer = await Swal.fire({
+      ...alertList.doubleCheckMessage("자기 소개를 저장 하시겠습니까?"),
+      width: "350px"
+    })
+    if (answer.isConfirmed) {
+      console.log(watch("introduce"))
+    }
+  }
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
           <AvatarInfo>
-            <Avatar isAuth={isAuth} />
+            <Avatar $isAuth={isAuth} />
             <Badge>
               {isAuth ? (
                 <svg
-                  width=""
-                  height=""
+                  width="2.2vw"
+                  height="2.5vw"
                   viewBox="0 0 53 52"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -125,8 +68,8 @@ const ProfileForm = () => {
                 </svg>
               ) : (
                 <svg
-                  width=""
-                  height=""
+                  width="2.2vw"
+                  height="2.5vw"
                   viewBox="0 0 53 52"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,11 +97,16 @@ const ProfileForm = () => {
           </Info>
           <Info>
             <Label>자기소개</Label>
-            <Introduce></Introduce>
+            <Introduce
+              {...register("introduce", { required: true, maxLength: 300 })}
+              maxLength={300}
+              placeholder="키워드와 함께 짧은 글로 자기소개를 해보세요"
+            />
+            <Checklen>{`${watch("introduce")}`.length + "/300"}</Checklen>
           </Info>
         </Infos>
         <Store>
-          <Button>저장</Button>
+          <Button $isLong={true}>저장</Button>
         </Store>
       </Form>
     </Container>

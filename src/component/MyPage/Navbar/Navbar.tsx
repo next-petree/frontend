@@ -33,7 +33,7 @@ const Navbar = () => {
     <NavBarContainer>
       <Main>
         {NavCategory.map((cate) => (
-          <CategoryContainer onClick={() => navi(`${cate.link}`)} key={cate.id} isHere={location.pathname === cate.link}>
+          <CategoryContainer onClick={() => navi(`${cate.link}`)} key={cate.id} $isHere={location.pathname === cate.link}>
             <Category>{cate.name}</Category>
           </CategoryContainer>
         ))}

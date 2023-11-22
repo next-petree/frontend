@@ -3,7 +3,7 @@ import BreederAuthToggle from "./breeder_auth_toggle";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { IForms, IParams } from "./BC_main";
-import AutoInput from "../auto_complete_input";
+import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -41,7 +41,7 @@ const Input = styled.input`
   border-radius: 12px;
   background-color: #f5f5f5;
   padding-left: 14px;
-  ::placeholder {
+  &::placeholder {
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 600;
     font-size: 16px;
