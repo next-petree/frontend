@@ -22,14 +22,14 @@ export const Main = styled.div`
 `;
 
 
-export const CategoryContainer = styled.div<{$isHere:boolean}>`
+export const CategoryContainer = styled.div<{$$isHere:boolean}>`
   width: 100%;
   height: 8%;
   padding: 1.5vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.$isHere ? "#f5f5f5" : ""};
+  background-color: ${props => props.$$isHere ? "#f5f5f5" : ""};
   &:hover {
     background-color: #f5f5f5;
   }

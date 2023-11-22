@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Routes, Route } from 'react-router-dom';
 import BreederCollect from './pages/Collects/breedercollect';
 import DogyCollect from './pages/Collects/dogycollect';
@@ -26,6 +27,36 @@ import ModifyAuth from './pages/MyPage/modifyauth';
 import Profile from './pages/MyPage/profile';
 import Breeder from './pages/AdoptionRequestList/Breeder/Breeder';
 import Adopter from './pages/AdoptionRequestList/Adopter/Adopter';
+=======
+import { Routes, Route } from 'react-router-dom';
+import BreederCollect from './pages/Collects/breedercollect';
+import DogyCollect from './pages/Collects/dogycollect';
+import BreedingRegister from './pages/breeding-register/register/BreedingRegister';
+import RegisterFillOut from './pages/breeding-register/fillout/RegisterFillOut';
+import BreedingComplete from './pages/breeding-register/complete/BreedingComplete';
+import BreederDetails from './pages/breeder-details/BreederDetails';
+import CustomerDetails from './pages/customer-details/CustomerDetails';
+import Login from './pages/Login/Login';
+import LoginCheckForKakao from './pages/LoginCheckForKakao/LoginCheckForKakao';
+import Register from './pages/Register/Register';
+import RegisterDetail from './pages/Register/RegisterDetail';
+import FindEmail from './pages/FindEmail/FindEmail';
+import FindPassword from './pages/FindPassword/FindPassWord';
+import FindEmailResult from './pages/FindEmailResult/FindEmailResult';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import ChangePasswordResult from './pages/ChangePasswordResult/ChangePasswordResult';
+import TestDesc from './pages/BasicTest/TestDesc/TestDesc';
+import Test from './pages/BasicTest/Test/Test';
+import Result from './pages/BasicTest/Result/Result';
+import Answer from './pages/BasicTest/Answer/Answer';
+import Certify from './pages/Certify/Certify';
+import IntroPage from './pages/IntroPage/IntroPage';
+import PrivateRoute from './component/PrivateRoute/PrivateRoute';
+import ModifyAuth from './pages/MyPage/modifyauth';
+import Profile from './pages/MyPage/profile';
+import Breeder from './pages/AdoptionRequestList/Breeder/Breeder';
+import Adopter from './pages/AdoptionRequestList/Adopter/Adopter';
+>>>>>>> Stashed changes
 
 function App() {
   return (
