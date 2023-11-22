@@ -11,9 +11,8 @@ export const NavBarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   :first-child {
-    &:hover {
-      border-radius: 20px 20px 0 0;
-    }
+    border-radius: 20px 20px 0 0;
+    
   }
 `;
 
