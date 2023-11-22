@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Container,
@@ -67,12 +68,17 @@ import {
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
 
 const RegisterContentDetail = () => {
+  const navigate = useNavigate();
+
+  const handleNextClick = () => {
+    navigate("/success-register");
+  };
   return (
     <Container>
       <RegisterSequence>
         <RegisterSequenceStyle
           src={RegisterSequenceImage2}
-          alt="First RegisterSequence"
+          alt="Second RegisterSequence"
         />
       </RegisterSequence>
       <SelectArea>
@@ -166,7 +172,7 @@ const RegisterContentDetail = () => {
         </BottomRightContentArea>
       </BottomContentArea>
       <RegisterButtonContainer>
-        <RegisterButton>가입하기</RegisterButton>
+        <RegisterButton onClick={handleNextClick}>가입하기</RegisterButton>
       </RegisterButtonContainer>
     </Container>
   );
