@@ -31,7 +31,7 @@ export const Tr = styled.tr`
   text-align: center;
   width: 100%;
   border-bottom: 1px solid #eee;
-  padding: 10px 0;
+  padding: 20px 0;
 `;
 export const Th = styled.th`
   width: 16%;
