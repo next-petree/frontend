@@ -7,22 +7,23 @@ import alertList from '../../../../../../utils/swal';
 
 interface CheckModalProps {
   setHideModal: () => void;
+  name: string;
 }
-export default function CheckModal({ setHideModal }: CheckModalProps) {
+export default function CheckModal({ setHideModal, name }: CheckModalProps) {
   const { isModalVisible, showModal, hideModal, modalContent } = useModal();
 
   return (
     <BtnWrap>
       <Button
-        bgColor={'#4EC1BF'}
-        buttonWidth={'200px'}
-        buttonHeight={'40px'}
+        bgcolor={'#4EC1BF'}
+        buttonwidth={'200px'}
+        buttonheight={'40px'}
         onClick={() => {
           setHideModal(); // 모달을 닫습니다.
           Swal.fire(
             alertList.customMessage(
               '승인되었습니다.',
-              '분양희망자:수현<br>연락처 : 010-1010-1010'
+              `분양희망자:${name}<br>연락처 : 010-1010-1010`
             )
           );
         }}
@@ -38,9 +39,9 @@ export default function CheckModal({ setHideModal }: CheckModalProps) {
         </ModalWrap>
       )}
       <Button
-        bgColor={'#2F2F2F'}
-        buttonWidth={'200px'}
-        buttonHeight={'40px'}
+        bgcolor={'#2F2F2F'}
+        buttonwidth={'200px'}
+        buttonheight={'40px'}
         onClick={() => {
           setHideModal();
           Swal.fire(alertList.errorMessage('해당 신청서를 거절하였습니다.'));
