@@ -22,14 +22,17 @@ import {
 import useModal from '../../../../../Modal/Modal';
 import DogImg from '../../../../../../assets/images/temporaryImg.png';
 import CheckModal from '../CheckModal/CheckModal';
+
 const RowModal = ({
   index,
   breed,
   bday,
+  name,
 }: {
   index: number;
   breed: string;
   bday: string;
+  name: string;
 }) => {
   const { isModalVisible, showModal, hideModal } = useModal();
 
@@ -85,7 +88,7 @@ const RowModal = ({
                 <CountSpan>{inputCount2}/2000</CountSpan>
               </AnswerInput>
             </AnswerWrap>
-            <CheckModal setHideModal={hideModal} />
+            <CheckModal setHideModal={hideModal} name={name} />
           </Modal>
         </ModalWrap>
       )}

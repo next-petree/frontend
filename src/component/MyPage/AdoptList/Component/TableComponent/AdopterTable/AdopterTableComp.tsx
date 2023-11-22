@@ -1,12 +1,14 @@
 import { useTable } from 'react-table';
-import RowModal from '../Modal/Breeder/BreederRowModal';
+import RowModal from '../../Modal/Breeder/BreederRowModal';
 import { Table, THead, TBody, Tr, Th, Td } from './TableCompStyle';
+import Button from '../../Button/Button';
 
 type dataType = {
-  name: string;
-  breed: string;
+  breeder: string;
   bday: string;
+  breed: string;
   state: string;
+  breakdown: () => void;
 };
 
 type Column = {
@@ -21,20 +23,19 @@ const TableComp = ({
   columns: Column[];
   data: dataType[];
 }) => {
+  // updatedColumns 생성 부분을 제거합니다.
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
   return (
     <Table {...getTableProps()}>
       <THead>
         {headerGroups.map((header) => (
-          // getHeaderGroupProps를 통해 header 배열을 호출한다
           <Tr {...header.getHeaderGroupProps()}>
             <Th>No</Th>
             {header.headers.map((col) => (
-              // getHeaderProps는 각 셀 순서에 맞게 header를 호출한다
               <Th {...col.getHeaderProps()}>{col.render('Header')}</Th>
             ))}
-            <Th>신청내역</Th>
           </Tr>
         ))}
       </THead>
@@ -52,13 +53,21 @@ const TableComp = ({
             >
               <Td>{i + 1}</Td>
               {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                <Td {...cell.getCellProps()}>
+                  {cell.column.id === 'breakdown' ? ( // 추가
+                    <Button
+                      bgcolor="#4EC1BF"
+                      buttonwidth="70px;"
+                      buttonheight="40px;"
+                      onClick={row.original.breakdown}
+                    >
+                      상세보기
+                    </Button>
+                  ) : (
+                    cell.render('Cell')
+                  )}
+                </Td>
               ))}
-              <RowModal
-                index={i}
-                breed={row.original.breed}
-                bday={row.original.bday}
-              />
             </Tr>
           );
         })}

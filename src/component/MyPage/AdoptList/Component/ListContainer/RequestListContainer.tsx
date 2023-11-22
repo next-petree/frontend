@@ -1,20 +1,10 @@
 import { useState, useMemo } from 'react';
 import { styled } from 'styled-components';
-import {
-  TitleWrap,
-  Title,
-  SubTitle,
-  SearchWrap,
-  DropDown,
-  Input,
-  Button,
-  DisNone,
-  DropDownWrap,
-  Selected,
-  PageNationWrap,
-} from './RequestListStyle';
-import arrowDown from '../../../../../assets/images/arrowDown.png';
-import TableComp from '../TableComponent/TableComp';
+import { TitleWrap, Title, SubTitle, PageNationWrap } from './RequestListStyle';
+
+import BreederTableComp from '../TableComponent/BreederTable/BreederTableComp';
+import AdopterTableComp from '../TableComponent/AdopterTable/AdopterTableComp';
+import SearchComp from './SearchComp/SearchComp';
 
 export const Container = styled.div`
   background-color: white;
@@ -25,30 +15,48 @@ export const Container = styled.div`
   padding: 4vw 3vw 2.5vw;
   z-index: 100;
 `;
-type Column = {
+type BreederColumn = {
   Header: string;
-  accessor: keyof dataType;
+  accessor: keyof BreederdataType;
 };
-type dataType = {
+type BreederdataType = {
   name: string;
   breed: string;
   bday: string;
   state: string;
 };
+type AdopterColumn = {
+  Header: string;
+  accessor: keyof AdopterdataType;
+};
+type AdopterdataType = {
+  breeder: string;
+  bday: string;
+  breed: string;
+  state: string;
+  breakdown: () => void;
+};
 
 const RequestListContainer = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('내역을 검색하세요');
-  const [select, setSelect] = useState('항목을 선택해주세요');
-
-  const headerData: Column[] = [
+  // 브리더 가데이터!!!!!!!!!!!!!!!!!!
+  const BreederheaderData: BreederColumn[] = [
     { accessor: 'name', Header: '분양희망자' },
     { accessor: 'breed', Header: '강아지(견종명)' },
     { accessor: 'bday', Header: '출생일' },
     { accessor: 'state', Header: '분양상태' },
   ];
-  const Theaders = useMemo(() => headerData, []);
-  const items = useMemo(
+  const BreederHeaders = useMemo(() => BreederheaderData, []);
+
+  // 입양자 가데이터!!!!!!!!!!!!!!!!!
+  const AdopterheaderData: AdopterColumn[] = [
+    { accessor: 'breeder', Header: '브리더' },
+    { accessor: 'breed', Header: '강아지(견종명)' },
+    { accessor: 'bday', Header: '출생일' },
+    { accessor: 'state', Header: '분양상태' },
+    { accessor: 'breakdown', Header: '신청내역' }, // 추가
+  ];
+  const AdopterHeaders = useMemo(() => AdopterheaderData, []);
+  const BreederItems = useMemo(
     () => [
       {
         name: '수현',
@@ -83,29 +91,34 @@ const RequestListContainer = () => {
     ],
     []
   );
-  const handleInputChange = (event: any) => {
-    const value = event.target.value;
-    if (value !== '내역을 검색하세요') {
-      setInputValue(value);
-    }
-  };
-  const handleInputFocus = (event: any) => {
-    if (event.target.value === '내역을 검색하세요') {
-      setInputValue('');
-    }
+
+  const getTableData = (
+    breeder: string,
+    breed: string,
+    bday: string,
+    state: string
+  ) => {
+    return {
+      breeder,
+      breed,
+      bday,
+      state,
+      breakdown: () => {
+        console.log(
+          `브리더: ${breeder}, 강아지(견종명): ${breed}, 출생일: ${bday}`
+        );
+      },
+    };
   };
 
-  const DropOpen = () => {
-    if (isOpen === false) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  };
-
-  const getValue = () => {
-    console.log(`선택된 항목: ${select}, 검색어: ${inputValue}`);
-  };
+  const AdopterItems = useMemo(
+    () => [
+      getTableData('페이커', '티원(르블랑)', '2013-01-22', '분양승인'),
+      getTableData('케이틀린', '말파이트(돌덩이)', '2013-05-29', '분양거절'),
+      getTableData('룰루', '아리(구미호)', '2013-05-29', '미승인'),
+    ],
+    []
+  );
 
   return (
     <Container>
@@ -115,55 +128,11 @@ const RequestListContainer = () => {
             <Title>분양신청내역</Title>
             <SubTitle>분양 승인 시, 분양희망자의 연락처가 공개됩니다.</SubTitle>
           </TitleWrap>
-          <SearchWrap>
-            <DropDown>
-              <Selected onClick={DropOpen}>
-                <div>{select}</div> {/* 상태 변수 select의 값을 표시 */}
-                <img src={arrowDown} />
-              </Selected>
-              {isOpen ? (
-                <DropDownWrap>
-                  <div
-                    className="sel"
-                    onClick={() => {
-                      setSelect('전체');
-                      setIsOpen(false);
-                    }}
-                  >
-                    전체
-                  </div>
-                  <div
-                    className="sel"
-                    onClick={() => {
-                      setSelect('견종');
-                      setIsOpen(false);
-                    }}
-                  >
-                    견종
-                  </div>
-                  <div
-                    className="sel"
-                    onClick={() => {
-                      setSelect('강아지 이름');
-                      setIsOpen(false);
-                    }}
-                  >
-                    강아지 이름
-                  </div>
-                </DropDownWrap>
-              ) : (
-                <DisNone></DisNone>
-              )}
-            </DropDown>
-            <Input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            ></Input>
-            <Button onClick={getValue}>검색</Button>
-          </SearchWrap>
-          <TableComp columns={Theaders} data={items}></TableComp>
+          <SearchComp />
+          <BreederTableComp
+            columns={BreederHeaders}
+            data={BreederItems}
+          ></BreederTableComp>
           <PageNationWrap>
             <div>
               <button>&lt;</button>
@@ -177,7 +146,17 @@ const RequestListContainer = () => {
           </PageNationWrap>
         </>
       ) : location.pathname === '/adoptlist/adopter' ? (
-        <div>Adopter</div>
+        <>
+          <TitleWrap>
+            <Title>분양신청내역</Title>
+            <SubTitle>
+              분양 승인시, 신청내역 &gt; 상세보기를 클릭하면{' '}
+              <span>브리더 정보</span>를 확인할 수 있습니다.
+            </SubTitle>
+          </TitleWrap>
+          <SearchComp />
+          <AdopterTableComp columns={AdopterHeaders} data={AdopterItems} />
+        </>
       ) : null}
     </Container>
   );

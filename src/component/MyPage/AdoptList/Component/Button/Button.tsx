@@ -3,23 +3,23 @@ import { Button } from './style';
 
 interface ButtonProps {
   children: React.ReactNode;
-  bgColor: string;
-  buttonWidth: string;
-  buttonHeight: string;
+  bgcolor: string;
+  buttonwidth: string;
+  buttonheight: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 const PrimaryButton = ({
   children,
-  bgColor,
-  buttonWidth,
-  buttonHeight,
+  bgcolor,
+  buttonwidth,
+  buttonheight,
   onClick,
 }: ButtonProps) => {
   return (
     <Button
-      bgColor={bgColor}
-      buttonWidth={buttonWidth}
-      buttonHeight={buttonHeight}
+      bgcolor={bgcolor}
+      buttonwidth={buttonwidth}
+      buttonheight={buttonheight}
       onClick={onClick}
     >
       {children}
