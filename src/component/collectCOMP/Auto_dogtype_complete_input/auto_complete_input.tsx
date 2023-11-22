@@ -5,69 +5,12 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import styled from "styled-components";
-import { DogsTypeurl } from "../../utils/collect_url";
-import { get } from "../../api/api";
+import { DogsTypeurl } from "../../../utils/collect_url";
+import { get } from "../../../api/api";
+import { AutoSearchContainer, AutoSearchData, AutoSearchWrap, Search, SearchContainer } from "./styles";
+import { IDogType, IDogTypeAPI } from "../../../types/auto_complete_type";
 
-const SearchContainer = styled.div`
-  width: 400px;
-  height: 45px;
-  position: relative;
-  border: 0;
-  margin: 0 auto;
-`;
 
-const Search = styled.input`
-  display: flex;
-  align-items: center;
-  border: none;
-  width: 314px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: #f5f5f5;
-  padding-left: 2vw;
-  ::placeholder {
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: #939393;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
-
-const AutoSearchContainer = styled.div`
-  z-index: 3;
-  height: fit-content;
-  width: 314px;
-  padding: 14px 0 14px 14px;
-  background-color: #fff;
-  position: absolute;
-  top: 45px;
-  border: 1px solid #edf5f5;
-  border-radius: 12px;
-`;
-
-const AutoSearchWrap = styled.ul``;
-
-const AutoSearchData = styled.li`
-  width: 100%;
-  list-style: none;
-  /* height: 30px; */
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: #5d5d5d;
-  z-index: 4;
-  letter-spacing: 2px;
-  margin-left: -2.5vw;
-  &:hover {
-    background-color: #edf5f5;
-    cursor: pointer;
-  }
-  position: relative;
-`;
 
 interface Iinput {
   [key: string]: any;
@@ -79,16 +22,7 @@ interface Iinput {
   setDogtype?:React.Dispatch<React.SetStateAction<number>>
 }
 
-interface IDogTypeAPI {
-  status: "SUCCESS" | "FAIL";
-  data:IType[];
-}
 
-interface IType {
-  id: number;
-  imgUrl: string;
-  name: string;
-}
 
 export default function AutoInput({
   type,
@@ -100,8 +34,8 @@ export default function AutoInput({
   ...rest
 }: Iinput) {
   const [show, setShow] = useState(false);
-  const [types, setTypes] = useState<IType[]>([]);
-  const [keyItems, setKeyItems] = useState<IType[]>([]);
+  const [types, setTypes] = useState<IDogType[]>([]);
+  const [keyItems, setKeyItems] = useState<IDogType[]>([]);
   const fetchData = async () => {
     try {
       const url = DogsTypeurl();

@@ -11,7 +11,6 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 3rem;
 `;
@@ -20,12 +19,12 @@ export const Form1 = styled.form`
   padding-left: 1vw;
 `;
 
-export const Form2 = styled.form`
+export const InsideForm = styled.div`
   display: flex;
   gap: 0.5vw;
 `;
 
-export const Form3 = styled.form`
+export const Form2 = styled.form`
   margin-top: 4.3vh;
 `;
 
@@ -43,50 +42,67 @@ export const Info = styled.div`
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 2rem;
   span {
-    font-family: "Noto Sans KR", sans-serif;
+
     font-weight: 500;
     font-size: 1.7rem;
     margin-left: 8vw;
   }
 `;
-export const Input = styled.input<{ islen: string }>`
+export const Input = styled.input<{ $islen: string }>`
   display: flex;
   align-items: center;
   border: none;
   width: ${(props) =>
-    props.islen === "mid"
+    props.$islen === "mid"
       ? "18.7vw"
-      : props.islen === "shot"
+      : props.$islen === "shot"
       ? "15vw"
-      : props.islen === "long"
+      : props.$islen === "long"
       ? "21.5vw"
       : null};
   height: 48px;
   border-radius: 12px;
   background-color: #f5f5f5;
   padding-left: 14px;
-  ::placeholder {
-    font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  &::placeholder {
+    
     font-weight: 600;
-    font-size: 1vw;
+    font-size: 1.7rem;
     color: #939393;
   }
 `;
 
-export const Button = styled.button<{ isLong: boolean }>`
+export const SearchButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(props) => (props.isLong ? "12.5vw" : "6vw")};
+  width: 6vw;
   height: 52px;
   border: none;
   border-radius: 12px;
   background-color: #35d8d5;
-  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+`;
+
+
+export const Button = styled.button<{ $isLong: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${(props) => (props.$isLong ? "12.5vw" : "6vw")};
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background-color: #35d8d5;
+ 
   font-weight: 700;
   font-size: 1.8rem;
   color: white;
@@ -103,7 +119,7 @@ export const Pws = styled.div`
   flex-direction: column;
   gap: 4.3vh;
   span {
-    font-family: "Noto Sans KR", sans-serif;
+
     font-size: 14px;
     font-weight: 350;
     text-align: right;
@@ -116,3 +132,12 @@ export const Pw = styled.div`
   justify-content: space-between;
   gap: 1.5vh;
 `;
+
+export const Errmsg = styled.div<{$needMargin:boolean}>`
+  font-weight: 500;
+  font-size: 1.7rem;
+  margin-left: ${props => props.$needMargin ? "12.5vw" : "14px"};
+  margin-top: ${props => props.$needMargin ? "-2.5vh" : null};
+  color: #35d8d5;
+`;
+
