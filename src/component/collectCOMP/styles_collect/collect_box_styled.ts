@@ -39,7 +39,7 @@ export const Availtext = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -69,7 +69,7 @@ export const Badge = styled.span`
 export const Nameline = styled.div`
   display: flex;
   align-items: center;
-  width: 180px;
+  width: 12vw;
 `;
 export const Name = styled.span`
   /* width: 220px; */
@@ -88,7 +88,7 @@ export const Distance = styled.span`
   font-weight: 600;
 `;
 export const MajorDog = styled.div`
-  width: 180px;
+  width: 12vw;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
@@ -106,8 +106,7 @@ export const LitteBadge = styled.span`
 export const Doginfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85%;
-  min-width: 180px;
+  width: 12vw;
   gap: 2px;
 `;
 

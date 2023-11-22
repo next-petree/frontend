@@ -69,3 +69,8 @@ export const Text = styled.div`
   order: 1;
   flex-grow: 0;
 `;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 383px;
+`

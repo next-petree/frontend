@@ -1,13 +1,13 @@
 import { styled } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dogfilters } from "./filter_data";
-import AutoInput from "../auto_complete_input";
+import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
 import { IDogyFilterParams } from "./DC_main";
 
 const Overlay = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   width: 100%;
   height: 100%;
@@ -40,22 +40,7 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
 `;
-const Input = styled.input`
-  width: 22vw;
-  margin: 0 auto;
-  border: none;
-  border-radius: 12px;
-  background-color: #f5f5f5;
-  padding-left: 2vw;
-  ::placeholder {
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: #939393;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
+
 const Checks = styled.div`
   display: flex;
   flex-direction: column;
@@ -110,20 +95,18 @@ const ConfirmBtn = styled.button<{ $isYes: boolean }>`
   color: white;
 `;
 
-
-
 interface IParams2 {
   setOnSearch: React.Dispatch<React.SetStateAction<boolean>>;
   category: IDogyFilterParams;
   setCategory: React.Dispatch<React.SetStateAction<IDogyFilterParams>>;
-  setOnUseFilter:React.Dispatch<React.SetStateAction<boolean>>;
+  setOnUseFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function SearchFilter({
   setOnSearch,
   category,
   setCategory,
-  setOnUseFilter
+  setOnUseFilter,
 }: IParams2) {
   const {
     register,
@@ -133,41 +116,40 @@ export default function SearchFilter({
     setValue,
   } = useForm();
   const [dogtype, setDogtype] = useState(0);
+  const [formdata, setFormdata] = useState(category);
   const onClose = () => {
     setOnSearch((prev) => !prev);
   };
   const onValid = (data: any) => {
     setOnUseFilter(true);
-    if(data.keyword === "")
-    {
+    if (data.keyword === "") {
       setDogtype(0);
+    } else if (data.keyword != "" && dogtype === 0) {
+      setDogtype(-1);
     }
-    else if (data.keyword != "" && dogtype === 0) {
-      setDogtype(-1)
-    }
-    setCategory({ ...category,dogtype});
+    setCategory({ ...formdata, dogtype });
     onClose();
   };
   const onCategorySet = (data1: any, data2: any) => {
     if (data1 === "verification") {
-      setCategory({ ...category, verification: data2 });
+      setFormdata({ ...formdata, verification: data2 });
     } else if (data1 === "isAvailable") {
-      setCategory({ ...category, isAvailable: data2 });
+      setFormdata({ ...formdata, isAvailable: data2 });
     } else if (data1 === "gender") {
-      setCategory({ ...category, gender: data2 });
+      setFormdata({ ...formdata, gender: data2 });
     } else if (data1 === "size") {
-      setCategory({ ...category, size: data2 });
+      setFormdata({ ...formdata, size: data2 });
     }
   };
   const onCategoryCheck = (data1: any, data2: any) => {
     if (data1 === "verification") {
-      return Boolean(category.verification === data2);
+      return Boolean(formdata.verification === data2);
     } else if (data1 === "isAvailable") {
-      return Boolean(category.isAvailable === data2);
+      return Boolean(formdata.isAvailable === data2);
     } else if (data1 === "gender") {
-      return Boolean(category.gender === data2);
+      return Boolean(formdata.gender === data2);
     } else if (data1 === "size") {
-      return Boolean(category.size === data2);
+      return Boolean(formdata.size === data2);
     }
   };
 

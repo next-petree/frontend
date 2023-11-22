@@ -13,6 +13,7 @@ import {
   ModalWrap,
   Modal,
 } from './CertifyComp1Style';
+
 type CertProps = {
   img: string;
   name: string;
