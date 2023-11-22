@@ -54,7 +54,7 @@ const TableComp = ({
               <Td>{i + 1}</Td>
               {row.cells.map((cell) => (
                 <Td {...cell.getCellProps()}>
-                  {cell.column.id === 'breakdown' ? ( // 추가
+                  {cell.column.id === 'breakdown' ? (
                     <Button
                       bgcolor="#4EC1BF"
                       buttonwidth="70px;"
@@ -63,6 +63,21 @@ const TableComp = ({
                     >
                       상세보기
                     </Button>
+                  ) : cell.column.id === 'state' &&
+                    cell.value === '분양승인' ? (
+                    <>
+                      {cell.render('Cell')}
+                      <Button
+                        bgcolor="#4EC1BF"
+                        buttonwidth="70px;"
+                        buttonheight="40px;"
+                        onClick={() => {
+                          console.log('후기 작서이이잉!!');
+                        }}
+                      >
+                        후기작성
+                      </Button>
+                    </>
                   ) : (
                     cell.render('Cell')
                   )}
