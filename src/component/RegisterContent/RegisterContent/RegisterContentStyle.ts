@@ -22,7 +22,6 @@ export const RegisterSequenceStyle = styled.img`
 
 export const InnerContent = styled.div`
   display: flex;
-  height: 621px;
   flex-direction: column;
 `;
 
@@ -105,6 +104,7 @@ export const AgreeAllText = styled.div`
 
 export const TermsArea = styled.div`
   margin-bottom: 45px;
+  height: 50%;
 `;
 
 export const TermsContent = styled(content)``;
@@ -114,11 +114,10 @@ export const TermsCheckInput = styled(checkbox)``;
 export const TermsTitle = styled(title)``;
 
 export const DropDown = styled.div`
-  display: flex;
+  position: relative;
   justify-content: space-between;
   width: 823px;
-  padding: 0 15px 0 15px;
-  height: 58px;
+  padding: 15px 20px;
   background-color: #f5f5f5;
   align-items: center;
   border-radius: 15px;
@@ -127,9 +126,15 @@ export const DropDown = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  line-height: 200%;
   letter-spacing: -0.48px;
   cursor: pointer;
+
+  img {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+  }
 `;
 
 export const PersonalInfomationArea = styled.div`
@@ -152,8 +157,9 @@ export const LocationBasedServiceTitle = styled(title)``;
 
 export const NextButtonContainer = styled.div`
   display: flex;
-  margin: 0 auto;
+  justify-content: center;
   margin-top: 100px;
+  width: 100%;
 `;
 
 export const NextButton = styled.button`
