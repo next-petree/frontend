@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   AuthDeleteContainer,
-  Category,
+  CategoryContent,
   CategoryContainer,
   Main,
   NavBarContainer,
@@ -32,23 +32,27 @@ export const NavCategory = [
 ];
 
 const Navbar = () => {
-  const navi = useNavigate();
+  const navigation = useNavigate();
   const location = useLocation();
+
+  const DeleteAccount = () => {
+    navigation("/mypage/remove-account");
+  };
   return (
     <NavBarContainer>
       <Main>
-        {NavCategory.map((cate) => (
+        {NavCategory.map(category => (
           <CategoryContainer
-            onClick={() => navi(`${cate.link}`)}
-            key={cate.id}
-            $isHere={location.pathname === cate.link}
+            onClick={() => navigation(`${category.link}`)}
+            key={category.id}
+            $isHere={location.pathname === category.link}
           >
-            <Category>{cate.name}</Category>
+            <CategoryContent>{category.name}</CategoryContent>
           </CategoryContainer>
         ))}
       </Main>
-      <AuthDeleteContainer>
-        <Category>회원 탈퇴</Category>
+      <AuthDeleteContainer onClick={DeleteAccount}>
+        <CategoryContent>회원 탈퇴</CategoryContent>
       </AuthDeleteContainer>
     </NavBarContainer>
   );
