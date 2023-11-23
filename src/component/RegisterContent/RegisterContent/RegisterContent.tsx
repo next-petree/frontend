@@ -76,9 +76,7 @@ const RegisterContent = () => {
     if (Object.values(checkboxes).every(Boolean)) {
       navigate("/register-detail");
     } else {
-      Swal.fire({
-        ...alertList.infoMessage("모든 항목에 동의해주세요."),
-      });
+      Swal.fire(alertList.infoMessage("모든 항목에 동의해주세요."));
     }
   };
 
