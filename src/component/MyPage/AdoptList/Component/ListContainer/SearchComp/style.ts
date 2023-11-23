@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 export const SearchWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,7 +19,7 @@ export const DropDown = styled.div`
   position: relative;
 `;
 export const Selected = styled.div`
-  width: 170px;
+  width: 13vw;
   border-radius: 16px;
   border: 1px solid #dddddd;
   padding: 8px 15px;
@@ -31,7 +32,7 @@ export const Selected = styled.div`
   cursor: pointer;
 `;
 export const DropDownWrap = styled.div`
-  width: 170px;
+  width: 13vw;
   box-shadow: 1px 5px 10px 3px raba(0, 0, 0);
   padding: 0 15px;
   border-radius: 16px;
@@ -48,6 +49,7 @@ export const DisNone = styled.div`
 `;
 
 export const Input = styled.input`
+  width: 12vw;
   background: #f5f5f5;
   color: #939393;
   border: none;
@@ -55,15 +57,4 @@ export const Input = styled.input`
   padding: 0 20px;
   height: 50px;
   font-size: 14px;
-`;
-export const Button = styled.button`
-  background: #4ec1bf;
-  color: #fff;
-  border: none;
-  border-radius: 16px;
-  padding: 0 39px;
-  font-size: 14px;
-  font-weight: 700;
-  height: 50px;
-  cursor: pointer;
 `;

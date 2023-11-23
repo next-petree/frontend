@@ -86,7 +86,7 @@ export default function SearchComp() {
       ></Input>
       <Button
         bgcolor={'#4EC1BF'}
-        buttonwidth={'100px'}
+        buttonwidth={'8vw'}
         buttonheight={'50px'}
         onClick={getValue}
       >

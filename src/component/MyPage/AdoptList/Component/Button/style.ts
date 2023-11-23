@@ -12,7 +12,7 @@ export const Button = styled.button<ButtonProps>`
   width: ${(props) => props.buttonwidth};
   height: ${(props) => props.buttonheight};
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
 `;

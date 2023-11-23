@@ -22,6 +22,7 @@ import {
 import useModal from '../../../../../Modal/Modal';
 import DogImg from '../../../../../../assets/images/temporaryImg.png';
 import CheckModal from '../CheckModal/CheckModal';
+import Button from '../../Button/Button';
 
 const RowModal = ({
   index,
@@ -53,7 +54,15 @@ const RowModal = ({
   }, [inputValue1, inputValue2]);
   return (
     <Td>
-      <DetailButton onClick={showModal}>상세보기</DetailButton>
+      <Button
+        bgcolor="#4EC1BF"
+        buttonwidth="70px;"
+        buttonheight="40px;"
+        onClick={showModal}
+      >
+        상세보기
+      </Button>
+      {/* <DetailButton onClick={showModal}>상세보기</DetailButton> */}
       {isModalVisible && (
         <ModalWrap onClick={hideModal}>
           <Modal onClick={(e) => e.stopPropagation()}>

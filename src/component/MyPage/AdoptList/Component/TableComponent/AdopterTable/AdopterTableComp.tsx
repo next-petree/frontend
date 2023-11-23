@@ -1,7 +1,8 @@
 import { useTable } from 'react-table';
-import RowModal from '../../Modal/Breeder/BreederRowModal';
+import RowModal from '../../Modal/Adopter/AdopterRowModal';
 import { Table, THead, TBody, Tr, Th, Td } from './TableCompStyle';
 import Button from '../../Button/Button';
+import useModal from '../../../../../Modal/Modal';
 
 type dataType = {
   breeder: string;
@@ -24,7 +25,7 @@ const TableComp = ({
   data: dataType[];
 }) => {
   // updatedColumns 생성 부분을 제거합니다.
-
+  const { isModalVisible, showModal, hideModal } = useModal();
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
   return (
@@ -55,14 +56,12 @@ const TableComp = ({
               {row.cells.map((cell) => (
                 <Td {...cell.getCellProps()}>
                   {cell.column.id === 'breakdown' ? (
-                    <Button
-                      bgcolor="#4EC1BF"
-                      buttonwidth="70px;"
-                      buttonheight="40px;"
-                      onClick={row.original.breakdown}
-                    >
-                      상세보기
-                    </Button>
+                    <RowModal
+                      index={i}
+                      breed={row.original.breed}
+                      bday={row.original.bday}
+                      breeder={row.original.breeder}
+                    />
                   ) : cell.column.id === 'state' &&
                     cell.value === '분양승인' ? (
                     <>

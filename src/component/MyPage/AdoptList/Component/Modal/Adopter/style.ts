@@ -29,7 +29,7 @@ export const Modal = styled.div`
   top: 0;
   bottom: 10vh;
   padding: 20px 20px 50px;
-  width: 70%;
+  width: 60%;
   background: #fff;
   border-radius: 32px;
   position: relative;
@@ -37,15 +37,18 @@ export const Modal = styled.div`
   z-index: 10000;
 `;
 
+export const ContentWrap = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
 export const Title = styled.h3`
-  color: #4ec1bf;
+  text-align: left;
+  color: #000;
   font-size: 23px;
   font-weight: 800;
   margin: 20px 0 30px;
 `;
 export const InfoWrap = styled.div`
-  margin: 0 auto;
-  width: 50%;
   display: flex;
   justify-content: center;
   text-align: left;
@@ -54,11 +57,9 @@ export const InfoWrap = styled.div`
   padding: 20px 0;
 `;
 export const Img = styled.img`
-  width: 130px;
   object-fit: cover;
 `;
 export const DetailInfoWrap = styled.div`
-  width: 50%;
   color: #333333;
   font-size: 13px;
   font-weight: 500;
@@ -73,36 +74,3 @@ export const DogName = styled.div`
 export const BreedDog = styled.div``;
 export const Gender = styled.div``;
 export const BDay = styled.div``;
-
-export const AnswerWrap = styled.div`
-  text-align: left;
-  width: 70%;
-  margin: 0 auto;
-  color: #000;
-`;
-export const Question = styled.h4`
-  font-size: 16px;
-  font-weight: 500;
-`;
-export const AnswerInput = styled.div`
-  background: #fafafa;
-  width: 100%;
-  max-height: 25vh;
-  box-sizing: border-box;
-  border-radius: 5px;
-  color: #939393;
-  padding: 10px 20px;
-  border: none;
-  resize: none;
-  overflow: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  position: relative;
-`;
-export const CountSpan = styled.span`
-  position: absolute;
-  bottom: 1vh;
-  right: 2vw;
-  float: right;
-  color: #939393;
-`;
