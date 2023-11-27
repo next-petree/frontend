@@ -17,7 +17,8 @@ const ProfileContent = () => {
   return (
     <Wrapper>
       <ProfileForm/>
-      <LivingAtmosphereForm/>
+
+      <MajorDogForm/>
     </Wrapper>
   );
 };
