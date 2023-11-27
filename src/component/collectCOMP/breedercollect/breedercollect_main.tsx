@@ -1,5 +1,4 @@
-import BreederForm from "./breeder_form";
-import BreederBox from "./breeder_Box";
+
 import {
   BoxContainer,
   MainBox,
@@ -15,6 +14,8 @@ import { Link } from "react-router-dom";
 import { BreedersCollecturl } from "../../../utils/collect_url";
 import { IBreedersAPI } from "../../../types/breederscollect_type";
 import { get } from "../../../api/api";
+import BreederForm from "./breeder_form";
+import BreederBox from "./breeder_Box";
 
 // 상태 관리 사용전 임시 interface/////////////////
 export interface IParams {
@@ -29,7 +30,7 @@ export interface IForms {
 }
 //////////////////////////////////////////////////
 
-export default function BC_Main() {
+export default function BreederCollect_Main() {
   const param = useParams();
   const [onSearch, setOnSearch] = useState(false);
   const [page, setPage] = useState(Number(param.pageId));

@@ -27,7 +27,7 @@ export interface IDogyFilterParams {
 }
 ///////////////////////////////////
 
-export default function DC_main() {
+export default function DogyCollect_main() {
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
   const [loading, setLoading] = useState(false);
