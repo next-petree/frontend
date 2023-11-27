@@ -2,7 +2,7 @@ import styled from "styled-components";
 import BreederAuthToggle from "./breeder_auth_toggle";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { IForms, IParams } from "./BC_main";
+import { IForms, IParams } from "./breedercollect_main";
 import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
 import { useNavigate } from "react-router-dom";
 

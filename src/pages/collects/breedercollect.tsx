@@ -1,12 +1,11 @@
-import { useParams } from "react-router-dom";
-import BC_Main from "../../component/collectCOMP/breedercollectCOMP/BC_main";
 import Header from "../../component/Header/Header";
+import BreederCollect_Main from "../../component/collectCOMP/breedercollect/breedercollect_main";
 
 export default function BreederCollect() {
   return (
     <>
       <Header />
-      <BC_Main />
+      <BreederCollect_Main />
     </>
   );
 }

@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from 'axios';
-import instance from './axiosInstance';
+import { AxiosRequestConfig } from "axios";
+import instance from "./axiosInstance";
 
 // axios.get
 export const get = async <T>(url: string, config?: AxiosRequestConfig) => {

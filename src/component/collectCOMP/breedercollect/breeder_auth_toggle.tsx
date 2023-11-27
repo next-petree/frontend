@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { IParams } from "./BC_main";
+import { IParams } from "./breedercollect_main";
+
 
 const Toggle = styled.label<{ $toggle: boolean }>`
   display: flex;

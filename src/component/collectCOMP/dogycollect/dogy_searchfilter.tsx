@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dogfilters } from "./filter_data";
 import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
-import { IDogyFilterParams } from "./DC_main";
+import { IDogyFilterParams } from "./dogycollect_main";
 
 const Overlay = styled.div`
   position: fixed;
@@ -18,7 +18,7 @@ const Overlay = styled.div`
 const FilterContainer = styled.div`
   position: absolute;
   width: 50vw;
-  height: 37vw;
+  height: 82vh;
   border-radius: 50px;
   top: 20px;
   left: 0;
