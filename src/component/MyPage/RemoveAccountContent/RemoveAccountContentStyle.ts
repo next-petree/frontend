@@ -128,10 +128,6 @@ const Button = styled.button`
   line-height: normal;
 `;
 
-export const CancelButton = styled(Button)`
-  background-color: #2f2f2f;
-`;
-
 export const RemoveAccountButton = styled(Button)`
   background-color: #4ec1bf;
 `;

@@ -15,7 +15,6 @@ import {
   CheckInput,
   CheckInputText,
   ButtonArea,
-  CancelButton,
   RemoveAccountButton,
 } from "./RemoveAccountContentStyle";
 
@@ -104,7 +103,6 @@ const RemoveAccountContent = () => {
           </CheckInputText>
         </CheckInputArea>
         <ButtonArea>
-          <CancelButton>취소</CancelButton>
           <RemoveAccountButton onClick={handleRemoveAccountClick}>
             회원 탈퇴
           </RemoveAccountButton>
