@@ -1,33 +1,33 @@
-import { Routes, Route } from "react-router-dom";
-import BreederCollect from "./pages/Collects/breedercollect";
-import DogyCollect from "./pages/Collects/dogycollect";
-import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
-import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
-import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
-import BreederDetails from "./pages/breeder-details/BreederDetails";
-import CustomerDetails from "./pages/customer-details/CustomerDetails";
-import Login from "./pages/Login/Login";
-import LoginCheckForKakao from "./pages/Login/LoginCheckForKakao";
-import Register from "./pages/Register/Register";
-import RegisterDetail from "./pages/Register/RegisterDetail";
-import SuccessRegister from "./pages/Register/SuccessRegister";
-import FindEmail from "./pages/FindEmail/FindEmail";
-import FindPassword from "./pages/FindPassword/FindPassWord";
-import FindEmailResult from "./pages/FindEmail/FindEmailResult";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
-import ChangePasswordResult from "./pages/ChangePassword/ChangePasswordResult";
-import TestDesc from "./pages/BasicTest/TestDesc/TestDesc";
-import Test from "./pages/BasicTest/Test/Test";
-import Result from "./pages/BasicTest/Result/Result";
-import Answer from "./pages/BasicTest/Answer/Answer";
-import Certify from "./pages/Certify/Certify";
-import IntroPage from "./pages/IntroPage/IntroPage";
-import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
-import ModifyAuth from "./pages/MyPage/modifyauth";
-import Profile from "./pages/MyPage/profile";
-import Breeder from "./pages/AdoptionRequestList/Breeder/Breeder";
-import Adopter from "./pages/AdoptionRequestList/Adopter/Adopter";
-import RemoveAccount from "./pages/RemoveAccount/RemoveAccount";
+import { Routes, Route } from 'react-router-dom';
+import BreederCollect from './pages/collects/breedercollect';
+import DogyCollect from './pages/collects/dogycollect';
+import BreedingRegister from './pages/breeding-register/register/BreedingRegister';
+import RegisterFillOut from './pages/breeding-register/fillout/RegisterFillOut';
+import BreedingComplete from './pages/breeding-register/complete/BreedingComplete';
+import BreederDetails from './pages/breeder-details/BreederDetails';
+import CustomerDetails from './pages/customer-details/CustomerDetails';
+import Login from './pages/Login/Login';
+import LoginCheckForKakao from './pages/Login/LoginCheckForKakao';
+import Register from './pages/Register/Register';
+import RegisterDetail from './pages/Register/RegisterDetail';
+import SuccessRegister from './pages/Register/SuccessRegister';
+import FindEmail from './pages/FindEmail/FindEmail';
+import FindPassword from './pages/FindPassword/FindPassWord';
+import FindEmailResult from './pages/FindEmail/FindEmailResult';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import ChangePasswordResult from './pages/ChangePassword/ChangePasswordResult';
+import TestDesc from './pages/BasicTest/TestDesc/TestDesc';
+import Test from './pages/BasicTest/Test/Test';
+import Result from './pages/BasicTest/Result/Result';
+import Answer from './pages/BasicTest/Answer/Answer';
+import Certify from './pages/Certify/Certify';
+import IntroPage from './pages/IntroPage/IntroPage';
+import PrivateRoute from './component/PrivateRoute/PrivateRoute';
+import ModifyAuth from './pages/MyPage/modifyauth';
+import Profile from './pages/MyPage/profile';
+import Breeder from './pages/AdoptionRequestList/Breeder/Breeder';
+import Adopter from './pages/AdoptionRequestList/Adopter/Adopter';
+import RemoveAccount from './pages/RemoveAccount/RemoveAccount';
 
 function App() {
   return (
@@ -61,8 +61,8 @@ function App() {
         <Route path="/result" element={<Result />} />
         <Route path="/answer" element={<Answer />} />
         <Route path="/certify" element={<Certify />} />
-        <Route path="/adoptlist/adopter" element={<Adopter />} />
-        <Route path="/adoptlist/breeder" element={<Breeder />} />
+        <Route path="/mypage/adoptlist/adopter" element={<Adopter />} />
+        <Route path="/mypage/adoptlist/breeder" element={<Breeder />} />
         <Route path="/mypage/modifyauth" element={<ModifyAuth />} />
         <Route path="/mypage/profile" element={<Profile />} />
         <Route path="/mypage/remove-account" element={<RemoveAccount />} />

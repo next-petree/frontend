@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { styled } from 'styled-components';
 import { TitleWrap, Title, SubTitle, PageNationWrap } from './RequestListStyle';
-
 import BreederTableComp from '../TableComponent/BreederTable/BreederTableComp';
 import AdopterTableComp from '../TableComponent/AdopterTable/AdopterTableComp';
 import SearchComp from './SearchComp/SearchComp';
+import { get } from '../../../../../api/api';
 
 export const Container = styled.div`
   background-color: white;
@@ -91,7 +91,17 @@ const RequestListContainer = () => {
     ],
     []
   );
-
+  useEffect(() => {
+    const getBreederData = async () => {
+      try {
+        const response = await get<BreederdataType>('/me/matchings?page=2');
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBreederData();
+  }, []);
   const getTableData = (
     breeder: string,
     breed: string,
@@ -122,7 +132,7 @@ const RequestListContainer = () => {
 
   return (
     <Container>
-      {location.pathname === '/adoptlist/breeder' ? (
+      {location.pathname === '/mypage/adoptlist/breeder' ? (
         <>
           <TitleWrap>
             <Title>분양신청내역</Title>
@@ -145,7 +155,7 @@ const RequestListContainer = () => {
             </div>
           </PageNationWrap>
         </>
-      ) : location.pathname === '/adoptlist/adopter' ? (
+      ) : location.pathname === '/mypage/adoptlist/adopter' ? (
         <>
           <TitleWrap>
             <Title>분양신청내역</Title>
