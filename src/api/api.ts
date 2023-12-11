@@ -38,6 +38,19 @@ export const patch = async <T>(
     throw error;
   }
 };
+// axios.put
+export const put = async<T>(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+) => {
+  try {
+    const response = await instance.put<T>(url, data, { ...config });
+    return response;
+  } catch (error: any) {
+    throw error;
+  }
+}
 
 // axios.delete
 export const del = async <T>(

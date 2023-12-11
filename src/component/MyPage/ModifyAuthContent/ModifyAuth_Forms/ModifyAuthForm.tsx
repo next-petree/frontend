@@ -15,6 +15,11 @@ import {
 } from "./styles";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/swal";
+import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
+import { DuplicateCheckUrl, MemberInfoUrl } from "../../../../utils/mypage_url";
+import { useEffect, useState } from "react";
+import { ResultResponse, IMemberInfoAPI, IMeberInfoForm } from "../../../../types/mypage_type";
+import { get, post, patch } from "../../../../api/api";
 
 const ModifyAuthForm = () => {
   const {
@@ -23,16 +28,91 @@ const ModifyAuthForm = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm();
-  const onValid = async (data:any) => {
+  } = useForm<IMeberInfoForm>();
+  const [onCheckDuplicate, setonCheckDuplicate] = useState<boolean>(false);
+  const [authtype, setauthtype] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>();
+  const [currentNickname, setCurrentNickname] = useState<string>("");
+  const onValid = async (data: IMeberInfoForm) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("회원정보를 저장하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
-      console.log(data);
+      try {
+        const url = MemberInfoUrl(false);
+        const response = await patch<ResultResponse>(url, {
+          nicknameChecked: onCheckDuplicate,
+          nickname: data.nickname,
+          email: data.email,
+          address1: data.address1,
+          address2: data.address2,
+          phoneNumber: data.phoneNumber,
+        });
+        Swal.fire({
+          ...alertList.successMessage(response.data.data),
+          width: "350px",
+        });
+        
+      } catch (e: any) {
+        Swal.fire({
+          ...alertList.errorMessage(e.response.data.data),
+          width: "350px",
+        });
+      }
     }
   };
+  const getAuthInformation = async () => {
+    try {
+      const url = MemberInfoUrl(false);
+      const response = await get<IMemberInfoAPI>(url);
+
+      if (response.data.status === "FAIL") {
+        throw "올바르지 못한 접근 입니다.";
+      }
+      setValue("nickname", response.data.data.nickname);
+      setValue("email", response.data.data.email);
+      setValue("address1", response.data.data.address1);
+      setValue("address2", response.data.data.address2);
+      setValue("phoneNumber", response.data.data.phoneNumber);
+      setCurrentNickname(response.data.data.nickname);
+    } catch (e) {
+    }
+  };
+  const onDuplicateCheck = async () => {
+    if (currentNickname === watch("nickname")) {
+      setonCheckDuplicate(true);
+      return Swal.fire({
+        ...alertList.successMessage("현재 사용중인 닉네임과 같습니다"),
+        width: "350px",
+      });
+    }
+    const url = DuplicateCheckUrl(watch("nickname"));
+    const response = await get<ResultResponse>(url);
+    if (response.data.status === "FAIL") {
+      setonCheckDuplicate(false);
+      return Swal.fire({
+        ...alertList.errorMessage(response.data.data),
+        width: "350px",
+      });
+    } else {
+      setonCheckDuplicate(true);
+      return Swal.fire({
+        ...alertList.successMessage(response.data.data),
+        width: "350px",
+      });
+    }
+  };
+  useEffect(() => {
+    getAuthInformation();
+    const user = DecodeToken();
+    if (user.role === "BREEDER") {
+      setauthtype("브리더");
+    } else {
+      setauthtype("분양희망자");
+    }
+  }, []);
+
   return (
     <Container>
       <Title>회원정보 수정</Title>
@@ -40,7 +120,7 @@ const ModifyAuthForm = () => {
         <Infos>
           <Info>
             <Label>회원유형</Label>
-            <Input $islen="mid" value="브리더" disabled />
+            <Input $islen="mid" value={authtype} disabled />
           </Info>
           <Info>
             <Label>
@@ -63,10 +143,12 @@ const ModifyAuthForm = () => {
                   required: "닉네임을 입력해주세요",
                 })}
               />
-              <SearchButton>중복확인</SearchButton>
+              <SearchButton onClick={onDuplicateCheck}>중복확인</SearchButton>
             </InsideForm>
             {errors.nickname ? (
-              <Errmsg $needMargin={false}>{`${errors.nickname.message}`}</Errmsg>
+              <Errmsg
+                $needMargin={false}
+              >{`${errors.nickname.message}`}</Errmsg>
             ) : null}
           </Info>
           <Info>
@@ -76,7 +158,9 @@ const ModifyAuthForm = () => {
               $islen="mid"
               {...register("email", { required: "이메일을 입력해주세요" })}
             />
-            {errors.email ? <Errmsg $needMargin={false}>{`${errors.email.message}`}</Errmsg> : null}
+            {errors.email ? (
+              <Errmsg $needMargin={false}>{`${errors.email.message}`}</Errmsg>
+            ) : null}
           </Info>
           <Info>
             <Label>활동지역</Label>
@@ -96,10 +180,14 @@ const ModifyAuthForm = () => {
               {...register("address2", { required: "상세주소를 입력해주세요" })}
             />
             {errors.address1 ? (
-              <Errmsg $needMargin={false}>{`${errors.address1.message}`}</Errmsg>
+              <Errmsg
+                $needMargin={false}
+              >{`${errors.address1.message}`}</Errmsg>
             ) : null}
             {errors.address2 ? (
-              <Errmsg $needMargin={false}>{`${errors.address2.message}`}</Errmsg>
+              <Errmsg
+                $needMargin={false}
+              >{`${errors.address2.message}`}</Errmsg>
             ) : null}
           </Info>
           <Info>
@@ -116,7 +204,9 @@ const ModifyAuthForm = () => {
               })}
             />
             {errors.phoneNumber ? (
-              <Errmsg $needMargin={false}>{`${errors.phoneNumber.message}`}</Errmsg>
+              <Errmsg
+                $needMargin={false}
+              >{`${errors.phoneNumber.message}`}</Errmsg>
             ) : null}
           </Info>
         </Infos>

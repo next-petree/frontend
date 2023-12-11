@@ -32,3 +32,12 @@ export interface DogsContent {
 interface Pageable {}
 
 interface Sort {}
+
+
+export interface IDogyFilterParams {
+  dogtype: number;
+  verification: boolean;
+  isAvailable: boolean;
+  gender: string;
+  size: string;
+}

@@ -50,21 +50,18 @@ const LivingAtmosphereForm = () => {
   useEffect(() => {
     if (images.ground && images.ground.length > 0) {
       const file1 = images.ground[0];
-      console.log(file1);
       setImagesPre({ ...imagesPre, ground: URL.createObjectURL(file1) });
     }
   }, [images.ground]);
   useEffect(() => {
     if (images.toilet && images.toilet.length > 0) {
       const file2 = images.toilet[0];
-      console.log(file2);
       setImagesPre({ ...imagesPre, toilet: URL.createObjectURL(file2) });
     }
   }, [images.toilet]);
   useEffect(() => {
     if (images.livingroom && images.livingroom.length > 0) {
       const file3 = images.livingroom[0];
-      console.log(file3);
       setImagesPre({ ...imagesPre, livingroom: URL.createObjectURL(file3) });
     }
   }, [images.livingroom]);
