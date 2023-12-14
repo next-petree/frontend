@@ -79,6 +79,7 @@ const ShortInput = styled.input`
   background-color: #f5f5f5;
   color: #939393;
   font-family: Noto Sans KR;
+  color: #000;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -93,7 +94,7 @@ const LongInput = styled.input`
   border: none;
   border-radius: 12px;
   background-color: #f5f5f5;
-  color: #939393;
+  color: #000;
   font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
@@ -148,7 +149,7 @@ export const EmailTextArea = styled(TextArea)``;
 export const EmailText = styled(Text)``;
 
 export const EmailInfomationText = styled(InfomationText)`
-  margin-right: 110px;
+  margin-right: 125px;
 `;
 
 export const EmailInputArea = styled.div`
@@ -182,6 +183,11 @@ export const PasswordCheckText = styled(Text)`
 
 export const PasswordCheckInput = styled(LongInput)``;
 
+export const PasswordErrorText = styled(InfomationText)`
+  margin-top: 5px;
+  color: red;
+`;
+
 export const TopRightContentArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -212,7 +218,7 @@ export const NickNameTextArea = styled(TextArea)``;
 export const NickNameText = styled(Text)``;
 
 export const NickNameInfomationText = styled(InfomationText)`
-  margin-right: 110px;
+  margin-right: 125px;
 `;
 
 export const NickNameInputArea = styled.div`
@@ -242,22 +248,6 @@ export const RegionSelectorArea = styled.div``;
 export const RegionSelectorTextArea = styled(TextArea)``;
 
 export const RegionSelectorText = styled(Text)``;
-
-export const RegionSelectorInputArea = styled.div``;
-
-export const RegionSelctorInputTop = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-`;
-
-export const RegionSelectorInput = styled(ShortInput)``;
-
-export const RegionSearchButton = styled(CheckButton)``;
-
-export const RegionSelctorInputBottom = styled.div``;
-
-export const RegionSectorDetailInput = styled(LongInput)``;
 
 export const BottomRightContentArea = styled.div`
   display: flex;

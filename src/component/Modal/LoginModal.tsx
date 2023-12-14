@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { get } from '../../api/api';
-import Icon from '../../assets/icons/Group 21.jpg';
-import { LoginModalProps, LogoutResponse } from '../../types/index';
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { get } from "../../api/api";
+import Icon from "../../assets/icons/Group 21.png";
+import { LoginModalProps, LogoutResponse } from "../../types/index";
 import {
   Modal,
   Title,
@@ -10,7 +10,7 @@ import {
   LogoutBtn,
   Wrapper,
   Img,
-} from './LoginModalStyle';
+} from "./LoginModalStyle";
 
 const LoginModal: React.FC<LoginModalProps> = ({
   onLogin,
@@ -31,26 +31,26 @@ const LoginModal: React.FC<LoginModalProps> = ({
       }
     };
     // 이벤트 리스너를 등록합니다.
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
 
   const handleLogin = () => {
     onLogin();
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleLogout = () => {
     const Logout = async () => {
       try {
-        const response = await get<LogoutResponse>('/api/logout');
+        const response = await get<LogoutResponse>("/api/logout");
 
-        if (response.data.status === 'SUCCESS') {
-          console.log('로그아웃!', response.data);
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
+        if (response.data.status === "SUCCESS") {
+          console.log("로그아웃!", response.data);
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
         }
       } catch (error: any) {
         console.log(error);
@@ -58,11 +58,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
     };
     Logout();
     onClose();
-    navigate('/login');
+    navigate("/login");
   };
 
   const isLoggedIn =
-    localStorage.getItem('accessToken') && localStorage.getItem('refreshToken');
+    localStorage.getItem("accessToken") && localStorage.getItem("refreshToken");
 
   return (
     <Modal ref={modalRef} style={{ top: `${top}%` }}>

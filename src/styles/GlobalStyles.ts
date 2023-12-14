@@ -67,6 +67,30 @@ const GlobalStyles = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+
+  .ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1
+  }
+  
+  .ReactModal__Content {
+    position: relative ;
+    width: 500px;
+    height: 500px ;
+    padding: 0;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
 `;
 
 export default GlobalStyles;
