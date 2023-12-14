@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import petTreeIconImage from "../../assets/icons/header_pets_black_24dp.png";
 import petTreeTextImage from "../../assets/icons/header_petree.png";
-import userProfileImage from "../../assets/icons/Group 21.jpg";
+import userProfileImage from "../../assets/icons/Group 21.png";
 
 export const Container = styled.div`
   position: relative;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../app/hooks";
-import { selectBreederProfile } from "../../features/breeder/breederSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { selectBreederProfile } from "../../redux/breeder/breederSlice";
 
 import {
   Container,

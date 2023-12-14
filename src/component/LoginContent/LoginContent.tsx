@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
 import alertList from "../../utils/swal";
 import Swal from "sweetalert2";
-import { setProfileImg } from "../../features/breeder/breederSlice";
+import { setProfileImg } from "../../redux/breeder/breederSlice";
 
 import {
   Container,

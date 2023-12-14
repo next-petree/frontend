@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import userProfileImage from "../../assets/icons/Group 21.jpg";
+import userProfileImage from "../../assets/icons/Group 21.png";
 
 export const Wrapper = styled.div`
   width: 280px;
