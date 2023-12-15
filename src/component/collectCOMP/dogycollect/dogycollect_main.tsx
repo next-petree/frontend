@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DogyBox from "./dogy_Box";
 import Pagenation from "../pagenation";
-import SearchFilter from "./dogy_searchfilter";
+import SearchFilter from "./dogy_searchfilter/dogy_searchfilter";
 import DetailModal from "../../DetailModal/DetailModal";
 import {
   BoxContainer,
@@ -16,42 +16,35 @@ import { useParams } from "react-router-dom";
 import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/collect_url";
 import { IDogsAPI } from "../../../types/dogscollect_types";
 import { get } from "../../../api/api";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { selectDog_searchfilter } from "../../../redux/collect/dog_searchfilterSlice";
+import { selectOnDogSearchSlice, setOnDogSearch } from "../../../redux/collect/onDogSearchSlice";
+import { selectOnUseDogfilterSlice, setOnUseDogfilter } from "../../../redux/collect/onUseDogfilterSlice";
 
-////////////////////////////////
-export interface IDogyFilterParams {
-  dogtype: number;
-  verification: boolean;
-  isAvailable: boolean;
-  gender: string;
-  size: string;
-}
-///////////////////////////////////
+
 
 export default function DogyCollect_main() {
   const param = useParams();
+  const dispath = useAppDispatch();
+
   const [page, setPage] = useState(Number(param.pageId));
   const [loading, setLoading] = useState(false);
-  //////////////////////////////////////////////////////
-  const [onSearch, setOnSearch] = useState(false);
-  const [onUseFilter, setOnUseFilter] = useState(false);
-  const [category, setCategory] = useState({
-    dogtype: 0,
-    verification: false,
-    isAvailable: false,
-    gender: "",
-    size: "",
-  });
   const [dogs, setdogs] = useState<IDogsAPI>();
+  /////////////////////////용현님 코드////////////////////////
   const [dogBoxClicked, setDogBoxClicked] = useState(false);
   const [selectedId, setSelectedId] = useState<number>();
   ///////////////////////////////////////////////////////////
+  const category = useAppSelector(selectDog_searchfilter);
+  const onSearch = useAppSelector(selectOnDogSearchSlice);
+  const onUseFilter = useAppSelector(selectOnUseDogfilterSlice);
 
   const getDogs = async () => {
     try {
       setLoading(true);
-      if (onUseFilter) {
+      if (onUseFilter.onUseDogfilter) {
         setPage(1);
       }
+      console.log(page)
       const url = DogsCollecturl({ page, category });
       const response = await get<IDogsAPI>(url);
       if (response.data.status === "FAIL") {
@@ -59,10 +52,9 @@ export default function DogyCollect_main() {
       }
       setdogs(response.data);
     } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
-      setOnUseFilter(false);
+      dispath(setOnUseDogfilter(false));
     }
   };
 
@@ -78,7 +70,7 @@ export default function DogyCollect_main() {
     <Wrapper>
       <MainBox>
         <Title>강아지 모아보기</Title>
-        <SearchBtn onClick={() => setOnSearch(!onSearch)}>검색 필터</SearchBtn>
+        <SearchBtn onClick={() => dispath(setOnDogSearch(true))}>검색 필터</SearchBtn>
         {loading ? (
           <Title>잠시만 기다려 주십시오...</Title>
         ) : (
@@ -119,13 +111,8 @@ export default function DogyCollect_main() {
         setPage={setPage}
         name={"dogys"}
       />
-      {onSearch ? (
-        <SearchFilter
-          setOnSearch={setOnSearch}
-          category={category}
-          setCategory={setCategory}
-          setOnUseFilter={setOnUseFilter}
-        />
+      {onSearch.onDogSearch ? (
+        <SearchFilter/>
       ) : null}
       {dogBoxClicked && (
         <DetailModal

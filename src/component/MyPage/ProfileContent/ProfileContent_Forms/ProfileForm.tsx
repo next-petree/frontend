@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import {
   Auth,
   Avatar,
+  AvatarBorder,
   AvatarInfo,
   Badge,
   Button,
@@ -14,14 +15,17 @@ import {
   Infos,
   Introduce,
   Label,
+  AvatarLabel,
   Store,
   Title,
 } from "./styles";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/swal";
+import AvatarUpload from "./AvatarUpload";
 
 const ProfileForm = () => {
   const [isAuth, setIsAuth] = useState(false);
+  const [changeAvatar, setChangeAvatar] = useState(false);
   const {
     register,
     handleSubmit,
@@ -32,18 +36,56 @@ const ProfileForm = () => {
   const onValid = async () => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("자기 소개를 저장 하시겠습니까?"),
-      width: "350px"
-    })
+      width: "350px",
+    });
     if (answer.isConfirmed) {
-      console.log(watch("introduce"))
+      console.log(watch("introduce"));
     }
+  };
+
+  const onChangeAvatar = () => {
+    setChangeAvatar(true)
   }
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onValid)}>
+    <>
+      <Container>
         <Infos>
-          <AvatarInfo>
-            <Avatar $isAuth={isAuth} />
+          <AvatarInfo onClick={onChangeAvatar}>
+            <AvatarBorder $isAuth={isAuth}>
+              <AvatarLabel>
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="-1.6 -1.6 19.20 19.20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#000000"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0">
+                    <rect
+                      x="-1.6"
+                      y="-1.6"
+                      width="19.20"
+                      height="19.20"
+                      rx="9.6"
+                      fill="#9c9c9c"
+                      strokeWidth="0"
+                    ></rect>
+                  </g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"
+                      fill="#686868"
+                    ></path>{" "}
+                  </g>
+                </svg>
+              </AvatarLabel>
+            </AvatarBorder>
             <Badge>
               {isAuth ? (
                 <svg
@@ -90,26 +132,29 @@ const ProfileForm = () => {
               )}
             </Badge>
           </AvatarInfo>
-          <Title>프로필</Title>
-          <Info>
-            <Label>브리더 인증 여부</Label>
-            <Auth>브리더 인증 되지 않음</Auth>
-          </Info>
-          <Info>
-            <Label>자기소개</Label>
-            <Introduce
-              {...register("introduce", { required: true, maxLength: 300 })}
-              maxLength={300}
-              placeholder="키워드와 함께 짧은 글로 자기소개를 해보세요"
-            />
-            <Checklen>{`${watch("introduce")}`.length + "/300"}</Checklen>
-          </Info>
+          <Form>
+            <Title>프로필</Title>
+            <Info>
+              <Label>브리더 인증 여부</Label>
+              <Auth>브리더 인증 되지 않음</Auth>
+            </Info>
+            <Info>
+              <Label>자기소개</Label>
+              <Introduce
+                {...register("introduce", { required: true, maxLength: 300 })}
+                maxLength={300}
+                placeholder="키워드와 함께 짧은 글로 자기소개를 해보세요"
+              />
+              <Checklen>{`${watch("introduce")}`.length + "/300"}</Checklen>
+            </Info>
+            <Store>
+              <Button $isLong={true}>저장</Button>
+            </Store>
+          </Form>
         </Infos>
-        <Store>
-          <Button $isLong={true}>저장</Button>
-        </Store>
-      </Form>
-    </Container>
+      </Container>
+      {changeAvatar ? <AvatarUpload setChangeAvatar={setChangeAvatar} /> : null}
+    </>
   );
 };
 

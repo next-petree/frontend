@@ -11,11 +11,14 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  padding-top: 3vh;
-  padding-left: 1vw;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
 `;
 
 export const Infos = styled.div`
+  padding-top: 3vh;
+  padding-left: 1vw;
   display: flex;
   flex-direction: column;
   gap: 3vh;
@@ -28,16 +31,60 @@ export const Info = styled.div`
   position: relative;
 `;
 
+export const AvatarBox = styled.div`
+  position: relative;
+  background-color: white;
+  width: 13vw;
+  height: fit-content;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
+  padding: 4vw 3vw 2.5vw;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
 export const AvatarInfo = styled.div`
   position: relative;
 `;
-export const Avatar = styled.img<{ $isAuth: boolean }>`
+export const Avatar = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export const AvatarBorder = styled.div<{ $isAuth: boolean }>`
   width: 9vw;
   height: 9vw;
   border-radius: 100%;
-  background-color: whitesmoke;
   border: 2px solid ${(props) => (props.$isAuth ? "#FF6363" : "#23F39C")};
   overflow: hidden;
+`;
+export const UploadAvatarBorder = styled.div`
+  position: relative;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 100%;
+  overflow: hidden;
+  align-self: center;
+  margin-bottom: -3vh;
+`;
+
+export const AvatarInput = styled.input`
+  display: none;
+`;
+
+export const AvatarLabel = styled.label`
+  width: 100%;
+  height: 100%;
+`;
+
+export const AvatarDeleteBtn = styled.div`
+  position: absolute;
+  top:5vw;
+  right: 4.27vw;
 `;
 export const Badge = styled.span`
   position: absolute;
@@ -155,7 +202,7 @@ export const ImageDeleteBtn = styled.div`
   position: absolute;
   top: -18px;
   right: -19px;
-`
+`;
 
 export const ImageInput = styled.input`
   display: none;
@@ -250,4 +297,18 @@ export const DeleteBtn = styled.div`
   font-weight: 600;
   top: 0;
   right: 0;
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

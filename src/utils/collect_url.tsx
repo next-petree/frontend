@@ -1,9 +1,10 @@
-import { IForms } from "../component/collectCOMP/breedercollect/breedercollect_main";
-import { IDogyFilterParams } from "../component/collectCOMP/dogycollect/dogycollect_main";
+import { IBreederSearch } from "../types/breederscollect_type";
+import { IDogyFilterParams } from "../types/dogscollect_types";
+
 
 interface IBreedersCollecturl {
   page: number;
-  forms: IForms;
+  searchs: IBreederSearch;
 }
 
 interface IDogsCollecturl {
@@ -11,9 +12,9 @@ interface IDogsCollecturl {
   category: IDogyFilterParams;
 }
 
-export const BreedersCollecturl = ({ page, forms }: IBreedersCollecturl) => {
-  return `breeders?page=${page - 1}${forms.auth ? "&verification=yes" : ""}${
-    forms.keyword === "" ? "" : `&keyword=${forms.keyword}`
+export const BreedersCollecturl = ({ page, searchs }: IBreedersCollecturl) => {
+  return `breeders?page=${page - 1}${searchs.auth ? "&verification=yes" : ""}${
+    searchs.keyword === "" ? "" : `&keyword=${searchs.keyword}`
   }`;
 };
 
