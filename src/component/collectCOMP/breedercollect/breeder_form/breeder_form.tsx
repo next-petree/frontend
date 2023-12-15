@@ -2,11 +2,11 @@ import BreederAuthToggle from "../breeder_auth_toggle/breeder_auth_toggle";
 import { useForm } from "react-hook-form";
 import AutoInput from "../../Auto_dogtype_complete_input/auto_complete_input";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
-import { setOnBreederSearch } from "../../../../features/collect/onBreederSearchSlice";
+import { setOnBreederSearch } from "../../../../../redux/collect/onBreederSearchSlice";
 import {
   selectBreeder_search,
   set_breedersearchkeyword,
-} from "../../../../features/collect/breeder_searchSlice";
+} from "../../../../../redux/collect/breeder_searchSlice";
 import { Btn, Container, Form, State } from "./styles";
 
 export default function BreederForm() {
@@ -20,7 +20,7 @@ export default function BreederForm() {
   } = useForm();
   const dispath = useAppDispatch();
   const searchs = useAppSelector(selectBreeder_search);
-  
+
   const onValid = ({ keyword }: any) => {
     dispath(set_breedersearchkeyword(keyword));
     reset();

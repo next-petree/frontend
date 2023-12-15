@@ -109,17 +109,22 @@ export const Label = styled.label`
   font-size: 2rem;
 `;
 export const Auth = styled.div`
+  position: relative;
   width: 22vw;
   height: 5vh;
   background-color: #f5f5f5;
   border-radius: 12px;
   display: flex;
   align-items: center;
-
   font-weight: 600;
   font-size: 1.5rem;
   padding-left: 20px;
 `;
+
+export const CheckMark = styled.div`
+  position: absolute;
+  right: 1vw;
+`
 export const Introduce = styled.textarea`
   width: 85%;
   height: 150px;

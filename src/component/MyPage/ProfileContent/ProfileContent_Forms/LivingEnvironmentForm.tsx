@@ -18,8 +18,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import alertList from "../../../../utils/swal";
 import Swal from "sweetalert2";
+import { LivingEnvironmentUrl } from "../../../../utils/mypage_url";
+import { get } from "../../../../api/api";
+import { LivingEnvironmentsResultResponse } from "../../../../types/mypage_type";
 
-const LivingAtmosphereForm = () => {
+const LivingEnvironmentForm = () => {
   const {
     register,
     handleSubmit,
@@ -31,54 +34,78 @@ const LivingAtmosphereForm = () => {
   const onValid = async (data: any) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주거 환경을 저장 하시겠습니까?"),
-      width: "350px"
-    })
-    if(answer.isConfirmed) {
-      console.log(data)
+      width: "350px",
+    });
+    if (answer.isConfirmed) {
+      const formData = new FormData();
+      formData.append("files", data.yard[0]);
+      console.log(formData.values);
     }
   };
+  // 이미지 url만 보내면 업로드가 되는 건지
   const [imagesPre, setImagesPre] = useState({
-    ground: "",
-    toilet: "",
-    livingroom: "",
+    yard: "",
+    bathRoom: "",
+    livingRoom: "",
   });
   const images = {
-    ground: watch("ground"),
-    toilet: watch("toilet"),
-    livingroom: watch("livingroom"),
+    yard: watch("yard"),
+    bathRoom: watch("bathRoom"),
+    livingRoom: watch("livingRoom"),
   };
   useEffect(() => {
-    if (images.ground && images.ground.length > 0) {
-      const file1 = images.ground[0];
-      setImagesPre({ ...imagesPre, ground: URL.createObjectURL(file1) });
+    if (images.yard && images.yard.length > 0) {
+      const file1 = images.yard[0];
+      setImagesPre({ ...imagesPre, yard: URL.createObjectURL(file1) });
     }
-  }, [images.ground]);
+  }, [images.yard]);
   useEffect(() => {
-    if (images.toilet && images.toilet.length > 0) {
-      const file2 = images.toilet[0];
-      setImagesPre({ ...imagesPre, toilet: URL.createObjectURL(file2) });
+    if (images.bathRoom && images.bathRoom.length > 0) {
+      const file2 = images.bathRoom[0];
+      setImagesPre({ ...imagesPre, bathRoom: URL.createObjectURL(file2) });
     }
-  }, [images.toilet]);
+  }, [images.bathRoom]);
   useEffect(() => {
-    if (images.livingroom && images.livingroom.length > 0) {
-      const file3 = images.livingroom[0];
-      setImagesPre({ ...imagesPre, livingroom: URL.createObjectURL(file3) });
+    if (images.livingRoom && images.livingRoom.length > 0) {
+      const file3 = images.livingRoom[0];
+      setImagesPre({ ...imagesPre, livingRoom: URL.createObjectURL(file3) });
     }
-  }, [images.livingroom]);
+  }, [images.livingRoom]);
 
   const onDelete = (data: string) => {
-    setValue(data, "")
-    if(data === "ground")
-    {
-      setImagesPre({...imagesPre, ground: ""})
-    }
-    else if(data === "toilet"){
-      setImagesPre({...imagesPre, toilet: ""})
-    }
-    else if (data === "livingroom") {
-      setImagesPre({...imagesPre, livingroom: ""})
+    setValue(data, "");
+    if (data === "yard") {
+      setImagesPre({ ...imagesPre, yard: "" });
+    } else if (data === "bathRoom") {
+      setImagesPre({ ...imagesPre, bathRoom: "" });
+    } else if (data === "livingRoom") {
+      setImagesPre({ ...imagesPre, livingRoom: "" });
     }
   };
+  //spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
+  const getLivingEnvironments = async () => {
+    try {
+      const url = LivingEnvironmentUrl();
+      const response = await get<LivingEnvironmentsResultResponse[]>(url);
+      const livingroom = response.data.find(
+        (i) => i.spaceType === "LIVING_ROOM"
+      );
+      const bathroom = response.data.find((i) => i.spaceType === "BATH_ROOM");
+      const yard = response.data.find((i) => i.spaceType === "YARD");
+      if (livingroom?.imgUrl) {
+        setImagesPre({ ...imagesPre, livingRoom: livingroom?.imgUrl });
+      }
+      if (bathroom?.imgUrl) {
+        setImagesPre({ ...imagesPre, bathRoom: bathroom?.imgUrl });
+      }
+      if (yard?.imgUrl) {
+        setImagesPre({ ...imagesPre, yard: yard?.imgUrl });
+      }
+    } catch (e) {}
+  };
+  useEffect(() => {
+    getLivingEnvironments();
+  }, []);
 
   return (
     <Container>
@@ -87,10 +114,10 @@ const LivingAtmosphereForm = () => {
           <Title>주거환경</Title>
           <Images>
             <ImageContainer>
-              {imagesPre.ground !== "" ? (
+              {imagesPre.yard !== "" ? (
                 <>
-                  <Image src={imagesPre.ground} alt="" />
-                  <ImageDeleteBtn onClick={() => onDelete("ground")}>
+                  <Image src={imagesPre.yard} alt="" />
+                  <ImageDeleteBtn onClick={() => onDelete("yard")}>
                     <svg
                       width="36"
                       height="36"
@@ -121,7 +148,7 @@ const LivingAtmosphereForm = () => {
                   </ImageDeleteBtn>
                 </>
               ) : (
-                <ImageLabel htmlFor="ground">
+                <ImageLabel htmlFor="yard">
                   <svg
                     width="63"
                     height="47"
@@ -163,20 +190,20 @@ const LivingAtmosphereForm = () => {
                     </defs>
                   </svg>
                   <ImageInput
-                    id="ground"
+                    id="yard"
                     type="file"
                     accept="image/*"
-                    {...register("ground")}
+                    {...register("yard")}
                   />
                 </ImageLabel>
               )}
               <ImageText>마당</ImageText>
             </ImageContainer>
             <ImageContainer>
-            {imagesPre.toilet !== "" ? (
+              {imagesPre.bathRoom !== "" ? (
                 <>
-                  <Image src={imagesPre.toilet} alt="" />
-                  <ImageDeleteBtn onClick={() => onDelete("toilet")}>
+                  <Image src={imagesPre.bathRoom} alt="" />
+                  <ImageDeleteBtn onClick={() => onDelete("bathRoom")}>
                     <svg
                       width="36"
                       height="36"
@@ -207,7 +234,7 @@ const LivingAtmosphereForm = () => {
                   </ImageDeleteBtn>
                 </>
               ) : (
-                <ImageLabel htmlFor="toilet">
+                <ImageLabel htmlFor="bathRoom">
                   <svg
                     width="63"
                     height="47"
@@ -249,20 +276,20 @@ const LivingAtmosphereForm = () => {
                     </defs>
                   </svg>
                   <ImageInput
-                    id="toilet"
+                    id="bathRoom"
                     type="file"
                     accept="image/*"
-                    {...register("toilet")}
+                    {...register("bathRoom")}
                   />
                 </ImageLabel>
               )}
               <ImageText>화장실</ImageText>
             </ImageContainer>
             <ImageContainer>
-            {imagesPre.livingroom !== "" ? (
+              {imagesPre.livingRoom !== "" ? (
                 <>
-                  <Image src={imagesPre.livingroom} alt="" />
-                  <ImageDeleteBtn onClick={() => onDelete("livingroom")}>
+                  <Image src={imagesPre.livingRoom} alt="" />
+                  <ImageDeleteBtn onClick={() => onDelete("livingRoom")}>
                     <svg
                       width="36"
                       height="36"
@@ -293,7 +320,7 @@ const LivingAtmosphereForm = () => {
                   </ImageDeleteBtn>
                 </>
               ) : (
-                <ImageLabel htmlFor="livingroom">
+                <ImageLabel htmlFor="livingRoom">
                   <svg
                     width="63"
                     height="47"
@@ -335,10 +362,10 @@ const LivingAtmosphereForm = () => {
                     </defs>
                   </svg>
                   <ImageInput
-                    id="livingroom"
+                    id="livingRoom"
                     type="file"
                     accept="image/*"
-                    {...register("livingroom")}
+                    {...register("livingRoom")}
                   />
                 </ImageLabel>
               )}
@@ -354,4 +381,4 @@ const LivingAtmosphereForm = () => {
   );
 };
 
-export default LivingAtmosphereForm;
+export default LivingEnvironmentForm;

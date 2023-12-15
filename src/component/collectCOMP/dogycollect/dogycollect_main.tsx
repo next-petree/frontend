@@ -17,11 +17,15 @@ import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/collect_url";
 import { IDogsAPI } from "../../../types/dogscollect_types";
 import { get } from "../../../api/api";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { selectDog_searchfilter } from "../../../features/collect/dog_searchfilterSlice";
-import { selectOnDogSearchSlice, setOnDogSearch } from "../../../features/collect/onDogSearchSlice";
-import { selectOnUseDogfilterSlice, setOnUseDogfilter } from "../../../features/collect/onUseDogfilterSlice";
-
-
+import { selectDog_searchfilter } from "../../../../redux/collect/dog_searchfilterSlice";
+import {
+  selectOnDogSearchSlice,
+  setOnDogSearch,
+} from "../../../../redux/collect/onDogSearchSlice";
+import {
+  selectOnUseDogfilterSlice,
+  setOnUseDogfilter,
+} from "../../../../redux/collect/onUseDogfilterSlice";
 
 export default function DogyCollect_main() {
   const param = useParams();
@@ -44,7 +48,7 @@ export default function DogyCollect_main() {
       if (onUseFilter.onUseDogfilter) {
         setPage(1);
       }
-      console.log(page)
+      console.log(page);
       const url = DogsCollecturl({ page, category });
       const response = await get<IDogsAPI>(url);
       if (response.data.status === "FAIL") {
@@ -70,7 +74,9 @@ export default function DogyCollect_main() {
     <Wrapper>
       <MainBox>
         <Title>강아지 모아보기</Title>
-        <SearchBtn onClick={() => dispath(setOnDogSearch(true))}>검색 필터</SearchBtn>
+        <SearchBtn onClick={() => dispath(setOnDogSearch(true))}>
+          검색 필터
+        </SearchBtn>
         {loading ? (
           <Title>잠시만 기다려 주십시오...</Title>
         ) : (
@@ -111,9 +117,7 @@ export default function DogyCollect_main() {
         setPage={setPage}
         name={"dogys"}
       />
-      {onSearch.onDogSearch ? (
-        <SearchFilter/>
-      ) : null}
+      {onSearch.onDogSearch ? <SearchFilter /> : null}
       {dogBoxClicked && (
         <DetailModal
           customTop="21%"

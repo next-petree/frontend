@@ -18,8 +18,8 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   selectOnBreederSearchSlice,
   setOnBreederSearch,
-} from "../../../features/collect/onBreederSearchSlice";
-import { selectBreeder_search } from "../../../features/collect/breeder_searchSlice";
+} from "../../../../redux/collect/onBreederSearchSlice";
+import { selectBreeder_search } from "../../../../redux/collect/breeder_searchSlice";
 
 export default function BreederCollect_Main() {
   const param = useParams();
@@ -31,12 +31,12 @@ export default function BreederCollect_Main() {
 
   const searchs = useAppSelector(selectBreeder_search);
   const onSearch = useAppSelector(selectOnBreederSearchSlice);
-  
+
   const getBreeders = async () => {
     try {
       setLoading(true);
       if (onSearch.onBreederSearch) {
-        console.log("on here")
+        console.log("on here");
         setPage(1);
       }
       console.log(page, searchs);

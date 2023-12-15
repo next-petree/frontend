@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/hooks";
-import { selectBreederProfile } from "../../features/breeder/breederSlice";
+import { selectBreederProfile } from "../../../redux/breeder/breederSlice";
 
 import {
   Container,
@@ -24,7 +24,7 @@ const Header = () => {
   console.log(profileImg);
 
   const handleClick = () => {
-    setIsCilcked(prev => !prev);
+    setIsCilcked((prev) => !prev);
   };
 
   const decodedData = DecodeToken();

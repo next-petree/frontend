@@ -11,22 +11,26 @@ import {
   set_searchfilterIsAvailable,
   set_searchfilterSize,
   set_searchfilterVerification,
-} from "../../../../features/collect/dog_searchfilterSlice";
+} from "../../../../../redux/collect/dog_searchfilterSlice";
 import { IDogyFilterParams } from "../../../../types/dogscollect_types";
-import { setOnDogSearch } from "../../../../features/collect/onDogSearchSlice";
-import { setOnUseDogfilter } from "../../../../features/collect/onUseDogfilterSlice";
-import { Btn, Buttons, Check, Checks, ConfirmBtn, Confirms, FilterContainer, Form, Overlay, Span, Title } from "./styles";
-
-
-
+import { setOnDogSearch } from "../../../../../redux/collect/onDogSearchSlice";
+import { setOnUseDogfilter } from "../../../../../redux/collect/onUseDogfilterSlice";
+import {
+  Btn,
+  Buttons,
+  Check,
+  Checks,
+  ConfirmBtn,
+  Confirms,
+  FilterContainer,
+  Form,
+  Overlay,
+  Span,
+  Title,
+} from "./styles";
 
 export default function SearchFilter() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-  } = useForm();
+  const { register, handleSubmit, watch, setValue } = useForm();
 
   const dispath = useAppDispatch();
   const category = useAppSelector(selectDog_searchfilter);
@@ -109,7 +113,9 @@ export default function SearchFilter() {
             ))}
           </Checks>
           <Confirms>
-            <ConfirmBtn type="submit" $isYes={true}>검색</ConfirmBtn>
+            <ConfirmBtn type="submit" $isYes={true}>
+              검색
+            </ConfirmBtn>
             <ConfirmBtn type="button" onClick={onClose} $isYes={false}>
               취소
             </ConfirmBtn>

@@ -8,7 +8,7 @@ import CustomLayout from "../Layout/CustomLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
-import { useGetBreederDetailQuery } from "../../features/api/breederApiSlice";
+import { useGetBreederDetailQuery } from "../../../redux/api/breederApiSlice";
 import { useParams } from "react-router-dom";
 
 const BreederDetails = () => {

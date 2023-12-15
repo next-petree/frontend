@@ -6,7 +6,7 @@ import * as S from "./styles";
 import { IMG2 } from "../../assets/images";
 import { desc } from "../../constants";
 
-import { useGetAdopterQuery } from "../../features/api/adopterApiSlice";
+import { useGetAdopterQuery } from "../../../redux/api/adopterApiSlice";
 import CustomLayout from "../Layout/CustomLayout";
 
 const CustomerDetails = () => {

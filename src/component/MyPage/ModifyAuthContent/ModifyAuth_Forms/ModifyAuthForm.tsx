@@ -18,7 +18,7 @@ import alertList from "../../../../utils/swal";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import { DuplicateCheckUrl, MemberInfoUrl } from "../../../../utils/mypage_url";
 import { useEffect, useState } from "react";
-import { ResultResponse, IMemberInfoAPI, IMeberInfoForm } from "../../../../types/mypage_type";
+import { IMemberInfoAPI, IMeberInfoForm, ResultResponse } from "../../../../types/mypage_type";
 import { get, post, patch } from "../../../../api/api";
 
 const ModifyAuthForm = () => {
@@ -31,7 +31,6 @@ const ModifyAuthForm = () => {
   } = useForm<IMeberInfoForm>();
   const [onCheckDuplicate, setonCheckDuplicate] = useState<boolean>(false);
   const [authtype, setauthtype] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>();
   const [currentNickname, setCurrentNickname] = useState<string>("");
   const onValid = async (data: IMeberInfoForm) => {
     const answer = await Swal.fire({

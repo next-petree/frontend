@@ -3,7 +3,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 import { BreederBadge } from "../../assets/icons";
 import { IDMProps } from "../../types";
-import { useGetDogDetailQuery } from "../../features/api/dogApiSlice";
+import { useGetDogDetailQuery } from "../../../redux/api/dogApiSlice";
 import * as S from "./styles";
 
 const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
