@@ -1,21 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import { RecoilRoot } from "recoil";
-import GlobalStyle from "./styles";
-import { IntlProvider } from "react-intl";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
+import App from "./App";
+// import store from "./store/store";
+import GlobalStyles from "./styles/GlobalStyles";
+import GlobalFont from "./styles/GlobalFont";
+
+import { store } from "./redux/store";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <GlobalStyle />
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
-  </React.StrictMode>
+    <Provider store={store}>
+      <Router>
+        <GlobalStyles />
+        <GlobalFont />
+        <App />
+      </Router>
+    </Provider>
+  </React.StrictMode>,
 );
 
 reportWebVitals();
