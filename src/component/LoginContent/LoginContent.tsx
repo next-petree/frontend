@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
+import { LoginResponse } from "../../types/authType";
 import alertList from "../../utils/swal";
 import Swal from "sweetalert2";
 import { setProfileImg } from "../../redux/breeder/breederSlice";
@@ -30,18 +31,6 @@ import {
   SignUpButton,
 } from "./LoginContentStyle";
 
-type LoginResponse = {
-  status: string;
-  data: {
-    grantType: string;
-    accessToken: string;
-    accessTokenExpireTime: string;
-    refreshToken: string;
-    refreshTokenExpireTime: string;
-    profileImgUrl: string | null;
-  };
-};
-
 const LoginContent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,9 +40,8 @@ const LoginContent = () => {
 
   const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API;
 
-  const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
-
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const handleLogin = async () => {
     try {
@@ -63,8 +51,6 @@ const LoginContent = () => {
       };
 
       const response = await post<LoginResponse>("/login", requestBody);
-
-      console.log(response);
 
       if (response.data.status === "SUCCESS") {
         await Swal.fire(alertList.successMessage("로그인에 성공했습니다."));
