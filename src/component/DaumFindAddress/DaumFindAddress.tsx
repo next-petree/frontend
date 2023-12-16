@@ -26,6 +26,10 @@ const DaumFindAddress = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
   };
@@ -56,6 +60,7 @@ const DaumFindAddress = () => {
 
       <Modal
         isOpen={isOpen}
+        onRequestClose={closeModal}
         ariaHideApp={false}
         className="ReactModal__Content"
         overlayClassName="ReactModal__Overlay"

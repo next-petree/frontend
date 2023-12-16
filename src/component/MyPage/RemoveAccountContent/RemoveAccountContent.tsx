@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { post } from "../../../api/api";
+import { RegisterResponse } from "../../../types/authType";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/swal";
@@ -27,21 +29,31 @@ const RemoveAccountContent = () => {
     setCheckbox(event.target.checked);
   };
   const navigation = useNavigate();
-  const handleRemoveAccountClick = () => {
-    if (checkbox) {
-      Swal.fire(
-        alertList.doubleCheckTitkeMsg(
-          "회원탈퇴 안내",
-          "펫트리 회원서비스를 탈퇴 하시겠습니까?",
-        ),
-      ).then(result => {
-        if (result.isConfirmed) {
+
+  const handleRemoveAccountClick = async () => {
+    if (!checkbox) {
+      Swal.fire(alertList.infoMessage("항목에 동의해주세요."));
+      return;
+    }
+    const confirmResult = await Swal.fire(
+      alertList.doubleCheckTitkeMsg(
+        "회원탈퇴 안내",
+        "펫트리 회원서비스를 탈퇴 하시겠습니까?",
+      ),
+    );
+    if (confirmResult.isConfirmed) {
+      try {
+        const response = await post<RegisterResponse>("/withdraw");
+
+        if (response.data.status === "SUCCESS") {
           Swal.fire(alertList.successMessage("회원탈퇴가 완료되었습니다."));
           navigation("/");
+        } else {
+          Swal.fire(alertList.errorMessage(response.data.data));
         }
-      });
-    } else {
-      Swal.fire(alertList.infoMessage("항목에 동의해주세요."));
+      } catch (error) {
+        Swal.fire(alertList.errorMessage("회원탈퇴에 실패했습니다."));
+      }
     }
   };
 

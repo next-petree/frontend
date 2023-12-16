@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { get, post } from "../../../api/api";
+import { RegisterResponse } from "../../../types/authType";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/swal";
 import { useNavigate } from "react-router-dom";
@@ -64,11 +65,6 @@ import {
   RegisterButton,
 } from "./RegisterContentDetailStyle";
 
-interface ApiResponse {
-  status: string;
-  data: string;
-}
-
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
 
 const RegisterContentDetail = () => {
@@ -132,7 +128,7 @@ const RegisterContentDetail = () => {
     }
 
     try {
-      const response = await get<ApiResponse>("/email/check", {
+      const response = await get<RegisterResponse>("/email/check", {
         params: { email: email },
       });
 
@@ -155,7 +151,7 @@ const RegisterContentDetail = () => {
     }
 
     try {
-      const response = await get<ApiResponse>("nickname/check", {
+      const response = await get<RegisterResponse>("nickname/check", {
         params: { nickname },
       });
 
@@ -178,7 +174,7 @@ const RegisterContentDetail = () => {
     }
 
     try {
-      const response = await post<ApiResponse>("/sms/send", {
+      const response = await post<RegisterResponse>("/sms/send", {
         to: phoneNumber,
       });
 
@@ -197,7 +193,7 @@ const RegisterContentDetail = () => {
 
   const verifyCode = async () => {
     try {
-      const response = await post<ApiResponse>("/sms/verify", {
+      const response = await post<RegisterResponse>("/sms/verify", {
         phoneNumber,
         code: verificationCode,
       });
