@@ -1,5 +1,5 @@
-import { IForms } from "../component/collectCOMP/breedercollectCOMP/BC_main";
-import { IDogyFilterParams } from "../component/collectCOMP/dogycollectCOMP/DC_main";
+import { IForms } from "../component/CollectCOMP/BreederCollectCOMP/BCMain";
+import { IDogyFilterParams } from "../component/CollectCOMP/DogyCollectCOMP/DCMain";
 
 interface IBreedersCollecturl {
   page: number;

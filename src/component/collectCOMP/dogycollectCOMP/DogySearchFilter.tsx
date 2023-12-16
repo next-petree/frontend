@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dogfilters } from "./filter_data";
-import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
-import { IDogyFilterParams } from "./DC_main";
+import AutoInput from "../AutoDogtypeCompleteInput/AutoCompleteInput";
+import { IDogyFilterParams } from "./DCMain";
 
 const Overlay = styled.div`
   position: fixed;
@@ -56,18 +56,18 @@ const Buttons = styled.div`
   gap: 0.8vw;
 `;
 const Btn = styled.div<{ $isCheck: boolean | undefined; $isLong: boolean }>`
-  width: ${(props) => (props.$isLong ? "17vw" : "7.5vw")};
+  width: ${props => (props.$isLong ? "17vw" : "7.5vw")};
   height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: ${(props) => (props.$isCheck ? "none" : "1px solid #4EC1BF")};
+  border: ${props => (props.$isCheck ? "none" : "1px solid #4EC1BF")};
   border-radius: 12px;
-  background-color: ${(props) => (props.$isCheck ? "#4EC1BF" : "white")};
+  background-color: ${props => (props.$isCheck ? "#4EC1BF" : "white")};
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 2rem;
-  color: ${(props) => (props.$isCheck ? "white" : " #4EC1BF")};
+  color: ${props => (props.$isCheck ? "white" : " #4EC1BF")};
 `;
 
 const Span = styled.span`
@@ -88,7 +88,7 @@ const ConfirmBtn = styled.button<{ $isYes: boolean }>`
   height: 7vh;
   border: none;
   border-radius: 12px;
-  background-color: ${(props) => (props.$isYes ? "#4EC1BF" : "black")};
+  background-color: ${props => (props.$isYes ? "#4EC1BF" : "black")};
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 2rem;
@@ -118,7 +118,7 @@ export default function SearchFilter({
   const [dogtype, setDogtype] = useState(0);
   const [formdata, setFormdata] = useState(category);
   const onClose = () => {
-    setOnSearch((prev) => !prev);
+    setOnSearch(prev => !prev);
   };
   const onValid = (data: any) => {
     setOnUseFilter(true);
@@ -168,11 +168,11 @@ export default function SearchFilter({
             />
           </Title>
           <Checks>
-            {dogfilters.map((dogfilter) => (
+            {dogfilters.map(dogfilter => (
               <Check key={dogfilter.id}>
                 <Span>{dogfilter.name}</Span>
                 <Buttons>
-                  {dogfilter.category.map((btn) => (
+                  {dogfilter.category.map(btn => (
                     <Btn
                       key={btn.key}
                       onClick={() => onCategorySet(dogfilter.value, btn.value)}

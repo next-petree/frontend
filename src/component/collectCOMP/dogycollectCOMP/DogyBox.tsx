@@ -12,7 +12,7 @@ import {
   Nameline,
   Poss,
   Span,
-} from "../styles_collect/collect_box_styled";
+} from "../StylesCollect/CollectBoxStyled";
 import { DogsContent } from "../../../types/dogscollect_types";
 
 export default function DogyBox({

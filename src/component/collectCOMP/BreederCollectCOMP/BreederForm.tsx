@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import BreederAuthToggle from "./breeder_auth_toggle";
+import BreederAuthToggle from "./BreederAuthToggle";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { IForms, IParams } from "./BC_main";
-import AutoInput from "../Auto_dogtype_complete_input/auto_complete_input";
+import { IForms, IParams } from "./BCMain";
+import AutoInput from "../AutoDogtypeCompleteInput/AutoCompleteInput";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -63,32 +63,37 @@ const Btn = styled.button`
   color: white;
 `;
 
-
-
-
-export default function BreederForm({forms, setForms,setOnSearch}:IParams) {
+export default function BreederForm({ forms, setForms, setOnSearch }: IParams) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
     setValue,
-    watch
+    watch,
   } = useForm();
-  const onValid = ({keyword}:any) => {
-    setForms({...forms, keyword})
+  const onValid = ({ keyword }: any) => {
+    setForms({ ...forms, keyword });
     reset();
     setOnSearch(true);
   };
   return (
     <Container>
-      <BreederAuthToggle forms={forms} setForms={setForms} setOnSearch={setOnSearch} />
+      <BreederAuthToggle
+        forms={forms}
+        setForms={setForms}
+        setOnSearch={setOnSearch}
+      />
       <State>{forms.auth ? "인증 브리더만 보기" : "모든 브리더 보기"}</State>
       <Form onSubmit={handleSubmit(onValid)}>
-        <AutoInput register={register("keyword")} type="text" setValue={setValue} watch={watch}/>
+        <AutoInput
+          register={register("keyword")}
+          type="text"
+          setValue={setValue}
+          watch={watch}
+        />
         <Btn>검색</Btn>
       </Form>
-      
     </Container>
   );
 }

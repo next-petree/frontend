@@ -1,5 +1,5 @@
-import BreederForm from "./breeder_form";
-import BreederBox from "./breeder_Box";
+import BreederForm from "./BreederForm";
+import BreederBox from "./BreederBox";
 import {
   BoxContainer,
   MainBox,
@@ -7,7 +7,7 @@ import {
   Title,
   Wrapper,
   BoxWrapper,
-} from "../styles_collect/collect_main_styled";
+} from "../StylesCollect/CollectMainStyled";
 import Pagenation from "../pagenation";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

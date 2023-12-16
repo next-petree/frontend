@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import DogyBox from "./dogy_Box";
+import DogyBox from "./DogyBox";
 import Pagenation from "../pagenation";
-import SearchFilter from "./dogy_searchfilter";
+import SearchFilter from "./DogySearchFilter";
 import DetailModal from "../../DetailModal/DetailModal";
 import {
   BoxContainer,
@@ -11,7 +11,7 @@ import {
   Title,
   Wrapper,
   BoxWrapper,
-} from "../styles_collect/collect_main_styled";
+} from "../StylesCollect/CollectMainStyled";
 import { useParams } from "react-router-dom";
 import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/collect_url";
 import { IDogsAPI } from "../../../types/dogscollect_types";
@@ -85,7 +85,7 @@ export default function DC_main() {
           <>
             {dogs?.data.totalElements != 0 ? (
               <BoxContainer>
-                {dogs?.data.content.map((box) => (
+                {dogs?.data.content.map(box => (
                   <BoxWrapper
                     key={box.id}
                     onClick={() => handleDetailClick(box.id)}

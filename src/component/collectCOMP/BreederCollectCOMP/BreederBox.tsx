@@ -8,7 +8,7 @@ import {
   MajorDog,
   Name,
   Nameline,
-} from "../styles_collect/collect_box_styled";
+} from "../StylesCollect/CollectBoxStyled";
 
 interface IBreederBox {
   id: number;
@@ -62,9 +62,9 @@ export default function BreederBox({
       </Nameline>
 
       <MajorDog>
-        {`주력견종 : ${types.map((t) => " " + t)}`.length < 19
-          ? `주력견종 : ${types.map((t) => " " + t)}`
-          : `주력견종 : ${types.map((t) => " " + t)}`.slice(0, 19) + "..."}
+        {`주력견종 : ${types.map(t => " " + t)}`.length < 19
+          ? `주력견종 : ${types.map(t => " " + t)}`
+          : `주력견종 : ${types.map(t => " " + t)}`.slice(0, 19) + "..."}
       </MajorDog>
     </BoxWrapper>
   );

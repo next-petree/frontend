@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
-import AutoInput from "../../../collectCOMP/Auto_dogtype_complete_input/auto_complete_input";
+import AutoInput from "../../../CollectCOMP/AutoDogtypeCompleteInput/AutoCompleteInput";
 import {
   Button,
   Container,
@@ -20,8 +20,6 @@ import { IDogType } from "../../../../types/auto_complete_type";
 import { useForm } from "react-hook-form";
 import alertList from "../../../../utils/swal";
 import Swal from "sweetalert2";
-
-
 
 const MajorDogForm = () => {
   const {
@@ -53,13 +51,12 @@ const MajorDogForm = () => {
     if (data === "") {
       Swal.fire({
         ...alertList.errorMessage("견종을 입력해주세요!"),
-        width:"350px",
+        width: "350px",
       });
-    }
-    else if (dogtypes.length >= 3) {
+    } else if (dogtypes.length >= 3) {
       Swal.fire({
         ...alertList.errorMessage("주력 견종은 최대 3개까지 등록 가능합니다!"),
-        width:"350px",
+        width: "350px",
       });
       setValue("dogtype", "");
     } else {
@@ -70,25 +67,27 @@ const MajorDogForm = () => {
   };
   const onDelete = (id: number) => {
     const newdogtypes = dogtypes.filter(dogtype => {
-      return dogtype.id !== id 
-    })
+      return dogtype.id !== id;
+    });
     setDogtypes(newdogtypes);
   };
   const onValid = async () => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주력 견종을 저장 하시겠습니까?"),
-      width: "350px"
-    })
-    if(answer.isConfirmed) {
-      console.log(dogtypes)
+      width: "350px",
+    });
+    if (answer.isConfirmed) {
+      console.log(dogtypes);
     }
-  }
+  };
   // 주력견종 3개 밖에 불가능 하다고 텍스트 써 놓기
   return (
     <Container>
       <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
-          <Title>주력견종<span>※주력견종은 최대 3개 까지 등록 가능합니다.</span></Title>
+          <Title>
+            주력견종<span>※주력견종은 최대 3개 까지 등록 가능합니다.</span>
+          </Title>
           <InsideForm>
             <Input
               {...register("dogtype")}
@@ -100,7 +99,7 @@ const MajorDogForm = () => {
             </SearchButton>
           </InsideForm>
           <Tags>
-            {dogtypes.map((dogtype) => (
+            {dogtypes.map(dogtype => (
               <Tag key={dogtype.id}>
                 <span>{dogtype.name}</span>
                 <DeleteBtn onClick={() => onDelete(dogtype.id)}>X</DeleteBtn>
