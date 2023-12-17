@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/swal";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
-
 import {
   AvatarResultResponse,
   IChangeAvatar,
@@ -24,6 +23,7 @@ import {
 import { AvatarUrl } from "../../../../utils/mypage_url";
 import { post } from "../../../../api/api";
 import { selectAvatarSlice, setAvatar } from "../../../../redux/mypage/avatarSlice";
+import React from "react";
 
 interface IAvatarUpload {
   setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;

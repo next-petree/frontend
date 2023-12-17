@@ -8,6 +8,7 @@ import {
   set_breedersearchkeyword,
 } from "../../../../redux/collect/breeder_searchSlice";
 import { Btn, Container, Form, State } from "./styles";
+import React from "react";
 
 export default function BreederForm() {
   const {

@@ -41,7 +41,6 @@ export interface IChangePasswordForm {
   newPasswordConfirmation: string;
 }
 
-
 export interface AvatarResultResponse {
   status: "SUCCESS" | "FAIL";
   data: AvatarData;

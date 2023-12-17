@@ -24,6 +24,7 @@ import {
   ResultResponse,
 } from "../../../../types/mypage_type";
 import axios, { AxiosError } from "axios";
+import React from "react";
 
 const ChangePwForm = () => {
   const {

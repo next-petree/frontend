@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectDog_searchfilter } from "../../../redux/collect/dog_searchfilterSlice";
 import { selectOnDogSearchSlice, setOnDogSearch } from "../../../redux/collect/onDogSearchSlice";
 import { selectOnUseDogfilterSlice, setOnUseDogfilter } from "../../../redux/collect/onUseDogfilterSlice";
+import React from "react";
 
 
 

@@ -4,6 +4,7 @@ import MajorDogForm from "./ProfileContent_Forms/MajorDogForm";
 import LivingEnvironmentForm from "./ProfileContent_Forms/LivingEnvironmentForm";
 import DecodeToken from "../../../utils/DecodeJWT/DecodeJWT";
 import { useEffect, useState } from "react";
+import React from "react";
 
 const Wrapper = styled.div`
   display: flex;

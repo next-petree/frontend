@@ -18,9 +18,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import alertList from "../../../../utils/swal";
 import Swal from "sweetalert2";
+import { LivingEnvironmentsResultResponse } from "../../../../types/mypage_type";
 import { LivingEnvironmentUrl } from "../../../../utils/mypage_url";
 import { get } from "../../../../api/api";
-import { LivingEnvironmentsResultResponse } from "../../../../types/mypage_type";
+import React from "react";
+
 
 const LivingEnvironmentForm = () => {
   const {

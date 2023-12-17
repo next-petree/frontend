@@ -5,6 +5,7 @@ import {
   set_breedersearchauth,
 } from "../../../../redux/collect/breeder_searchSlice";
 import { Circle, Toggle } from "./styles";
+import React from "react";
 
 export default function BreederAuthToggle() {
   const dispath = useAppDispatch();

@@ -20,6 +20,7 @@ import {
   setOnBreederSearch,
 } from "../../../redux/collect/onBreederSearchSlice";
 import { selectBreeder_search } from "../../../redux/collect/breeder_searchSlice";
+import React from "react";
 
 export default function BreederCollect_Main() {
   const param = useParams();

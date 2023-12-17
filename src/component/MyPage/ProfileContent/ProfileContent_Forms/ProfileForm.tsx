@@ -32,6 +32,7 @@ import {
 import { get, put } from "../../../../api/api";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { selectAvatarSlice, setAvatar } from "../../../../redux/mypage/avatarSlice";
+import React from "react";
 
 
 interface IUser {

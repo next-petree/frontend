@@ -16,6 +16,7 @@ import { IDogyFilterParams } from "../../../../types/dogscollect_types";
 import { setOnDogSearch } from "../../../../redux/collect/onDogSearchSlice";
 import { setOnUseDogfilter } from "../../../../redux/collect/onUseDogfilterSlice";
 import { Btn, Buttons, Check, Checks, ConfirmBtn, Confirms, FilterContainer, Form, Overlay, Span, Title } from "./styles";
+import React from "react";
 
 
 

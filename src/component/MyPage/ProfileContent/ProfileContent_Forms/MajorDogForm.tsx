@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import { MajordogUrl } from "../../../../utils/mypage_url";
 import { MajordogResultResponse } from "../../../../types/mypage_type";
 import { get, patch, post } from "../../../../api/api";
+import React from "react";
 
 const MajorDogForm = () => {
   const {

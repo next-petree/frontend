@@ -71,6 +71,7 @@ interface ApiResponse {
 
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
 
+
 const RegisterContentDetail = () => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
