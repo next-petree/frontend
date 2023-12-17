@@ -15,12 +15,21 @@ import {
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/swal";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+
+import {
+  AvatarResultResponse,
+  IChangeAvatar,
+} from "../../../../types/mypage_type";
+import { AvatarUrl } from "../../../../utils/mypage_url";
+import { post } from "../../../../api/api";
+import { selectAvatarSlice, setAvatar } from "../../../../redux/mypage/avatarSlice";
 
 interface IAvatarUpload {
-  setChangeAvatar:React.Dispatch<React.SetStateAction<boolean>>
+  setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AvatarUpload = ({setChangeAvatar}:IAvatarUpload) => {
+const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +37,9 @@ const AvatarUpload = ({setChangeAvatar}:IAvatarUpload) => {
     watch,
     setValue,
   } = useForm();
-  const [avatarPreview, setAvatarPreview] = useState("");
+  const nowavatar = useAppSelector(selectAvatarSlice);
+  const dispath = useAppDispatch();
+  const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
   const avatar = watch("avatar");
   useEffect(() => {
     if (avatar && avatar.length > 0) {
@@ -40,13 +51,23 @@ const AvatarUpload = ({setChangeAvatar}:IAvatarUpload) => {
     setValue("avatar", "");
     setAvatarPreview("");
   };
-  const onValid = async (data: any) => {
+  const onValid = async () => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("프로필 사진은 변경하시겠습니까?"),
-      width: "350px"
-    })
-    if(answer.isConfirmed) {
-      console.log(data)
+      width: "350px",
+    });
+    if (answer.isConfirmed) {
+      // post가 제대로 보내지지 않음
+      try {
+        const url = AvatarUrl("post");
+        const response = await post<AvatarResultResponse>(url, {
+          image: avatarPreview,
+        });
+        if (response.data.status === "FAIL") {
+          throw "올바르지 못한 접근 입니다.";
+        }
+        dispath(setAvatar(response.data.data.fileUrl));
+      } catch (e) {}
     }
     setChangeAvatar(false);
   };
@@ -140,5 +161,4 @@ const AvatarUpload = ({setChangeAvatar}:IAvatarUpload) => {
     </Overlay>
   );
 };
-
 export default AvatarUpload;

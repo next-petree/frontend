@@ -1,5 +1,3 @@
-import { styled } from "styled-components";
-import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import AutoInput from "../../../collectCOMP/Auto_dogtype_complete_input/auto_complete_input";
 import {
   Button,
@@ -7,7 +5,6 @@ import {
   DeleteBtn,
   Form,
   Infos,
-  Input,
   InsideForm,
   SearchButton,
   Store,
@@ -20,8 +17,9 @@ import { IDogType } from "../../../../types/auto_complete_type";
 import { useForm } from "react-hook-form";
 import alertList from "../../../../utils/swal";
 import Swal from "sweetalert2";
-
-
+import { MajordogUrl } from "../../../../utils/mypage_url";
+import { MajordogResultResponse } from "../../../../types/mypage_type";
+import { get, patch, post } from "../../../../api/api";
 
 const MajorDogForm = () => {
   const {
@@ -31,79 +29,100 @@ const MajorDogForm = () => {
     watch,
     setValue,
   } = useForm();
-  const getUser = DecodeToken();
-  const [dogtypes, setDogtypes] = useState<IDogType[]>([
-    {
-      id: 1,
-      imgUrl: "",
-      name: "푸들",
-    },
-    {
-      id: 2,
-      imgUrl: "",
-      name: "진돗개",
-    },
-    {
-      id: 3,
-      imgUrl: "",
-      name: "요크셔테리어",
-    },
-  ]);
+  const [majordogtypes, setMajordogtypes] = useState<IDogType[]>([]);
+  const [dogtype, setDogtype] = useState(0);
   const onSearch = (data: string) => {
     if (data === "") {
       Swal.fire({
         ...alertList.errorMessage("견종을 입력해주세요!"),
-        width:"350px",
+        width: "350px",
       });
-    }
-    else if (dogtypes.length >= 3) {
+    } else if (majordogtypes.length >= 3) {
       Swal.fire({
         ...alertList.errorMessage("주력 견종은 최대 3개까지 등록 가능합니다!"),
-        width:"350px",
+        width: "350px",
       });
-      setValue("dogtype", "");
+      setValue("keyword", "");
+    } else if (
+      majordogtypes.some((majordogtype) => majordogtype.name === data)
+    ) {
+      Swal.fire({
+        ...alertList.errorMessage("이미 등록된 견종입니다"),
+        width: "350px",
+      });
+      setValue("keyword", "");
     } else {
-      const newdogtypes = { id: 5, imgUrl: "", name: data };
-      setDogtypes([...dogtypes, newdogtypes]);
-      setValue("dogtype", "");
+      const newdogtypes = { id: dogtype, imgUrl: "", name: data };
+      setMajordogtypes([...majordogtypes, newdogtypes]);
+      setValue("keyword", "");
+      console.log(majordogtypes);
     }
   };
   const onDelete = (id: number) => {
-    const newdogtypes = dogtypes.filter(dogtype => {
-      return dogtype.id !== id 
-    })
-    setDogtypes(newdogtypes);
+    const newdogtypes = majordogtypes.filter((dogtype) => {
+      return dogtype.id !== id;
+    });
+    setMajordogtypes(newdogtypes);
   };
   const onValid = async () => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주력 견종을 저장 하시겠습니까?"),
-      width: "350px"
-    })
-    if(answer.isConfirmed) {
-      console.log(dogtypes)
+      width: "350px",
+    });
+    if (answer.isConfirmed) {
+      try {
+        const dogTypdId = majordogtypes.map((majordogtype) => majordogtype.id);
+        const url = MajordogUrl();
+        const response = await patch<MajordogResultResponse>(url, {
+          dogTypdId,
+        });
+        if (response.data.status === "FAIL") {
+          throw "올바르지 못한 접근 입니다.";
+        }
+      } catch (e) {}
     }
-  }
+  };
+  // 주력견종이 로그인이 되지 않았다고 하며 가져와지지 않고, post 도 되지않고 있음
+  const getMajordog = async () => {
+    try {
+      const url = MajordogUrl();
+      const response = await get<MajordogResultResponse>(url);
+      if (response.data.status === "FAIL") {
+        throw "올바르지 못한 접근 입니다.";
+      }
+      setMajordogtypes(response.data.data);
+    } catch (e) {}
+  };
+  useEffect(() => {
+    getMajordog();
+  }, []);
   // 주력견종 3개 밖에 불가능 하다고 텍스트 써 놓기
   return (
     <Container>
       <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
-          <Title>주력견종<span>※주력견종은 최대 3개 까지 등록 가능합니다.</span></Title>
+          <Title>
+            주력견종<span>※주력견종은 최대 3개 까지 등록 가능합니다.</span>
+          </Title>
           <InsideForm>
-            <Input
-              {...register("dogtype")}
-              $islen="mid"
-              placeholder="원하시는 견종을 입력해주세요"
+            <AutoInput
+              register={register("keyword")}
+              type="text"
+              setValue={setValue}
+              watch={watch}
+              setDogtype={setDogtype}
             />
-            <SearchButton onClick={() => onSearch(watch("dogtype"))}>
+            <SearchButton onClick={() => onSearch(watch("keyword"))}>
               검색
             </SearchButton>
           </InsideForm>
           <Tags>
-            {dogtypes.map((dogtype) => (
-              <Tag key={dogtype.id}>
-                <span>{dogtype.name}</span>
-                <DeleteBtn onClick={() => onDelete(dogtype.id)}>X</DeleteBtn>
+            {majordogtypes.map((majordogtype) => (
+              <Tag key={majordogtype.id}>
+                <span>{majordogtype.name}</span>
+                <DeleteBtn onClick={() => onDelete(majordogtype.id)}>
+                  X
+                </DeleteBtn>
               </Tag>
             ))}
           </Tags>
@@ -115,5 +134,4 @@ const MajorDogForm = () => {
     </Container>
   );
 };
-
 export default MajorDogForm;

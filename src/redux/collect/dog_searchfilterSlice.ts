@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+
 import { IDogyFilterParams } from "../../types/dogscollect_types";
+import { RootState } from "../store";
 
 
 

@@ -6,6 +6,7 @@ import onDogSearchSlice from "../redux/collect/onDogSearchSlice";
 import onUseDogfilterSlice from "../redux/collect/onUseDogfilterSlice";
 import onBreederSearchSlice from "../redux/collect/onBreederSearchSlice";
 import breeder_searchSlice from "../redux/collect/breeder_searchSlice";
+import avatarSlice from "../redux/mypage/avatarSlice";
 
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     onUseDogfilter: onUseDogfilterSlice,
     breeder_search:breeder_searchSlice,
     onBreederSearch: onBreederSearchSlice,
+    avatar:avatarSlice,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
