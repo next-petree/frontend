@@ -1,6 +1,5 @@
-import { BREEDERS_URL } from "../../constants";
 import { apiSlice } from "./apiSlice";
-
+import { BREEDERS_URL } from "../../src/constants";
 
 export const breedersApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({

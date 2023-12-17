@@ -34,5 +34,8 @@ interface Pageable {}
 interface Sort {}
 
 
-
+export interface IBreederSearch {
+  keyword: string;
+  auth: boolean;
+}
   

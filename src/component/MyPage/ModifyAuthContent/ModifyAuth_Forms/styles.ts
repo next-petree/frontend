@@ -131,7 +131,20 @@ export const Pw = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1.5vh;
+  position: relative;
 `;
+
+export const SeeBtn = styled.span<{$isClicked: boolean}>`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${props => props.$isClicked ? "#35d8d5" : "#b6b6b6"};
+  width: 20px;
+  height: 10px;
+  right: 0.5vw;
+  top: 40%;
+`
 
 export const Errmsg = styled.div<{$needMargin:boolean}>`
   font-weight: 500;

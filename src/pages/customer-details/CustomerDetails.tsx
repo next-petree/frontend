@@ -8,6 +8,7 @@ import { desc } from "../../constants";
 
 import { useGetAdopterQuery } from "../../redux/api/adopterApiSlice";
 import CustomLayout from "../Layout/CustomLayout";
+import React from "react";
 
 const CustomerDetails = () => {
   const { data: adopter, isLoading, isError } = useGetAdopterQuery(4);

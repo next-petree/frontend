@@ -24,7 +24,7 @@ const Header = () => {
   console.log(profileImg);
 
   const handleClick = () => {
-    setIsCilcked(prev => !prev);
+    setIsCilcked((prev) => !prev);
   };
 
   const decodedData = DecodeToken();

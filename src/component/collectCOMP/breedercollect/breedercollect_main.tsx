@@ -1,12 +1,9 @@
-import BreederForm from "./breeder_form";
-import BreederBox from "./breeder_Box";
 import {
   BoxContainer,
   MainBox,
   No_return,
   Title,
   Wrapper,
-  BoxWrapper,
 } from "../styles_collect/collect_main_styled";
 import Pagenation from "../pagenation";
 import { useEffect, useState } from "react";
@@ -15,38 +12,36 @@ import { Link } from "react-router-dom";
 import { BreedersCollecturl } from "../../../utils/collect_url";
 import { IBreedersAPI } from "../../../types/breederscollect_type";
 import { get } from "../../../api/api";
+import BreederForm from "./breeder_form/breeder_form";
+import BreederBox from "./breeder_Box";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  selectOnBreederSearchSlice,
+  setOnBreederSearch,
+} from "../../../redux/collect/onBreederSearchSlice";
+import { selectBreeder_search } from "../../../redux/collect/breeder_searchSlice";
+import React from "react";
 
-// 상태 관리 사용전 임시 interface/////////////////
-export interface IParams {
-  forms: IForms;
-  setForms: React.Dispatch<React.SetStateAction<IForms>>;
-  setOnSearch: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface IForms {
-  keyword: string;
-  auth: boolean;
-}
-//////////////////////////////////////////////////
-
-export default function BC_Main() {
+export default function BreederCollect_Main() {
   const param = useParams();
-  const [onSearch, setOnSearch] = useState(false);
+  const dispath = useAppDispatch();
+
   const [page, setPage] = useState(Number(param.pageId));
   const [loading, setLoading] = useState(false);
-  const [isBoxClicked, setIsBoxClicked] = useState(false);
-  ////////////////////////////////////////////////
-  const [forms, setForms] = useState<IForms>({ keyword: "", auth: false });
   const [breeders, setBreeders] = useState<IBreedersAPI>();
-  ////////////////////////////////////////////////
+
+  const searchs = useAppSelector(selectBreeder_search);
+  const onSearch = useAppSelector(selectOnBreederSearchSlice);
+  
   const getBreeders = async () => {
     try {
       setLoading(true);
-      if (onSearch) {
+      if (onSearch.onBreederSearch) {
+        console.log("on here")
         setPage(1);
       }
-      console.log(page, forms);
-      const url = BreedersCollecturl({ page, forms });
+      console.log(page, searchs);
+      const url = BreedersCollecturl({ page, searchs });
       const response = await get<IBreedersAPI>(url);
 
       if (response.data.status === "FAIL") {
@@ -54,27 +49,20 @@ export default function BC_Main() {
       }
       setBreeders(response.data);
     } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
-      setOnSearch(false);
+      dispath(setOnBreederSearch(false));
     }
   };
   useEffect(() => {
     getBreeders();
-  }, [forms, page]);
-
-  const handleBoxClick = (breederId: number) => {};
+  }, [searchs, page]);
 
   return (
     <Wrapper>
       <MainBox>
         <Title>브리더 모아보기</Title>
-        <BreederForm
-          forms={forms}
-          setForms={setForms}
-          setOnSearch={setOnSearch}
-        />
+        <BreederForm />
         {loading ? (
           <Title>잠시만 기다려 주십시오...</Title>
         ) : (

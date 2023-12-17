@@ -45,7 +45,6 @@ export default function AutoInput({
       }
       setTypes(response.data.data);
     } catch (e) {
-      console.log(e);
     }
   };
   const upDateData = () => {
