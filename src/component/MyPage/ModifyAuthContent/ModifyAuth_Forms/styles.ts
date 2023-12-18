@@ -7,7 +7,7 @@ export const Container = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
   padding: 4vw 3vw 2.5vw;
-  z-index: 100;
+  z-index: 1;
 `;
 
 export const Title = styled.h1`

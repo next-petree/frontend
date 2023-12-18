@@ -18,9 +18,15 @@ import alertList from "../../../../utils/swal";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import { DuplicateCheckUrl, MemberInfoUrl } from "../../../../utils/mypage_url";
 import { useEffect, useState } from "react";
-import { ResultResponse, IMemberInfoAPI, IMeberInfoForm } from "../../../../types/mypage_type";
+import {
+  ResultResponse,
+  IMemberInfoAPI,
+  IMeberInfoForm,
+} from "../../../../types/mypage_type";
 import { get, post, patch } from "../../../../api/api";
 import React from "react";
+import DaumPostcode from "react-daum-postcode";
+import Modal from "react-modal";
 
 const ModifyAuthForm = () => {
   const {
@@ -33,6 +39,7 @@ const ModifyAuthForm = () => {
   const [onCheckDuplicate, setonCheckDuplicate] = useState<boolean>(false);
   const [authtype, setauthtype] = useState<string>("");
   const [currentNickname, setCurrentNickname] = useState<string>("");
+  const [addressSearch, setAddressSearch] = useState<boolean>(false);
   const onValid = async (data: IMeberInfoForm) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("회원정보를 저장하시겠습니까?"),
@@ -53,7 +60,6 @@ const ModifyAuthForm = () => {
           ...alertList.successMessage(response.data.data),
           width: "350px",
         });
-        
       } catch (e: any) {
         Swal.fire({
           ...alertList.errorMessage(e.response.data.data),
@@ -76,9 +82,13 @@ const ModifyAuthForm = () => {
       setValue("address2", response.data.data.address2);
       setValue("phoneNumber", response.data.data.phoneNumber);
       setCurrentNickname(response.data.data.nickname);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
+  const AddressSearchHandler = (data: any) => {
+    setValue("address1",data.roadAddress)
+    setAddressSearch(false);
+  };
+
   const onDuplicateCheck = async () => {
     if (currentNickname === watch("nickname")) {
       setonCheckDuplicate(true);
@@ -172,7 +182,9 @@ const ModifyAuthForm = () => {
                   required: "활동지역을 입력해주세요",
                 })}
               />
-              <SearchButton>주소검색</SearchButton>
+              <SearchButton onClick={() => setAddressSearch(true)}>
+                주소검색
+              </SearchButton>
             </InsideForm>
             <Input
               type="text"
@@ -214,6 +226,17 @@ const ModifyAuthForm = () => {
           <Button $isLong={true}>저장</Button>
         </Store>
       </Form1>
+      {addressSearch ? (
+        <Modal
+          isOpen={addressSearch}
+          ariaHideApp={false}
+          className="ReactModal__Content"
+          overlayClassName="ReactModal__Overlay"
+        >
+          <DaumPostcode onComplete={AddressSearchHandler} />
+        </Modal>
+      ) : null}
+      
     </Container>
   );
 };
