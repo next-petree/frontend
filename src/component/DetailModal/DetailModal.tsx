@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
-
+import React from "react";
 import { BreederBadge } from "../../assets/icons";
 import { IDMProps } from "../../types";
 import { useGetDogDetailQuery } from "../../redux/api/dogApiSlice";

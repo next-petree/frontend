@@ -6,7 +6,7 @@ export const NavBarContainer = styled.div`
   height: 113vh;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 20px;
-  z-index: 100;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { styled } from "styled-components";
 import {
   Auth,
   Avatar,
+  AvatarBorder,
   AvatarInfo,
   Badge,
   Button,
@@ -14,38 +14,160 @@ import {
   Infos,
   Introduce,
   Label,
+  AvatarLabel,
   Store,
   Title,
+  CheckMark,
 } from "./styles";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/swal";
+import AvatarUpload from "./AvatarUpload";
+import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
+import { AvatarUrl, IntroduceUrl } from "../../../../utils/mypage_url";
+import {
+  AvatarResultResponse,
+  IIntroductionForm,
+  ResultResponse,
+} from "../../../../types/mypage_type";
+import { get, put } from "../../../../api/api";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+import { selectAvatarSlice, setAvatar } from "../../../../redux/mypage/avatarSlice";
+import React from "react";
+
+
+interface IUser {
+  email: string;
+  exp: number;
+  iat: number;
+  role: "ADOPTER" | "BREEDER";
+  sub: string;
+  verification: boolean;
+}
 
 const ProfileForm = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isBreederAuth, setIsBreederAuth] = useState(false);
+  const [isAdopterAuth, setIsAdopterAuth] = useState(false);
+  const [changeAvatar, setChangeAvatar] = useState(false);
+
+  const avatar = useAppSelector(selectAvatarSlice);
+  const dispath = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     setValue,
-  } = useForm();
-  const onValid = async () => {
+  } = useForm<IIntroductionForm>();
+
+  const accountInfo = DecodeToken();
+  const [user, setuser] = useState<IUser>(accountInfo);
+
+  const onValid = async ({ introduction }: IIntroductionForm) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("자기 소개를 저장 하시겠습니까?"),
-      width: "350px"
-    })
+      width: "350px",
+    });
     if (answer.isConfirmed) {
-      console.log(watch("introduce"))
+      /// post 요청과 답은 제대로 오는데 수정이 되지 않음
+      try {
+        const url = IntroduceUrl();
+        const response = await put<ResultResponse>(url, {
+          additionalProp1: "string",
+          additionalProp2: "string",
+          additionalProp3: "string",
+        });
+        if (response.data.status === "FAIL") {
+          throw "올바르지 못한 접근 입니다.";
+        }
+        console.log(response);
+      } catch (e) {}
     }
-  }
+  };
+  const getAvatar = async () => {
+    try {
+      const url = AvatarUrl("get");
+      const response = await get<AvatarResultResponse>(url);
+      if (response.data.status === "FAIL") {
+        throw "올바르지 못한 접근 입니다.";
+      }
+      dispath(setAvatar(response.data.data.fileUrl));
+    } catch (e) {}
+  };
+
+  const getIntroduce = async () => {
+    try {
+      const url = IntroduceUrl();
+      const response = await get<ResultResponse>(url);
+      if (response.data.status === "FAIL") {
+        throw "올바르지 못한 접근 입니다.";
+      }
+      setValue("introduction", response.data.data);
+    } catch (e) {}
+  };
+  const onChangeAvatar = () => {
+    setChangeAvatar(true);
+  };
+
+  useEffect(() => {
+    if (user.role === "BREEDER" && user.verification) {
+      setIsBreederAuth(true);
+    }
+    if (user.role === "ADOPTER" && user.verification) {
+      setIsAdopterAuth(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    getAvatar();
+    getIntroduce();
+  }, []);
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onValid)}>
+    <>
+      <Container>
         <Infos>
-          <AvatarInfo>
-            <Avatar $isAuth={isAuth} />
+          <AvatarInfo onClick={onChangeAvatar}>
+            <AvatarBorder $isAuth={isBreederAuth}>
+              {avatar.avatar ? (
+                <Avatar src={avatar.avatar} alt="" />
+              ) : (
+                <AvatarLabel>
+                  <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="-1.6 -1.6 19.20 19.20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#000000"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0">
+                      <rect
+                        x="-1.6"
+                        y="-1.6"
+                        width="19.20"
+                        height="19.20"
+                        rx="9.6"
+                        fill="#9c9c9c"
+                        strokeWidth="0"
+                      ></rect>
+                    </g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"
+                        fill="#686868"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                </AvatarLabel>
+              )}
+            </AvatarBorder>
             <Badge>
-              {isAuth ? (
+              {isBreederAuth ? (
                 <svg
                   width="2.2vw"
                   height="2.5vw"
@@ -90,27 +212,81 @@ const ProfileForm = () => {
               )}
             </Badge>
           </AvatarInfo>
-          <Title>프로필</Title>
-          <Info>
-            <Label>브리더 인증 여부</Label>
-            <Auth>브리더 인증 되지 않음</Auth>
-          </Info>
-          <Info>
-            <Label>자기소개</Label>
-            <Introduce
-              {...register("introduce", { required: true, maxLength: 300 })}
-              maxLength={300}
-              placeholder="키워드와 함께 짧은 글로 자기소개를 해보세요"
-            />
-            <Checklen>{`${watch("introduce")}`.length + "/300"}</Checklen>
-          </Info>
+          <Form onSubmit={handleSubmit(onValid)}>
+            <Title>프로필</Title>
+            <Info>
+              {user.role === "BREEDER" ? (
+                <>
+                  {isBreederAuth ? (
+                    <Auth>
+                      브리더 인증자
+                      <CheckMark>
+                        <svg
+                          width="21"
+                          height="16"
+                          viewBox="0 0 21 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M19.4432 3.97122L10.3021 12.8675L8.32757 14.7891C7.86063 15.2436 7.24867 15.47 6.63831 15.47C6.02794 15.47 5.41439 15.2436 4.94745 14.7891L0.700405 10.6543C-0.233468 9.74543 -0.233468 8.27512 0.700405 7.36626C1.63268 6.4574 3.14505 6.4574 4.07892 7.36626L6.63671 9.85555L16.0631 0.681645C16.997 -0.227215 18.5093 -0.227215 19.4416 0.681645C20.3755 1.5905 20.3755 3.06236 19.4416 3.96967L19.4432 3.97122Z"
+                            fill="#4EC1BF"
+                          />
+                        </svg>
+                      </CheckMark>
+                    </Auth>
+                  ) : (
+                    <Auth>브리더 인증 되지않음</Auth>
+                  )}
+                </>
+              ) : (
+                <>
+                  <Label>분양희망자 인증여부</Label>
+                  {isAdopterAuth ? (
+                    <Auth>
+                      반려견 기초 테스트 인증자
+                      <CheckMark>
+                        <svg
+                          width="21"
+                          height="16"
+                          viewBox="0 0 21 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M19.4432 3.97122L10.3021 12.8675L8.32757 14.7891C7.86063 15.2436 7.24867 15.47 6.63831 15.47C6.02794 15.47 5.41439 15.2436 4.94745 14.7891L0.700405 10.6543C-0.233468 9.74543 -0.233468 8.27512 0.700405 7.36626C1.63268 6.4574 3.14505 6.4574 4.07892 7.36626L6.63671 9.85555L16.0631 0.681645C16.997 -0.227215 18.5093 -0.227215 19.4416 0.681645C20.3755 1.5905 20.3755 3.06236 19.4416 3.96967L19.4432 3.97122Z"
+                            fill="#4EC1BF"
+                          />
+                        </svg>
+                      </CheckMark>
+                    </Auth>
+                  ) : (
+                    <Auth>반려견 기초 테스트 인증 되지않음</Auth>
+                  )}
+                  ;
+                </>
+              )}
+            </Info>
+            <Info>
+              <Label>자기소개</Label>
+              <Introduce
+                {...register("introduction", {
+                  required: true,
+                  maxLength: 300,
+                })}
+                maxLength={300}
+                placeholder="키워드와 함께 짧은 글로 자기소개를 해보세요"
+              />
+              <Checklen>{`${watch("introduction")}`.length + "/300"}</Checklen>
+            </Info>
+            <Store>
+              <Button $isLong={true}>저장</Button>
+            </Store>
+          </Form>
         </Infos>
-        <Store>
-          <Button $isLong={true}>저장</Button>
-        </Store>
-      </Form>
-    </Container>
+      </Container>
+      {changeAvatar ? <AvatarUpload setChangeAvatar={setChangeAvatar} /> : null}
+    </>
   );
 };
-
 export default ProfileForm;
