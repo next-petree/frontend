@@ -8,11 +8,11 @@ export const SearchContainer = styled.div`
   margin: 0 auto;
 `;
 
-export const Search = styled.input`
+export const Search = styled.input<{$width: number | null}>`
   display: flex;
   align-items: center;
   border: none;
-  width: 314px;
+  width: ${props => props.$width ? props.$width.toString() + "px" : "314px"};
   height: 48px;
   border-radius: 12px;
   background-color: #f5f5f5;
