@@ -19,7 +19,8 @@ interface Iinput {
   required?: boolean;
   watch: UseFormWatch<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  setDogtype?:React.Dispatch<React.SetStateAction<number>>
+  setDogtype?:React.Dispatch<React.SetStateAction<number>>;
+  width?:number;
 }
 
 
@@ -31,6 +32,7 @@ export default function AutoInput({
   setValue,
   watch,
   setDogtype,
+  width,
   ...rest
 }: Iinput) {
   const [show, setShow] = useState(false);
@@ -71,6 +73,7 @@ export default function AutoInput({
         {...rest}
         type={type}
         placeholder="원하시는 견종을 입력해주세요"
+        $width={width ? width : null}
       />
       {keyItems.length > 0 && keyItems && show && (
         <AutoSearchContainer>
