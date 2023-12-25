@@ -2,7 +2,7 @@ import Banner from "../../component/Banner/Banner";
 import Header from "../../component/Header/Header";
 
 import { ICLProps } from "../../types";
-import { Wrapper } from "./styles";
+import { Wrapper } from "./Styles1";
 
 const CustomLayout = ({ height, children }: ICLProps) => {
   return (

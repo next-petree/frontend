@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { get, post } from "../../../api/api";
 import { RegisterResponse } from "../../../types/authType";
 import Swal from "sweetalert2";
-import alertList from "../../../utils/swal";
+import alertList from "../../../utils/Swal1";
 import { useNavigate } from "react-router-dom";
 import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
 
@@ -66,7 +66,6 @@ import {
 } from "./RegisterContentDetailStyle";
 
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
-
 
 const RegisterContentDetail = () => {
   const [email, setEmail] = useState("");

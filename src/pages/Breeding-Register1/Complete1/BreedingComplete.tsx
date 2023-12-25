@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Header from "../../../component/Header/Header";
-import * as S from "./styles";
+import * as S from "./Styles1";
 
 const BreedingComplete = () => {
   const [img, setImg] = useState();

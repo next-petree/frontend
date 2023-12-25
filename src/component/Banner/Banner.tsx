@@ -1,5 +1,5 @@
 import { IMG1 } from "../../assets/images";
-import * as S from "./styles";
+import * as S from "./Styles1";
 
 const Banner = () => {
   return (

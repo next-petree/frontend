@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import * as S from "./styles";
+import * as S from "./Styles1";
 import PrimaryButton from "../../component/Button/PrimaryButton";
 import DogCard from "../../component/Card/DogCard";
 import WhiteBox from "../../component/WhiteBox/WhiteBox";
@@ -8,7 +8,7 @@ import CustomLayout from "../Layout/CustomLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
-import { useGetBreederDetailQuery } from "../../redux/api/breederApiSlice";
+import { useGetBreederDetailQuery } from "../../redux/api/BreederApiSlice1";
 import { useParams } from "react-router-dom";
 import React from "react";
 

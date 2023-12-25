@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
-import alertList from "../../utils/swal";
+import alertList from "../../utils/Swal1";
 import Swal from "sweetalert2";
 
 import {

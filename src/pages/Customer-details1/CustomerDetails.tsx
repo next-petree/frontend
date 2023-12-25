@@ -2,11 +2,11 @@ import WhiteBox from "../../component/WhiteBox/WhiteBox";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
 import PrimaryButton from "../../component/Button/PrimaryButton";
 
-import * as S from "./styles";
+import * as S from "./Styles1";
 import { IMG2 } from "../../assets/images";
 import { desc } from "../../constants";
 
-import { useGetAdopterQuery } from "../../redux/api/adopterApiSlice";
+import { useGetAdopterQuery } from "../../redux/api/AdopterApiSlice1";
 import CustomLayout from "../Layout/CustomLayout";
 import React from "react";
 

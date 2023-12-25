@@ -8,7 +8,7 @@ import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import { BreederBadge } from "../../../assets/icons";
 
 import { agreementInfo } from "../../../constants";
-import * as S from "./styles";
+import * as S from "./Styles1";
 
 const BreedingRegister = () => {
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
@@ -20,7 +20,7 @@ const BreedingRegister = () => {
   const navigate = useNavigate();
 
   const handleAgreementClick = () => {
-    setIsAgreeChecked((prev) => !prev);
+    setIsAgreeChecked(prev => !prev);
   };
 
   const handleNextButtonClick = () => {

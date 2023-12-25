@@ -12,17 +12,17 @@ import {
   SeeBtn,
   Store,
   Title,
-} from "./styles";
+} from "./Styles1";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
-import alertList from "../../../../utils/swal";
+import alertList from "../../../../utils/Swal1";
 import { put } from "../../../../api/api";
-import { MemberInfoUrl } from "../../../../utils/mypage_url";
+import { MemberInfoUrl } from "../../../../utils/MypageUrl1";
 import {
   ChangePassword_400_Response,
   IChangePasswordForm,
   ResultResponse,
-} from "../../../../types/mypage_type";
+} from "../../../../types/MypageType1";
 import axios, { AxiosError } from "axios";
 import React from "react";
 
@@ -71,8 +71,8 @@ const ChangePwForm = () => {
           width: "350px",
         });
       } catch (e) {
-        if(axios.isAxiosError<ChangePassword_400_Response, any>(e)){
-          if(e.response?.status === 401) {
+        if (axios.isAxiosError<ChangePassword_400_Response, any>(e)) {
+          if (e.response?.status === 401) {
             return Swal.fire({
               ...alertList.errorMessage("해당 회원을 찾을 수 없습니다"),
               width: "350px",
@@ -82,17 +82,29 @@ const ChangePwForm = () => {
             ...alertList.errorMessage("비밀번호 변경을 다시 확인해주세요"),
             width: "350px",
           });
-          if(e.response?.data.data.currentPassword) {
-            setError("currentPassword", { type: 'custom', message: e.response?.data.data.currentPassword })
+          if (e.response?.data.data.currentPassword) {
+            setError("currentPassword", {
+              type: "custom",
+              message: e.response?.data.data.currentPassword,
+            });
           }
-          if(e.response?.data.data.newPassword) {
-            setError("newPassword", { type: 'custom', message: e.response?.data.data.newPassword })
+          if (e.response?.data.data.newPassword) {
+            setError("newPassword", {
+              type: "custom",
+              message: e.response?.data.data.newPassword,
+            });
           }
-          if(e.response?.data.data.newPasswordConfirmation) {
-            setError("newPasswordConfirmation", { type: 'custom', message: e.response?.data.data.newPasswordConfirmation })
+          if (e.response?.data.data.newPasswordConfirmation) {
+            setError("newPasswordConfirmation", {
+              type: "custom",
+              message: e.response?.data.data.newPasswordConfirmation,
+            });
           }
-          if(typeof e.response?.data.data === "string") {
-            setError("newPasswordConfirmation", { type: 'custom', message: e.response?.data.data })
+          if (typeof e.response?.data.data === "string") {
+            setError("newPasswordConfirmation", {
+              type: "custom",
+              message: e.response?.data.data,
+            });
           }
         }
       }

@@ -12,17 +12,17 @@ import {
   SearchButton,
   Store,
   Title,
-} from "./styles";
+} from "./Styles1";
 import Swal from "sweetalert2";
-import alertList from "../../../../utils/swal";
+import alertList from "../../../../utils/Swal1";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
-import { DuplicateCheckUrl, MemberInfoUrl } from "../../../../utils/mypage_url";
+import { DuplicateCheckUrl, MemberInfoUrl } from "../../../../utils/MypageUrl1";
 import { useEffect, useState } from "react";
 import {
   ResultResponse,
   IMemberInfoAPI,
   IMeberInfoForm,
-} from "../../../../types/mypage_type";
+} from "../../../../types/MypageType1";
 import { get, post, patch } from "../../../../api/api";
 import React from "react";
 import DaumPostcode from "react-daum-postcode";
@@ -85,7 +85,7 @@ const ModifyAuthForm = () => {
     } catch (e) {}
   };
   const AddressSearchHandler = (data: any) => {
-    setValue("address1",data.roadAddress)
+    setValue("address1", data.roadAddress);
     setAddressSearch(false);
   };
 
@@ -236,7 +236,6 @@ const ModifyAuthForm = () => {
           <DaumPostcode onComplete={AddressSearchHandler} />
         </Modal>
       ) : null}
-      
     </Container>
   );
 };
