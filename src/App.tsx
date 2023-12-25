@@ -5,7 +5,7 @@ import BreedingRegister from "./pages/Breeding-Register1/Register1/BreedingRegis
 import RegisterFillOut from "./pages/Breeding-Register1/Fillout1/RegisterFillOut";
 import BreedingComplete from "./pages/Breeding-Register1/Complete1/BreedingComplete";
 import BreederDetails from "./pages/Breeder-Details1/BreederDetails";
-import CustomerDetails from "./pages/customer-details/CustomerDetails";
+import CustomerDetails from "./pages/Customer-details1/CustomerDetails";
 import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/Login/LoginCheckForKakao";
 import Register from "./pages/Register/Register";
