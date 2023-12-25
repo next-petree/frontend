@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import BreederCollect from "./pages/Collects/BreederCollect";
 import DogyCollect from "./pages/Collects/DogyCollect";
-import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
-import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
-import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
-import BreederDetails from "./pages/breeder-details/BreederDetails";
+import BreedingRegister from "./pages/Breeding-Register1/Register1/BreedingRegister";
+import RegisterFillOut from "./pages/Breeding-Register1/Fillout1/RegisterFillOut";
+import BreedingComplete from "./pages/Breeding-Register1/Complete1/BreedingComplete";
+import BreederDetails from "./pages/Breeder-Details1/BreederDetails";
 import CustomerDetails from "./pages/customer-details/CustomerDetails";
 import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/Login/LoginCheckForKakao";
