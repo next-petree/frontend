@@ -14,13 +14,13 @@ import { IBreedersAPI } from "../../../types/BreedersCollectType1";
 import { get } from "../../../api/api";
 import BreederForm from "./BreederForm1/BreederForm1";
 import BreederBox from "./BreederBox1";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   selectOnBreederSearchSlice,
   setOnBreederSearch,
 } from "../../../redux/Collect1/OnBreederSearchSlice1";
 import { selectBreeder_search } from "../../../redux/Collect1/BreederSearchSlice1";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 export default function BreederCollect_Main() {
   const param = useParams();

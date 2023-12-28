@@ -6,8 +6,8 @@ export const DuplicateCheckUrl = (nickname:string) => {
     return `nickname/check?nickname=${nickname}`;
 }
 
-export const AvatarUrl = (method:string) => {
-    return `me/profile/image${method === "post" ? "/upload":""}`;
+export const AvatarUrl = (method:string, id?:number) => {
+    return `me/profile/image${method === "post" ? "/upload": method === "delete" ? `/${id}` :""}`;
 }
 
 export const IntroduceUrl = () => {
