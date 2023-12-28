@@ -28,7 +28,11 @@ const ProfileContent = () => {
   return (
     <Wrapper>
       <ProfileForm />
-      {user?.role === "BREEDER" ? <MajorDogForm /> : <LivingEnvironmentForm/>}
+      {user?.role === "BREEDER" ? (
+        <MajorDogForm />
+      ) : user?.role === "ADOPTER" ? (
+        <LivingEnvironmentForm />
+      ) : null}
     </Wrapper>
   );
 };

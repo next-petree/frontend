@@ -22,7 +22,10 @@ import {
 } from "../../../../types/mypage_type";
 import { AvatarUrl } from "../../../../utils/mypage_url";
 import { post } from "../../../../api/api";
-import { selectAvatarSlice, setAvatar } from "../../../../redux/mypage/avatarSlice";
+import {
+  selectAvatarSlice,
+  setAvatar,
+} from "../../../../redux/mypage/avatarSlice";
 import React from "react";
 
 interface IAvatarUpload {
@@ -33,10 +36,9 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch,
     setValue,
-  } = useForm();
+  } = useForm<IChangeAvatar>();
   const nowavatar = useAppSelector(selectAvatarSlice);
   const dispath = useAppDispatch();
   const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
@@ -48,26 +50,32 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
     }
   }, [avatar]);
   const onDelete = () => {
-    setValue("avatar", "");
+    setValue("avatar", null);
     setAvatarPreview("");
   };
-  const onValid = async () => {
+  const onValid = async ({ avatar }: IChangeAvatar) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("프로필 사진은 변경하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
       // post가 제대로 보내지지 않음
-      try {
-        const url = AvatarUrl("post");
-        const response = await post<AvatarResultResponse>(url, {
-          image: avatarPreview,
-        });
-        if (response.data.status === "FAIL") {
-          throw "올바르지 못한 접근 입니다.";
-        }
-        dispath(setAvatar(response.data.data.fileUrl));
-      } catch (e) {}
+      if (avatar && avatar.length > 0) {
+        try {
+          const url = AvatarUrl("post");
+          const form = new FormData();
+          form.append("profile", avatar[0]);
+          const response = await post<AvatarResultResponse>(url, {
+            image: form,
+          });
+
+          if (response.data.status === "FAIL") {
+            throw "올바르지 못한 접근 입니다.";
+          }
+          console.log(response);
+          //dispath(setAvatar(response.data.data.fileUrl));
+        } catch (e) {}
+      }
     }
     setChangeAvatar(false);
   };

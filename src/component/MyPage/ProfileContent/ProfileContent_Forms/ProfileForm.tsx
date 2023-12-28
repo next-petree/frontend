@@ -73,15 +73,21 @@ const ProfileForm = () => {
       try {
         const url = IntroduceUrl();
         const response = await put<ResultResponse>(url, {
-          additionalProp1: "string",
-          additionalProp2: "string",
-          additionalProp3: "string",
+          content:introduction
         });
         if (response.data.status === "FAIL") {
           throw "올바르지 못한 접근 입니다.";
         }
-        console.log(response);
-      } catch (e) {}
+        Swal.fire({
+          ...alertList.successMessage("자기소개가 저장 되었습니다."),
+          width: "350px",
+        });
+      } catch (e) {
+        Swal.fire({
+          ...alertList.errorMessage("오류가 발생했습니다."),
+          width: "350px",
+        });
+      }
     }
   };
   const getAvatar = async () => {
