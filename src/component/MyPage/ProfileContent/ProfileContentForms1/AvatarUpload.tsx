@@ -27,9 +27,19 @@ import {
   setAvatar,
 } from "../../../../redux/Mypage1/AvatarSlice1";
 import React from "react";
+import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 
 interface IAvatarUpload {
   setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface IUser {
+  email: string;
+  exp: number;
+  iat: number;
+  role: "ADOPTER" | "BREEDER";
+  sub: string;
+  verification: boolean;
 }
 
 const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
@@ -39,6 +49,8 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
     watch,
     setValue,
   } = useForm<IChangeAvatar>();
+  const accountInfo = DecodeToken();
+  const [user, setuser] = useState<IUser>(accountInfo);
   const nowavatar = useAppSelector(selectAvatarSlice);
   const dispath = useAppDispatch();
   const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
