@@ -1,7 +1,7 @@
 import { CustomerBadge, BreederBadge, Avatar } from "../../assets/icons";
 import { ICAProps } from "../../types";
 
-import * as S from "./styles";
+import * as S from "./Styles1";
 
 export const CustomAvatar = ({
   isQualifiedBreeder,

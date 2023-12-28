@@ -1,5 +1,5 @@
 import { IWBProps } from "../../types";
-import { Wrapper } from "./styles";
+import { Wrapper } from "./Styles1";
 
 const WhiteBox = (props: IWBProps) => {
   return (

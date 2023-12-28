@@ -5,7 +5,7 @@ import {
   CategoryContainer,
   Main,
   NavBarContainer,
-} from "./styles";
+} from "./Styles1";
 
 export const NavCategory = [
   {

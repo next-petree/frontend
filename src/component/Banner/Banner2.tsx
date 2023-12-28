@@ -1,7 +1,7 @@
-import { IMG1 } from '../../assets/images';
-import petreeIconBrowm from '../../assets/images/PetreeIconBrown.png';
-import petreeBrowm from '../../assets/images/PetreeBrown.png';
-import { CustomBanner, Logo, LogoIcon, LogoWrapper } from './styles';
+import { IMG1 } from "../../assets/images";
+import petreeIconBrowm from "../../assets/images/PetreeIconBrown.png";
+import petreeBrowm from "../../assets/images/PetreeBrown.png";
+import { CustomBanner, Logo, LogoIcon, LogoWrapper } from "./Styles1";
 
 const Banner = () => {
   return (

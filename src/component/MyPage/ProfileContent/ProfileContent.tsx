@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import ProfileForm from "./ProfileContent_Forms/ProfileForm";
-import MajorDogForm from "./ProfileContent_Forms/MajorDogForm";
-import LivingEnvironmentForm from "./ProfileContent_Forms/LivingEnvironmentForm";
+import ProfileForm from "./ProfileContentForms1/ProfileForm";
+import MajorDogForm from "./ProfileContentForms1/MajorDogForm";
+import LivingEnvironmentForm from "./ProfileContentForms1/LivingEnvironmentForm";
 import DecodeToken from "../../../utils/DecodeJWT/DecodeJWT";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -28,7 +28,7 @@ const ProfileContent = () => {
   return (
     <Wrapper>
       <ProfileForm />
-      {user?.role === "BREEDER" ? <MajorDogForm /> : <LivingEnvironmentForm/>}
+      {user?.role === "BREEDER" ? <MajorDogForm /> : <LivingEnvironmentForm />}
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../src/app/store";
-import { IBreederSearch } from "../../src/types/breederscollect_type";
+import { IBreederSearch } from "../../src/types/BreedersCollectType1";
 
 const initialState: IBreederSearch = {
   keyword: "",

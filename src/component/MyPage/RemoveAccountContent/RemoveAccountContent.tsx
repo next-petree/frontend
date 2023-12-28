@@ -4,7 +4,7 @@ import { post } from "../../../api/api";
 import { RegisterResponse } from "../../../types/authType";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
-import alertList from "../../../utils/swal";
+import alertList from "../../../utils/Swal1";
 
 import {
   Container,

@@ -9,7 +9,7 @@ import {
   Desc,
   DescText,
   Button,
-} from "./styles";
+} from "./Styles1";
 
 import { IDCProps } from "../../types";
 
