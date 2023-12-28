@@ -62,7 +62,7 @@ export const NavigationLink = styled(Link)`
 `;
 
 export const UserProfileImage = styled.div<{
-  imgSrc?: string;
+  $imgSrc?: string;
 }>`
   width: 32px;
   height: 32px;
@@ -70,9 +70,9 @@ export const UserProfileImage = styled.div<{
   cursor: pointer;
   object-fit: cover;
   ${props =>
-    props.imgSrc
+    props.$imgSrc
       ? css`
-          background: url(${props.imgSrc}) no-repeat center;
+          background: url(${props.$imgSrc}) no-repeat center;
         `
       : css`
           background: url(${userProfileImage}) no-repeat center;

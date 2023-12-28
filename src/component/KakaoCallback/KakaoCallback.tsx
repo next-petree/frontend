@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
 import { getToken } from "../../api/token";
+import Swal from "sweetalert2";
+import alertList from "../../utils/Swal1";
 
 interface KakaoLoginResponse {
   status: "SUCCESS" | "FAIL";
   data: {
-    tokenType: string;
+    grantType: string;
     accessToken: string;
-    accessTokenExpiresIn: string;
+    accessTokenExpireTime: string;
     refreshToken: string;
-    refreshTokenExpiresIn: string;
-    createdAt: string;
+    refreshTokenExpireTime: string;
     profileImgUrl: string;
   };
 }
@@ -19,10 +20,12 @@ interface KakaoLoginResponse {
 const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const code = new URLSearchParams(location.search).get("code");
+    const code = new URL(document.location.toString()).searchParams.get("code");
 
+    console.log(code);
     if (code) {
       handleKakaoLogin(code);
     }
@@ -34,7 +37,7 @@ const KakaoCallback = () => {
 
     try {
       const response = await get<KakaoLoginResponse>(
-        `${REACT_APP_API_URL}/api/oauth/kakao/callback?code=${code}`,
+        `${REACT_APP_API_URL}/oauth/kakao/callback?code=${code}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,13 +48,29 @@ const KakaoCallback = () => {
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
         navigate("/");
+      } else {
+        const errorMessage =
+          typeof response.data.data === "string"
+            ? response.data.data
+            : "로그인에 실패했습니다.";
+        await Swal.fire(alertList.errorMessage(errorMessage));
+        setError("로그인에 실패했습니다.");
       }
     } catch (error) {
       console.error("Kakao login error:", error);
+      await Swal.fire(
+        alertList.errorMessage("카카오 로그인 중 오류가 발생했습니다."),
+      );
+      navigate("/login");
     }
   };
 
-  return <div>카카오 로그인 중...</div>;
+  return (
+    <div>
+      카카오 로그인 중...
+      {error && <div>{error}</div>}
+    </div>
+  );
 };
 
 export default KakaoCallback;

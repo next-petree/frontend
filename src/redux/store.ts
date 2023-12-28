@@ -7,9 +7,7 @@ import onUseDogfilterSlice from "./Collect1/OnUseDogfilterSlice1";
 import onBreederSearchSlice from "../redux/Collect1/OnBreederSearchSlice1";
 import breeder_searchSlice from "./Collect1/BreederSearchSlice1";
 import avatarSlice from "../redux/Mypage1/AvatarSlice1";
-import AddressSlice from "./Address1/AddressSlice";
-
-
+import AddressSlice from "./Address/AddressSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,11 +20,11 @@ export const store = configureStore({
     breeder_search: breeder_searchSlice,
     onBreederSearch: onBreederSearchSlice,
     avatar: avatarSlice,
-    address:AddressSlice
+    address: AddressSlice,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(apiSlice.middleware),
 });
 

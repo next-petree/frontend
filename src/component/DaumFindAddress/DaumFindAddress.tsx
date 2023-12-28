@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import {
+  setRoadAddress,
+  setDetailAddress,
+  selectAddressSlice,
+} from "../../redux/Address/AddressSlice";
 import {
   Container,
   RegionSelectorInputTop,
@@ -11,14 +18,12 @@ import {
 } from "./DaumFindAddressStyle";
 
 const DaumFindAddress = () => {
-  const [zipCode, setZipcode] = useState<string>("");
-  const [roadAddress, setRoadAddress] = useState<string>("");
-  const [detailAddress, setDetailAddress] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { roadAddress, detailAddress } = useSelector(selectAddressSlice);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const completeHandler = (data: any) => {
-    setZipcode(data.zonecode);
-    setRoadAddress(data.roadAddress);
+    dispatch(setRoadAddress(data.roadAddress));
     setIsOpen(false);
   };
 
@@ -31,15 +36,7 @@ const DaumFindAddress = () => {
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDetailAddress(e.target.value);
-  };
-
-  const clickHandler = () => {
-    if (detailAddress === "") {
-      alert("상세주소를 입력해주세요.");
-    } else {
-      console.log(zipCode, roadAddress, detailAddress);
-    }
+    dispatch(setDetailAddress(e.target.value));
   };
 
   return (

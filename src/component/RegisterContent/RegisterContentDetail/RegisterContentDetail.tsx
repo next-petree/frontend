@@ -63,9 +63,24 @@ import {
   PhoneNumberCheckButton,
   RegisterButtonContainer,
   RegisterButton,
+  DogTypeResult,
+  DogType,
+  BreedList,
+  Breed,
 } from "./RegisterContentDetailStyle";
 
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
+
+interface DogType {
+  id: number;
+  name: string;
+  imgUrl: string;
+}
+
+interface DogTypeSearchResponse {
+  status: "SUCCESS" | "FAIL";
+  data: DogType[];
+}
 
 const RegisterContentDetail = () => {
   const [email, setEmail] = useState("");
@@ -75,11 +90,22 @@ const RegisterContentDetail = () => {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchResults, setSearchResults] = useState<DogType[]>([]);
+  const [selectedBreeds, setSelectedBreeds] = useState<DogType[]>([]);
 
   const navigate = useNavigate();
 
   const handleNextClick = () => {
     navigate("/success-register");
+  };
+
+  const navigateToBreeder = () => {
+    navigate("/register/breeder-detail");
+  };
+
+  const navigateToAdopter = () => {
+    navigate("/register/adopter-detail");
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +133,12 @@ const RegisterContentDetail = () => {
     } else {
       setPasswordError("");
     }
+  };
+
+  const handleSearchKeywordChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSearchKeyword(e.target.value);
   };
 
   const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,6 +174,71 @@ const RegisterContentDetail = () => {
         alertList.errorMessage("이메일 중복 확인 중 오류가 발생했습니다."),
       );
     }
+  };
+
+  const handleSearchDog = async () => {
+    if (!searchKeyword) {
+      Swal.fire(alertList.infoMessage("견종 이름을 입력해주세요."));
+      return;
+    }
+
+    try {
+      const response = await get<DogTypeSearchResponse>("/dog-type/search", {
+        params: { keyword: searchKeyword },
+      });
+
+      if (response.data.status === "SUCCESS") {
+        if (response.data.data.length < 1) {
+          Swal.fire(alertList.errorMessage("검색 결과가 없습니다."));
+        } else {
+          setSearchResults(response.data.data);
+          console.log(response.data.data.length);
+        }
+      } else {
+        Swal.fire(
+          alertList.errorMessage("검색 결과를 가져오는 데 실패했습니다."),
+        );
+      }
+    } catch (error) {
+      Swal.fire(alertList.errorMessage("검색 중 오류가 발생했습니다."));
+    }
+  };
+
+  const handleBreedClick = (dogType: DogType) => {
+    const isAlreadySelected = selectedBreeds.some(
+      breed => breed.id === dogType.id,
+    );
+
+    if (!isAlreadySelected && selectedBreeds.length < 3) {
+      setSelectedBreeds([...selectedBreeds, dogType]);
+      setSearchResults([]);
+    } else if (isAlreadySelected) {
+      Swal.fire(alertList.infoMessage("이미 선택된 견종입니다."));
+    } else if (selectedBreeds.length >= 3) {
+      Swal.fire(alertList.infoMessage("견종은 최대 3개까지 추가 가능합니다."));
+    }
+  };
+
+  const DogTypeList = () => {
+    return (
+      <DogTypeResult>
+        {searchResults.map(dogType => (
+          <DogType key={dogType.id} onClick={() => handleBreedClick(dogType)}>
+            {dogType.name}
+          </DogType>
+        ))}
+      </DogTypeResult>
+    );
+  };
+
+  const SelectedBreedsList = () => {
+    return (
+      <BreedList>
+        {selectedBreeds.map(breed => (
+          <Breed key={breed.id}>{breed.name}</Breed>
+        ))}
+      </BreedList>
+    );
   };
 
   const handleNickNameCheck = async () => {
@@ -217,8 +314,12 @@ const RegisterContentDetail = () => {
         />
       </RegisterSequence>
       <SelectArea>
-        <BreederButton>브리더</BreederButton>
-        <CustomerButton>분양희망자</CustomerButton>
+        <SelectArea>
+          <BreederButton onClick={navigateToBreeder}>브리더</BreederButton>
+          <CustomerButton onClick={navigateToAdopter}>
+            분양희망자
+          </CustomerButton>
+        </SelectArea>
       </SelectArea>
       <TopContentArea>
         <TopLeftContentArea>
@@ -258,7 +359,7 @@ const RegisterContentDetail = () => {
             <PasswordCheckText>비밀번호 확인</PasswordCheckText>
             <PasswordCheckInput
               type="password"
-              placeholder="비밀번호"
+              placeholder="비밀번호 확인"
               onChange={handleCheckPasswordChange}
             />
             <PasswordErrorText>{passwordError}</PasswordErrorText>
@@ -273,9 +374,15 @@ const RegisterContentDetail = () => {
               <MainBreedInput
                 type="text"
                 placeholder="원하시는 견종을 입력해 주세요."
+                value={searchKeyword}
+                onChange={handleSearchKeywordChange}
               />
-              <MainBreedSearchButton>검색</MainBreedSearchButton>
+              <MainBreedSearchButton onClick={handleSearchDog}>
+                검색
+              </MainBreedSearchButton>
             </MainBreedInputArea>
+            <DogTypeList />
+            <SelectedBreedsList />
           </MainBreedArea>
           <NickNameArea>
             <NickNameTextArea>
