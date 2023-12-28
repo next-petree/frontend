@@ -37,6 +37,7 @@ export default function BreederForm() {
           type="text"
           setValue={setValue}
           watch={watch}
+          width={314}
         />
         <Btn>검색</Btn>
       </Form>

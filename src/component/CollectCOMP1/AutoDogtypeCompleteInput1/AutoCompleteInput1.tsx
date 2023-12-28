@@ -16,7 +16,7 @@ import {
 } from "./Styles1";
 import { IDogType, IDogTypeAPI } from "../../../types/AutoCompleteType1";
 
-interface Iinput {
+interface Input {
   [key: string]: any;
   type: string;
   register: UseFormRegisterReturn;
@@ -24,6 +24,7 @@ interface Iinput {
   watch: UseFormWatch<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   setDogtype?: React.Dispatch<React.SetStateAction<number>>;
+  width?: number;
 }
 
 export default function AutoInput({
@@ -33,8 +34,9 @@ export default function AutoInput({
   setValue,
   watch,
   setDogtype,
+  width,
   ...rest
-}: Iinput) {
+}: Input) {
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState<IDogType[]>([]);
   const [keyItems, setKeyItems] = useState<IDogType[]>([]);
@@ -72,6 +74,7 @@ export default function AutoInput({
         {...rest}
         type={type}
         placeholder="원하시는 견종을 입력해주세요"
+        $width={width ? width : null}
       />
       {keyItems.length > 0 && keyItems && show && (
         <AutoSearchContainer>
