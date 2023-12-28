@@ -38,19 +38,14 @@ const LivingEnvironmentForm = () => {
     setValue,
   } = useForm<ILivingEnvironment>();
   const getUser = DecodeToken();
+  const [imageData, setImageData] = useState<LivingEnvironmentsResultResponse[]>([]);
   const onValid = async (data: any) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주거 환경을 저장 하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
-      const yardform = new FormData();
-      const bathroomform = new FormData();
-      const livingroomform = new FormData();
-      yardform.append("files", data.yard[0]);
-      bathroomform.append("files", data.bathRoom[0]);
-      livingroomform.append("files", data.livingRoom[0]);
-      
+      const form = new FormData();
     }
   };
   // 이미지 url만 보내면 업로드가 되는 건지
@@ -100,17 +95,15 @@ const LivingEnvironmentForm = () => {
     try {
       const url = LivingEnvironmentUrl();
       const response = await get<LivingEnvironmentsResultResponse[]>(url);
-      const livingroom = response.data.find(i => i.spaceType === "LIVING_ROOM");
-      const bathroom = response.data.find(i => i.spaceType === "BATH_ROOM");
-      const yard = response.data.find(i => i.spaceType === "YARD");
-      if (livingroom?.imgUrl) {
-        setImagesPre({ ...imagesPre, livingRoom: livingroom?.imgUrl });
+      setImageData(response.data);
+      if (imageData[0].imgUrl) {
+        setImagesPre({ ...imagesPre, livingRoom: imageData[0].imgUrl });
       }
-      if (bathroom?.imgUrl) {
-        setImagesPre({ ...imagesPre, bathRoom: bathroom?.imgUrl });
+      if (imageData[1].imgUrl) {
+        setImagesPre({ ...imagesPre, bathRoom: imageData[1].imgUrl });
       }
-      if (yard?.imgUrl) {
-        setImagesPre({ ...imagesPre, yard: yard?.imgUrl });
+      if (imageData[2].imgUrl) {
+        setImagesPre({ ...imagesPre, yard: imageData[2].imgUrl });
       }
     } catch (e) {}
   };
