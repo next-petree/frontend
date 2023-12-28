@@ -72,9 +72,13 @@ const MajorDogForm = () => {
       try {
         const dogTypdId = majordogtypes.map(majordogtype => majordogtype.id);
         const url = MajordogUrl();
-        const response = await patch<MajordogResultResponse>(url, {
-          dogTypdId,
-        });
+        const response = await post<MajordogResultResponse>(
+          url,
+          {
+            dogTypdId,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        );
         if (response.data.status === "FAIL") {
           throw "올바르지 못한 접근 입니다.";
         }

@@ -63,8 +63,8 @@ export default function DogyBox({
         {isBreederVerified ? (
           <LitteBadge>
             <svg
-              width=""
-              height=""
+              width="1.2vw"
+              height="1.2vw"
               viewBox="0 0 33 38"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

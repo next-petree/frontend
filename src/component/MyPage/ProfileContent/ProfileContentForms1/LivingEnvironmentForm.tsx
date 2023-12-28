@@ -23,6 +23,12 @@ import { LivingEnvironmentUrl } from "../../../../utils/MypageUrl1";
 import { get } from "../../../../api/api";
 import React from "react";
 
+export interface ILivingEnvironment {
+  yard: FileList | null;
+  bathRoom: FileList | null;
+  livingRoom: FileList | null;
+}
+
 const LivingEnvironmentForm = () => {
   const {
     register,
@@ -30,7 +36,7 @@ const LivingEnvironmentForm = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm();
+  } = useForm<ILivingEnvironment>();
   const getUser = DecodeToken();
   const onValid = async (data: any) => {
     const answer = await Swal.fire({
@@ -38,9 +44,13 @@ const LivingEnvironmentForm = () => {
       width: "350px",
     });
     if (answer.isConfirmed) {
-      const formData = new FormData();
-      formData.append("files", data.yard[0]);
-      console.log(formData.values);
+      const yardform = new FormData();
+      const bathroomform = new FormData();
+      const livingroomform = new FormData();
+      yardform.append("files", data.yard[0]);
+      bathroomform.append("files", data.bathRoom[0]);
+      livingroomform.append("files", data.livingRoom[0]);
+      
     }
   };
   // 이미지 url만 보내면 업로드가 되는 건지
@@ -74,13 +84,15 @@ const LivingEnvironmentForm = () => {
   }, [images.livingRoom]);
 
   const onDelete = (data: string) => {
-    setValue(data, "");
     if (data === "yard") {
       setImagesPre({ ...imagesPre, yard: "" });
+      setValue(data, null);
     } else if (data === "bathRoom") {
       setImagesPre({ ...imagesPre, bathRoom: "" });
+      setValue(data, null);
     } else if (data === "livingRoom") {
       setImagesPre({ ...imagesPre, livingRoom: "" });
+      setValue(data, null);
     }
   };
   //spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
