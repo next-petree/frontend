@@ -16,7 +16,6 @@ import { useParams } from "react-router-dom";
 import { DogsCollecturl, DogsTypeSearchurl } from "../../../utils/CollectUrl1";
 import { IDogsAPI } from "../../../types/DogsCollectTypes1";
 import { get } from "../../../api/api";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectDog_searchfilter } from "../../../redux/Collect1/DogSearchfilterSlice1";
 import {
   selectOnDogSearchSlice,
@@ -27,6 +26,7 @@ import {
   setOnUseDogfilter,
 } from "../../../redux/Collect1/OnUseDogfilterSlice1";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 export default function DogyCollect_main() {
   const param = useParams();

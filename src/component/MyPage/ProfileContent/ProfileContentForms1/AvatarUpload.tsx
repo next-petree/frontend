@@ -15,19 +15,20 @@ import {
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/Swal1";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import {
   AvatarResultResponse,
   IChangeAvatar,
 } from "../../../../types/MypageType1";
 import { AvatarUrl } from "../../../../utils/MypageUrl1";
-import { post } from "../../../../api/api";
+import { del, post } from "../../../../api/api";
 import {
   selectAvatarSlice,
   setAvatar,
+  setAvatarId,
 } from "../../../../redux/Mypage1/AvatarSlice1";
 import React from "react";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
 interface IAvatarUpload {
   setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,6 +52,7 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
   } = useForm<IChangeAvatar>();
   const accountInfo = DecodeToken();
   const [user, setuser] = useState<IUser>(accountInfo);
+  const [isAvatarDel, setIsAvatarDel] = useState<boolean>(false);
   const nowavatar = useAppSelector(selectAvatarSlice);
   const dispath = useAppDispatch();
   const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
@@ -76,17 +78,26 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
         try {
           const url = AvatarUrl("post");
           const form = new FormData();
-          form.append("profile", avatar[0]);
-          const response = await post<AvatarResultResponse>(url, {
-            image: form,
-          });
-
+          form.append("image", avatar[0]);
+          const response = await post<AvatarResultResponse>(url, form);
           if (response.data.status === "FAIL") {
             throw "올바르지 못한 접근 입니다.";
           }
-          console.log(response);
-          //dispath(setAvatar(response.data.data.fileUrl));
+          dispath(setAvatar(response.data.data.fileUrl));
+          dispath(setAvatarId(response.data.data.id));
         } catch (e) {}
+      }
+      else {
+        if(nowavatar.avatar !== "") {
+          try {
+            const url = AvatarUrl("delete", nowavatar.id);
+            const response = await del<AvatarResultResponse>(url);
+            if (response.data.status === "FAIL") {
+              throw "올바르지 못한 접근 입니다.";
+            }
+            dispath(setAvatar(""));
+          } catch (e) {}
+        }
       }
     }
     setChangeAvatar(false);

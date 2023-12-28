@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dogfilters } from "../FilterData12";
 import AutoInput from "../../AutoDogtypeCompleteInput1/AutoCompleteInput1";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+
 import {
   selectDog_searchfilter,
   set_searchfilterDogtype,
@@ -29,6 +29,7 @@ import {
   Title,
 } from "./Styles1";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
 export default function SearchFilter() {
   const { register, handleSubmit, watch, setValue } = useForm();

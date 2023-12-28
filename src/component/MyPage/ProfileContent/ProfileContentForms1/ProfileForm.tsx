@@ -30,12 +30,13 @@ import {
   ResultResponse,
 } from "../../../../types/MypageType1";
 import { get, put } from "../../../../api/api";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import {
   selectAvatarSlice,
   setAvatar,
+  setAvatarId,
 } from "../../../../redux/Mypage1/AvatarSlice1";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
 interface IUser {
   email: string;
@@ -100,6 +101,7 @@ const ProfileForm = () => {
         throw "올바르지 못한 접근 입니다.";
       }
       dispath(setAvatar(response.data.data.fileUrl));
+      dispath(setAvatarId(response.data.data.id));
     } catch (e) {}
   };
 
