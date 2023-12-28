@@ -52,7 +52,7 @@ interface AvatarData {
 }
 
 export interface IChangeAvatar {
-  avatar: FileList;
+  avatar: FileList | null;
 }
 
 export interface IIntroductionForm {

@@ -19,7 +19,7 @@ import alertList from "../../../../utils/Swal1";
 import Swal from "sweetalert2";
 import { MajordogUrl } from "../../../../utils/MypageUrl1";
 import { MajordogResultResponse } from "../../../../types/MypageType1";
-import { get, patch, post } from "../../../../api/api";
+import { get, patch } from "../../../../api/api";
 import React from "react";
 
 const MajorDogForm = () => {
@@ -70,10 +70,18 @@ const MajorDogForm = () => {
     });
     if (answer.isConfirmed) {
       try {
-        const dogTypdId = majordogtypes.map(majordogtype => majordogtype.id);
+        const dogTypeId = majordogtypes.map(majordogtype => majordogtype.id);
         const url = MajordogUrl();
-        const response = await patch<MajordogResultResponse>(url, {
-          dogTypdId,
+        const response = await patch<MajordogResultResponse>(
+          url,
+          {
+            dogTypeId,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        );
+        Swal.fire({
+          ...alertList.successMessage("주력 견종이 저장 되었습니다"),
+          width: "350px",
         });
         if (response.data.status === "FAIL") {
           throw "올바르지 못한 접근 입니다.";
