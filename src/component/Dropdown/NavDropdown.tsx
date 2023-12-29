@@ -29,8 +29,8 @@ const NavDropdown = ({ loggedIn }: IDropdownProps) => {
       localStorage.removeItem("refreshToken");
       if (res.data.status === "SUCCESS") {
         await Swal.fire({
-          ...alertList.successMessage(`${res.data.data}`),
-          width: "350px",
+          ...alertList.successMessage(res.data.data),
+          width: "330px",
         });
         navigate("/login");
       }

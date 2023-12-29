@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../component/Header/Header";
 import RegisterContentDetail from "../../component/RegisterContent/RegisterContentDetail/RegisterContentDetail";
 
-const RegisterDetail = () => {
+const RegisterAdopterDetail = () => {
   return (
     <>
       <Header />
@@ -11,4 +11,4 @@ const RegisterDetail = () => {
   );
 };
 
-export default RegisterDetail;
+export default RegisterAdopterDetail;

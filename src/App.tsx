@@ -9,7 +9,8 @@ import CustomerDetails from "./pages/Customer-details1/CustomerDetails";
 import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/Login/LoginCheckForKakao";
 import Register from "./pages/Register/Register";
-import RegisterDetail from "./pages/Register/RegisterDetail";
+import RegisterBreederDetail from "./pages/Register/RegisterBreederDetail";
+import RegisterAdopterDetail from "./pages/Register/RegisterAdopterDetail";
 import SuccessRegister from "./pages/Register/SuccessRegister";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
@@ -39,7 +40,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
         <Route path="register" element={<Register />} />
-        <Route path="register-detail" element={<RegisterDetail />} />
+        <Route
+          path="register/breeder-detail"
+          element={<RegisterBreederDetail />}
+        />
+        <Route
+          path="register/adopter-detail"
+          element={<RegisterAdopterDetail />}
+        />
         <Route path="success-register" element={<SuccessRegister />} />
         <Route path="/find-email" element={<FindEmail />} />
         <Route path="/find-password" element={<FindPassword />} />

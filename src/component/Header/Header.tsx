@@ -60,7 +60,7 @@ const Header = () => {
         )}
 
         <div onClick={handleClick}>
-          <UserProfileImage imgSrc={profileImg} />
+          <UserProfileImage $imgSrc={profileImg} />
         </div>
       </HeaderContent>
 

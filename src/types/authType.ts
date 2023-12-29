@@ -10,7 +10,7 @@ export interface LoginResponse {
   };
 }
 
-export interface RegisterResponse {
+export interface CertificationCheckResponse {
   status: string;
   data: string;
 }

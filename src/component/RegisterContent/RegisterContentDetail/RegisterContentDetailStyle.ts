@@ -121,17 +121,13 @@ const CheckButton = styled.button`
 
 export const BreederButton = styled(SelectButton)``;
 
-export const CustomerButton = styled(SelectButton)`
-  border: 1px solid #35d8d5;
-  background-color: #fff;
-  color: #35d8d5;
-`;
+export const CustomerButton = styled(SelectButton)``;
 
 export const TopContentArea = styled.div`
   display: flex;
   margin: 0 auto;
   margin-bottom: 100px;
-  gap: 60px;
+  gap: 55px;
 `;
 
 export const TopLeftContentArea = styled.div`
@@ -184,6 +180,7 @@ export const PasswordCheckText = styled(Text)`
 export const PasswordCheckInput = styled(LongInput)``;
 
 export const PasswordErrorText = styled(InfomationText)`
+  position: absolute;
   margin-top: 5px;
   color: red;
 `;
@@ -234,7 +231,7 @@ export const BottomContentArea = styled.div`
   display: flex;
   margin: 0 auto;
   margin-bottom: 100px;
-  gap: 60px;
+  gap: 55px;
 `;
 
 export const BottomLeftContentArea = styled.div`
@@ -304,4 +301,40 @@ export const RegisterButton = styled.button`
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+`;
+
+export const DogTypeResult = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #eee;
+  z-index: 1;
+`;
+
+export const DogType = styled.div`
+  width: 200px;
+  height: 20px;
+  padding: 13px 25px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+export const BreedList = styled.div`
+  display: flex;
+  position: absolute;
+  margin-top: 2px;
+  width: 100%;
+  gap: 10px;
+`;
+
+export const Breed = styled.div`
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #eee;
+  padding: 4px;
+  border-radius: 12px;
 `;

@@ -93,7 +93,7 @@ const RegisterContent = () => {
 
   const handleNextClick = () => {
     if (Object.values(checkboxes).every(Boolean)) {
-      navigate("/register-detail");
+      navigate("/register/breeder-detail");
     } else {
       Swal.fire(alertList.infoMessage("모든 항목에 동의해주세요."));
     }
