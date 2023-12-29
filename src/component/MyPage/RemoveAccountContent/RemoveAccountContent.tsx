@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../../api/api";
-import { RegisterResponse } from "../../../types/authType";
+import { CertificationCheckResponse } from "../../../types/authType";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
@@ -21,6 +21,7 @@ import {
 } from "./RemoveAccountContentStyle";
 
 import DropDownButton from "../../../assets/icons/Group 5.png";
+import { CertificationResponse } from "../../../types";
 
 const RemoveAccountContent = () => {
   const [checkbox, setCheckbox] = useState(false);
@@ -43,7 +44,7 @@ const RemoveAccountContent = () => {
     );
     if (confirmResult.isConfirmed) {
       try {
-        const response = await post<RegisterResponse>("/withdraw");
+        const response = await post<CertificationCheckResponse>("/withdraw");
 
         if (response.data.status === "SUCCESS") {
           Swal.fire(alertList.successMessage("회원탈퇴가 완료되었습니다."));

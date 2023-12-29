@@ -121,11 +121,7 @@ const CheckButton = styled.button`
 
 export const BreederButton = styled(SelectButton)``;
 
-export const CustomerButton = styled(SelectButton)`
-  border: 1px solid #35d8d5;
-  background-color: #fff;
-  color: #35d8d5;
-`;
+export const CustomerButton = styled(SelectButton)``;
 
 export const TopContentArea = styled.div`
   display: flex;
@@ -184,6 +180,7 @@ export const PasswordCheckText = styled(Text)`
 export const PasswordCheckInput = styled(LongInput)``;
 
 export const PasswordErrorText = styled(InfomationText)`
+  position: absolute;
   margin-top: 5px;
   color: red;
 `;
