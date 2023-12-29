@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { get, post } from "../../../api/api";
+import { post } from "../../../api/api";
 import { CertificationCheckResponse } from "../../../types/authType";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
 import { useNavigate } from "react-router-dom";
 import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
+import EmailContent from "./EmailContent";
+import NicknameContent from "./NicknameContent";
+import PhoneNumberContent from "./PhoneNumberContent";
+import PasswordContent from "./PasswordContent";
+import MainBreedContent from "./MainBreedContent";
 
 import {
   Container,
@@ -18,94 +23,28 @@ import {
   CustomerButton,
   TopContentArea,
   TopLeftContentArea,
-  EmailArea,
-  EmailTextArea,
-  EmailText,
-  EmailInfomationText,
-  EmailInputArea,
-  EmailInput,
-  EmailCheckButton,
-  PasswordArea,
-  PasswordTextArea,
-  PasswordText,
-  PasswordInfomationText,
-  PasswordInputArea,
-  PasswordInput,
-  PasswordCheckArea,
-  PasswordCheckText,
-  PasswordCheckInput,
-  PasswordErrorText,
   TopRightContentArea,
-  MainBreedArea,
-  MainBreedTextArea,
-  MianBreedText,
-  MainBreedInputArea,
-  MainBreedInput,
-  MainBreedSearchButton,
-  NickNameArea,
-  NickNameTextArea,
-  NickNameText,
-  NickNameInfomationText,
-  NickNameInputArea,
-  NickNameInput,
-  NickNameCheckButton,
   BottomContentArea,
   BottomLeftContentArea,
   RegionSelectorArea,
   RegionSelectorTextArea,
   RegionSelectorText,
   BottomRightContentArea,
-  PhoneNumberArea,
-  PhoneNumberTextArea,
-  PhoneNumberText,
-  PhoneNumberInputTop,
-  PhoneNumberInput,
-  PhoneNumberButton,
-  PhoneNumberInputBottom,
-  PhoneNumberCheckInput,
-  PhoneNumberCheckButton,
   RegisterButtonContainer,
   RegisterButton,
-  DogTypeResult,
-  DogType,
-  BreedList,
-  Breed,
 } from "./RegisterContentDetailStyle";
 
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
 
-interface DogType {
-  id: number;
-  name: string;
-  imgUrl: string;
-}
-
-interface DogTypeSearchResponse {
-  status: "SUCCESS" | "FAIL";
-  data: DogType[];
-}
-
 const RegisterContentDetail = () => {
-  //이메일 체크
-  const [email, setEmail] = useState("");
-  const [emailCheck, setEmailCheck] = useState(false);
-  //닉네임 체크
-  const [nickname, setNickname] = useState("");
-  const [nicknameCheck, setNickNameCheck] = useState(false);
-  //휴대폰 번호 체크
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
-  const [phoneNumberCheck, setPhoneNumberCheck] = useState(false);
-  //비밀번호 체크
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  //견종 체크
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState<DogType[]>([]);
-  const [selectedBreeds, setSelectedBreeds] = useState<DogType[]>([]);
-
   const address = useSelector((state: RootState) => state.address);
+  const email = useSelector((state: RootState) => state.email);
+  const nickname = useSelector((state: RootState) => state.nickname);
+  const phonenumber = useSelector((state: RootState) => state.phonenumber);
+  const password = useSelector((state: RootState) => state.password);
+  const selectedBreeds = useSelector(
+    (state: RootState) => state.mainbreed.selectedBreeds,
+  );
 
   const navigate = useNavigate();
 
@@ -127,247 +66,35 @@ const RegisterContentDetail = () => {
     role = "ADOPTER";
   }
 
-  console.log(role);
-
-  //이메일
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setEmailCheck(false);
-  };
-
-  const handleEmailCheck = async () => {
-    if (!email) {
-      Swal.fire(alertList.infoMessage("이메일을 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await get<CertificationCheckResponse>("/email/check", {
-        params: { email: email },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setEmailCheck(true);
-        Swal.fire(alertList.successMessage("사용 가능한 이메일입니다."));
-      } else {
-        setEmailCheck(false);
-        Swal.fire(alertList.errorMessage("이미 사용 중인 이메일입니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("이메일 중복 확인 중 오류가 발생했습니다."),
-      );
-    }
-  };
-
-  // console.log(emailCheck);
-
-  //비밀번호
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-
-    if (checkPassword) {
-      validatePassword(e.target.value, checkPassword);
-    }
-  };
-
-  const handleCheckPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setCheckPassword(e.target.value);
-    validatePassword(password, e.target.value);
-  };
-
-  const validatePassword = (pwd: string, checkPwd: string) => {
-    if (pwd !== checkPwd) {
-      setPasswordError("비밀번호가 일치하지 않습니다.");
-    } else {
-      setPasswordError("");
-    }
-  };
-
-  //닉네임
-  const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-    setNickNameCheck(false);
-  };
-
-  const handleNickNameCheck = async () => {
-    if (!nickname) {
-      Swal.fire(alertList.infoMessage("닉네임을 입력해주세요"));
-      return;
-    }
-
-    try {
-      const response = await get<CertificationCheckResponse>("nickname/check", {
-        params: { nickname },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setNickNameCheck(true);
-        Swal.fire(alertList.successMessage("사용 가능한 닉네임입니다."));
-      } else {
-        setNickNameCheck(false);
-        Swal.fire(alertList.errorMessage("이미 사용 중인 닉네임입니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("닉네임 중복 확인 중 오류가 발생했습니다."),
-      );
-    }
-  };
-
-  // console.log(nicknameCheck);
-
-  //휴대폰 번호
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(
-      e.target.value
-        .replace(/[^0-9]/g, "")
-        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
-    );
-    setPhoneNumberCheck(false);
-  };
-
-  const sendVerificationCode = async () => {
-    if (!phoneNumber) {
-      Swal.fire(alertList.infoMessage("휴대전화 번호를 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await post<CertificationCheckResponse>("/sms/send", {
-        to: phoneNumber,
-      });
-
-      if (response.data.status === "SUCCESS") {
-        Swal.fire(alertList.successMessage("인증번호가 발송되었습니다."));
-      } else if (response.data.status === "FAIL") {
-        Swal.fire(alertList.successMessage("올바른 전화번호 형식이 아닙니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("인증번호 발송 중 오류가 발생했습니다."),
-      );
-    }
-  };
-
-  const verifyCode = async () => {
-    try {
-      const response = await post<CertificationCheckResponse>("/sms/verify", {
-        phoneNumber,
-        code: verificationCode,
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setPhoneNumberCheck(true);
-        Swal.fire(alertList.successMessage("인증 성공!"));
-      } else {
-        setPhoneNumberCheck(false);
-        Swal.fire(alertList.errorMessage("인증 실패!"));
-      }
-    } catch (error) {
-      Swal.fire(alertList.errorMessage("인증 중 오류가 발생했습니다."));
-    }
-  };
-
-  // console.log(phoneNumberCheck);
-
-  //견종 확인
-  const handleSearchKeywordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchKeyword(e.target.value);
-  };
-
-  const handleSearchDog = async () => {
-    if (!searchKeyword) {
-      Swal.fire(alertList.infoMessage("견종 이름을 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await get<DogTypeSearchResponse>("/dog-type/search", {
-        params: { keyword: searchKeyword },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        if (response.data.data.length < 1) {
-          Swal.fire(alertList.errorMessage("검색 결과가 없습니다."));
-        } else {
-          setSearchResults(response.data.data);
-        }
-      } else {
-        Swal.fire(
-          alertList.errorMessage("검색 결과를 가져오는 데 실패했습니다."),
-        );
-      }
-    } catch (error) {
-      Swal.fire(alertList.errorMessage("검색 중 오류가 발생했습니다."));
-    }
-  };
-
-  const handleBreedClick = (dogType: DogType) => {
-    const isAlreadySelected = selectedBreeds.some(
-      breed => breed.id === dogType.id,
-    );
-
-    if (!isAlreadySelected && selectedBreeds.length < 3) {
-      setSelectedBreeds([...selectedBreeds, dogType]);
-      setSearchResults([]);
-    } else if (isAlreadySelected) {
-      Swal.fire(alertList.infoMessage("이미 선택된 견종입니다."));
-    } else if (selectedBreeds.length >= 3) {
-      Swal.fire(alertList.infoMessage("견종은 최대 3개까지 추가 가능합니다."));
-    }
-  };
-
-  const DogTypeList = () => {
-    return (
-      <DogTypeResult>
-        {searchResults.map(dogType => (
-          <DogType key={dogType.id} onClick={() => handleBreedClick(dogType)}>
-            {dogType.name}
-          </DogType>
-        ))}
-      </DogTypeResult>
-    );
-  };
-
-  const SelectedBreedsList = () => {
-    return (
-      <BreedList>
-        {selectedBreeds.map(breed => (
-          <Breed key={breed.id}>{breed.name}</Breed>
-        ))}
-      </BreedList>
-    );
-  };
-
   // 최종 제출
   const handleSubmit = async () => {
-    if (!emailCheck) {
+    console.log(email.emailCheck);
+    console.log(nickname.nicknameCheck);
+    console.log(phonenumber.phoneNumberCheck);
+    if (!email.emailCheck) {
       Swal.fire(alertList.infoMessage("이메일 중복확인을 해주세요"));
       return;
-    } else if (!nicknameCheck) {
+    } else if (!nickname.nicknameCheck) {
       Swal.fire(alertList.infoMessage("닉네임 중복확인을 해주세요"));
       return;
-    } else if (!phoneNumberCheck) {
+    } else if (!phonenumber.phoneNumberCheck) {
       Swal.fire(alertList.infoMessage("휴대폰 인증을 해주세요"));
       return;
     }
 
     const dogTypeIds = selectedBreeds.map(breed => breed.id);
 
+    console.log(dogTypeIds);
+
     const SignUpData = {
-      emailChecked: emailCheck,
-      nicknameChecked: nicknameCheck,
-      phoneNumberChecked: phoneNumberCheck,
-      email,
-      nickname,
-      password,
-      confirmPassword: checkPassword,
-      phoneNumber,
+      emailChecked: email.emailCheck,
+      nicknameChecked: nickname.nicknameCheck,
+      phoneNumberChecked: phonenumber.phoneNumberCheck,
+      email: email.email,
+      nickname: nickname.nickname,
+      password: password.password,
+      confirmPassword: password.checkPassword,
+      phoneNumber: phonenumber.phoneNumber,
       address1: address.roadAddress,
       address2: address.detailAddress,
       role,
@@ -376,13 +103,14 @@ const RegisterContentDetail = () => {
       },
     };
 
+    console.log(SignUpData);
+
     try {
       const response = await post<CertificationCheckResponse>(
         "/signup",
         SignUpData,
       );
       if (response.data.status === "SUCCESS") {
-        Swal.fire(alertList.successMessage("회원가입이 완료되었습니다"));
         navigate("/success-register");
       } else if (response.data.status === "FAIL") {
         Swal.fire(alertList.errorMessage("회원정보를 확인해주세요"));
@@ -434,83 +162,12 @@ const RegisterContentDetail = () => {
       </SelectArea>
       <TopContentArea>
         <TopLeftContentArea>
-          <EmailArea>
-            <EmailTextArea>
-              <EmailText>이메일</EmailText>
-              <EmailInfomationText>2~10자 이내</EmailInfomationText>
-            </EmailTextArea>
-            <EmailInputArea>
-              <EmailInput
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="breeder@email.com"
-              />
-              <EmailCheckButton onClick={handleEmailCheck}>
-                중복확인
-              </EmailCheckButton>
-            </EmailInputArea>
-          </EmailArea>
-          <PasswordArea>
-            <PasswordTextArea>
-              <PasswordText>비밀번호</PasswordText>
-              <PasswordInfomationText>
-                4~16자로 특수문자를 포함
-              </PasswordInfomationText>
-            </PasswordTextArea>
-            <PasswordInputArea>
-              <PasswordInput
-                type="password"
-                placeholder="비밀번호"
-                onChange={handlePasswordChange}
-              />
-            </PasswordInputArea>
-          </PasswordArea>
-          <PasswordCheckArea>
-            <PasswordCheckText>비밀번호 확인</PasswordCheckText>
-            <PasswordCheckInput
-              type="password"
-              placeholder="비밀번호 확인"
-              onChange={handleCheckPasswordChange}
-            />
-            <PasswordErrorText>{passwordError}</PasswordErrorText>
-          </PasswordCheckArea>
+          <EmailContent />
+          <PasswordContent />
         </TopLeftContentArea>
         <TopRightContentArea>
-          <MainBreedArea>
-            <MainBreedTextArea>
-              <MianBreedText>주력견종</MianBreedText>
-            </MainBreedTextArea>
-            <MainBreedInputArea>
-              <MainBreedInput
-                type="text"
-                placeholder="원하시는 견종을 입력해 주세요."
-                value={searchKeyword}
-                onChange={handleSearchKeywordChange}
-              />
-              <MainBreedSearchButton onClick={handleSearchDog}>
-                검색
-              </MainBreedSearchButton>
-            </MainBreedInputArea>
-            <DogTypeList />
-            <SelectedBreedsList />
-          </MainBreedArea>
-          <NickNameArea>
-            <NickNameTextArea>
-              <NickNameText>닉네임</NickNameText>
-              <NickNameInfomationText>2~10자 이내</NickNameInfomationText>
-            </NickNameTextArea>
-            <NickNameInputArea>
-              <NickNameInput
-                type="text"
-                placeholder="닉네임 검색"
-                onChange={handleNickNameChange}
-              />
-              <NickNameCheckButton onClick={handleNickNameCheck}>
-                중복확인
-              </NickNameCheckButton>
-            </NickNameInputArea>
-          </NickNameArea>
+          <MainBreedContent />
+          <NicknameContent />
         </TopRightContentArea>
       </TopContentArea>
       <BottomContentArea>
@@ -523,33 +180,7 @@ const RegisterContentDetail = () => {
           </RegionSelectorArea>
         </BottomLeftContentArea>
         <BottomRightContentArea>
-          <PhoneNumberArea>
-            <PhoneNumberTextArea>
-              <PhoneNumberText>휴대전화</PhoneNumberText>
-            </PhoneNumberTextArea>
-            <PhoneNumberInputTop>
-              <PhoneNumberInput
-                type="text"
-                placeholder="전화번호"
-                onChange={handlePhoneNumberChange}
-                value={phoneNumber}
-              />
-              <PhoneNumberButton onClick={sendVerificationCode}>
-                인증요청
-              </PhoneNumberButton>
-            </PhoneNumberInputTop>
-            <PhoneNumberInputBottom>
-              <PhoneNumberCheckInput
-                type="text"
-                value={verificationCode}
-                onChange={e => setVerificationCode(e.target.value)}
-                placeholder="인증번호"
-              />
-              <PhoneNumberCheckButton onClick={verifyCode}>
-                확인
-              </PhoneNumberCheckButton>
-            </PhoneNumberInputBottom>
-          </PhoneNumberArea>
+          <PhoneNumberContent />
         </BottomRightContentArea>
       </BottomContentArea>
       <RegisterButtonContainer>

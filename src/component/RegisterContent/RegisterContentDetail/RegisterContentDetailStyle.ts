@@ -335,6 +335,6 @@ export const Breed = styled.div`
   font-size: 15px;
   font-weight: bold;
   background-color: #eee;
-  padding: 4px;
+  padding: 4px 10px;
   border-radius: 12px;
 `;
