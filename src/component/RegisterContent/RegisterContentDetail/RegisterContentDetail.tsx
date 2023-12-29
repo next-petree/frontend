@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
 import EmailContent from "./EmailContent";
 import NicknameContent from "./NicknameContent";
+import PhoneNumberContent from "./PhoneNumberContent";
 
 import {
   Container,
@@ -43,15 +44,6 @@ import {
   RegionSelectorTextArea,
   RegionSelectorText,
   BottomRightContentArea,
-  PhoneNumberArea,
-  PhoneNumberTextArea,
-  PhoneNumberText,
-  PhoneNumberInputTop,
-  PhoneNumberInput,
-  PhoneNumberButton,
-  PhoneNumberInputBottom,
-  PhoneNumberCheckInput,
-  PhoneNumberCheckButton,
   RegisterButtonContainer,
   RegisterButton,
   DogTypeResult,
@@ -74,10 +66,6 @@ interface DogTypeSearchResponse {
 }
 
 const RegisterContentDetail = () => {
-  //휴대폰 번호 체크
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
-  const [phoneNumberCheck, setPhoneNumberCheck] = useState(false);
   //비밀번호 체크
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
@@ -90,6 +78,7 @@ const RegisterContentDetail = () => {
   const address = useSelector((state: RootState) => state.address);
   const email = useSelector((state: RootState) => state.email);
   const nickname = useSelector((state: RootState) => state.nickname);
+  const phonenumber = useSelector((state: RootState) => state.phonenumber);
 
   const navigate = useNavigate();
 
@@ -132,58 +121,6 @@ const RegisterContentDetail = () => {
       setPasswordError("비밀번호가 일치하지 않습니다.");
     } else {
       setPasswordError("");
-    }
-  };
-
-  //휴대폰 번호
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(
-      e.target.value
-        .replace(/[^0-9]/g, "")
-        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
-    );
-    setPhoneNumberCheck(false);
-  };
-
-  const sendVerificationCode = async () => {
-    if (!phoneNumber) {
-      Swal.fire(alertList.infoMessage("휴대전화 번호를 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await post<CertificationCheckResponse>("/sms/send", {
-        to: phoneNumber,
-      });
-
-      if (response.data.status === "SUCCESS") {
-        Swal.fire(alertList.successMessage("인증번호가 발송되었습니다."));
-      } else if (response.data.status === "FAIL") {
-        Swal.fire(alertList.successMessage("올바른 전화번호 형식이 아닙니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("인증번호 발송 중 오류가 발생했습니다."),
-      );
-    }
-  };
-
-  const verifyCode = async () => {
-    try {
-      const response = await post<CertificationCheckResponse>("/sms/verify", {
-        phoneNumber,
-        code: verificationCode,
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setPhoneNumberCheck(true);
-        Swal.fire(alertList.successMessage("인증 성공!"));
-      } else {
-        setPhoneNumberCheck(false);
-        Swal.fire(alertList.errorMessage("인증 실패!"));
-      }
-    } catch (error) {
-      Swal.fire(alertList.errorMessage("인증 중 오류가 발생했습니다."));
     }
   };
 
@@ -260,14 +197,16 @@ const RegisterContentDetail = () => {
 
   // 최종 제출
   const handleSubmit = async () => {
+    console.log(email.emailCheck);
     console.log(nickname.nicknameCheck);
+    console.log(phonenumber.phoneNumberCheck);
     if (!email.emailCheck) {
       Swal.fire(alertList.infoMessage("이메일 중복확인을 해주세요"));
       return;
     } else if (!nickname.nicknameCheck) {
       Swal.fire(alertList.infoMessage("닉네임 중복확인을 해주세요"));
       return;
-    } else if (!phoneNumberCheck) {
+    } else if (!phonenumber.phoneNumberCheck) {
       Swal.fire(alertList.infoMessage("휴대폰 인증을 해주세요"));
       return;
     }
@@ -277,12 +216,12 @@ const RegisterContentDetail = () => {
     const SignUpData = {
       emailChecked: email.emailCheck,
       nicknameChecked: nickname.nicknameCheck,
-      phoneNumberChecked: phoneNumberCheck,
-      email,
-      nickname,
+      phoneNumberChecked: phonenumber.phoneNumberCheck,
+      email: email.email,
+      nickname: nickname.nickname,
       password,
       confirmPassword: checkPassword,
-      phoneNumber,
+      phoneNumber: phonenumber.phoneNumber,
       address1: address.roadAddress,
       address2: address.detailAddress,
       role,
@@ -291,13 +230,14 @@ const RegisterContentDetail = () => {
       },
     };
 
+    console.log(SignUpData);
+
     try {
       const response = await post<CertificationCheckResponse>(
         "/signup",
         SignUpData,
       );
       if (response.data.status === "SUCCESS") {
-        Swal.fire(alertList.successMessage("회원가입이 완료되었습니다"));
         navigate("/success-register");
       } else if (response.data.status === "FAIL") {
         Swal.fire(alertList.errorMessage("회원정보를 확인해주세요"));
@@ -407,33 +347,7 @@ const RegisterContentDetail = () => {
           </RegionSelectorArea>
         </BottomLeftContentArea>
         <BottomRightContentArea>
-          <PhoneNumberArea>
-            <PhoneNumberTextArea>
-              <PhoneNumberText>휴대전화</PhoneNumberText>
-            </PhoneNumberTextArea>
-            <PhoneNumberInputTop>
-              <PhoneNumberInput
-                type="text"
-                placeholder="전화번호"
-                onChange={handlePhoneNumberChange}
-                value={phoneNumber}
-              />
-              <PhoneNumberButton onClick={sendVerificationCode}>
-                인증요청
-              </PhoneNumberButton>
-            </PhoneNumberInputTop>
-            <PhoneNumberInputBottom>
-              <PhoneNumberCheckInput
-                type="text"
-                value={verificationCode}
-                onChange={e => setVerificationCode(e.target.value)}
-                placeholder="인증번호"
-              />
-              <PhoneNumberCheckButton onClick={verifyCode}>
-                확인
-              </PhoneNumberCheckButton>
-            </PhoneNumberInputBottom>
-          </PhoneNumberArea>
+          <PhoneNumberContent />
         </BottomRightContentArea>
       </BottomContentArea>
       <RegisterButtonContainer>

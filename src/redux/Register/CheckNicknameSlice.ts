@@ -12,7 +12,7 @@ const initialState: NicknameState = {
 };
 
 const CheckNicknameSlice = createSlice({
-  name: "email",
+  name: "nickname",
   initialState,
   reducers: {
     setNickname: (state, action: PayloadAction<string>) => {
