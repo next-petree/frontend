@@ -9,6 +9,7 @@ import breeder_searchSlice from "./Collect1/BreederSearchSlice1";
 import avatarSlice from "../redux/Mypage1/AvatarSlice1";
 import AddressSlice from "./Address/AddressSlice";
 import CheckEmailSlice from "./Register/CheckEmailSlice";
+import CheckNicknameSlice from "./Register/CheckNicknameSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     avatar: avatarSlice,
     address: AddressSlice,
     email: CheckEmailSlice,
+    nickname: CheckNicknameSlice,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

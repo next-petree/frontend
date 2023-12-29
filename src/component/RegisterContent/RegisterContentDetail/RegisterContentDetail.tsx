@@ -9,6 +9,7 @@ import alertList from "../../../utils/Swal1";
 import { useNavigate } from "react-router-dom";
 import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
 import EmailContent from "./EmailContent";
+import NicknameContent from "./NicknameContent";
 
 import {
   Container,
@@ -36,13 +37,6 @@ import {
   MainBreedInputArea,
   MainBreedInput,
   MainBreedSearchButton,
-  NickNameArea,
-  NickNameTextArea,
-  NickNameText,
-  NickNameInfomationText,
-  NickNameInputArea,
-  NickNameInput,
-  NickNameCheckButton,
   BottomContentArea,
   BottomLeftContentArea,
   RegionSelectorArea,
@@ -80,9 +74,6 @@ interface DogTypeSearchResponse {
 }
 
 const RegisterContentDetail = () => {
-  //닉네임 체크
-  const [nickname, setNickname] = useState("");
-  const [nicknameCheck, setNickNameCheck] = useState(false);
   //휴대폰 번호 체크
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -98,6 +89,7 @@ const RegisterContentDetail = () => {
 
   const address = useSelector((state: RootState) => state.address);
   const email = useSelector((state: RootState) => state.email);
+  const nickname = useSelector((state: RootState) => state.nickname);
 
   const navigate = useNavigate();
 
@@ -140,37 +132,6 @@ const RegisterContentDetail = () => {
       setPasswordError("비밀번호가 일치하지 않습니다.");
     } else {
       setPasswordError("");
-    }
-  };
-
-  //닉네임
-  const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-    setNickNameCheck(false);
-  };
-
-  const handleNickNameCheck = async () => {
-    if (!nickname) {
-      Swal.fire(alertList.infoMessage("닉네임을 입력해주세요"));
-      return;
-    }
-
-    try {
-      const response = await get<CertificationCheckResponse>("nickname/check", {
-        params: { nickname },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setNickNameCheck(true);
-        Swal.fire(alertList.successMessage("사용 가능한 닉네임입니다."));
-      } else {
-        setNickNameCheck(false);
-        Swal.fire(alertList.errorMessage("이미 사용 중인 닉네임입니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("닉네임 중복 확인 중 오류가 발생했습니다."),
-      );
     }
   };
 
@@ -225,8 +186,6 @@ const RegisterContentDetail = () => {
       Swal.fire(alertList.errorMessage("인증 중 오류가 발생했습니다."));
     }
   };
-
-  // console.log(phoneNumberCheck);
 
   //견종 확인
   const handleSearchKeywordChange = (
@@ -301,10 +260,11 @@ const RegisterContentDetail = () => {
 
   // 최종 제출
   const handleSubmit = async () => {
+    console.log(nickname.nicknameCheck);
     if (!email.emailCheck) {
       Swal.fire(alertList.infoMessage("이메일 중복확인을 해주세요"));
       return;
-    } else if (!nicknameCheck) {
+    } else if (!nickname.nicknameCheck) {
       Swal.fire(alertList.infoMessage("닉네임 중복확인을 해주세요"));
       return;
     } else if (!phoneNumberCheck) {
@@ -316,7 +276,7 @@ const RegisterContentDetail = () => {
 
     const SignUpData = {
       emailChecked: email.emailCheck,
-      nicknameChecked: nicknameCheck,
+      nicknameChecked: nickname.nicknameCheck,
       phoneNumberChecked: phoneNumberCheck,
       email,
       nickname,
@@ -434,22 +394,7 @@ const RegisterContentDetail = () => {
             <DogTypeList />
             <SelectedBreedsList />
           </MainBreedArea>
-          <NickNameArea>
-            <NickNameTextArea>
-              <NickNameText>닉네임</NickNameText>
-              <NickNameInfomationText>2~10자 이내</NickNameInfomationText>
-            </NickNameTextArea>
-            <NickNameInputArea>
-              <NickNameInput
-                type="text"
-                placeholder="닉네임 검색"
-                onChange={handleNickNameChange}
-              />
-              <NickNameCheckButton onClick={handleNickNameCheck}>
-                중복확인
-              </NickNameCheckButton>
-            </NickNameInputArea>
-          </NickNameArea>
+          <NicknameContent />
         </TopRightContentArea>
       </TopContentArea>
       <BottomContentArea>
