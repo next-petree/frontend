@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
 import { useNavigate } from "react-router-dom";
 import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
+import EmailContent from "./EmailContent";
 
 import {
   Container,
@@ -18,13 +19,6 @@ import {
   CustomerButton,
   TopContentArea,
   TopLeftContentArea,
-  EmailArea,
-  EmailTextArea,
-  EmailText,
-  EmailInfomationText,
-  EmailInputArea,
-  EmailInput,
-  EmailCheckButton,
   PasswordArea,
   PasswordTextArea,
   PasswordText,
@@ -86,9 +80,6 @@ interface DogTypeSearchResponse {
 }
 
 const RegisterContentDetail = () => {
-  //이메일 체크
-  const [email, setEmail] = useState("");
-  const [emailCheck, setEmailCheck] = useState(false);
   //닉네임 체크
   const [nickname, setNickname] = useState("");
   const [nicknameCheck, setNickNameCheck] = useState(false);
@@ -106,6 +97,7 @@ const RegisterContentDetail = () => {
   const [selectedBreeds, setSelectedBreeds] = useState<DogType[]>([]);
 
   const address = useSelector((state: RootState) => state.address);
+  const email = useSelector((state: RootState) => state.email);
 
   const navigate = useNavigate();
 
@@ -126,41 +118,6 @@ const RegisterContentDetail = () => {
   } else if (location.pathname.includes("adopter-detail")) {
     role = "ADOPTER";
   }
-
-  console.log(role);
-
-  //이메일
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setEmailCheck(false);
-  };
-
-  const handleEmailCheck = async () => {
-    if (!email) {
-      Swal.fire(alertList.infoMessage("이메일을 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await get<CertificationCheckResponse>("/email/check", {
-        params: { email: email },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        setEmailCheck(true);
-        Swal.fire(alertList.successMessage("사용 가능한 이메일입니다."));
-      } else {
-        setEmailCheck(false);
-        Swal.fire(alertList.errorMessage("이미 사용 중인 이메일입니다."));
-      }
-    } catch (error) {
-      Swal.fire(
-        alertList.errorMessage("이메일 중복 확인 중 오류가 발생했습니다."),
-      );
-    }
-  };
-
-  // console.log(emailCheck);
 
   //비밀번호
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -216,8 +173,6 @@ const RegisterContentDetail = () => {
       );
     }
   };
-
-  // console.log(nicknameCheck);
 
   //휴대폰 번호
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -346,7 +301,7 @@ const RegisterContentDetail = () => {
 
   // 최종 제출
   const handleSubmit = async () => {
-    if (!emailCheck) {
+    if (!email.emailCheck) {
       Swal.fire(alertList.infoMessage("이메일 중복확인을 해주세요"));
       return;
     } else if (!nicknameCheck) {
@@ -360,7 +315,7 @@ const RegisterContentDetail = () => {
     const dogTypeIds = selectedBreeds.map(breed => breed.id);
 
     const SignUpData = {
-      emailChecked: emailCheck,
+      emailChecked: email.emailCheck,
       nicknameChecked: nicknameCheck,
       phoneNumberChecked: phoneNumberCheck,
       email,
@@ -434,23 +389,7 @@ const RegisterContentDetail = () => {
       </SelectArea>
       <TopContentArea>
         <TopLeftContentArea>
-          <EmailArea>
-            <EmailTextArea>
-              <EmailText>이메일</EmailText>
-              <EmailInfomationText>2~10자 이내</EmailInfomationText>
-            </EmailTextArea>
-            <EmailInputArea>
-              <EmailInput
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="breeder@email.com"
-              />
-              <EmailCheckButton onClick={handleEmailCheck}>
-                중복확인
-              </EmailCheckButton>
-            </EmailInputArea>
-          </EmailArea>
+          <EmailContent />
           <PasswordArea>
             <PasswordTextArea>
               <PasswordText>비밀번호</PasswordText>
