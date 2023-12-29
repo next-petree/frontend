@@ -12,6 +12,7 @@ import CheckEmailSlice from "./Register/CheckEmailSlice";
 import CheckNicknameSlice from "./Register/CheckNicknameSlice";
 import CheckPhoneNumberSlice from "./Register/CheckPhoneNumberSlice";
 import CheckPasswordSlice from "./Register/CheckPasswordSlice";
+import CheckMainBreedSlice from "./Register/CheckMainBreedSlice";
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
     nickname: CheckNicknameSlice,
     phonenumber: CheckPhoneNumberSlice,
     password: CheckPasswordSlice,
+    mainbreed: CheckMainBreedSlice,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

@@ -12,6 +12,7 @@ import EmailContent from "./EmailContent";
 import NicknameContent from "./NicknameContent";
 import PhoneNumberContent from "./PhoneNumberContent";
 import PasswordContent from "./PasswordContent";
+import MainBreedContent from "./MainBreedContent";
 
 import {
   Container,
@@ -23,12 +24,6 @@ import {
   TopContentArea,
   TopLeftContentArea,
   TopRightContentArea,
-  MainBreedArea,
-  MainBreedTextArea,
-  MianBreedText,
-  MainBreedInputArea,
-  MainBreedInput,
-  MainBreedSearchButton,
   BottomContentArea,
   BottomLeftContentArea,
   RegionSelectorArea,
@@ -37,36 +32,19 @@ import {
   BottomRightContentArea,
   RegisterButtonContainer,
   RegisterButton,
-  DogTypeResult,
-  DogType,
-  BreedList,
-  Breed,
 } from "./RegisterContentDetailStyle";
 
 import RegisterSequenceImage2 from "../../../assets/images/register-sequence2.png";
 
-interface DogType {
-  id: number;
-  name: string;
-  imgUrl: string;
-}
-
-interface DogTypeSearchResponse {
-  status: "SUCCESS" | "FAIL";
-  data: DogType[];
-}
-
 const RegisterContentDetail = () => {
-  //견종 체크
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState<DogType[]>([]);
-  const [selectedBreeds, setSelectedBreeds] = useState<DogType[]>([]);
-
   const address = useSelector((state: RootState) => state.address);
   const email = useSelector((state: RootState) => state.email);
   const nickname = useSelector((state: RootState) => state.nickname);
   const phonenumber = useSelector((state: RootState) => state.phonenumber);
   const password = useSelector((state: RootState) => state.password);
+  const selectedBreeds = useSelector(
+    (state: RootState) => state.mainbreed.selectedBreeds,
+  );
 
   const navigate = useNavigate();
 
@@ -88,77 +66,6 @@ const RegisterContentDetail = () => {
     role = "ADOPTER";
   }
 
-  //견종 확인
-  const handleSearchKeywordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchKeyword(e.target.value);
-  };
-
-  const handleSearchDog = async () => {
-    if (!searchKeyword) {
-      Swal.fire(alertList.infoMessage("견종 이름을 입력해주세요."));
-      return;
-    }
-
-    try {
-      const response = await get<DogTypeSearchResponse>("/dog-type/search", {
-        params: { keyword: searchKeyword },
-      });
-
-      if (response.data.status === "SUCCESS") {
-        if (response.data.data.length < 1) {
-          Swal.fire(alertList.errorMessage("검색 결과가 없습니다."));
-        } else {
-          setSearchResults(response.data.data);
-        }
-      } else {
-        Swal.fire(
-          alertList.errorMessage("검색 결과를 가져오는 데 실패했습니다."),
-        );
-      }
-    } catch (error) {
-      Swal.fire(alertList.errorMessage("검색 중 오류가 발생했습니다."));
-    }
-  };
-
-  const handleBreedClick = (dogType: DogType) => {
-    const isAlreadySelected = selectedBreeds.some(
-      breed => breed.id === dogType.id,
-    );
-
-    if (!isAlreadySelected && selectedBreeds.length < 3) {
-      setSelectedBreeds([...selectedBreeds, dogType]);
-      setSearchResults([]);
-    } else if (isAlreadySelected) {
-      Swal.fire(alertList.infoMessage("이미 선택된 견종입니다."));
-    } else if (selectedBreeds.length >= 3) {
-      Swal.fire(alertList.infoMessage("견종은 최대 3개까지 추가 가능합니다."));
-    }
-  };
-
-  const DogTypeList = () => {
-    return (
-      <DogTypeResult>
-        {searchResults.map(dogType => (
-          <DogType key={dogType.id} onClick={() => handleBreedClick(dogType)}>
-            {dogType.name}
-          </DogType>
-        ))}
-      </DogTypeResult>
-    );
-  };
-
-  const SelectedBreedsList = () => {
-    return (
-      <BreedList>
-        {selectedBreeds.map(breed => (
-          <Breed key={breed.id}>{breed.name}</Breed>
-        ))}
-      </BreedList>
-    );
-  };
-
   // 최종 제출
   const handleSubmit = async () => {
     console.log(email.emailCheck);
@@ -176,6 +83,8 @@ const RegisterContentDetail = () => {
     }
 
     const dogTypeIds = selectedBreeds.map(breed => breed.id);
+
+    console.log(dogTypeIds);
 
     const SignUpData = {
       emailChecked: email.emailCheck,
@@ -257,24 +166,7 @@ const RegisterContentDetail = () => {
           <PasswordContent />
         </TopLeftContentArea>
         <TopRightContentArea>
-          <MainBreedArea>
-            <MainBreedTextArea>
-              <MianBreedText>주력견종</MianBreedText>
-            </MainBreedTextArea>
-            <MainBreedInputArea>
-              <MainBreedInput
-                type="text"
-                placeholder="원하시는 견종을 입력해 주세요."
-                value={searchKeyword}
-                onChange={handleSearchKeywordChange}
-              />
-              <MainBreedSearchButton onClick={handleSearchDog}>
-                검색
-              </MainBreedSearchButton>
-            </MainBreedInputArea>
-            <DogTypeList />
-            <SelectedBreedsList />
-          </MainBreedArea>
+          <MainBreedContent />
           <NicknameContent />
         </TopRightContentArea>
       </TopContentArea>
