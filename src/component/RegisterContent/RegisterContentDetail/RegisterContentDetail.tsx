@@ -11,6 +11,7 @@ import DaumFindAdress from "../../DaumFindAddress/DaumFindAddress";
 import EmailContent from "./EmailContent";
 import NicknameContent from "./NicknameContent";
 import PhoneNumberContent from "./PhoneNumberContent";
+import PasswordContent from "./PasswordContent";
 
 import {
   Container,
@@ -21,16 +22,6 @@ import {
   CustomerButton,
   TopContentArea,
   TopLeftContentArea,
-  PasswordArea,
-  PasswordTextArea,
-  PasswordText,
-  PasswordInfomationText,
-  PasswordInputArea,
-  PasswordInput,
-  PasswordCheckArea,
-  PasswordCheckText,
-  PasswordCheckInput,
-  PasswordErrorText,
   TopRightContentArea,
   MainBreedArea,
   MainBreedTextArea,
@@ -66,10 +57,6 @@ interface DogTypeSearchResponse {
 }
 
 const RegisterContentDetail = () => {
-  //비밀번호 체크
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   //견종 체크
   const [searchKeyword, setSearchKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<DogType[]>([]);
@@ -79,6 +66,7 @@ const RegisterContentDetail = () => {
   const email = useSelector((state: RootState) => state.email);
   const nickname = useSelector((state: RootState) => state.nickname);
   const phonenumber = useSelector((state: RootState) => state.phonenumber);
+  const password = useSelector((state: RootState) => state.password);
 
   const navigate = useNavigate();
 
@@ -99,30 +87,6 @@ const RegisterContentDetail = () => {
   } else if (location.pathname.includes("adopter-detail")) {
     role = "ADOPTER";
   }
-
-  //비밀번호
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-
-    if (checkPassword) {
-      validatePassword(e.target.value, checkPassword);
-    }
-  };
-
-  const handleCheckPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setCheckPassword(e.target.value);
-    validatePassword(password, e.target.value);
-  };
-
-  const validatePassword = (pwd: string, checkPwd: string) => {
-    if (pwd !== checkPwd) {
-      setPasswordError("비밀번호가 일치하지 않습니다.");
-    } else {
-      setPasswordError("");
-    }
-  };
 
   //견종 확인
   const handleSearchKeywordChange = (
@@ -219,8 +183,8 @@ const RegisterContentDetail = () => {
       phoneNumberChecked: phonenumber.phoneNumberCheck,
       email: email.email,
       nickname: nickname.nickname,
-      password,
-      confirmPassword: checkPassword,
+      password: password.password,
+      confirmPassword: password.checkPassword,
       phoneNumber: phonenumber.phoneNumber,
       address1: address.roadAddress,
       address2: address.detailAddress,
@@ -290,30 +254,7 @@ const RegisterContentDetail = () => {
       <TopContentArea>
         <TopLeftContentArea>
           <EmailContent />
-          <PasswordArea>
-            <PasswordTextArea>
-              <PasswordText>비밀번호</PasswordText>
-              <PasswordInfomationText>
-                4~16자로 특수문자를 포함
-              </PasswordInfomationText>
-            </PasswordTextArea>
-            <PasswordInputArea>
-              <PasswordInput
-                type="password"
-                placeholder="비밀번호"
-                onChange={handlePasswordChange}
-              />
-            </PasswordInputArea>
-          </PasswordArea>
-          <PasswordCheckArea>
-            <PasswordCheckText>비밀번호 확인</PasswordCheckText>
-            <PasswordCheckInput
-              type="password"
-              placeholder="비밀번호 확인"
-              onChange={handleCheckPasswordChange}
-            />
-            <PasswordErrorText>{passwordError}</PasswordErrorText>
-          </PasswordCheckArea>
+          <PasswordContent />
         </TopLeftContentArea>
         <TopRightContentArea>
           <MainBreedArea>
