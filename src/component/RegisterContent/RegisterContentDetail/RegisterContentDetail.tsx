@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { get, post } from "../../../api/api";
+import { post } from "../../../api/api";
 import { CertificationCheckResponse } from "../../../types/authType";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";

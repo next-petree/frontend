@@ -52,6 +52,11 @@ const MainBreedContent = () => {
   };
 
   const handleSearchDog = async () => {
+    if (selectedBreeds.length >= 3) {
+      Swal.fire(alertList.infoMessage("견종은 최대 3개까지 추가 가능합니다."));
+      return;
+    }
+
     if (!searchKeyword) {
       Swal.fire(alertList.infoMessage("견종 이름을 입력해주세요."));
       return;
@@ -84,8 +89,6 @@ const MainBreedContent = () => {
       dispatch(setSearchResults([]));
     } else if (isAlreadySelected) {
       Swal.fire(alertList.infoMessage("이미 선택된 견종입니다."));
-    } else if (selectedBreeds.length >= 3) {
-      Swal.fire(alertList.infoMessage("견종은 최대 3개까지 추가 가능합니다."));
     }
   };
 
@@ -101,11 +104,18 @@ const MainBreedContent = () => {
     );
   };
 
+  const handleBreedRemove = (id: number) => {
+    const updatedBreeds = selectedBreeds.filter(breed => breed.id !== id);
+    dispatch(setSelectedBreeds(updatedBreeds));
+  };
+
   const SelectedBreedsList = () => {
     return (
       <BreedList>
         {selectedBreeds.map(breed => (
-          <Breed key={breed.id}>{breed.name}</Breed>
+          <Breed key={breed.id} onClick={() => handleBreedRemove(breed.id)}>
+            {breed.name}
+          </Breed>
         ))}
       </BreedList>
     );

@@ -24,7 +24,6 @@ const EmailContent = () => {
   const dispatch = useDispatch();
   const email = useSelector((state: RootState) => state.email.email);
 
-  //이메일
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
     dispatch(setEmailCheck(false));
