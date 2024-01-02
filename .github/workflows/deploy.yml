@@ -4,7 +4,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - boilerPlate
+      - main
 
 # 작업 정의
 jobs:
