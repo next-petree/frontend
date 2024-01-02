@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import BreederCollect from "./pages/C1ollects/B1reedercollect";
-import DogyCollect from "./pages/C1ollects/D1ogycollect";
-import BreedingRegister from "./pages/breeding-register/register/BreedingRegister";
-import RegisterFillOut from "./pages/breeding-register/fillout/RegisterFillOut";
-import BreedingComplete from "./pages/breeding-register/complete/BreedingComplete";
-import BreederDetails from "./pages/breeder-details/BreederDetails";
-import CustomerDetails from "./pages/customer-details/CustomerDetails";
+import BreederCollect from "./pages/Collects/BreederCollect";
+import DogyCollect from "./pages/Collects/DogyCollect";
+import BreedingRegister from "./pages/Breeding-Register1/Register1/BreedingRegister";
+import RegisterFillOut from "./pages/Breeding-Register1/Fillout1/RegisterFillOut";
+import BreedingComplete from "./pages/Breeding-Register1/Complete1/BreedingComplete";
+import BreederDetails from "./pages/Breeder-Details1/BreederDetails";
+import CustomerDetails from "./pages/Customer-details1/CustomerDetails";
 import Login from "./pages/Login/Login";
 import LoginCheckForKakao from "./pages/Login/LoginCheckForKakao";
 import Register from "./pages/Register/Register";
-import RegisterDetail from "./pages/Register/RegisterDetail";
+import RegisterBreederDetail from "./pages/Register/RegisterBreederDetail";
+import RegisterAdopterDetail from "./pages/Register/RegisterAdopterDetail";
 import SuccessRegister from "./pages/Register/SuccessRegister";
 import FindEmail from "./pages/FindEmail/FindEmail";
 import FindPassword from "./pages/FindPassword/FindPassWord";
@@ -39,7 +40,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
         <Route path="register" element={<Register />} />
-        <Route path="register-detail" element={<RegisterDetail />} />
+        <Route
+          path="register/breeder-detail"
+          element={<RegisterBreederDetail />}
+        />
+        <Route
+          path="register/adopter-detail"
+          element={<RegisterAdopterDetail />}
+        />
         <Route path="success-register" element={<SuccessRegister />} />
         <Route path="/find-email" element={<FindEmail />} />
         <Route path="/find-password" element={<FindPassword />} />

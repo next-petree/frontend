@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
 import { getToken } from "../../api/token";
+import Swal from "sweetalert2";
+import alertList from "../../utils/Swal1";
 
 interface KakaoLoginResponse {
   status: "SUCCESS" | "FAIL";
   data: {
-    tokenType: string;
+    grantType: string;
     accessToken: string;
-    accessTokenExpiresIn: string;
+    accessTokenExpireTime: string;
     refreshToken: string;
-    refreshTokenExpiresIn: string;
-    createdAt: string;
+    refreshTokenExpireTime: string;
     profileImgUrl: string;
   };
 }
@@ -21,8 +22,9 @@ const KakaoCallback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const code = new URLSearchParams(location.search).get("code");
+    const code = new URL(document.location.toString()).searchParams.get("code");
 
+    console.log(code);
     if (code) {
       handleKakaoLogin(code);
     }
@@ -34,20 +36,29 @@ const KakaoCallback = () => {
 
     try {
       const response = await get<KakaoLoginResponse>(
-        `${REACT_APP_API_URL}/api/oauth/kakao/callback?code=${code}`,
+        `${REACT_APP_API_URL}oauth/kakao/callback?code=${code}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         },
       );
+
       if (response.data.status === "SUCCESS") {
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
         navigate("/");
+      } else if (response.data.status === "FAIL") {
+        Swal.fire(alertList.errorMessage("카카오에 연동된 계정이 없습니다."));
+        navigate("/login");
+        return;
       }
     } catch (error) {
       console.error("Kakao login error:", error);
+      await Swal.fire(
+        alertList.errorMessage("카카오 로그인 중 오류가 발생했습니다."),
+      );
+      navigate("/login");
     }
   };
 

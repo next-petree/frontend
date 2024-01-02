@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   SearchWrap,
   DropDown,
@@ -7,22 +7,22 @@ import {
   DisNone,
   DropDownWrap,
   Selected,
-} from './style';
-import arrowDown from '../../../../../../assets/images/arrowDown.png';
-import Button from '../../Button/Button';
+} from "./Style1";
+import arrowDown from "../../../../../../assets/images/arrowDown.png";
+import Button from "../../Button/Button";
 export default function SearchComp() {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('내역을 검색하세요');
-  const [select, setSelect] = useState('항목을 선택해주세요');
+  const [inputValue, setInputValue] = useState("내역을 검색하세요");
+  const [select, setSelect] = useState("항목을 선택해주세요");
   const handleInputChange = (event: any) => {
     const value = event.target.value;
-    if (value !== '내역을 검색하세요') {
+    if (value !== "내역을 검색하세요") {
       setInputValue(value);
     }
   };
   const handleInputFocus = (event: any) => {
-    if (event.target.value === '내역을 검색하세요') {
-      setInputValue('');
+    if (event.target.value === "내역을 검색하세요") {
+      setInputValue("");
     }
   };
 
@@ -49,7 +49,7 @@ export default function SearchComp() {
             <div
               className="sel"
               onClick={() => {
-                setSelect('전체');
+                setSelect("전체");
                 setIsOpen(false);
               }}
             >
@@ -58,7 +58,7 @@ export default function SearchComp() {
             <div
               className="sel"
               onClick={() => {
-                setSelect('견종');
+                setSelect("견종");
                 setIsOpen(false);
               }}
             >
@@ -67,7 +67,7 @@ export default function SearchComp() {
             <div
               className="sel"
               onClick={() => {
-                setSelect('강아지 이름');
+                setSelect("강아지 이름");
                 setIsOpen(false);
               }}
             >
@@ -85,9 +85,9 @@ export default function SearchComp() {
         onFocus={handleInputFocus}
       ></Input>
       <Button
-        bgcolor={'#4EC1BF'}
-        buttonwidth={'100px'}
-        buttonheight={'50px'}
+        bgcolor={"#4EC1BF"}
+        buttonwidth={"100px"}
+        buttonheight={"50px"}
         onClick={getValue}
       >
         검색

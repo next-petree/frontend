@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
-
+import React from "react";
 import { BreederBadge } from "../../assets/icons";
 import { IDMProps } from "../../types";
-import { useGetDogDetailQuery } from "../../redux/api/dogApiSlice";
-import * as S from "./styles";
+import { useGetDogDetailQuery } from "../../redux/api/DogApiSlice1";
+import * as S from "./Styles1";
 
 const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
   const { data: dog } = useGetDogDetailQuery(dogId);

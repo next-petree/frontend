@@ -3,9 +3,9 @@ import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../api/api";
 import { LoginResponse } from "../../types/authType";
-import alertList from "../../utils/swal";
+import alertList from "../../utils/Swal1";
 import Swal from "sweetalert2";
-import { setProfileImg } from "../../redux/breeder/breederSlice";
+import { setProfileImg } from "../../redux/Breeder1/BreederSlice1";
 
 import {
   Container,

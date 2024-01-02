@@ -58,7 +58,7 @@ export type TestResponse = {
     questions: [
       id: number,
       questionText: string,
-      choices: [id: number, choiceText: string]
+      choices: [id: number, choiceText: string],
     ];
   };
 };
@@ -67,7 +67,7 @@ export type ResultResponse = {
   status: string;
   score: number;
   explanations: [
-    { questionId: number; explanationText: string; correctChoiceId: number }
+    { questionId: number; explanationText: string; correctChoiceId: number },
   ];
   passed: boolean;
 };
@@ -96,6 +96,7 @@ export type AnswersType = {
   questionId: number;
   selectedChoiceId: number;
 }[];
+
 export type ResultType = {
   explanations: {
     questionId: number;

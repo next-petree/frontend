@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import alertList from "../../../utils/swal";
+import alertList from "../../../utils/Swal1";
 
 import {
   Container,
@@ -93,7 +93,7 @@ const RegisterContent = () => {
 
   const handleNextClick = () => {
     if (Object.values(checkboxes).every(Boolean)) {
-      navigate("/register-detail");
+      navigate("/register/breeder-detail");
     } else {
       Swal.fire(alertList.infoMessage("모든 항목에 동의해주세요."));
     }

@@ -1,11 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import alertList from "../../../utils/Swal1";
+import { removeToken } from "../../../api/token";
 import {
   AuthDeleteContainer,
   CategoryContent,
   CategoryContainer,
   Main,
   NavBarContainer,
-} from "./styles";
+  LogoutContainer,
+} from "./Styles1";
 
 export const NavCategory = [
   {
@@ -38,6 +42,24 @@ const Navbar = () => {
   const DeleteAccount = () => {
     navigation("/mypage/remove-account");
   };
+
+  const handleLogout = async () => {
+    const answer = await Swal.fire(
+      alertList.doubleCheckMessage("로그아웃 하시겠습니까?"),
+    );
+
+    if (answer.isConfirmed) {
+      try {
+        removeToken("accessToken");
+        removeToken("refreshToken");
+        navigation("/");
+        Swal.fire(alertList.successMessage("로그아웃이 완료되었습니다"));
+      } catch (error) {
+        console.error("로그아웃 중 오류 발생:", error);
+      }
+    }
+  };
+
   return (
     <NavBarContainer>
       <Main>
@@ -50,9 +72,12 @@ const Navbar = () => {
             <CategoryContent>{category.name}</CategoryContent>
           </CategoryContainer>
         ))}
+        <LogoutContainer onClick={handleLogout}>
+          <CategoryContent style={{ color: "red" }}>로그아웃</CategoryContent>
+        </LogoutContainer>
       </Main>
       <AuthDeleteContainer onClick={DeleteAccount}>
-        <CategoryContent>회원 탈퇴</CategoryContent>
+        <CategoryContent>회원탈퇴</CategoryContent>
       </AuthDeleteContainer>
     </NavBarContainer>
   );

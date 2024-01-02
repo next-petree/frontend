@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Td,
   DetailButton,
@@ -18,10 +18,10 @@ import {
 
   // AnswerLength,
   CountSpan,
-} from './style';
-import useModal from '../../../../../Modal/Modal';
-import DogImg from '../../../../../../assets/images/temporaryImg.png';
-import CheckModal from '../CheckModal/CheckModal';
+} from "./Style1";
+import useModal from "../../../../../Modal/Modal";
+import DogImg from "../../../../../../assets/images/temporaryImg.png";
+import CheckModal from "../CheckModal/CheckModal";
 
 const RowModal = ({
   index,
@@ -37,16 +37,16 @@ const RowModal = ({
   const { isModalVisible, showModal, hideModal } = useModal();
 
   const [inputValue1, setInputValue1] = useState(
-    '반려견을 좋아하는 예비 분양자입니다. 현재 강아지 2마리를 키우고 있습니다. 특히 포메라니안을 좋아하는 마음에 신청하게되었습니다.'
+    "반려견을 좋아하는 예비 분양자입니다. 현재 강아지 2마리를 키우고 있습니다. 특히 포메라니안을 좋아하는 마음에 신청하게되었습니다.",
   );
   const [inputValue2, setInputValue2] = useState(
-    '반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!'
+    "반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!",
   );
   const [inputCount1, setInputCount1] = useState(0);
   const [inputCount2, setInputCount2] = useState(0);
 
-  const dogName = breed.match(/(.+)(?=\()/g)?.[0] || '';
-  const typeofdog = breed.match(/(?<=\().+?(?=\))/g)?.[0] || '';
+  const dogName = breed.match(/(.+)(?=\()/g)?.[0] || "";
+  const typeofdog = breed.match(/(?<=\().+?(?=\))/g)?.[0] || "";
   useEffect(() => {
     setInputCount1(inputValue1.length);
     setInputCount2(inputValue2.length);
@@ -56,7 +56,7 @@ const RowModal = ({
       <DetailButton onClick={showModal}>상세보기</DetailButton>
       {isModalVisible && (
         <ModalWrap onClick={hideModal}>
-          <Modal onClick={(e) => e.stopPropagation()}>
+          <Modal onClick={e => e.stopPropagation()}>
             <Title>분양 신청서</Title>
             <InfoWrap>
               <Img src={DogImg}></Img>
