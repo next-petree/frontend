@@ -15,16 +15,26 @@ import {
 
 import NavDropdown from "../Dropdown/NavDropdown";
 import DecodeToken from "../../utils/DecodeJWT/DecodeJWT";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import alertList from "../../utils/Swal1";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isCilcked, setIsCilcked] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const profileImg = useAppSelector(selectBreederProfile);
-  console.log(profileImg);
 
-  const handleClick = () => {
-    setIsCilcked(prev => !prev);
+  const handleClick = async () => {
+    if(isLoggedIn) {
+      navigate("/mypage/modifyauth")
+    }
+    else {
+      const answer = await Swal.fire({
+        ...alertList.infoMessage("로그인을 먼저 진행해주세요"),
+        width: "350px",
+      });
+      if(answer) navigate("/login");
+    }
   };
 
   const decodedData = DecodeToken();
@@ -63,10 +73,6 @@ const Header = () => {
           <UserProfileImage imgSrc={profileImg} />
         </div>
       </HeaderContent>
-
-      {isCilcked && (
-        <NavDropdown profileUrl={profileImg} loggedIn={isLoggedIn} />
-      )}
     </Container>
   );
 };

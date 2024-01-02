@@ -71,7 +71,17 @@ interface MajordogData {
 }
 
 export interface LivingEnvironmentsResultResponse {
+  status: "SUCCESS" | "FAIL";
+  data: LivingEnvironmentsData[];
+}
+
+export interface LivingEnvironmentsData {
   imgUrl: string;
   spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
   id: number;
+}
+
+export interface LivingEnvironmentsUploadResultResponse {
+  status: "SUCCESS" | "FAIL";
+  data: string;
 }

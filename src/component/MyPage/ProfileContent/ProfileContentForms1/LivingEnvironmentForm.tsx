@@ -18,9 +18,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import alertList from "../../../../utils/Swal1";
 import Swal from "sweetalert2";
-import { LivingEnvironmentsResultResponse } from "../../../../types/MypageType1";
+import {
+  LivingEnvironmentsData,
+  LivingEnvironmentsResultResponse,
+  LivingEnvironmentsUploadResultResponse,
+} from "../../../../types/MypageType1";
 import { LivingEnvironmentUrl } from "../../../../utils/MypageUrl1";
-import { get } from "../../../../api/api";
+import { get, put } from "../../../../api/api";
 import React from "react";
 
 export interface ILivingEnvironment {
@@ -38,14 +42,45 @@ const LivingEnvironmentForm = () => {
     setValue,
   } = useForm<ILivingEnvironment>();
   const getUser = DecodeToken();
-  const [imageData, setImageData] = useState<LivingEnvironmentsResultResponse[]>([]);
-  const onValid = async (data: any) => {
+  const [deleteImgId, setDeleteImgId] = useState<number[]>([])
+  const [imageData, setImageData] = useState<LivingEnvironmentsData[]>([]);
+  const onValid = async ({livingRoom,bathRoom,yard,}: ILivingEnvironment) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주거 환경을 저장 하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
-      const form = new FormData();
+      try {
+        const form = new FormData();
+        const id = Array.from(new Set(deleteImgId));
+        console.log(id)
+        if (livingRoom && livingRoom.length > 0) {
+          form.append("livingRoomImg", livingRoom[0]);
+        }
+        else {
+          form.append("livingRoomImg","");
+        }
+
+        if (bathRoom && bathRoom.length > 0) {
+          form.append("bathRoomImg", bathRoom[0]);
+        }
+        else {
+          form.append("bathRoomImg", "");
+        }
+
+        if (yard && yard.length > 0) {
+          form.append("yardImg", yard[0]);
+        }
+        else {
+          form.append("yardImg", "");
+        }
+        form.append("deletedImgsId", `${id}`);
+        const url = LivingEnvironmentUrl();
+        const response = await put<LivingEnvironmentsUploadResultResponse>(
+          url,
+          form
+        );
+      } catch (e) {}
     }
   };
   // 이미지 url만 보내면 업로드가 되는 건지
@@ -82,40 +117,44 @@ const LivingEnvironmentForm = () => {
     if (data === "yard") {
       setImagesPre({ ...imagesPre, yard: "" });
       setValue(data, null);
+      if(imageData[2] && imageData[2].id) {
+        setDeleteImgId([...deleteImgId, imageData[2].id])
+      }
     } else if (data === "bathRoom") {
       setImagesPre({ ...imagesPre, bathRoom: "" });
       setValue(data, null);
+      if(imageData[1] && imageData[1].id) {
+        setDeleteImgId([...deleteImgId, imageData[1].id])
+      }
     } else if (data === "livingRoom") {
       setImagesPre({ ...imagesPre, livingRoom: "" });
       setValue(data, null);
+      if(imageData[0] && imageData[0].id) {
+        setDeleteImgId([...deleteImgId, imageData[0].id])
+      }
     }
   };
   //spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
   const getLivingEnvironments = async () => {
     try {
       const url = LivingEnvironmentUrl();
-      const response = await get<LivingEnvironmentsResultResponse[]>(url);
-      setImageData(response.data);
-      if (imageData[0].imgUrl) {
-        setImagesPre({ ...imagesPre, livingRoom: imageData[0].imgUrl });
-      }
-      if (imageData[1].imgUrl) {
-        setImagesPre({ ...imagesPre, bathRoom: imageData[1].imgUrl });
-      }
-      if (imageData[2].imgUrl) {
-        setImagesPre({ ...imagesPre, yard: imageData[2].imgUrl });
-      }
+      const response = await get<LivingEnvironmentsResultResponse>(url);
+      setImageData(response.data.data);
+      setImagesPre({
+        livingRoom: response.data.data[0].imgUrl,
+        bathRoom: response.data.data[1].imgUrl,
+        yard: response.data.data[2].imgUrl,
+      });
     } catch (e) {}
   };
   useEffect(() => {
     getLivingEnvironments();
   }, []);
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
-          <Title>주거환경</Title>
+          <Title>주거환경{}</Title>
           <Images>
             <ImageContainer>
               {imagesPre.yard !== "" ? (
