@@ -48,9 +48,24 @@ export const AuthDeleteContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   &:hover {
     background-color: #f5f5f5;
     border-radius: 0 0 20px 20px;
   }
 `;
+
+export const LogoutContainer = styled.div`
+  width: 100%;
+  height: 8%;
+  padding: 1.5vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+    border-radius: 0 0 20px 20px;
+  }
+`;
+
+export const LogoutButton = styled.div``;
