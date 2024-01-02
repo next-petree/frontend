@@ -25,15 +25,13 @@ const Header = () => {
   const profileImg = useAppSelector(selectBreederProfile);
 
   const handleClick = async () => {
-    if(isLoggedIn) {
-      navigate("/mypage/modifyauth")
-    }
-    else {
+    if (isLoggedIn) {
+      navigate("/mypage/modifyauth");
+    } else {
       const answer = await Swal.fire({
         ...alertList.infoMessage("로그인을 먼저 진행해주세요"),
-        width: "350px",
       });
-      if(answer) navigate("/login");
+      if (answer) navigate("/login");
     }
   };
 
