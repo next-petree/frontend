@@ -139,7 +139,7 @@ const ProfileForm = () => {
           <AvatarInfo onClick={onChangeAvatar}>
             <AvatarBorder $isAuth={isBreederAuth}>
               {avatar.avatar ? (
-                <Avatar src={avatar.avatar} alt="" />
+                <Avatar src={avatar.avatar} alt="Profile_image" />
               ) : (
                 <AvatarLabel>
                   <svg
