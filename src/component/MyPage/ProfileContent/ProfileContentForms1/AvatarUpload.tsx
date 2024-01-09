@@ -109,7 +109,7 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
           {avatarPreview !== "" ? (
             <>
               <UploadAvatarBorder>
-                <Avatar src={avatarPreview} alt="" />
+                <Avatar src={avatarPreview} alt="Profile_image_preview" />
               </UploadAvatarBorder>
               <AvatarDeleteBtn onClick={onDelete}>
                 <svg

@@ -33,6 +33,12 @@ export interface ILivingEnvironment {
   livingRoom: FileList | null;
 }
 
+export interface ILivingEnvironmentPreview {
+  yard: string | null;
+  bathRoom: string | null;
+  livingRoom: string | null;
+}
+
 const LivingEnvironmentForm = () => {
   const {
     register,
@@ -42,9 +48,13 @@ const LivingEnvironmentForm = () => {
     setValue,
   } = useForm<ILivingEnvironment>();
   const getUser = DecodeToken();
-  const [deleteImgId, setDeleteImgId] = useState<number[]>([])
+  const [deleteImgId, setDeleteImgId] = useState<number[]>([]);
   const [imageData, setImageData] = useState<LivingEnvironmentsData[]>([]);
-  const onValid = async ({livingRoom,bathRoom,yard,}: ILivingEnvironment) => {
+  const onValid = async ({
+    livingRoom,
+    bathRoom,
+    yard,
+  }: ILivingEnvironment) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주거 환경을 저장 하시겠습니까?"),
       width: "350px",
@@ -53,38 +63,36 @@ const LivingEnvironmentForm = () => {
       try {
         const form = new FormData();
         const id = Array.from(new Set(deleteImgId));
-        console.log(id)
         if (livingRoom && livingRoom.length > 0) {
           form.append("livingRoomImg", livingRoom[0]);
-        }
-        else {
-          form.append("livingRoomImg","");
-        }
-
+        } 
         if (bathRoom && bathRoom.length > 0) {
           form.append("bathRoomImg", bathRoom[0]);
-        }
-        else {
-          form.append("bathRoomImg", "");
-        }
+        } 
 
         if (yard && yard.length > 0) {
           form.append("yardImg", yard[0]);
+        } 
+        let data = {
+          "deletedImgsId":id
         }
-        else {
-          form.append("yardImg", "");
-        }
-        form.append("deletedImgsId", `${id}`);
+        form.append("deletedImgsId", JSON.stringify(data));
         const url = LivingEnvironmentUrl();
         const response = await put<LivingEnvironmentsUploadResultResponse>(
           url,
           form
         );
+        if(response.data.status === "SUCCESS") {
+          Swal.fire({
+            ...alertList.successMessage("주거 환경이 저장되었습니다"),
+            width: "350px",
+          });
+        }
       } catch (e) {}
     }
   };
   // 이미지 url만 보내면 업로드가 되는 건지
-  const [imagesPre, setImagesPre] = useState({
+  const [imagesPre, setImagesPre] = useState<ILivingEnvironmentPreview>({
     yard: "",
     bathRoom: "",
     livingRoom: "",
@@ -115,22 +123,22 @@ const LivingEnvironmentForm = () => {
 
   const onDelete = (data: string) => {
     if (data === "yard") {
-      setImagesPre({ ...imagesPre, yard: "" });
+      setImagesPre({ ...imagesPre, yard: null });
       setValue(data, null);
-      if(imageData[2] && imageData[2].id) {
-        setDeleteImgId([...deleteImgId, imageData[2].id])
+      if (imageData[2] && imageData[2].id) {
+        setDeleteImgId([...deleteImgId, imageData[2].id]);
       }
     } else if (data === "bathRoom") {
-      setImagesPre({ ...imagesPre, bathRoom: "" });
+      setImagesPre({ ...imagesPre, bathRoom: null });
       setValue(data, null);
-      if(imageData[1] && imageData[1].id) {
-        setDeleteImgId([...deleteImgId, imageData[1].id])
+      if (imageData[1] && imageData[1].id) {
+        setDeleteImgId([...deleteImgId, imageData[1].id]);
       }
     } else if (data === "livingRoom") {
-      setImagesPre({ ...imagesPre, livingRoom: "" });
+      setImagesPre({ ...imagesPre, livingRoom: null });
       setValue(data, null);
-      if(imageData[0] && imageData[0].id) {
-        setDeleteImgId([...deleteImgId, imageData[0].id])
+      if (imageData[0] && imageData[0].id) {
+        setDeleteImgId([...deleteImgId, imageData[0].id]);
       }
     }
   };
@@ -154,12 +162,12 @@ const LivingEnvironmentForm = () => {
     <Container>
       <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
-          <Title>주거환경{}</Title>
+          <Title>주거환경</Title>
           <Images>
             <ImageContainer>
-              {imagesPre.yard !== "" ? (
+              {imagesPre.yard !== null ? (
                 <>
-                  <Image src={imagesPre.yard} alt="" />
+                  <Image src={imagesPre.yard} alt="Yard_image" />
                   <ImageDeleteBtn onClick={() => onDelete("yard")}>
                     <svg
                       width="36"
@@ -243,9 +251,9 @@ const LivingEnvironmentForm = () => {
               <ImageText>마당</ImageText>
             </ImageContainer>
             <ImageContainer>
-              {imagesPre.bathRoom !== "" ? (
+              {imagesPre.bathRoom !== null ? (
                 <>
-                  <Image src={imagesPre.bathRoom} alt="" />
+                  <Image src={imagesPre.bathRoom} alt="BathRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("bathRoom")}>
                     <svg
                       width="36"
@@ -329,9 +337,9 @@ const LivingEnvironmentForm = () => {
               <ImageText>화장실</ImageText>
             </ImageContainer>
             <ImageContainer>
-              {imagesPre.livingRoom !== "" ? (
+              {imagesPre.livingRoom !== null ? (
                 <>
-                  <Image src={imagesPre.livingRoom} alt="" />
+                  <Image src={imagesPre.livingRoom} alt="LivingRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("livingRoom")}>
                     <svg
                       width="36"
