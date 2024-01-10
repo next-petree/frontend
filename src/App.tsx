@@ -29,6 +29,10 @@ import Profile from "./pages/MyPage/profile";
 import Breeder from "./pages/AdoptionRequestList/Breeder/Breeder";
 import Adopter from "./pages/AdoptionRequestList/Adopter/Adopter";
 import RemoveAccount from "./pages/RemoveAccount/RemoveAccount";
+import ManageReview from "./pages/ManageReview/ManageReview";
+import ManageOwnDogs from "./pages/ManageOwnDogs/ManageOwnDogs";
+import CreateReview from "./pages/ManageReview/create/CreateReview";
+import EditReview from "./pages/ManageReview/edit/EditReview";
 
 function App() {
   return (
@@ -61,6 +65,16 @@ function App() {
           <Route path="/breeding-register" element={<BreedingRegister />} />
           <Route path="/register-fillout" element={<RegisterFillOut />} />
           <Route path="/breeding-complete" element={<BreedingComplete />} />
+          <Route path="/manage/review" element={<ManageReview />} />
+          <Route
+            path="/manage/review/create"
+            element={<CreateReview />}
+          ></Route>
+          <Route
+            path="/manage/review/:id/edit"
+            element={<EditReview />}
+          ></Route>
+          <Route path="/manage/owndogs" element={<ManageOwnDogs />} />
         </Route>
         <Route path="/breeder/:id" element={<BreederDetails />} />
         <Route path="/customer-details" element={<CustomerDetails />} />
