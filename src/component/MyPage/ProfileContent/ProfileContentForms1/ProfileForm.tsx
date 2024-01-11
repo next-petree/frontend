@@ -58,13 +58,12 @@ const ProfileForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch,
     setValue,
   } = useForm<IIntroductionForm>();
 
   const accountInfo = DecodeToken();
-  const [user, setuser] = useState<IUser>(accountInfo);
+  const [user] = useState<IUser>(accountInfo);
 
   const onValid = async ({ introduction }: IIntroductionForm) => {
     const answer = await Swal.fire({

@@ -1,4 +1,3 @@
-import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import {
   Button,
   Container,
@@ -26,6 +25,7 @@ import {
 import { LivingEnvironmentUrl } from "../../../../utils/MypageUrl1";
 import { get, put } from "../../../../api/api";
 import React from "react";
+import { resizeFile } from "../../../../utils/ImageResize";
 
 export interface ILivingEnvironment {
   yard: FileList | null;
@@ -40,14 +40,8 @@ export interface ILivingEnvironmentPreview {
 }
 
 const LivingEnvironmentForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    setValue,
-  } = useForm<ILivingEnvironment>();
-  const getUser = DecodeToken();
+  const { register, handleSubmit, watch, setValue } =
+    useForm<ILivingEnvironment>();
   const [deleteImgId, setDeleteImgId] = useState<number[]>([]);
   const [imageData, setImageData] = useState<LivingEnvironmentsData[]>([]);
   const onValid = async ({
@@ -64,25 +58,31 @@ const LivingEnvironmentForm = () => {
         const form = new FormData();
         const id = Array.from(new Set(deleteImgId));
         if (livingRoom && livingRoom.length > 0) {
-          form.append("livingRoomImg", livingRoom[0]);
-        } 
+          const livingRoom_Resize = (await resizeFile(livingRoom[0])) as File;
+          form.append("livingRoomImg", livingRoom_Resize);
+        }
         if (bathRoom && bathRoom.length > 0) {
-          form.append("bathRoomImg", bathRoom[0]);
-        } 
+          const bathRoom_Resize = (await resizeFile(bathRoom[0])) as File;
+          form.append("bathRoomImg", bathRoom_Resize);
+        }
 
         if (yard && yard.length > 0) {
-          form.append("yardImg", yard[0]);
-        } 
-        let data = {
-          "deletedImgsId":id
+          const yard_Resize = (await resizeFile(yard[0])) as File;
+          form.append("yardImg", yard_Resize);
         }
-        form.append("deletedImgsId", JSON.stringify(data));
+        const data = {
+          deletedImgsId: id,
+        };
+        const blob = new Blob([JSON.stringify(data)], {
+          type: "application/json",
+        });
+        form.append("deletedImgsId", blob);
         const url = LivingEnvironmentUrl();
         const response = await put<LivingEnvironmentsUploadResultResponse>(
           url,
           form
         );
-        if(response.data.status === "SUCCESS") {
+        if (response.data.status === "SUCCESS") {
           Swal.fire({
             ...alertList.successMessage("주거 환경이 저장되었습니다"),
             width: "350px",
