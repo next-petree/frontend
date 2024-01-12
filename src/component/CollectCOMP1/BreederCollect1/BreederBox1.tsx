@@ -30,7 +30,7 @@ export default function BreederBox({
   return (
     <BoxWrapper>
       <ImgBox>
-        {profileImagUrl ? <Img src={profileImagUrl} /> : <Dermyimg />}
+        {profileImagUrl ? <Img src={profileImagUrl} alt="Breeder_image" /> : <Dermyimg />}
         {verified ? (
           <Badge>
             <svg
