@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { get } from "../../api/api";
 import { getToken } from "../../api/token";
@@ -20,7 +20,6 @@ interface KakaoLoginResponse {
 const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const code = new URL(document.location.toString()).searchParams.get("code");
@@ -37,24 +36,22 @@ const KakaoCallback = () => {
 
     try {
       const response = await get<KakaoLoginResponse>(
-        `${REACT_APP_API_URL}/oauth/kakao/callback?code=${code}`,
+        `${REACT_APP_API_URL}oauth/kakao/callback?code=${code}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         },
       );
+
       if (response.data.status === "SUCCESS") {
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
         navigate("/");
-      } else {
-        const errorMessage =
-          typeof response.data.data === "string"
-            ? response.data.data
-            : "로그인에 실패했습니다.";
-        await Swal.fire(alertList.errorMessage(errorMessage));
-        setError("로그인에 실패했습니다.");
+      } else if (response.data.status === "FAIL") {
+        Swal.fire(alertList.errorMessage("카카오에 연동된 계정이 없습니다."));
+        navigate("/login");
+        return;
       }
     } catch (error) {
       console.error("Kakao login error:", error);
@@ -65,12 +62,7 @@ const KakaoCallback = () => {
     }
   };
 
-  return (
-    <div>
-      카카오 로그인 중...
-      {error && <div>{error}</div>}
-    </div>
-  );
+  return <div>카카오 로그인 중...</div>;
 };
 
 export default KakaoCallback;

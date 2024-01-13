@@ -1,0 +1,57 @@
+name: CI/CD
+
+# 'boilerPlate' 브랜치에 푸시될 때 워크플로우를 실행
+on:
+  push:
+    branches:
+      - boilerPlate
+
+# 작업 정의
+jobs:
+  build:
+    # 이 작업은 우분투 최신 버전에서 실행
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1단계: 레포지토리 코드 체크아웃
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      # 2단계: 우분투 버전을 확인 (선택)
+      - name: Check Ubuntu version
+        run: lsb_release -a
+
+      # 3단계: 환경 변수 파일 생성
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env
+          echo REACT_APP_KAKAO_REST_API=${{ secrets.REACT_APP_KAKAO_REST_API }} >> .env
+          echo REACT_APP_KAKAO_REDIRECT_URI=${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }} >> .env
+          cat .env
+
+      # 4단계: 프로젝트 의존성을 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 5단계: 프로젝트를 빌드
+      - name: Build
+        run: npm run build
+
+      # 6단계: AWS CLI 버전 표시(선택)
+      - name: SHOW AWS CLI VERSION
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws --version
+
+      # 7단계: 빌드 파일을 S3 버킷에 동기화.
+      - name: Sync Bucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 sync \
+            --region ap-northeast-2 \
+            build s3://petree-front\
+            --delete

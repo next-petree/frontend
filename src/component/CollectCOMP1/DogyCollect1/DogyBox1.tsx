@@ -30,15 +30,15 @@ export default function DogyBox({
     <BoxWrapper>
       <ImgBox>
         {status === "AVAILABLE" ? (
-          <Img src={imgUrl} alt="" />
+          <Img src={imgUrl} alt="Dog_image" />
         ) : status === "UNDERWAY" ? (
           <>
-            <AlreadyImg src={imgUrl} alt="" />
+            <AlreadyImg src={imgUrl} alt="Dog_image" />
             <Availtext>예약 중</Availtext>
           </>
         ) : (
           <>
-            <AlreadyImg src={imgUrl} alt="" />
+            <AlreadyImg src={imgUrl} alt="Dog_image" />
             <Availtext>분양 완료</Availtext>
           </>
         )}
