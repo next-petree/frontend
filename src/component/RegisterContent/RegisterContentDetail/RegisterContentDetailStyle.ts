@@ -326,7 +326,6 @@ export const BreedList = styled.div`
   display: flex;
   position: absolute;
   margin-top: 2px;
-  width: 100%;
   gap: 10px;
 `;
 
