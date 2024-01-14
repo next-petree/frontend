@@ -29,6 +29,7 @@ import React from "react";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { resizeFile } from "../../../../utils/ImageResize";
+import { setProfileImg } from "../../../../redux/Breeder1/BreederSlice1";
 
 interface IAvatarUpload {
   setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -75,14 +76,15 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
           if (response.data.status === "FAIL") {
             throw "올바르지 못한 접근 입니다.";
           }
-          dispath(setAvatar(response.data.data.fileUrl));
-          dispath(setAvatarId(response.data.data.id));
           if (response.data.status === "SUCCESS") {
             Swal.fire({
               ...alertList.successMessage("프로필 사진이 변경되었습니다"),
               width: "350px",
             });
           }
+          dispath(setAvatar(response.data.data.fileUrl));
+          dispath(setAvatarId(response.data.data.id));
+          dispath(setProfileImg(response.data.data.fileUrl));
         } catch (e) {}
       }
       else {
@@ -94,6 +96,7 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
               throw "올바르지 못한 접근 입니다.";
             }
             dispath(setAvatar(""));
+            dispath(setProfileImg(""));
           } catch (e) {}
         }
       }
