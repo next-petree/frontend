@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
 import { IDogInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CustomDate = styled(DatePicker)`
     width: 80%;
@@ -39,6 +40,8 @@ const OwnDogsForm = ({ dog }: IProps) => {
     const [fetchedDog, setFetchedDog] = useState<IDogInfo>();
     const [signicant, setSignificant] = useState<string>();
 
+    const naviage = useNavigate();
+
     useEffect(() => {
         setFetchedDog(dog);
         setSignificant(fetchedDog?.management);
@@ -46,7 +49,7 @@ const OwnDogsForm = ({ dog }: IProps) => {
 
     return (
         <S.Wrapper>
-            <S.ReturnBtnContainer>
+            <S.ReturnBtnContainer onClick={() => naviage(-1)}>
                 <S.ReturnButton>
                     <IoIosArrowBack />
                 </S.ReturnButton>
