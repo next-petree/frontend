@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setSelect,
+  setInputValue,
+} from "../../../../../../redux/SearchResult/SearchResultSlice";
 import {
   SearchWrap,
   DropDown,
   Input,
-  // Button,
   DisNone,
   DropDownWrap,
   Selected,
@@ -11,19 +15,24 @@ import {
 import arrowDown from "../../../../../../assets/images/arrowDown.png";
 import Button from "../../Button/Button";
 export default function SearchComp() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("내역을 검색하세요");
-  const [select, setSelect] = useState("항목을 선택해주세요");
-  const handleInputChange = (event: any) => {
-    const value = event.target.value;
-    if (value !== "내역을 검색하세요") {
-      setInputValue(value);
+  const [localSelect, setLocalSelect] = useState("전체");
+  const [localInputValue, setLocalInputValue] = useState("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLocalInputValue(event.target.value);
+  };
+
+  const handleInputFocus = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === "내역을 검색하세요") {
+      setLocalInputValue("");
     }
   };
-  const handleInputFocus = (event: any) => {
-    if (event.target.value === "내역을 검색하세요") {
-      setInputValue("");
-    }
+
+  const selectItem = (item: string) => {
+    setLocalSelect(item);
+    setIsOpen(false);
   };
 
   const DropOpen = () => {
@@ -33,44 +42,29 @@ export default function SearchComp() {
       setIsOpen(false);
     }
   };
+
   const getValue = () => {
-    console.log(`선택된 항목: ${select}, 검색어: ${inputValue}`);
+    dispatch(setSelect(localSelect));
+    dispatch(setInputValue(localInputValue));
+    console.log(`선택된 항목: ${localSelect}, 검색어: ${localInputValue}`);
   };
 
   return (
     <SearchWrap>
       <DropDown>
         <Selected onClick={DropOpen}>
-          <div>{select}</div> {/* 상태 변수 select의 값을 표시 */}
+          <div>{localSelect}</div>
           <img src={arrowDown} />
         </Selected>
         {isOpen ? (
           <DropDownWrap>
-            <div
-              className="sel"
-              onClick={() => {
-                setSelect("전체");
-                setIsOpen(false);
-              }}
-            >
+            <div className="sel" onClick={() => selectItem("전체")}>
               전체
             </div>
-            <div
-              className="sel"
-              onClick={() => {
-                setSelect("견종");
-                setIsOpen(false);
-              }}
-            >
+            <div className="sel" onClick={() => selectItem("견종")}>
               견종
             </div>
-            <div
-              className="sel"
-              onClick={() => {
-                setSelect("강아지 이름");
-                setIsOpen(false);
-              }}
-            >
+            <div className="sel" onClick={() => selectItem("강아지 이름")}>
               강아지 이름
             </div>
           </DropDownWrap>
@@ -80,10 +74,10 @@ export default function SearchComp() {
       </DropDown>
       <Input
         type="text"
-        value={inputValue}
+        value={localInputValue}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
-      ></Input>
+      />
       <Button
         bgcolor={"#4EC1BF"}
         buttonwidth={"100px"}

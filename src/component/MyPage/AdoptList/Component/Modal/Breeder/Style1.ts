@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const Td = styled.td`
   width: 16%;
 `;
@@ -84,7 +84,7 @@ export const Question = styled.h4`
   font-size: 16px;
   font-weight: 500;
 `;
-export const AnswerInput = styled.div`
+export const AnswerTextBox = styled.div`
   background: #fafafa;
   width: 100%;
   max-height: 25vh;

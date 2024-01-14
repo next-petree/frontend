@@ -1,4 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { styled } from "styled-components";
 import { get } from "../../../../../api/api";
 import { TitleWrap, Title, SubTitle, PageNationWrap } from "./RequestListStyle";
@@ -54,14 +56,13 @@ type ApiResponse = {
 };
 
 const RequestListContainer = () => {
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const [currentPage, setCurrentPage] = useState(1);
   const [matchings, setMatchings] = useState<MatchingDataType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
 
   const fetchMatchingList = async (page: number) => {
     try {
       const response = await get<ApiResponse>("/me/matchings");
-      console.log("API 응답 데이터:", response.data.data.totalPages);
       setTotalPages(response.data.data.totalPages);
       setMatchings(response.data.data.content);
     } catch (error) {
@@ -94,6 +95,7 @@ const RequestListContainer = () => {
 
   const BreederItems = useMemo(() => {
     return matchings.map(matching => ({
+      id: matching.matchingId,
       name: matching.adopterNickname,
       breed: matching.dogTypeName,
       bday: matching.submitDate,
