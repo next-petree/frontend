@@ -49,16 +49,20 @@ type MatchingDataType = {
 type ApiResponse = {
   data: {
     content: MatchingDataType[];
+    totalPages: number;
   };
 };
 
 const RequestListContainer = () => {
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const [matchings, setMatchings] = useState<MatchingDataType[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const fetchMatchingList = async () => {
+  const fetchMatchingList = async (page: number) => {
     try {
       const response = await get<ApiResponse>("/me/matchings");
-      console.log("API 응답 데이터:", response.data.data.content);
+      console.log("API 응답 데이터:", response.data.data.totalPages);
+      setTotalPages(response.data.data.totalPages);
       setMatchings(response.data.data.content);
     } catch (error) {
       console.error("매칭 리스트 조회 중 오류 발생:", error);
@@ -66,8 +70,8 @@ const RequestListContainer = () => {
   };
 
   useEffect(() => {
-    fetchMatchingList();
-  }, []);
+    fetchMatchingList(currentPage);
+  }, [currentPage]);
 
   // 브리더 가데이터!!!!!!!!!!!!!!!!!!
   const BreederheaderData: BreederColumn[] = [
@@ -125,6 +129,72 @@ const RequestListContainer = () => {
     [],
   );
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    pageNumbers.push(
+      <button
+        key="prev"
+        onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+        disabled={currentPage === 1}
+        style={{
+          margin: "0 5px",
+          padding: "5px 10px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          backgroundColor: currentPage === 1 ? "#e0e0e0" : "#f0f0f0",
+          cursor: currentPage === 1 ? "not-allowed" : "pointer",
+        }}
+      >
+        {"<"}
+      </button>,
+    );
+
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={currentPage === i}
+          style={{
+            margin: "0 5px",
+            padding: "5px 10px",
+            border: "1px solid #ddd",
+            backgroundColor: currentPage === i ? "#e0e0e0" : "#4ec1bf",
+            color: currentPage === i ? "black" : "white",
+            borderRadius: "8px",
+          }}
+        >
+          {i}
+        </button>,
+      );
+    }
+
+    pageNumbers.push(
+      <button
+        key="next"
+        onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+        disabled={currentPage === totalPages}
+        style={{
+          margin: "0 5px",
+          padding: "5px 10px",
+          border: "1px solid #fff",
+          borderRadius: "8px",
+          backgroundColor: currentPage === totalPages ? "#e0e0e0" : "#f0f0f0",
+          cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+        }}
+      >
+        {">"}
+      </button>,
+    );
+
+    return pageNumbers;
+  };
+
   return (
     <Container>
       {location.pathname === "/mypage/adoptlist/breeder" ? (
@@ -139,11 +209,7 @@ const RequestListContainer = () => {
             data={BreederItems}
           ></BreederTableComp>
           <PageNationWrap>
-            <div>
-              <button>&lt;</button>
-              <button>1</button>
-              <button>&gt;</button>
-            </div>
+            {totalPages > 0 && renderPageNumbers()}
           </PageNationWrap>
         </>
       ) : location.pathname === "/mypage/adoptlist/adopter" ? (
