@@ -33,63 +33,86 @@ import ManageReview from "./pages/ManageReview/ManageReview";
 import ManageOwnDogs from "./pages/ManageOwnDogs/ManageOwnDogs";
 import CreateReview from "./pages/ManageReview/create/CreateReview";
 import EditReview from "./pages/ManageReview/edit/EditReview";
+import EditOwnDogs from "./pages/ManageOwnDogs/edit/EditOwnDogs";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/breeders/:pageId" element={<BreederCollect />} />
-        <Route path="/dogys/:pageId" element={<DogyCollect />} />
-        <Route path="/" element={<IntroPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="oauth/kakao/callback" element={<LoginCheckForKakao />} />
-        <Route path="register" element={<Register />} />
-        <Route
-          path="register/breeder-detail"
-          element={<RegisterBreederDetail />}
-        />
-        <Route
-          path="register/adopter-detail"
-          element={<RegisterAdopterDetail />}
-        />
-        <Route path="success-register" element={<SuccessRegister />} />
-        <Route path="/find-email" element={<FindEmail />} />
-        <Route path="/find-password" element={<FindPassword />} />
-        <Route path="/find-email-result" element={<FindEmailResult />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route
-          path="/change-password-result"
-          element={<ChangePasswordResult />}
-        />
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/breeding-register" element={<BreedingRegister />} />
-          <Route path="/register-fillout" element={<RegisterFillOut />} />
-          <Route path="/breeding-complete" element={<BreedingComplete />} />
-          <Route path="/manage/review" element={<ManageReview />} />
-          <Route
-            path="/manage/review/create"
-            element={<CreateReview />}
-          ></Route>
-          <Route
-            path="/manage/review/:id/edit"
-            element={<EditReview />}
-          ></Route>
-          <Route path="/manage/owndogs" element={<ManageOwnDogs />} />
-        </Route>
-        <Route path="/breeder/:id" element={<BreederDetails />} />
-        <Route path="/customer-details" element={<CustomerDetails />} />
-        <Route path="/test-description" element={<TestDesc />}></Route>
-        <Route path="/basic-test" element={<Test />} />
-        <Route path="/result" element={<Result />} />
-        <Route path="/answer" element={<Answer />} />
-        <Route path="/certify" element={<Certify />} />
-        <Route path="/adoptlist/adopter" element={<Adopter />} />
-        <Route path="/adoptlist/breeder" element={<Breeder />} />
-        <Route path="/mypage/modifyauth" element={<ModifyAuth />} />
-        <Route path="/mypage/profile" element={<Profile />} />
-        <Route path="/mypage/remove-account" element={<RemoveAccount />} />
-      </Routes>
-    </>
-  );
+    return (
+        <>
+            <Routes>
+                <Route path="/breeders/:pageId" element={<BreederCollect />} />
+                <Route path="/dogys/:pageId" element={<DogyCollect />} />
+                <Route path="/" element={<IntroPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                    path="oauth/kakao/callback"
+                    element={<LoginCheckForKakao />}
+                />
+                <Route path="register" element={<Register />} />
+                <Route
+                    path="register/breeder-detail"
+                    element={<RegisterBreederDetail />}
+                />
+                <Route
+                    path="register/adopter-detail"
+                    element={<RegisterAdopterDetail />}
+                />
+                <Route path="success-register" element={<SuccessRegister />} />
+                <Route path="/find-email" element={<FindEmail />} />
+                <Route path="/find-password" element={<FindPassword />} />
+                <Route
+                    path="/find-email-result"
+                    element={<FindEmailResult />}
+                />
+                <Route path="/change-password" element={<ChangePassword />} />
+                <Route
+                    path="/change-password-result"
+                    element={<ChangePasswordResult />}
+                />
+                <Route path="" element={<PrivateRoute />}>
+                    <Route
+                        path="/breeding-register"
+                        element={<BreedingRegister />}
+                    />
+                    <Route
+                        path="/register-fillout"
+                        element={<RegisterFillOut />}
+                    />
+                    <Route
+                        path="/breeding-complete"
+                        element={<BreedingComplete />}
+                    />
+                    <Route path="/manage/review" element={<ManageReview />} />
+                    <Route
+                        path="/manage/review/create"
+                        element={<CreateReview />}
+                    ></Route>
+                    <Route
+                        path="/manage/review/:id/edit"
+                        element={<EditReview />}
+                    ></Route>
+                    <Route path="/manage/owndogs" element={<ManageOwnDogs />} />
+                    <Route
+                        path="/manage/owndogs/edit/:id"
+                        element={<EditOwnDogs />}
+                    />
+                </Route>
+                <Route path="/breeder/:id" element={<BreederDetails />} />
+                <Route path="/customer-details" element={<CustomerDetails />} />
+                <Route path="/test-description" element={<TestDesc />}></Route>
+                <Route path="/basic-test" element={<Test />} />
+                <Route path="/result" element={<Result />} />
+                <Route path="/answer" element={<Answer />} />
+                <Route path="/certify" element={<Certify />} />
+                <Route path="/adoptlist/adopter" element={<Adopter />} />
+                <Route path="/adoptlist/breeder" element={<Breeder />} />
+                <Route path="/mypage/modifyauth" element={<ModifyAuth />} />
+                <Route path="/mypage/profile" element={<Profile />} />
+                <Route
+                    path="/mypage/remove-account"
+                    element={<RemoveAccount />}
+                />
+            </Routes>
+        </>
+    );
 }
 export default App;
