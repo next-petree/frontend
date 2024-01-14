@@ -81,15 +81,17 @@ function App() {
                         path="/breeding-complete"
                         element={<BreedingComplete />}
                     />
-                    <Route path="/manage/review" element={<ManageReview />} />
+                    <Route path="/mypage/review" element={<ManageReview />} />
                     <Route
-                        path="/manage/review/create"
+                        path="/mypage/review/create"
                         element={<CreateReview />}
                     ></Route>
+
                     <Route
-                        path="/manage/review/:id/edit"
+                        path="/mypage/review/edit/:id"
                         element={<EditReview />}
                     ></Route>
+
                     <Route path="/mypage/owndogs" element={<ManageOwnDogs />} />
                     <Route
                         path="/mypage/owndogs/edit/:id"
