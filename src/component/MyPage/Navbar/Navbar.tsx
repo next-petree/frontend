@@ -16,7 +16,7 @@ export const NavCategory = [
     id: 1,
     name: "분양신청내역",
     // App.tsx에 만들어두신 url을 link에 주소로 넣어놓으시면 됩니다.
-    link: "/adoptlist/breeder",
+    link: "/mypage/adoptlist/breeder",
   },
   {
     id: 2,

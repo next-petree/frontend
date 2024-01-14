@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
-import { styled } from 'styled-components';
-import { TitleWrap, Title, SubTitle, PageNationWrap } from './RequestListStyle';
-
-import BreederTableComp from '../TableComponent/BreederTable/BreederTableComp';
-import AdopterTableComp from '../TableComponent/AdopterTable/AdopterTableComp';
-import SearchComp from './SearchComp/SearchComp';
+import { useState, useMemo, useEffect } from "react";
+import { styled } from "styled-components";
+import { get } from "../../../../../api/api";
+import { TitleWrap, Title, SubTitle, PageNationWrap } from "./RequestListStyle";
+import BreederTableComp from "../TableComponent/BreederTable/BreederTableComp";
+import AdopterTableComp from "../TableComponent/AdopterTable/AdopterTableComp";
+import SearchComp from "./SearchComp/SearchComp";
 
 export const Container = styled.div`
   background-color: white;
@@ -37,66 +37,71 @@ type AdopterdataType = {
   breakdown: () => void;
 };
 
+type MatchingDataType = {
+  adopterNickname: string;
+  dogName: string;
+  dogTypeName: string;
+  isProcessed: boolean;
+  matchingId: number;
+  submitDate: string;
+};
+
+type ApiResponse = {
+  data: {
+    content: MatchingDataType[];
+  };
+};
+
 const RequestListContainer = () => {
+  const [matchings, setMatchings] = useState<MatchingDataType[]>([]);
+
+  const fetchMatchingList = async () => {
+    try {
+      const response = await get<ApiResponse>("/me/matchings");
+      console.log("API 응답 데이터:", response.data.data.content);
+      setMatchings(response.data.data.content);
+    } catch (error) {
+      console.error("매칭 리스트 조회 중 오류 발생:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMatchingList();
+  }, []);
+
   // 브리더 가데이터!!!!!!!!!!!!!!!!!!
   const BreederheaderData: BreederColumn[] = [
-    { accessor: 'name', Header: '분양희망자' },
-    { accessor: 'breed', Header: '강아지(견종명)' },
-    { accessor: 'bday', Header: '출생일' },
-    { accessor: 'state', Header: '분양상태' },
+    { accessor: "name", Header: "분양희망자" },
+    { accessor: "breed", Header: "강아지(견종명)" },
+    { accessor: "bday", Header: "출생일" },
+    { accessor: "state", Header: "분양상태" },
   ];
   const BreederHeaders = useMemo(() => BreederheaderData, []);
 
   // 입양자 가데이터!!!!!!!!!!!!!!!!!
   const AdopterheaderData: AdopterColumn[] = [
-    { accessor: 'breeder', Header: '브리더' },
-    { accessor: 'breed', Header: '강아지(견종명)' },
-    { accessor: 'bday', Header: '출생일' },
-    { accessor: 'state', Header: '분양상태' },
-    { accessor: 'breakdown', Header: '신청내역' }, // 추가
+    { accessor: "breeder", Header: "브리더" },
+    { accessor: "breed", Header: "강아지(견종명)" },
+    { accessor: "bday", Header: "출생일" },
+    { accessor: "state", Header: "분양상태" },
+    { accessor: "breakdown", Header: "신청내역" },
   ];
   const AdopterHeaders = useMemo(() => AdopterheaderData, []);
-  const BreederItems = useMemo(
-    () => [
-      {
-        name: '수현',
-        breed: '아리(구미호)',
-        bday: '2013-05-29',
-        state: '분양승인',
-      },
-      {
-        name: '케이틀린',
-        breed: '말파이트(돌덩이)',
-        bday: '2013-05-29',
-        state: '분양거절',
-      },
-      {
-        name: '룰루',
-        breed: '아리(구미호)',
-        bday: '2013-05-29',
-        state: '미승인',
-      },
-      {
-        name: '욱종',
-        breed: '아리(구미호)',
-        bday: '2013-05-29',
-        state: '분양거절',
-      },
-      {
-        name: '종욱',
-        breed: '아리(구미호)',
-        bday: '2013-05-29',
-        state: '분양승인',
-      },
-    ],
-    []
-  );
+
+  const BreederItems = useMemo(() => {
+    return matchings.map(matching => ({
+      name: matching.adopterNickname,
+      breed: matching.dogTypeName,
+      bday: matching.submitDate,
+      state: matching.isProcessed ? "분양승인" : "분양거절",
+    }));
+  }, [matchings]);
 
   const getTableData = (
     breeder: string,
     breed: string,
     bday: string,
-    state: string
+    state: string,
   ) => {
     return {
       breeder,
@@ -105,7 +110,7 @@ const RequestListContainer = () => {
       state,
       breakdown: () => {
         console.log(
-          `브리더: ${breeder}, 강아지(견종명): ${breed}, 출생일: ${bday}`
+          `브리더: ${breeder}, 강아지(견종명): ${breed}, 출생일: ${bday}`,
         );
       },
     };
@@ -113,16 +118,16 @@ const RequestListContainer = () => {
 
   const AdopterItems = useMemo(
     () => [
-      getTableData('페이커', '티원(르블랑)', '2013-01-22', '분양승인'),
-      getTableData('케이틀린', '말파이트(돌덩이)', '2013-05-29', '분양거절'),
-      getTableData('룰루', '아리(구미호)', '2013-05-29', '미승인'),
+      getTableData("페이커", "티원(르블랑)", "2013-01-22", "분양승인"),
+      getTableData("케이틀린", "말파이트(돌덩이)", "2013-05-29", "분양거절"),
+      getTableData("룰루", "아리(구미호)", "2013-05-29", "미승인"),
     ],
-    []
+    [],
   );
 
   return (
     <Container>
-      {location.pathname === '/adoptlist/breeder' ? (
+      {location.pathname === "/mypage/adoptlist/breeder" ? (
         <>
           <TitleWrap>
             <Title>분양신청내역</Title>
@@ -137,20 +142,16 @@ const RequestListContainer = () => {
             <div>
               <button>&lt;</button>
               <button>1</button>
-              <button>2</button>
-              <button>3</button>
-              <button>4</button>
-              <button>5</button>
               <button>&gt;</button>
             </div>
           </PageNationWrap>
         </>
-      ) : location.pathname === '/adoptlist/adopter' ? (
+      ) : location.pathname === "/mypage/adoptlist/adopter" ? (
         <>
           <TitleWrap>
             <Title>분양신청내역</Title>
             <SubTitle>
-              분양 승인시, 신청내역 &gt; 상세보기를 클릭하면{' '}
+              분양 승인시, 신청내역 &gt; 상세보기를 클릭하면
               <span>브리더 정보</span>를 확인할 수 있습니다.
             </SubTitle>
           </TitleWrap>
