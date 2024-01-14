@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     background-color: white;
-    /* width: 1060px; */
+    width: 1060px;
     width: 49vw;
     height: fit-content;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
@@ -88,8 +88,17 @@ export const Form = styled.form`
 export const TopInputContainer = styled.div`
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px 82px;
+`;
+
+export const LeftInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+`;
+export const RightInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 `;
 
 export const InputContainer = styled.div`
@@ -111,7 +120,7 @@ export const InputTitle = styled.h1`
 `;
 
 export const Input = styled.input`
-    width: 92%;
+    width: 80%;
     height: 48px;
     padding: 0 15px;
 
@@ -149,7 +158,7 @@ export const Textarea = styled.textarea`
     background: #f5f5f5;
     border-radius: 16px;
     height: 189px;
-    padding: 20px;
+    padding: 15px;
     font-family: Noto Sans KR;
     font-size: 16px;
     font-weight: 500;

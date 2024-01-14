@@ -90,9 +90,9 @@ function App() {
                         path="/manage/review/:id/edit"
                         element={<EditReview />}
                     ></Route>
-                    <Route path="/manage/owndogs" element={<ManageOwnDogs />} />
+                    <Route path="/mypage/owndogs" element={<ManageOwnDogs />} />
                     <Route
-                        path="/manage/owndogs/edit/:id"
+                        path="/mypage/owndogs/edit/:id"
                         element={<EditOwnDogs />}
                     />
                 </Route>

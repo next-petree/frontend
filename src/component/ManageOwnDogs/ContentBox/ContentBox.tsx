@@ -40,6 +40,7 @@ const ContentBox = () => {
             const res = await get<IData>(
                 `${process.env.REACT_APP_API_URL}/breeder/dogs`
             );
+            console.log(res.data.data);
 
             return res.data.data;
         };
@@ -88,7 +89,7 @@ const ContentBox = () => {
                 {inputText.length > 0
                     ? result?.map((d) => (
                           <S.DogItem key={d.id}>
-                              <Link to={`/manage/owndogs/edit/${d.id}`}>
+                              <Link to={`/mypage/owndogs/edit/${d.id}`}>
                                   <S.DogImg src={d.imgUrl} />
                               </Link>
                               <S.DogInfoContainer>
@@ -109,7 +110,7 @@ const ContentBox = () => {
                       ))
                     : dogs?.map((d) => (
                           <S.DogItem key={d.id}>
-                              <Link to={`/manage/owndogs/edit/${d.id}`}>
+                              <Link to={`/mypage/owndogs/edit/${d.id}`}>
                                   <S.DogImg src={d.imgUrl} />
                               </Link>
                               <S.DogInfoContainer>

@@ -1,11 +1,49 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
 import { IoIosArrowBack } from "react-icons/io";
-import { BiSolidDownArrow } from "react-icons/bi";
 
-import CustomInput from "../CustomInput/CustomInput";
+import "react-datepicker/dist/react-datepicker.css";
+
 import * as S from "./styles";
+import CustomInput from "../CustomInput/CustomInput";
+import { IDogInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
 
-const OwnDogsForm = () => {
+const CustomDate = styled(DatePicker)`
+    width: 80%;
+    height: 48px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 0 15px;
+    border: none;
+
+    font-family: Noto Sans KR;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+    letter-spacing: -0.03em;
+    text-align: left;
+    color: #939393;
+
+    .react-datepicker & {
+        width: 800px;
+        height: 200px;
+    }
+`;
+
+interface IProps {
+    dog?: IDogInfo;
+}
+
+const OwnDogsForm = ({ dog }: IProps) => {
+    const [fetchedDog, setFetchedDog] = useState<IDogInfo>();
+    const [signicant, setSignificant] = useState<string>();
+
+    useEffect(() => {
+        setFetchedDog(dog);
+        setSignificant(fetchedDog?.management);
+    }, [dog]);
+
     return (
         <S.Wrapper>
             <S.ReturnBtnContainer>
@@ -18,61 +56,77 @@ const OwnDogsForm = () => {
                 <S.Title>보유견종 글쓰기</S.Title>
                 <S.Form>
                     <S.TopInputContainer>
-                        <S.InputContainer>
-                            <S.InputTitle>강아지 이름</S.InputTitle>
-                            <S.Input placeholder="강아지 이름을 작성하세요" />
-                        </S.InputContainer>
-                        <S.InputContainer>
-                            <S.InputTitle>출생일</S.InputTitle>
-                            <S.DOBInputContainer>
-                                <CustomInput
-                                    width={"calc((100% / 3) - 20px)"}
-                                    height="48px"
-                                    placeHolder="년"
+                        <S.LeftInputContainer>
+                            <S.InputContainer>
+                                <S.InputTitle>강아지 이름</S.InputTitle>
+                                <S.Input
+                                    placeholder="강아지 이름을 작성하세요"
+                                    value={fetchedDog?.name}
                                 />
-                                <CustomInput
-                                    width={"calc((100% / 3) - 20px)"}
-                                    height="48px"
-                                    placeHolder="월"
+                            </S.InputContainer>
+                            <S.InputContainer>
+                                <S.InputTitle>견종</S.InputTitle>
+                                <S.Input
+                                    placeholder="포메라니안"
+                                    value={fetchedDog?.dogType}
                                 />
-                                <CustomInput
-                                    width={"calc((100% / 3) - 20px)"}
-                                    height="48px"
-                                    placeHolder="일"
+                            </S.InputContainer>
+                        </S.LeftInputContainer>
+                        <S.RightInputContainer>
+                            <S.InputContainer>
+                                <S.InputTitle>출생일</S.InputTitle>
+                                <CustomDate
+                                    selected={
+                                        fetchedDog
+                                            ? new Date(fetchedDog?.birthDate)
+                                            : new Date()
+                                    }
+                                    onChange={(date) => console.log(date)}
+                                    disabled
                                 />
-                            </S.DOBInputContainer>
-                        </S.InputContainer>
-                        <S.InputContainer>
-                            <S.InputTitle>견종</S.InputTitle>
-                            <S.Input placeholder="포메라니안" />
-                        </S.InputContainer>
-                        <S.InputContainer>
-                            <S.InputTitle>성별</S.InputTitle>
-                            <CustomInput
-                                width={"96%"}
-                                height="48px"
-                                placeHolder="수컷"
-                            />
-                        </S.InputContainer>
+                            </S.InputContainer>
+                            <S.InputContainer>
+                                <S.InputTitle>성별</S.InputTitle>
+                                <CustomInput
+                                    width={"84%"}
+                                    height="48px"
+                                    value={
+                                        fetchedDog ? fetchedDog.gender : "MALE"
+                                    }
+                                    genderArr={["FEMAIL", "MALE"]}
+                                />
+                            </S.InputContainer>
 
-                        <S.InputContainer>
-                            <S.InputTitle>분양상태</S.InputTitle>
-                            <CustomInput
-                                width={"96%"}
-                                height="48px"
-                                placeHolder="선택해주세요"
-                            />
-                        </S.InputContainer>
+                            <S.InputContainer>
+                                <S.InputTitle>분양상태</S.InputTitle>
+                                <CustomInput
+                                    width={"84%"}
+                                    height="48px"
+                                    value={
+                                        fetchedDog?.status
+                                            ? fetchedDog?.status
+                                            : "AVAILABLE"
+                                    }
+                                    statusArr={["DONE", "AVAILABLE"]}
+                                />
+                            </S.InputContainer>
+                        </S.RightInputContainer>
                     </S.TopInputContainer>
                     <S.ReviewInputContainer>
-                        <S.InputTitle>분양 후기 작성</S.InputTitle>
-                        <S.Textarea placeholder="분양후기를 작성해주세요." />
-                        <S.TextLength>0/2000</S.TextLength>
+                        <S.InputTitle>기타사항</S.InputTitle>
+                        <S.Textarea
+                            value={signicant}
+                            onChange={(e) => setSignificant(e.target.value)}
+                            placeholder="견종의 특이사항에 대해 작성해주세요"
+                        />
+                        <S.TextLength>
+                            {signicant ? signicant.length : 0}/2000
+                        </S.TextLength>
                     </S.ReviewInputContainer>
                 </S.Form>
                 <S.ImageUploaderContainer>
                     <S.ImageUploaderTitle>
-                        이미지 업로드(0/4)
+                        이미지 업로드({`${fetchedDog?.dogImgUrl.length}/4`})
                     </S.ImageUploaderTitle>
                     <S.ImageUploaderFlexBox>
                         <S.ImageUpoaderbox>
