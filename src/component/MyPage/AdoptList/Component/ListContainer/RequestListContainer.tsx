@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import { selectSearchResultSlice } from "../../../../../redux/SearchResult/SearchResultSlice";
+import { selectSuccessResultSlice } from "../../../../../redux/SuccessResult/SuccessResultSlice";
 import { styled } from "styled-components";
 import { get } from "../../../../../api/api";
 import { TitleWrap, Title, SubTitle, PageNationWrap } from "./RequestListStyle";
@@ -60,9 +61,19 @@ const RequestListContainer = () => {
   const [matchings, setMatchings] = useState<MatchingDataType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
 
+  const { select, inputValue } = useSelector(selectSearchResultSlice);
+  const apiCallCount = useSelector(selectSuccessResultSlice);
+
   const fetchMatchingList = async (page: number) => {
+    let url = `/me/matchings?page=${page - 1}`;
+
+    if (select !== "전체") {
+      const searchType = select === "견종" ? "type" : "name";
+      url += `&searchType=${searchType}&keyword=${inputValue}`;
+    }
+
     try {
-      const response = await get<ApiResponse>(`/me/matchings?page=${page - 1}`);
+      const response = await get<ApiResponse>(url);
       setTotalPages(response.data.data.totalPages);
       setMatchings(response.data.data.content);
     } catch (error) {
@@ -72,7 +83,7 @@ const RequestListContainer = () => {
 
   useEffect(() => {
     fetchMatchingList(currentPage);
-  }, [currentPage]);
+  }, [currentPage, select, inputValue, apiCallCount]);
 
   const BreederheaderData: BreederColumn[] = [
     { accessor: "name", Header: "분양희망자" },

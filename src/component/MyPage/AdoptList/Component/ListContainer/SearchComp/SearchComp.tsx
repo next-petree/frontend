@@ -46,7 +46,6 @@ export default function SearchComp() {
   const getValue = () => {
     dispatch(setSelect(localSelect));
     dispatch(setInputValue(localInputValue));
-    console.log(`선택된 항목: ${localSelect}, 검색어: ${localInputValue}`);
   };
 
   return (

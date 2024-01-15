@@ -1,4 +1,6 @@
 import { BtnWrap, Modal, ModalWrap } from "./Style1";
+import { useDispatch } from "react-redux";
+import { incrementApiCallCount } from "../../../../../../redux/SuccessResult/SuccessResultSlice";
 import Button from "../../Button/Button";
 import useModal from "../../../../../Modal/Modal";
 import Swal from "sweetalert2";
@@ -16,19 +18,20 @@ export default function CheckModal({
   matchingId,
 }: CheckModalProps) {
   const { isModalVisible, hideModal, modalContent } = useModal();
+  const dispatch = useDispatch();
 
   const handleApproval = async (isApproved: boolean) => {
     try {
       await post(
         `/me/matchings/${matchingId}/approval?isApproved=${isApproved}`,
       );
-
       Swal.fire(
         alertList.customMessage(
           "처리되었습니다.",
           `분양희망자: ${name}<br>상태: ${isApproved ? "승인됨" : "거절됨"}`,
         ),
       );
+      dispatch(incrementApiCallCount());
     } catch (error) {
       console.error("매칭 신청 처리 중 오류 발생:", error);
       Swal.fire(alertList.errorMessage("처리 중 오류가 발생했습니다."));
@@ -44,12 +47,6 @@ export default function CheckModal({
         onClick={() => {
           setHideModal();
           handleApproval(true);
-          Swal.fire(
-            alertList.customMessage(
-              "승인되었습니다.",
-              `분양희망자:${name}<br>연락처 : 010-1010-1010`,
-            ),
-          );
         }}
       >
         승인하기
@@ -69,7 +66,6 @@ export default function CheckModal({
         onClick={() => {
           setHideModal();
           handleApproval(false);
-          Swal.fire(alertList.errorMessage("해당 신청서를 거절하였습니다."));
         }}
       >
         거절하기
