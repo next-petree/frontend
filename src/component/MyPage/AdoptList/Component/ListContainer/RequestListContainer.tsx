@@ -62,7 +62,7 @@ const RequestListContainer = () => {
 
   const fetchMatchingList = async (page: number) => {
     try {
-      const response = await get<ApiResponse>("/me/matchings");
+      const response = await get<ApiResponse>(`/me/matchings?page=${page - 1}`);
       setTotalPages(response.data.data.totalPages);
       setMatchings(response.data.data.content);
     } catch (error) {
@@ -74,7 +74,6 @@ const RequestListContainer = () => {
     fetchMatchingList(currentPage);
   }, [currentPage]);
 
-  // 브리더 가데이터!!!!!!!!!!!!!!!!!!
   const BreederheaderData: BreederColumn[] = [
     { accessor: "name", Header: "분양희망자" },
     { accessor: "breed", Header: "강아지(견종명)" },
@@ -83,7 +82,6 @@ const RequestListContainer = () => {
   ];
   const BreederHeaders = useMemo(() => BreederheaderData, []);
 
-  // 입양자 가데이터!!!!!!!!!!!!!!!!!
   const AdopterheaderData: AdopterColumn[] = [
     { accessor: "breeder", Header: "브리더" },
     { accessor: "breed", Header: "강아지(견종명)" },
@@ -145,8 +143,8 @@ const RequestListContainer = () => {
         disabled={currentPage === 1}
         style={{
           margin: "0 5px",
-          padding: "5px 10px",
-          border: "1px solid #ddd",
+          padding: "8px 13px",
+          border: "none",
           borderRadius: "8px",
           backgroundColor: currentPage === 1 ? "#e0e0e0" : "#f0f0f0",
           cursor: currentPage === 1 ? "not-allowed" : "pointer",
@@ -164,11 +162,12 @@ const RequestListContainer = () => {
           disabled={currentPage === i}
           style={{
             margin: "0 5px",
-            padding: "5px 10px",
-            border: "1px solid #ddd",
-            backgroundColor: currentPage === i ? "#e0e0e0" : "#4ec1bf",
-            color: currentPage === i ? "black" : "white",
+            padding: "8px 13px",
+            border: "none",
+            backgroundColor: currentPage === i ? "#4ec1bf" : "#f0f0f0",
+            color: currentPage === i ? "white" : "black",
             borderRadius: "8px",
+            cursor: "pointer",
           }}
         >
           {i}
@@ -183,8 +182,8 @@ const RequestListContainer = () => {
         disabled={currentPage === totalPages}
         style={{
           margin: "0 5px",
-          padding: "5px 10px",
-          border: "1px solid #fff",
+          padding: "8px 13px",
+          border: "none",
           borderRadius: "8px",
           backgroundColor: currentPage === totalPages ? "#e0e0e0" : "#f0f0f0",
           cursor: currentPage === totalPages ? "not-allowed" : "pointer",

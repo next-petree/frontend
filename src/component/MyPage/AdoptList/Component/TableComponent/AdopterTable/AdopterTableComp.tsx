@@ -22,8 +22,6 @@ const TableComp = ({
   columns: Column[];
   data: dataType[];
 }) => {
-  // updatedColumns 생성 부분을 제거합니다.
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
   return (
