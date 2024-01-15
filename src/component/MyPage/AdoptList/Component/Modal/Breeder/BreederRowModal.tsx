@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { get } from "../../../../../../api/api";
 import {
   Td,
   DetailButton,
@@ -13,59 +14,61 @@ import {
   Gender,
   BDay,
   AnswerWrap,
-  AnswerInput,
+  AnswerTextBox,
   Question,
-
-  // AnswerLength,
   CountSpan,
 } from "./Style1";
 import useModal from "../../../../../Modal/Modal";
-import DogImg from "../../../../../../assets/images/temporaryImg.png";
 import CheckModal from "../CheckModal/CheckModal";
 
-const RowModal = ({
-  index,
-  breed,
-  bday,
-  name,
-}: {
-  index: number;
-  breed: string;
-  bday: string;
+type ModalDataType = {
+  imgUrl: string;
   name: string;
-}) => {
+  breedType: string;
+  gender: string;
+  birthDate: string;
+  nurturingEnv: string;
+  parentExp: string;
+};
+
+type ApiResponse = {
+  status: string;
+  data: {
+    body: {
+      data: ModalDataType;
+    };
+  };
+};
+
+const RowModal = ({ matchingId }: { matchingId: number }) => {
+  const [modalData, setModalData] = useState<ModalDataType | null>(null);
   const { isModalVisible, showModal, hideModal } = useModal();
 
-  const [inputValue1, setInputValue1] = useState(
-    "반려견을 좋아하는 예비 분양자입니다. 현재 강아지 2마리를 키우고 있습니다. 특히 포메라니안을 좋아하는 마음에 신청하게되었습니다.",
-  );
-  const [inputValue2, setInputValue2] = useState(
-    "반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!반려견을 마치 아이처럼 아끼고 보살피겠습니다. 마음으로 나은 아이라는 마음으로  아플때도 한결같이 키울게요~!",
-  );
-  const [inputCount1, setInputCount1] = useState(0);
-  const [inputCount2, setInputCount2] = useState(0);
+  const fetchAndShowModal = async () => {
+    try {
+      const response = await get<ApiResponse>(`/me/matchings/${matchingId}`);
+      setModalData(response.data.data.body.data);
+      showModal();
+    } catch (error) {
+      console.error("매칭 상세 조회 중 오류 발생:", error);
+    }
+  };
 
-  const dogName = breed.match(/(.+)(?=\()/g)?.[0] || "";
-  const typeofdog = breed.match(/(?<=\().+?(?=\))/g)?.[0] || "";
-  useEffect(() => {
-    setInputCount1(inputValue1.length);
-    setInputCount2(inputValue2.length);
-  }, [inputValue1, inputValue2]);
   return (
     <Td>
-      <DetailButton onClick={showModal}>상세보기</DetailButton>
+      <DetailButton onClick={fetchAndShowModal}>상세보기</DetailButton>
       {isModalVisible && (
         <ModalWrap onClick={hideModal}>
           <Modal onClick={e => e.stopPropagation()}>
             <Title>분양 신청서</Title>
             <InfoWrap>
-              <Img src={DogImg}></Img>
+              <Img src={modalData?.imgUrl}></Img>
               <DetailInfoWrap>
-                <DogName>{dogName}</DogName>
+                <DogName>{modalData?.name}</DogName>
                 <hr />
-                <BreedDog>견종 : {typeofdog}</BreedDog>
-                <Gender>성별 : 수컷</Gender>
-                <BDay>출생일 : {bday}</BDay>
+                <BreedDog>견종 : {modalData?.breedType}</BreedDog>
+                <Gender>성별 : {modalData?.gender}</Gender>
+                <BDay>출생일 : {modalData?.birthDate}</BDay>
                 <hr />
               </DetailInfoWrap>
             </InfoWrap>
@@ -73,22 +76,26 @@ const RowModal = ({
               <Question>
                 1. 반려동물을 분양하려는 사유에 대해 작성하세요.
               </Question>
-              <AnswerInput>
-                {inputValue1}
-                <CountSpan>{inputCount1}/2000</CountSpan>
-              </AnswerInput>
+              <AnswerTextBox>
+                {modalData?.nurturingEnv}
+                <CountSpan>{modalData?.nurturingEnv.length}/2000</CountSpan>
+              </AnswerTextBox>
             </AnswerWrap>
             <AnswerWrap>
               <Question>
                 2. 해당 견종을 분양하는 것에 있어 자신의 마음가짐을
                 작성해주세요.
               </Question>
-              <AnswerInput>
-                {inputValue2}
-                <CountSpan>{inputCount2}/2000</CountSpan>
-              </AnswerInput>
+              <AnswerTextBox>
+                {modalData?.parentExp}
+                <CountSpan>{modalData?.parentExp.length}/2000</CountSpan>
+              </AnswerTextBox>
             </AnswerWrap>
-            <CheckModal setHideModal={hideModal} name={name} />
+            <CheckModal
+              setHideModal={hideModal}
+              name={modalData?.name || ""}
+              matchingId={matchingId}
+            />
           </Modal>
         </ModalWrap>
       )}

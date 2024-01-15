@@ -1,4 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectSearchResultSlice } from "../../../../../redux/SearchResult/SearchResultSlice";
+import { selectSuccessResultSlice } from "../../../../../redux/SuccessResult/SuccessResultSlice";
 import { styled } from "styled-components";
 import { get } from "../../../../../api/api";
 import { TitleWrap, Title, SubTitle, PageNationWrap } from "./RequestListStyle";
@@ -54,14 +57,23 @@ type ApiResponse = {
 };
 
 const RequestListContainer = () => {
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const [currentPage, setCurrentPage] = useState(1);
   const [matchings, setMatchings] = useState<MatchingDataType[]>([]);
   const [totalPages, setTotalPages] = useState(0);
 
+  const { select, inputValue } = useSelector(selectSearchResultSlice);
+  const apiCallCount = useSelector(selectSuccessResultSlice);
+
   const fetchMatchingList = async (page: number) => {
+    let url = `/me/matchings?page=${page - 1}`;
+
+    if (select !== "전체") {
+      const searchType = select === "견종" ? "type" : "name";
+      url += `&searchType=${searchType}&keyword=${inputValue}`;
+    }
+
     try {
-      const response = await get<ApiResponse>("/me/matchings");
-      console.log("API 응답 데이터:", response.data.data.totalPages);
+      const response = await get<ApiResponse>(url);
       setTotalPages(response.data.data.totalPages);
       setMatchings(response.data.data.content);
     } catch (error) {
@@ -71,9 +83,8 @@ const RequestListContainer = () => {
 
   useEffect(() => {
     fetchMatchingList(currentPage);
-  }, [currentPage]);
+  }, [currentPage, select, inputValue, apiCallCount]);
 
-  // 브리더 가데이터!!!!!!!!!!!!!!!!!!
   const BreederheaderData: BreederColumn[] = [
     { accessor: "name", Header: "분양희망자" },
     { accessor: "breed", Header: "강아지(견종명)" },
@@ -82,7 +93,6 @@ const RequestListContainer = () => {
   ];
   const BreederHeaders = useMemo(() => BreederheaderData, []);
 
-  // 입양자 가데이터!!!!!!!!!!!!!!!!!
   const AdopterheaderData: AdopterColumn[] = [
     { accessor: "breeder", Header: "브리더" },
     { accessor: "breed", Header: "강아지(견종명)" },
@@ -94,6 +104,7 @@ const RequestListContainer = () => {
 
   const BreederItems = useMemo(() => {
     return matchings.map(matching => ({
+      id: matching.matchingId,
       name: matching.adopterNickname,
       breed: matching.dogTypeName,
       bday: matching.submitDate,
@@ -143,8 +154,8 @@ const RequestListContainer = () => {
         disabled={currentPage === 1}
         style={{
           margin: "0 5px",
-          padding: "5px 10px",
-          border: "1px solid #ddd",
+          padding: "8px 13px",
+          border: "none",
           borderRadius: "8px",
           backgroundColor: currentPage === 1 ? "#e0e0e0" : "#f0f0f0",
           cursor: currentPage === 1 ? "not-allowed" : "pointer",
@@ -162,11 +173,12 @@ const RequestListContainer = () => {
           disabled={currentPage === i}
           style={{
             margin: "0 5px",
-            padding: "5px 10px",
-            border: "1px solid #ddd",
-            backgroundColor: currentPage === i ? "#e0e0e0" : "#4ec1bf",
-            color: currentPage === i ? "black" : "white",
+            padding: "8px 13px",
+            border: "none",
+            backgroundColor: currentPage === i ? "#4ec1bf" : "#f0f0f0",
+            color: currentPage === i ? "white" : "black",
             borderRadius: "8px",
+            cursor: "pointer",
           }}
         >
           {i}
@@ -181,8 +193,8 @@ const RequestListContainer = () => {
         disabled={currentPage === totalPages}
         style={{
           margin: "0 5px",
-          padding: "5px 10px",
-          border: "1px solid #fff",
+          padding: "8px 13px",
+          border: "none",
           borderRadius: "8px",
           backgroundColor: currentPage === totalPages ? "#e0e0e0" : "#f0f0f0",
           cursor: currentPage === totalPages ? "not-allowed" : "pointer",

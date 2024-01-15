@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const Td = styled.td`
   width: 16%;
 `;
@@ -29,7 +29,7 @@ export const Modal = styled.div`
   top: 0;
   bottom: 10vh;
   padding: 20px 20px 50px;
-  width: 80%;
+  width: 50%;
   background: #fff;
   border-radius: 32px;
   position: relative;
@@ -55,6 +55,7 @@ export const InfoWrap = styled.div`
 `;
 export const Img = styled.img`
   width: 130px;
+  height: 130px;
   object-fit: cover;
 `;
 export const DetailInfoWrap = styled.div`
@@ -84,7 +85,7 @@ export const Question = styled.h4`
   font-size: 16px;
   font-weight: 500;
 `;
-export const AnswerInput = styled.div`
+export const AnswerTextBox = styled.div`
   background: #fafafa;
   width: 100%;
   max-height: 25vh;
