@@ -42,6 +42,7 @@ type AdopterdataType = {
 
 type MatchingDataType = {
   adopterNickname: string;
+  breederNickname: string;
   dogName: string;
   dogTypeName: string;
   isProcessed: boolean;
@@ -112,33 +113,20 @@ const RequestListContainer = () => {
     }));
   }, [matchings]);
 
-  const getTableData = (
-    breeder: string,
-    breed: string,
-    bday: string,
-    state: string,
-  ) => {
-    return {
-      breeder,
-      breed,
-      bday,
-      state,
+  const AdopterItems = useMemo(() => {
+    return matchings.map(matching => ({
+      id: matching.matchingId,
+      breeder: matching.breederNickname,
+      breed: matching.dogTypeName,
+      bday: matching.submitDate,
+      state: matching.isProcessed ? "분양승인" : "분양거절",
       breakdown: () => {
         console.log(
-          `브리더: ${breeder}, 강아지(견종명): ${breed}, 출생일: ${bday}`,
+          `브리더: ${matching.breederNickname}, 강아지(견종명): ${matching.dogTypeName}, 출생일: ${matching.submitDate}`,
         );
       },
-    };
-  };
-
-  const AdopterItems = useMemo(
-    () => [
-      getTableData("페이커", "티원(르블랑)", "2013-01-22", "분양승인"),
-      getTableData("케이틀린", "말파이트(돌덩이)", "2013-05-29", "분양거절"),
-      getTableData("룰루", "아리(구미호)", "2013-05-29", "미승인"),
-    ],
-    [],
-  );
+    }));
+  }, [matchings]);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -235,6 +223,9 @@ const RequestListContainer = () => {
           </TitleWrap>
           <SearchComp />
           <AdopterTableComp columns={AdopterHeaders} data={AdopterItems} />
+          <PageNationWrap>
+            {totalPages > 0 && renderPageNumbers()}
+          </PageNationWrap>
         </>
       ) : null}
     </Container>

@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import DecodeToken from "../../../utils/DecodeJWT/DecodeJWT";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
 import { removeToken } from "../../../api/token";
@@ -15,8 +16,7 @@ export const NavCategory = [
   {
     id: 1,
     name: "분양신청내역",
-    // App.tsx에 만들어두신 url을 link에 주소로 넣어놓으시면 됩니다.
-    link: "/mypage/adoptlist/breeder",
+    link: "",
   },
   {
     id: 2,
@@ -38,6 +38,20 @@ export const NavCategory = [
 const Navbar = () => {
   const navigation = useNavigate();
   const location = useLocation();
+
+  const decodedJWT = DecodeToken();
+  let roleBasedLink = "/mypage/adoptlist/breeder";
+
+  if (decodedJWT.role === "ADOPTER") {
+    roleBasedLink = "/mypage/adoptlist/adopter";
+  }
+
+  const NavCategoryWithRole = NavCategory.map(category => {
+    if (category.name === "분양신청내역") {
+      return { ...category, link: roleBasedLink };
+    }
+    return category;
+  });
 
   const DeleteAccount = () => {
     navigation("/mypage/remove-account");
@@ -63,7 +77,7 @@ const Navbar = () => {
   return (
     <NavBarContainer>
       <Main>
-        {NavCategory.map(category => (
+        {NavCategoryWithRole.map(category => (
           <CategoryContainer
             onClick={() => navigation(`${category.link}`)}
             key={category.id}
