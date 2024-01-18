@@ -86,6 +86,7 @@ const AvatarUpload = () => {
           dispath(setAvatar(response.data.data.fileUrl));
           dispath(setAvatarId(response.data.data.id));
           dispath(setProfileImg(response.data.data.fileUrl));
+          localStorage.setItem("profileImg", response.data.data.fileUrl);
         } catch (e) {}
       }
       else {
@@ -98,6 +99,7 @@ const AvatarUpload = () => {
             }
             dispath(setAvatar(""));
             dispath(setProfileImg(""));
+            localStorage.setItem("profileImg", "");
           } catch (e) {}
         }
       }
