@@ -29,25 +29,27 @@ import React from "react";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { resizeFile } from "../../../../utils/ImageResize";
-
-interface IAvatarUpload {
-  setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { setProfileImg } from "../../../../redux/Breeder1/BreederSlice1";
+import { setChangeavatar } from "../../../../redux/Mypage1/ChangeAvatarSlice1";
 
 
 
-const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
+
+
+const AvatarUpload = () => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
   } = useForm<IChangeAvatar>();
-  const accountInfo = DecodeToken();
+  
   const nowavatar = useAppSelector(selectAvatarSlice);
   const dispath = useAppDispatch();
+  
   const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
   const avatar = watch("avatar");
+
   useEffect(() => {
     if (avatar && avatar.length > 0) {
       const file = avatar[0];
@@ -60,7 +62,7 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
   };
   const onValid = async ({ avatar }: IChangeAvatar) => {
     const answer = await Swal.fire({
-      ...alertList.doubleCheckMessage("프로필 사진은 변경하시겠습니까?"),
+      ...alertList.doubleCheckMessage("프로필 사진을 변경하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
@@ -75,14 +77,16 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
           if (response.data.status === "FAIL") {
             throw "올바르지 못한 접근 입니다.";
           }
-          dispath(setAvatar(response.data.data.fileUrl));
-          dispath(setAvatarId(response.data.data.id));
           if (response.data.status === "SUCCESS") {
             Swal.fire({
               ...alertList.successMessage("프로필 사진이 변경되었습니다"),
               width: "350px",
             });
           }
+          dispath(setAvatar(response.data.data.fileUrl));
+          dispath(setAvatarId(response.data.data.id));
+          dispath(setProfileImg(response.data.data.fileUrl));
+          localStorage.setItem("profileImg", response.data.data.fileUrl);
         } catch (e) {}
       }
       else {
@@ -94,11 +98,13 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
               throw "올바르지 못한 접근 입니다.";
             }
             dispath(setAvatar(""));
+            dispath(setProfileImg(""));
+            localStorage.setItem("profileImg", "");
           } catch (e) {}
         }
       }
     }
-    setChangeAvatar(false);
+    dispath(setChangeavatar(false))
   };
   return (
     <Overlay>

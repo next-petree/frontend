@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import DecodeToken from "../../../utils/DecodeJWT/DecodeJWT";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
 import { removeToken } from "../../../api/token";
@@ -10,6 +11,8 @@ import {
     NavBarContainer,
     LogoutContainer,
 } from "./Styles1";
+import { useDispatch } from "react-redux";
+import { setProfileImg } from "../../../redux/Breeder1/BreederSlice1";
 
 export const NavCategory = [
     {
@@ -21,7 +24,7 @@ export const NavCategory = [
     {
         id: 2,
         name: "보유견종 관리",
-        link: "/mypage/owndogs",
+        link: "",
     },
     {
         id: 3,

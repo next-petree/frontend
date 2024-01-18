@@ -105,8 +105,8 @@ function App() {
                 <Route path="/result" element={<Result />} />
                 <Route path="/answer" element={<Answer />} />
                 <Route path="/certify" element={<Certify />} />
-                <Route path="/adoptlist/adopter" element={<Adopter />} />
-                <Route path="/adoptlist/breeder" element={<Breeder />} />
+                <Route path="/mypage/adoptlist/adopter" element={<Adopter />} />
+                <Route path="/mypage/adoptlist/breeder" element={<Breeder />} />
                 <Route path="/mypage/modifyauth" element={<ModifyAuth />} />
                 <Route path="/mypage/profile" element={<Profile />} />
                 <Route

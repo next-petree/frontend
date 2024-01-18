@@ -20,7 +20,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => {
-    console.log("api 요청 응답 :", response);
+    // console.log("api 요청 응답 :", response);
     return response;
   },
   error => {

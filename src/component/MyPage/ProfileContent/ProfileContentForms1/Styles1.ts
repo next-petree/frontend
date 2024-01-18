@@ -61,6 +61,7 @@ export const AvatarBorder = styled.div<{ $isAuth: boolean }>`
   border-radius: 100%;
   border: 2px solid ${(props) => (props.$isAuth ? "#FF6363" : "#23F39C")};
   overflow: hidden;
+  cursor: pointer;
 `;
 export const UploadAvatarBorder = styled.div`
   position: relative;
@@ -70,6 +71,7 @@ export const UploadAvatarBorder = styled.div`
   overflow: hidden;
   align-self: center;
   margin-bottom: -3vh;
+  cursor: pointer;
 `;
 
 export const AvatarInput = styled.input`
@@ -79,6 +81,7 @@ export const AvatarInput = styled.input`
 export const AvatarLabel = styled.label`
   width: 100%;
   height: 100%;
+  cursor: pointer;
 `;
 
 export const AvatarDeleteBtn = styled.div`

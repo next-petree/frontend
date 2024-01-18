@@ -58,6 +58,7 @@ const DaumFindAddress = () => {
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
+        shouldCloseOnOverlayClick={true}
         ariaHideApp={false}
         className="ReactModal__Content"
         overlayClassName="ReactModal__Overlay"

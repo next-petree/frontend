@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
   InnerContent,
@@ -16,14 +16,14 @@ import {
   BottomArea,
   CopyRightLogo,
   CopyrightBanner,
-} from './FooterStyle';
-import useModal from '../AlertModal/AlertModal';
+} from "./FooterStyle";
+import useModal from "../AlertModal/AlertModal";
 
 const Footer = () => {
   const { isModalVisible, showModal, hideModal } = useModal();
-  const [modalMessage, setModalMessage] = useState('');
+  const [modalMessage, setModalMessage] = useState("");
   const handleClick = () => {
-    setModalMessage('아직 준비중이에요!');
+    setModalMessage("아직 준비중이에요!");
     showModal();
   };
   return (
@@ -31,20 +31,20 @@ const Footer = () => {
       {isModalVisible && (
         <div
           style={{
-            width: '409px',
-            height: '109px',
-            borderRadius: '32px',
-            background: '#fff',
-            position: 'fixed',
-            top: '10%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: "409px",
+            height: "109px",
+            borderRadius: "32px",
+            background: "#fff",
+            position: "fixed",
+            top: "10%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             zIndex: 9999,
-            boxShadow: '1px 1px 4px 1px rgba(0, 0, 0, 0.1)',
-            fontSize: '20px',
+            boxShadow: "1px 1px 4px 1px rgba(0, 0, 0, 0.1)",
+            fontSize: "20px",
           }}
         >
           {modalMessage}
@@ -77,7 +77,7 @@ const Footer = () => {
                 인증 테스트
               </CategoriesLink>
               <CategoriesLink to="/dogys/1">강아지 모아보기</CategoriesLink>
-              <CategoriesLink to="/breeders/1">브리더모아보기</CategoriesLink>
+              <CategoriesLink to="/breeders/1">브리더 모아보기</CategoriesLink>
             </CategoriesMenu>
 
             <PagesMenu>
