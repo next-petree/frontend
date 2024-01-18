@@ -5,12 +5,7 @@ import { get } from "../../../api/api";
 import Navbar from "../../../component/ManageReview/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
 import ReviewForm from "../../../component/ManageReview/Form/ReviewForm";
-import {
-    BoxsContainer,
-    Container,
-    SubmitButton,
-    ButtonContainer,
-} from "../styles";
+import { BoxsContainer, Container, SubmitButton } from "../styles";
 
 interface IData {
     data: IReview;
@@ -23,9 +18,14 @@ export interface IReview {
     gender: string;
     id: number;
     name: string;
-    reviewImgId: string[];
+    reviewImgId: IReviewImg[];
     title: string;
     writeDate: string;
+}
+
+interface IReviewImg {
+    id: number;
+    fileUrl: string;
 }
 
 const EditReview = () => {
@@ -53,11 +53,10 @@ const EditReview = () => {
             <Container>
                 <BoxsContainer>
                     <Navbar />
+                    {/* div 하나 더 만들어서 폼과 버튼을 같이 넣기*/}
                     <ReviewForm review={reviewInfo} />
                 </BoxsContainer>
-                <ButtonContainer>
-                    <SubmitButton>저장</SubmitButton>
-                </ButtonContainer>
+                <SubmitButton>수정</SubmitButton>
             </Container>
         </CustomLayout>
     );

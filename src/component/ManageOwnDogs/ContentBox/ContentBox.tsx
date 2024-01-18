@@ -131,6 +131,11 @@ const ContentBox = () => {
                       ))}
             </S.ListContainer>
             <S.PaginationContainer>
+                {/* 페이지네이션 진행해주시면 됩니다. */}
+                {/* 페이지네이션 진행해주시면 됩니다. */}
+                {/* 페이지네이션 진행해주시면 됩니다. */}
+                {/* 페이지네이션 진행해주시면 됩니다. */}
+                {/* 페이지네이션 진행해주시면 됩니다. */}
                 <Pagenation
                     page={1}
                     totalPage={page}

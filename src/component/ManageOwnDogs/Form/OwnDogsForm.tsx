@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
 import { IDogInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CustomDate = styled(DatePicker)`
     width: 80%;
@@ -25,11 +25,6 @@ const CustomDate = styled(DatePicker)`
     letter-spacing: -0.03em;
     text-align: left;
     color: #939393;
-
-    .react-datepicker & {
-        width: 800px;
-        height: 200px;
-    }
 `;
 
 interface IProps {
@@ -78,6 +73,12 @@ const OwnDogsForm = ({ dog }: IProps) => {
                         <S.RightInputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>출생일</S.InputTitle>
+                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                {/* Date 부분 진행해주시면 됩니다.*/}
                                 <CustomDate
                                     selected={
                                         fetchedDog

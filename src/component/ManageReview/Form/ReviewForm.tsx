@@ -2,16 +2,18 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import * as S from "./styles";
 import { IReview } from "../../../pages/ManageReview/edit/EditReview";
+import { useNavigate } from "react-router-dom";
 
 interface IProp {
     review?: IReview;
 }
 
 const ReviewForm = ({ review }: IProp) => {
+    const naviagate = useNavigate();
     return (
         <S.Wrapper>
             <S.ReturnBtnContainer>
-                <S.ReturnButton>
+                <S.ReturnButton onClick={() => naviagate(-1)}>
                     <IoIosArrowBack />
                 </S.ReturnButton>
                 <S.ReturnBtnText>이전 페이지로</S.ReturnBtnText>
@@ -69,9 +71,29 @@ const ReviewForm = ({ review }: IProp) => {
                 </S.Form>
                 <S.ImageUploaderContainer>
                     <S.ImageUploaderTitle>
-                        이미지 업로드(0/4)
+                        이미지 업로드({`${review?.reviewImgId.length}/4`})
                     </S.ImageUploaderTitle>
                     <S.ImageUploaderFlexBox>
+                        <S.ImageUpoaderbox>
+                            <S.ImageBox
+                                img={`${review?.reviewImgId[0].fileUrl}`}
+                            />
+                            <S.ImageUploaderButton>
+                                업로드
+                            </S.ImageUploaderButton>
+                        </S.ImageUpoaderbox>
+                        <S.ImageUpoaderbox>
+                            <S.ImageBox />
+                            <S.ImageUploaderButton>
+                                업로드
+                            </S.ImageUploaderButton>
+                        </S.ImageUpoaderbox>
+                        <S.ImageUpoaderbox>
+                            <S.ImageBox />
+                            <S.ImageUploaderButton>
+                                업로드
+                            </S.ImageUploaderButton>
+                        </S.ImageUpoaderbox>
                         <S.ImageUpoaderbox>
                             <S.ImageBox />
                             <S.ImageUploaderButton>

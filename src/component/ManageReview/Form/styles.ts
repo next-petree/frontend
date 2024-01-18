@@ -184,13 +184,13 @@ export const TextLength = styled.span`
 
 export const ImageUploaderContainer = styled.div`
     // 240 * 3 + 36 * 2
-    width: 792px;
+    width: 100%;
     // 지워야함
     /* height: 212px; */
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 `;
 
 export const ImageUploaderTitle = styled.div`
@@ -205,13 +205,17 @@ export const ImageUploaderTitle = styled.div`
 
 export const ImageUploaderFlexBox = styled.div`
     width: 100%;
+    background-color: green;
     display: flex;
-    gap: 36px;
+    justify-content: space-between;
+    /* gap: 15px; */
 `;
 
 export const ImageUpoaderbox = styled.div`
-    width: 240px;
-    height: 212px;
+    width: 200px;
+    height: 180px;
+
+    background-color: greenyellow;
 
     display: flex;
     flex-direction: column;
@@ -219,7 +223,7 @@ export const ImageUpoaderbox = styled.div`
 `;
 
 export const ImageBox = styled.div<{ img?: string }>`
-    width: 240px;
+    width: 100%;
     height: 144px;
     border-radius: 12px;
     background: #f5f5f5;
@@ -227,7 +231,7 @@ export const ImageBox = styled.div<{ img?: string }>`
 `;
 
 export const ImageUploaderButton = styled.button`
-    width: 240px;
+    width: 100%;
     height: 52px;
     border: none;
     border-radius: 16px;
