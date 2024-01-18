@@ -84,7 +84,10 @@ const ModifyAuthForm = () => {
       setCurrentNickname(response.data.data.nickname);
     } catch (e) {}
   };
-  const AddressSearchHandler = (data: any) => {
+  const closeModal = () => {
+    setAddressSearch(false);
+  }
+  const addressSearchHandler = (data: any) => {
     setValue("address1", data.roadAddress);
     setAddressSearch(false);
   };
@@ -229,11 +232,13 @@ const ModifyAuthForm = () => {
       {addressSearch ? (
         <Modal
           isOpen={addressSearch}
+          onRequestClose={closeModal}
           ariaHideApp={false}
           className="ReactModal__Content"
+          shouldCloseOnOverlayClick={true}
           overlayClassName="ReactModal__Overlay"
         >
-          <DaumPostcode onComplete={AddressSearchHandler} />
+          <DaumPostcode onComplete={addressSearchHandler} />
         </Modal>
       ) : null}
     </Container>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import { selectBreederProfile } from "../../redux/Breeder1/BreederSlice1";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectBreederProfile, setProfileImg } from "../../redux/Breeder1/BreederSlice1";
 
 import {
   Container,
@@ -22,7 +22,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
   const profileImg = useAppSelector(selectBreederProfile);
-
+  const dispath = useAppDispatch()
+  
   const handleClick = async () => {
     if (isLoggedIn) {
       navigate("/mypage/modifyauth");
@@ -42,6 +43,7 @@ const Header = () => {
       localStorage.getItem("refreshToken")
     ) {
       setIsLoggedIn(true);
+      dispath(setProfileImg(localStorage.getItem("profileImg")!))
     }
   }, []);
 
@@ -67,7 +69,7 @@ const Header = () => {
         )}
 
         <div onClick={handleClick}>
-          <UserProfileImage $imgSrc={profileImg} />
+          <UserProfileImage $imgSrc={profileImg!} />
         </div>
       </HeaderContent>
     </Container>
