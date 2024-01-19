@@ -41,7 +41,8 @@ export const NavCategory = [
 const Navbar = () => {
     const navigation = useNavigate();
     const location = useLocation();
-
+    const dispath = useDispatch();
+    
     const DeleteAccount = () => {
         navigation("/mypage/remove-account");
     };
@@ -55,6 +56,8 @@ const Navbar = () => {
             try {
                 removeToken("accessToken");
                 removeToken("refreshToken");
+                removeToken("profileImg")
+                dispath(setProfileImg(""))
                 navigation("/");
                 Swal.fire(
                     alertList.successMessage("로그아웃이 완료되었습니다")
