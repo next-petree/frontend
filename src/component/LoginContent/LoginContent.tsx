@@ -58,7 +58,12 @@ const LoginContent = () => {
 
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        localStorage.setItem("profileImg", response.data.data.profileImgUrl!);
+        if(response.data.data.profileImgUrl) {
+          localStorage.setItem("profileImg", response.data.data.profileImgUrl);
+        }
+        else {
+          localStorage.setItem("profileImg", "")
+        }
         navigate("/");
       } else if (response.data.status === "FAIL") {
         await Swal.fire(alertList.errorMessage(`${response.data.data}`));
