@@ -10,7 +10,6 @@ import CustomAvatar from "../../component/Avatar/CustomAvatar";
 
 import { useGetBreederDetailQuery } from "../../redux/api/BreederApiSlice1";
 import { useParams } from "react-router-dom";
-import React from "react";
 
 const BreederDetails = () => {
   const { id } = useParams();
