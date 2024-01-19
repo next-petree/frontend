@@ -104,6 +104,7 @@ const AvatarUpload = () => {
         }
       }
     }
+    
     dispath(setChangeavatar(false))
   };
   return (
