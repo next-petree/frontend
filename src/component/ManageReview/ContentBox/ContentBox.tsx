@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Pagenation from "../../CollectCOMP1/Pagenation1";
 import FilterBox from "../../Common/FilterBox/FilterBox";
@@ -21,6 +21,10 @@ interface IReview {
 }
 
 const ContentBox = () => {
+     // 첫 페이지로 오실려면 "mypage/review/1" 이런 식으로 url을 연결 하셔야 합니다.
+    // 되도록이면 첫 페이지가 "mypage/review/0" 이 아닌 "mypage/review/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
+    const param = useParams();
+    const [page, setPage] = useState(Number(param.pageId));
     const [reviews, setReviews] = useState<IReview[]>();
     const [searchResult, setSearchResult] = useState<IReview[]>();
     const [inputText, setInputText] = useState("");
@@ -29,7 +33,7 @@ const ContentBox = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<any>(
-                `${process.env.REACT_APP_API_URL}/adopter/reviews`
+                `${process.env.REACT_APP_API_URL}adopter/reviews`
             );
 
             return res.data.data.content;
@@ -41,7 +45,6 @@ const ContentBox = () => {
             })
             .catch((err) => console.log(err));
     }, []);
-
     const searchItems = (searchValue: string) => {
         setInputText(searchValue);
         if (searchValue !== "") {
@@ -152,20 +155,14 @@ const ContentBox = () => {
                     ))}
                 </S.ReviewContainer>
             )}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
-            {/* 페이지네이션 진행해주시면 됩니다. */}
+            {/* 일단은 totalPage를 10으로 설정 해두었습니다. */}
+            
             <S.PaginationContainer>
                 <Pagenation
-                    page={1}
+                    page={page}
                     totalPage={10}
-                    setPage={() => {
-                        console.log("set page");
-                    }}
-                    name="_"
+                    setPage={setPage}
+                    name={"mypage/review"}
                 />
             </S.PaginationContainer>
         </S.Wrapper>

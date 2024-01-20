@@ -6,7 +6,7 @@ import FilterBox from "../../Common/FilterBox/FilterBox";
 import Button from "../../Common/Button/Button";
 
 import * as S from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export interface IContent {
     birthDate: string;
@@ -29,8 +29,11 @@ export interface IData {
 }
 
 const ContentBox = () => {
+    // 첫 페이지로 오실려면 "mypage/owndogs/1" 이런 식으로 url을 연결 하셔야 합니다.
+    // 되도록이면 첫 페이지가 "mypage/owndogs/0" 이 아닌 "mypage/owndogs/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
+    const param = useParams();
+    const [page, setPage] = useState(Number(param.pageId));
     const [dogs, setDogs] = useState<IContent[]>();
-    const [page, setPage] = useState(0);
     const [category, setCategory] = useState("");
     const [result, setResult] = useState<IContent[]>();
     const [inputText, setInputText] = useState("");
@@ -38,7 +41,7 @@ const ContentBox = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<IData>(
-                `${process.env.REACT_APP_API_URL}/breeder/dogs`
+                `${process.env.REACT_APP_API_URL}breeder/dogs`
             );
             console.log(res.data.data);
 
@@ -131,18 +134,13 @@ const ContentBox = () => {
                       ))}
             </S.ListContainer>
             <S.PaginationContainer>
-                {/* 페이지네이션 진행해주시면 됩니다. */}
-                {/* 페이지네이션 진행해주시면 됩니다. */}
-                {/* 페이지네이션 진행해주시면 됩니다. */}
-                {/* 페이지네이션 진행해주시면 됩니다. */}
-                {/* 페이지네이션 진행해주시면 됩니다. */}
+                {/* 현재 api에 데이터가 없는 것 같아서 totalPage는 일단 10으로 세팅 해두었습니다 */}
+                {/* 상단에 param.pageId 에 따라서 데이터가 잘 표시 되도록 하셔야 될 겁니다. */}
                 <Pagenation
-                    page={1}
-                    totalPage={page}
-                    setPage={() => {
-                        console.log("set page");
-                    }}
-                    name="_"
+                    page={page}
+                    totalPage={10}
+                    setPage={setPage}
+                    name={"mypage/owndogs"}
                 />
             </S.PaginationContainer>
         </S.Wrapper>

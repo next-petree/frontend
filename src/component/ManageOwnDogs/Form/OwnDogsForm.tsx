@@ -9,22 +9,13 @@ import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
 import { IDogInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
 import { useNavigate } from "react-router-dom";
+import DateInput from "../CustomInput/DateInput";
 
-const CustomDate = styled(DatePicker)`
-    width: 80%;
+const CustomDate = styled.div`
+    width: 100%;
     height: 48px;
-    background: #f5f5f5;
-    border-radius: 12px;
-    padding: 0 15px;
-    border: none;
-
-    font-family: Noto Sans KR;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 23px;
-    letter-spacing: -0.03em;
-    text-align: left;
-    color: #939393;
+    display: flex;
+    gap: 9%;
 `;
 
 interface IProps {
@@ -79,15 +70,24 @@ const OwnDogsForm = ({ dog }: IProps) => {
                                 {/* Date 부분 진행해주시면 됩니다.*/}
                                 {/* Date 부분 진행해주시면 됩니다.*/}
                                 {/* Date 부분 진행해주시면 됩니다.*/}
-                                <CustomDate
-                                    selected={
-                                        fetchedDog
-                                            ? new Date(fetchedDog?.birthDate)
-                                            : new Date()
-                                    }
-                                    onChange={(date) => console.log(date)}
-                                    disabled
+                                <CustomDate>
+                                <DateInput
+                                    placeHolder="년"
+                                    width={"22%"}
+                                    height="48px"
                                 />
+                                <DateInput
+                                    placeHolder="월"
+                                    width={"22%"}
+                                    height="48px"
+                                />
+                                <DateInput
+                                    placeHolder="일"
+                                    width={"22%"}
+                                    height="48px"
+                                />
+                                </CustomDate>
+                                
                             </S.InputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>성별</S.InputTitle>

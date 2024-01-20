@@ -49,7 +49,6 @@ export const SelectUl = styled.ul`
     width: 100%;
     position: absolute;
     top: 50px;
-
     background: #ffffff;
     border: 1px solid #eeeeee;
     border-radius: 12px;
