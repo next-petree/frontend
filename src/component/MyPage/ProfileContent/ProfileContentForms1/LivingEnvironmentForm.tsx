@@ -42,8 +42,23 @@ export interface ILivingEnvironmentPreview {
 const LivingEnvironmentForm = () => {
   const { register, handleSubmit, watch, setValue } =
     useForm<ILivingEnvironment>();
+  // 삭제하는 이미지의 id를 담아놓은 state입니다.
   const [deleteImgId, setDeleteImgId] = useState<number[]>([]);
+  // 처음 api를 요청했을 때의 정보를 담아놓는 state입니다.
   const [imageData, setImageData] = useState<LivingEnvironmentsData[]>([]);
+  // 사용자에게 주거환경 이미지의 실시간 프리뷰를 보여주는 state 입니다.
+  const [imagesPre, setImagesPre] = useState<ILivingEnvironmentPreview>({
+    yard: "",
+    bathRoom: "",
+    livingRoom: "",
+  });
+  // 사용자가 이미지를 저장 하기 이전에 수정을 할 때 마다 상태를 확인 하기 위한 객체 입니다.
+  const images = {
+    yard: watch("yard"),
+    bathRoom: watch("bathRoom"),
+    livingRoom: watch("livingRoom"),
+  };
+
   const onValid = async ({
     livingRoom,
     bathRoom,
@@ -56,7 +71,11 @@ const LivingEnvironmentForm = () => {
     if (answer.isConfirmed) {
       try {
         const form = new FormData();
+
+        // 사용자가 이미지를 여러번 수정 할 수 있기 떄문에 값은 id값이 중복 되어서 들어가 있을 수 있으므로 set type을 사용합니다.
         const id = Array.from(new Set(deleteImgId));
+
+        // 이미지가 존재하면 resize해서 formdata에 append 합니다.
         if (livingRoom && livingRoom.length > 0) {
           const livingRoom_Resize = (await resizeFile(livingRoom[0])) as File;
           form.append("livingRoomImg", livingRoom_Resize);
@@ -73,6 +92,7 @@ const LivingEnvironmentForm = () => {
         const data = {
           deletedImgsId: id,
         };
+        // 수현님이 용현님쪽 api를 어떤식으로 설계하신지는 모르겠지만, 저는 지워야 하는 이미지 id를 보낼 때 Blob을 사용하지 않으면 에러가 발생했습니다.
         const blob = new Blob([JSON.stringify(data)], {
           type: "application/json",
         });
@@ -91,17 +111,8 @@ const LivingEnvironmentForm = () => {
       } catch (e) {}
     }
   };
-  // 이미지 url만 보내면 업로드가 되는 건지
-  const [imagesPre, setImagesPre] = useState<ILivingEnvironmentPreview>({
-    yard: "",
-    bathRoom: "",
-    livingRoom: "",
-  });
-  const images = {
-    yard: watch("yard"),
-    bathRoom: watch("bathRoom"),
-    livingRoom: watch("livingRoom"),
-  };
+  
+  // 아래의 useEffect를 통해서 사용자가 이미지를 수정하면 images 사용해 그것을 감지하고 imagesPre에 표시합니다.
   useEffect(() => {
     if (images.yard && images.yard.length > 0) {
       const file1 = images.yard[0];
@@ -121,6 +132,7 @@ const LivingEnvironmentForm = () => {
     }
   }, [images.livingRoom]);
 
+  // 이미지를 삭제 할때마다 imagesPre의 값을 set 하고 deleteImgId에 이미지의 id 값을 저장합니다.
   const onDelete = (data: string) => {
     if (data === "yard") {
       setImagesPre({ ...imagesPre, yard: null });
@@ -143,6 +155,8 @@ const LivingEnvironmentForm = () => {
     }
   };
   //spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
+  // 최초에 주거환경 데이터를 받아오는 부분 입니다.
+  //ImageData 와 ImagesPre state에 set 해놓습니다.
   const getLivingEnvironments = async () => {
     try {
       const url = LivingEnvironmentUrl();
