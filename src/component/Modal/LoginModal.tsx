@@ -49,8 +49,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
         if (response.data.status === "SUCCESS") {
           console.log("로그아웃!", response.data);
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
+          sessionStorage.removeItem("accessToken");
+          sessionStorage.removeItem("refreshToken");
         }
       } catch (error: any) {
         console.log(error);
@@ -62,7 +62,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   const isLoggedIn =
-    localStorage.getItem("accessToken") && localStorage.getItem("refreshToken");
+    sessionStorage.getItem("accessToken") &&
+    sessionStorage.getItem("refreshToken");
 
   return (
     <Modal ref={modalRef} style={{ top: `${top}%` }}>

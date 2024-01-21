@@ -19,7 +19,6 @@ import ChangeAvatarSlice from "./Mypage1/ChangeAvatarSlice1";
 
 export const store = configureStore({
   reducer: {
-    // Add the generated reducer as a specific top-level slice
     [apiSlice.reducerPath]: apiSlice.reducer,
     breeder: breederSlice,
     dog_searchfilter: dog_searchfilterSlice,

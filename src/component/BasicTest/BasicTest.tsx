@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { get, post } from '../../api/api';
-import TestComp from './BasicTestComp/TestComp';
-import petfoot from '../../assets/icons/test_pets_black_24dp.png';
-import petree from '../../assets/images/test_petree.png';
-import TestBG from '../../assets/images/TestBG.png';
-import LoginModal from '../Modal/LoginModal';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { get, post } from "../../api/api";
+import TestComp from "./BasicTestComp/TestComp";
+import petfoot from "../../assets/icons/test_pets_black_24dp.png";
+import petree from "../../assets/images/test_petree.png";
+import TestBG from "../../assets/images/TestBG.png";
+import LoginModal from "../Modal/LoginModal";
 import {
   Choice,
   Question,
   TestResponse,
   ResultResponse,
-} from '../../types/index';
+} from "../../types/index";
 
 import {
   Wrapper,
@@ -23,7 +23,7 @@ import {
   MoveBtnWrap,
   PreBtn,
   NextBtn,
-} from './BasicTestStyle';
+} from "./BasicTestStyle";
 
 const BasicTest: React.FC = () => {
   const [testData, setTestData] = useState<Question[] | null>(null);
@@ -35,29 +35,29 @@ const BasicTest: React.FC = () => {
   const [selectedExample, setSelectedExample] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 상태 변수
   const [showLoginModal, setShowLoginModal] = useState(false); // 로그인 모달을 보여줄지 여부를 결정하는 상태 변수
-  const [errorMessage, setErrorMessage] = useState<string>(''); // 에러 메시지를 관리하는 상태 변수
+  const [errorMessage, setErrorMessage] = useState<string>(""); // 에러 메시지를 관리하는 상태 변수
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+    sessionStorage.setItem("userAnswers", JSON.stringify(userAnswers));
   }, [userAnswers]);
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem("accessToken");
     setIsLoggedIn(!!accessToken);
     // 로컬 스토리지에서 데이터 불러오기
     const getTest = async () => {
       try {
-        const response = await get<TestResponse>('/basic-test/start');
+        const response = await get<TestResponse>("/basic-test/start");
 
-        if (response.data.status === 'SUCCESS') {
+        if (response.data.status === "SUCCESS") {
           // 로컬 스토리지에 문제 데이터 저장
-          localStorage.setItem(
-            'questions',
-            JSON.stringify(response.data.data.questions)
+          sessionStorage.setItem(
+            "questions",
+            JSON.stringify(response.data.data.questions),
           );
           const storedQuestions = JSON.parse(
-            localStorage.getItem('questions') || '[]'
+            sessionStorage.getItem("questions") || "[]",
           );
           setTestData(storedQuestions);
         }
@@ -66,14 +66,14 @@ const BasicTest: React.FC = () => {
           {
             id: 1,
             questionText:
-              '개를 크게 소형견, 중형견, 대형견으로 나눌때 소형견에 해당하는 성견의 체중과 체고는 무엇인가?',
+              "개를 크게 소형견, 중형견, 대형견으로 나눌때 소형견에 해당하는 성견의 체중과 체고는 무엇인가?",
             TestNum: 1,
             choices: [
-              { id: 1, choiceText: '체중 10kg이하, 체고 40cm 미만' },
-              { id: 2, choiceText: '체중 20kg이하, 체고 40cm 미만' },
-              { id: 3, choiceText: '체중 30kg이하, 체고 40cm 미만' },
-              { id: 4, choiceText: '체중 40kg이하, 체고 40cm 미만' },
-              { id: 5, choiceText: '체중 50kg이하, 체고 40cm 미만' },
+              { id: 1, choiceText: "체중 10kg이하, 체고 40cm 미만" },
+              { id: 2, choiceText: "체중 20kg이하, 체고 40cm 미만" },
+              { id: 3, choiceText: "체중 30kg이하, 체고 40cm 미만" },
+              { id: 4, choiceText: "체중 40kg이하, 체고 40cm 미만" },
+              { id: 5, choiceText: "체중 50kg이하, 체고 40cm 미만" },
             ],
           },
         ]);
@@ -85,21 +85,21 @@ const BasicTest: React.FC = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setErrorMessage('서비스 이용을 위해 로그인을 하세요.');
+      setErrorMessage("서비스 이용을 위해 로그인을 하세요.");
     } else {
-      setErrorMessage('');
+      setErrorMessage("");
     }
   }, [isLoggedIn]);
 
   const handleAnswer = (answer: string) => {
     if (testData) {
       const selectedChoice = testData[currentQuestionIndex].choices.find(
-        (choice) => choice.choiceText === answer
+        choice => choice.choiceText === answer,
       );
 
       if (selectedChoice) {
         setSelectedAnswer(selectedChoice.id);
-        setSelectedExample(selectedChoice.id); // 선택한 Example 업데이트
+        setSelectedExample(selectedChoice.id);
       }
     }
   };
@@ -112,7 +112,7 @@ const BasicTest: React.FC = () => {
     if (selectedAnswer !== null && testData) {
       const currentQuestionId = testData[currentQuestionIndex].id;
       const existingAnswerIndex = userAnswers.findIndex(
-        (answer) => answer.questionId === currentQuestionId
+        answer => answer.questionId === currentQuestionId,
       );
       let newUserAnswers;
       if (existingAnswerIndex !== -1) {
@@ -131,32 +131,32 @@ const BasicTest: React.FC = () => {
       }
 
       setUserAnswers(newUserAnswers);
-      localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
+      sessionStorage.setItem("userAnswers", JSON.stringify(newUserAnswers));
 
       if (currentQuestionIndex + 1 >= testData.length) {
         try {
-          const response = await post<ResultResponse>('/basic-test/submit', {
+          const response = await post<ResultResponse>("/basic-test/submit", {
             answers: newUserAnswers,
           });
-          localStorage.setItem('result', JSON.stringify(response.data));
-          navigate('/result');
+          sessionStorage.setItem("result", JSON.stringify(response.data));
+          navigate("/result");
         } catch (error: any) {
-          console.log('error', error);
+          console.log("error", error);
           if (
             error.response &&
             error.response?.data &&
-            error.response?.data?.data === '분양희망자 회원이 아닙니다.'
+            error.response?.data?.data === "분양희망자 회원이 아닙니다."
           ) {
-            window.scroll({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
-            setErrorMessage('분양 희망자 회원이 아닙니다.'); // 에러 메시지 설정
+            window.scroll({ top: 0, behavior: "smooth" }); // 스크롤을 페이지 상단으로 이동
+            setErrorMessage("분양 희망자 회원이 아닙니다."); // 에러 메시지 설정
             setShowLoginModal(true); // 로그인 모달 보여주기
           } else if (
-            error.response?.data?.data === '해당 회원을 찾을 수 없습니다.'
+            error.response?.data?.data === "해당 회원을 찾을 수 없습니다."
           ) {
-            setErrorMessage('해당 회원을 찾을 수 없습니다.'); // 에러 메시지 설정
+            setErrorMessage("해당 회원을 찾을 수 없습니다."); // 에러 메시지 설정
             setShowLoginModal(true); // 로그인 모달 보여주기
           } else {
-            setErrorMessage('답변 제출 과정에서 오류가 발생했습니다.'); // 기본 에러 메시지 설정
+            setErrorMessage("답변 제출 과정에서 오류가 발생했습니다."); // 기본 에러 메시지 설정
           }
         }
       } else {
@@ -185,10 +185,10 @@ const BasicTest: React.FC = () => {
       {/* 로그인 모달 추가 */}
       {errorMessage && (
         <LoginModal
-          top={'8'}
+          top={"8"}
           onLogin={() => {
             setIsLoggedIn(true);
-            setErrorMessage(''); // 로그인에 성공하면 에러 메시지 초기화
+            setErrorMessage(""); // 로그인에 성공하면 에러 메시지 초기화
           }}
           onClose={() => setShowLoginModal(false)}
           errorMessage={errorMessage} // 에러 메시지 prop 전달
@@ -205,10 +205,10 @@ const BasicTest: React.FC = () => {
           {currentQuestion && (
             <>
               <TestComp
-                TestNum={(currentQuestionIndex + 1).toString().padStart(2, '0')}
+                TestNum={(currentQuestionIndex + 1).toString().padStart(2, "0")}
                 Question={currentQuestion.questionText}
                 Example={currentQuestion.choices.map(
-                  (choice) => choice.choiceText
+                  choice => choice.choiceText,
                 )}
                 onAnswer={handleAnswer}
                 selectedExample={selectedExample}
@@ -220,7 +220,7 @@ const BasicTest: React.FC = () => {
                     <NextBtn onClick={handleNext}>다음</NextBtn>
                   </>
                 ) : (
-                  <NextBtn style={{ width: '100%' }} onClick={handleNext}>
+                  <NextBtn style={{ width: "100%" }} onClick={handleNext}>
                     다음
                   </NextBtn>
                 )}
