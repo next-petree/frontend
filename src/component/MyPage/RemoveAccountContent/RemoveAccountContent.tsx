@@ -48,7 +48,7 @@ const RemoveAccountContent = () => {
 
         if (response.data.status === "SUCCESS") {
           Swal.fire(alertList.successMessage("회원탈퇴가 완료되었습니다."));
-          localStorage.clear();
+          sessionStorage.clear();
           navigation("/");
         } else {
           Swal.fire(alertList.errorMessage(response.data.data));

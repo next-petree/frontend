@@ -39,8 +39,8 @@ const Header = () => {
 
   useEffect(() => {
     if (
-      localStorage.getItem("accessToken") &&
-      localStorage.getItem("refreshToken")
+      sessionStorage.getItem("accessToken") &&
+      sessionStorage.getItem("refreshToken")
     ) {
       setIsLoggedIn(true);
       dispath(setProfileImg(localStorage.getItem("profileImg")!))

@@ -25,8 +25,8 @@ const NavDropdown = ({ loggedIn }: IDropdownProps) => {
   const handleLogoutClick = async () => {
     try {
       const res = await get<ILogoutResponse>("/logout");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("refreshToken");
       if (res.data.status === "SUCCESS") {
         await Swal.fire({
           ...alertList.successMessage(res.data.data),

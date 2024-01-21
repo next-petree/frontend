@@ -1,6 +1,6 @@
 export default function DecodeToken() {
   // accessToken 가져오기
-  const token = localStorage.getItem("accessToken")?.replace("Bearer ", "");
+  const token = sessionStorage.getItem("accessToken")?.replace("Bearer ", "");
   // token이 없으면 알림 표시
   if (!token) {
     // console.log("토큰이 없습니다.");

@@ -56,14 +56,10 @@ const LoginContent = () => {
       if (response.data.status === "SUCCESS") {
         await Swal.fire(alertList.successMessage("로그인에 성공했습니다."));
 
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        if(response.data.data.profileImgUrl) {
-          localStorage.setItem("profileImg", response.data.data.profileImgUrl);
-        }
-        else {
-          localStorage.setItem("profileImg", "")
-        }
+        sessionStorage.setItem("accessToken", response.data.data.accessToken);
+        sessionStorage.setItem("refreshToken", response.data.data.refreshToken);
+
+        dispath(setProfileImg(response.data.data.profileImgUrl!));
         navigate("/");
       } else if (response.data.status === "FAIL") {
         await Swal.fire(alertList.errorMessage(`${response.data.data}`));
