@@ -68,6 +68,8 @@ export const UserProfileImage = styled.div<{
   height: 32px;
   border-radius: 50%;
   cursor: pointer;
+  overflow: hidden;
+  align-self: center;
   object-fit: cover;
   ${props =>
     props.$imgSrc

@@ -37,7 +37,7 @@ import {
 } from "../../../../redux/Mypage1/AvatarSlice1";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-
+import { selectChangeAvatarSlice, setChangeavatar } from "../../../../redux/Mypage1/ChangeAvatarSlice1";
 interface IUser {
   email: string;
   exp: number;
@@ -50,9 +50,9 @@ interface IUser {
 const ProfileForm = () => {
   const [isBreederAuth, setIsBreederAuth] = useState(false);
   const [isAdopterAuth, setIsAdopterAuth] = useState(false);
-  const [changeAvatar, setChangeAvatar] = useState(false);
 
   const avatar = useAppSelector(selectAvatarSlice);
+  const changeavatar = useAppSelector(selectChangeAvatarSlice);
   const dispath = useAppDispatch();
 
   const {
@@ -115,7 +115,7 @@ const ProfileForm = () => {
     } catch (e) {}
   };
   const onChangeAvatar = () => {
-    setChangeAvatar(true);
+    dispath(setChangeavatar(true));
   };
 
   useEffect(() => {
@@ -135,8 +135,8 @@ const ProfileForm = () => {
     <>
       <Container>
         <Infos>
-          <AvatarInfo onClick={onChangeAvatar}>
-            <AvatarBorder $isAuth={isBreederAuth}>
+          <AvatarInfo >
+            <AvatarBorder $isAuth={isBreederAuth} onClick={onChangeAvatar}>
               {avatar.avatar ? (
                 <Avatar src={avatar.avatar} alt="Profile_image" />
               ) : (
@@ -178,25 +178,25 @@ const ProfileForm = () => {
             <Badge>
               {isBreederAuth ? (
                 <svg
-                  width="2.2vw"
-                  height="2.5vw"
-                  viewBox="0 0 53 52"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
+                width="2.2vw"
+                height="2.5vw"
+                viewBox="0 0 53 52"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
                     d="M45.9235 34.1445C44.5836 37.6805 42.5566 40.7539 39.8983 43.2803C36.872 46.1562 32.9098 48.4413 28.1211 50.0711C27.9639 50.1243 27.8 50.168 27.6351 50.2003C27.4174 50.2421 27.1969 50.2649 26.9773 50.2677H26.9344C26.7001 50.2677 26.4649 50.2449 26.2317 50.2003C26.0668 50.168 25.9048 50.1243 25.7486 50.0721C20.955 48.4451 16.987 46.1609 13.9587 43.285C11.2994 40.7587 9.27244 37.6871 7.9335 34.1511C5.4996 27.7231 5.63817 20.6426 5.74943 14.9516L5.75138 14.8643C5.77383 14.3941 5.78846 13.9012 5.79627 13.356C5.83726 10.6796 8.02328 8.4657 10.7734 8.31659C16.5068 8.00506 20.9423 6.18531 24.7327 2.59045L24.7659 2.56101C25.3954 1.99875 26.1878 1.72332 26.9773 1.73471C27.7375 1.74516 28.4958 2.01964 29.1028 2.56101L29.135 2.59045C32.9254 6.18531 37.3609 8.00506 43.0943 8.31659C45.8444 8.4657 48.0305 10.6796 48.0715 13.356C48.0793 13.905 48.0939 14.3979 48.1164 14.8643V14.9013C48.2286 20.6027 48.3662 27.6975 45.9235 34.1445Z"
                     fill="#FF6363"
-                  />
-                  <path
+                />
+                <path
                     d="M39.3616 25.9976C39.3616 32.6526 33.8097 38.0701 26.9774 38.0938H26.9335C20.0807 38.0938 14.5044 32.6669 14.5044 25.9976C14.5044 19.3284 20.0807 13.9023 26.9335 13.9023H26.9774C33.8097 13.9261 39.3616 19.3426 39.3616 25.9976Z"
                     fill="white"
-                  />
-                  <path
+                />
+                <path
                     d="M32.5745 24.2561L26.9767 29.7039L25.7676 30.8807C25.4816 31.159 25.1069 31.2976 24.7331 31.2976C24.3593 31.2976 23.9836 31.159 23.6977 30.8807L21.0969 28.3486C20.525 27.7921 20.525 26.8917 21.0969 26.3351C21.6678 25.7786 22.5939 25.7786 23.1658 26.3351L24.7321 27.8595L30.5046 22.2416C31.0765 21.6851 32.0026 21.6851 32.5735 22.2416C33.1454 22.7982 33.1454 23.6995 32.5735 24.2551L32.5745 24.2561Z"
                     fill="#908181"
-                  />
-                </svg>
+                />
+            </svg>
               ) : (
                 <svg
                   width="2.2vw"
@@ -294,7 +294,7 @@ const ProfileForm = () => {
           </Form>
         </Infos>
       </Container>
-      {changeAvatar ? <AvatarUpload setChangeAvatar={setChangeAvatar} /> : null}
+      {changeavatar.changeavatar ? <AvatarUpload /> : null}
     </>
   );
 };
