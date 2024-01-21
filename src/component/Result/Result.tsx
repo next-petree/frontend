@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { post } from '../../api/api';
-import Result1 from '../../assets/images/Result1.png';
-import Badge from '../../assets/images/Badge.png';
+import React, { useEffect, useState } from "react";
+import { post } from "../../api/api";
+import Result1 from "../../assets/images/Result1.png";
+import Badge from "../../assets/images/Badge.png";
 
 import {
   Wrapper,
@@ -18,7 +18,7 @@ import {
   AnswerBtn,
   ResultFailed,
   ResultAcceptance,
-} from './ResultStyle';
+} from "./ResultStyle";
 
 // type ResultResponse = {
 //   status: string;
@@ -33,7 +33,7 @@ export default function ResultComp() {
   const [score, setScore] = useState<number>(0);
   const [passed, setPassed] = useState<boolean>(false);
   useEffect(() => {
-    const storedResult = JSON.parse(localStorage.getItem('result') || '[]');
+    const storedResult = JSON.parse(sessionStorage.getItem("result") || "[]");
     setScore(storedResult.score);
     setPassed(storedResult.passed);
   }, []);
@@ -59,7 +59,7 @@ export default function ResultComp() {
             </ResultInfo>
             <BtnWrapper>
               {score === 100 ? (
-                <AnswerBtn to="/answer" style={{ width: '100%' }}>
+                <AnswerBtn to="/answer" style={{ width: "100%" }}>
                   해설보기
                 </AnswerBtn>
               ) : (
@@ -94,12 +94,12 @@ export default function ResultComp() {
 //   const submitAnswers = async () => {
 //     try {
 //       const userAnswers = JSON.parse(
-//         localStorage.getItem('userAnswers') || '[]'
+//         sessionStorage.getItem('userAnswers') || '[]'
 //       );
 //       const response = await post<ResultResponse>('/api/basic-test/submit', {
 //         answers: userAnswers,
 //       });
-//       localStorage.setItem('result', JSON.stringify(response.data));
+//       sessionStorage.setItem('result', JSON.stringify(response.data));
 //       console.log('결과 받아오기!!!!', response.data);
 //       setScore(response.data.score);
 //       setPassed(response.data.passed);

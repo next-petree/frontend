@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Wrapper,
   AnswerTitle,
   SubTitle,
   AnswerWrapper,
   Btn,
-} from './AnswerStyle';
-import AnswerComp1 from './AnswerComp1/AnswerComp1';
-import { QuestionType, AnswersType, ResultType } from '../../types/index';
+} from "./AnswerStyle";
+import AnswerComp1 from "./AnswerComp1/AnswerComp1";
+import { QuestionType, AnswersType, ResultType } from "../../types/index";
 
 export default function AnswerComp() {
   const navigate = useNavigate();
   const storedQuestions: QuestionType = JSON.parse(
-    localStorage.getItem('questions') || '[]'
+    sessionStorage.getItem("questions") || "[]",
   );
   const storedUserAnswers: AnswersType = JSON.parse(
-    localStorage.getItem('userAnswers') || '[]'
+    sessionStorage.getItem("userAnswers") || "[]",
   );
   const storedResult: ResultType = JSON.parse(
-    localStorage.getItem('result') || '{}'
+    sessionStorage.getItem("result") || "{}",
   );
 
   function moveBack() {
@@ -33,10 +33,10 @@ export default function AnswerComp() {
       <AnswerWrapper>
         {storedQuestions.map((question, index) => {
           const result = storedResult.explanations.find(
-            (res) => res.questionId === question.id
+            res => res.questionId === question.id,
           );
           const userAnswer = storedUserAnswers.find(
-            (answer) => answer.questionId === question.id
+            answer => answer.questionId === question.id,
           );
           return (
             <AnswerComp1
@@ -46,7 +46,7 @@ export default function AnswerComp() {
               num={index}
               question={question.questionText}
               choices={question.choices}
-              solution={result?.explanationText || ''}
+              solution={result?.explanationText || ""}
               correctChoiceId={result?.correctChoiceId}
               selectedChoiceId={userAnswer?.selectedChoiceId} // selectedChoiceId를 props로 전달
             />

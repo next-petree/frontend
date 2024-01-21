@@ -45,8 +45,8 @@ const KakaoCallback = () => {
       );
 
       if (response.data.status === "SUCCESS") {
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
+        sessionStorage.setItem("accessToken", response.data.data.accessToken);
+        sessionStorage.setItem("refreshToken", response.data.data.refreshToken);
         navigate("/");
       } else if (response.data.status === "FAIL") {
         Swal.fire(alertList.errorMessage("카카오에 연동된 계정이 없습니다."));

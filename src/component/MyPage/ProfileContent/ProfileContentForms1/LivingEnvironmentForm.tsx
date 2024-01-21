@@ -1,4 +1,3 @@
-import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import {
   Button,
   Container,
@@ -26,6 +25,7 @@ import {
 import { LivingEnvironmentUrl } from "../../../../utils/MypageUrl1";
 import { get, put } from "../../../../api/api";
 import React from "react";
+import { resizeFile } from "../../../../utils/ImageResize";
 
 export interface ILivingEnvironment {
   yard: FileList | null;
@@ -33,18 +33,37 @@ export interface ILivingEnvironment {
   livingRoom: FileList | null;
 }
 
+export interface ILivingEnvironmentPreview {
+  yard: string | null;
+  bathRoom: string | null;
+  livingRoom: string | null;
+}
+
 const LivingEnvironmentForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    setValue,
-  } = useForm<ILivingEnvironment>();
-  const getUser = DecodeToken();
-  const [deleteImgId, setDeleteImgId] = useState<number[]>([])
+  const { register, handleSubmit, watch, setValue } =
+    useForm<ILivingEnvironment>();
+  // 삭제하는 이미지의 id를 담아놓은 state입니다.
+  const [deleteImgId, setDeleteImgId] = useState<number[]>([]);
+  // 처음 api를 요청했을 때의 정보를 담아놓는 state입니다.
   const [imageData, setImageData] = useState<LivingEnvironmentsData[]>([]);
-  const onValid = async ({livingRoom,bathRoom,yard,}: ILivingEnvironment) => {
+  // 사용자에게 주거환경 이미지의 실시간 프리뷰를 보여주는 state 입니다.
+  const [imagesPre, setImagesPre] = useState<ILivingEnvironmentPreview>({
+    yard: "",
+    bathRoom: "",
+    livingRoom: "",
+  });
+  // 사용자가 이미지를 저장 하기 이전에 수정을 할 때 마다 상태를 확인 하기 위한 객체 입니다.
+  const images = {
+    yard: watch("yard"),
+    bathRoom: watch("bathRoom"),
+    livingRoom: watch("livingRoom"),
+  };
+
+  const onValid = async ({
+    livingRoom,
+    bathRoom,
+    yard,
+  }: ILivingEnvironment) => {
     const answer = await Swal.fire({
       ...alertList.doubleCheckMessage("주거 환경을 저장 하시겠습니까?"),
       width: "350px",
@@ -52,48 +71,48 @@ const LivingEnvironmentForm = () => {
     if (answer.isConfirmed) {
       try {
         const form = new FormData();
-        const id = Array.from(new Set(deleteImgId));
-        console.log(id)
-        if (livingRoom && livingRoom.length > 0) {
-          form.append("livingRoomImg", livingRoom[0]);
-        }
-        else {
-          form.append("livingRoomImg","");
-        }
 
-        if (bathRoom && bathRoom.length > 0) {
-          form.append("bathRoomImg", bathRoom[0]);
+        // 사용자가 이미지를 여러번 수정 할 수 있기 떄문에 값은 id값이 중복 되어서 들어가 있을 수 있으므로 set type을 사용합니다.
+        const id = Array.from(new Set(deleteImgId));
+
+        // 이미지가 존재하면 resize해서 formdata에 append 합니다.
+        if (livingRoom && livingRoom.length > 0) {
+          const livingRoom_Resize = (await resizeFile(livingRoom[0])) as File;
+          form.append("livingRoomImg", livingRoom_Resize);
         }
-        else {
-          form.append("bathRoomImg", "");
+        if (bathRoom && bathRoom.length > 0) {
+          const bathRoom_Resize = (await resizeFile(bathRoom[0])) as File;
+          form.append("bathRoomImg", bathRoom_Resize);
         }
 
         if (yard && yard.length > 0) {
-          form.append("yardImg", yard[0]);
+          const yard_Resize = (await resizeFile(yard[0])) as File;
+          form.append("yardImg", yard_Resize);
         }
-        else {
-          form.append("yardImg", "");
-        }
-        form.append("deletedImgsId", `${id}`);
+        const data = {
+          deletedImgsId: id,
+        };
+        // 수현님이 용현님쪽 api를 어떤식으로 설계하신지는 모르겠지만, 저는 지워야 하는 이미지 id를 보낼 때 Blob을 사용하지 않으면 에러가 발생했습니다.
+        const blob = new Blob([JSON.stringify(data)], {
+          type: "application/json",
+        });
+        form.append("deletedImgsId", blob);
         const url = LivingEnvironmentUrl();
         const response = await put<LivingEnvironmentsUploadResultResponse>(
           url,
           form
         );
+        if (response.data.status === "SUCCESS") {
+          Swal.fire({
+            ...alertList.successMessage("주거 환경이 저장되었습니다"),
+            width: "350px",
+          });
+        }
       } catch (e) {}
     }
   };
-  // 이미지 url만 보내면 업로드가 되는 건지
-  const [imagesPre, setImagesPre] = useState({
-    yard: "",
-    bathRoom: "",
-    livingRoom: "",
-  });
-  const images = {
-    yard: watch("yard"),
-    bathRoom: watch("bathRoom"),
-    livingRoom: watch("livingRoom"),
-  };
+  
+  // 아래의 useEffect를 통해서 사용자가 이미지를 수정하면 images 사용해 그것을 감지하고 imagesPre에 표시합니다.
   useEffect(() => {
     if (images.yard && images.yard.length > 0) {
       const file1 = images.yard[0];
@@ -113,28 +132,31 @@ const LivingEnvironmentForm = () => {
     }
   }, [images.livingRoom]);
 
+  // 이미지를 삭제 할때마다 imagesPre의 값을 set 하고 deleteImgId에 이미지의 id 값을 저장합니다.
   const onDelete = (data: string) => {
     if (data === "yard") {
-      setImagesPre({ ...imagesPre, yard: "" });
+      setImagesPre({ ...imagesPre, yard: null });
       setValue(data, null);
-      if(imageData[2] && imageData[2].id) {
-        setDeleteImgId([...deleteImgId, imageData[2].id])
+      if (imageData[2] && imageData[2].id) {
+        setDeleteImgId([...deleteImgId, imageData[2].id]);
       }
     } else if (data === "bathRoom") {
-      setImagesPre({ ...imagesPre, bathRoom: "" });
+      setImagesPre({ ...imagesPre, bathRoom: null });
       setValue(data, null);
-      if(imageData[1] && imageData[1].id) {
-        setDeleteImgId([...deleteImgId, imageData[1].id])
+      if (imageData[1] && imageData[1].id) {
+        setDeleteImgId([...deleteImgId, imageData[1].id]);
       }
     } else if (data === "livingRoom") {
-      setImagesPre({ ...imagesPre, livingRoom: "" });
+      setImagesPre({ ...imagesPre, livingRoom: null });
       setValue(data, null);
-      if(imageData[0] && imageData[0].id) {
-        setDeleteImgId([...deleteImgId, imageData[0].id])
+      if (imageData[0] && imageData[0].id) {
+        setDeleteImgId([...deleteImgId, imageData[0].id]);
       }
     }
   };
   //spaceType: "LIVING_ROOM" | "BATH_ROOM" | "YARD";
+  // 최초에 주거환경 데이터를 받아오는 부분 입니다.
+  //ImageData 와 ImagesPre state에 set 해놓습니다.
   const getLivingEnvironments = async () => {
     try {
       const url = LivingEnvironmentUrl();
@@ -154,12 +176,12 @@ const LivingEnvironmentForm = () => {
     <Container>
       <Form onSubmit={handleSubmit(onValid)}>
         <Infos>
-          <Title>주거환경{}</Title>
+          <Title>주거환경</Title>
           <Images>
             <ImageContainer>
-              {imagesPre.yard !== "" ? (
+              {imagesPre.yard !== null ? (
                 <>
-                  <Image src={imagesPre.yard} alt="" />
+                  <Image src={imagesPre.yard} alt="Yard_image" />
                   <ImageDeleteBtn onClick={() => onDelete("yard")}>
                     <svg
                       width="36"
@@ -243,9 +265,9 @@ const LivingEnvironmentForm = () => {
               <ImageText>마당</ImageText>
             </ImageContainer>
             <ImageContainer>
-              {imagesPre.bathRoom !== "" ? (
+              {imagesPre.bathRoom !== null ? (
                 <>
-                  <Image src={imagesPre.bathRoom} alt="" />
+                  <Image src={imagesPre.bathRoom} alt="BathRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("bathRoom")}>
                     <svg
                       width="36"
@@ -329,9 +351,9 @@ const LivingEnvironmentForm = () => {
               <ImageText>화장실</ImageText>
             </ImageContainer>
             <ImageContainer>
-              {imagesPre.livingRoom !== "" ? (
+              {imagesPre.livingRoom !== null ? (
                 <>
-                  <Image src={imagesPre.livingRoom} alt="" />
+                  <Image src={imagesPre.livingRoom} alt="LivingRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("livingRoom")}>
                     <svg
                       width="36"

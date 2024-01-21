@@ -51,7 +51,8 @@ export const dogCardData = [
 ];
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
-export const BREEDERS_URL = "/api/breeders";
-export const DOGS_URL = "/api/dogs";
-export const ADOPTER_URL = "/api/adopters";
-export const RESERVATION_URL = "/api/me/matchings";
+export const BREEDERS_URL = "/breeders";
+export const DOGS_URL = "/dogs";
+export const ADOPTER_URL = "/adopters";
+export const RESERVATION_URL = "/me/matchings";
+export const REVIEW_URL = "/adopter/reviews";

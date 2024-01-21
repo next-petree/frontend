@@ -7,7 +7,6 @@ import {
   AvatarLabel,
   Button,
   Form,
-  ImageDeleteBtn,
   Overlay,
   Store,
   UploadAvatarBorder,
@@ -29,34 +28,28 @@ import {
 import React from "react";
 import DecodeToken from "../../../../utils/DecodeJWT/DecodeJWT";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { resizeFile } from "../../../../utils/ImageResize";
+import { setProfileImg } from "../../../../redux/Breeder1/BreederSlice1";
+import { setChangeavatar } from "../../../../redux/Mypage1/ChangeAvatarSlice1";
 
-interface IAvatarUpload {
-  setChangeAvatar: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-interface IUser {
-  email: string;
-  exp: number;
-  iat: number;
-  role: "ADOPTER" | "BREEDER";
-  sub: string;
-  verification: boolean;
-}
 
-const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
+
+
+const AvatarUpload = () => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
   } = useForm<IChangeAvatar>();
-  const accountInfo = DecodeToken();
-  const [user, setuser] = useState<IUser>(accountInfo);
-  const [isAvatarDel, setIsAvatarDel] = useState<boolean>(false);
+  
   const nowavatar = useAppSelector(selectAvatarSlice);
   const dispath = useAppDispatch();
+  
   const [avatarPreview, setAvatarPreview] = useState(nowavatar.avatar);
   const avatar = watch("avatar");
+
   useEffect(() => {
     if (avatar && avatar.length > 0) {
       const file = avatar[0];
@@ -69,22 +62,31 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
   };
   const onValid = async ({ avatar }: IChangeAvatar) => {
     const answer = await Swal.fire({
-      ...alertList.doubleCheckMessage("프로필 사진은 변경하시겠습니까?"),
+      ...alertList.doubleCheckMessage("프로필 사진을 변경하시겠습니까?"),
       width: "350px",
     });
     if (answer.isConfirmed) {
       // post가 제대로 보내지지 않음
       if (avatar && avatar.length > 0) {
         try {
+          const avatar_Resize = (await resizeFile(avatar[0])) as File;
           const url = AvatarUrl("post");
           const form = new FormData();
-          form.append("image", avatar[0]);
+          form.append("image", avatar_Resize);
           const response = await post<AvatarResultResponse>(url, form);
           if (response.data.status === "FAIL") {
             throw "올바르지 못한 접근 입니다.";
           }
+          if (response.data.status === "SUCCESS") {
+            Swal.fire({
+              ...alertList.successMessage("프로필 사진이 변경되었습니다"),
+              width: "350px",
+            });
+          }
           dispath(setAvatar(response.data.data.fileUrl));
           dispath(setAvatarId(response.data.data.id));
+          dispath(setProfileImg(response.data.data.fileUrl));
+          localStorage.setItem("profileImg", response.data.data.fileUrl);
         } catch (e) {}
       }
       else {
@@ -96,11 +98,14 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
               throw "올바르지 못한 접근 입니다.";
             }
             dispath(setAvatar(""));
+            dispath(setProfileImg(""));
+            localStorage.setItem("profileImg", "");
           } catch (e) {}
         }
       }
     }
-    setChangeAvatar(false);
+    
+    dispath(setChangeavatar(false))
   };
   return (
     <Overlay>
@@ -109,7 +114,7 @@ const AvatarUpload = ({ setChangeAvatar }: IAvatarUpload) => {
           {avatarPreview !== "" ? (
             <>
               <UploadAvatarBorder>
-                <Avatar src={avatarPreview} alt="" />
+                <Avatar src={avatarPreview} alt="Profile_image_preview" />
               </UploadAvatarBorder>
               <AvatarDeleteBtn onClick={onDelete}>
                 <svg
