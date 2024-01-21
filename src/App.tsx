@@ -81,7 +81,7 @@ function App() {
                         path="/breeding-complete"
                         element={<BreedingComplete />}
                     />
-                    <Route path="/mypage/review" element={<ManageReview />} />
+                    <Route path="/mypage/review/:pageId" element={<ManageReview />} />
                     <Route
                         path="/mypage/review/create"
                         element={<CreateReview />}
@@ -92,7 +92,7 @@ function App() {
                         element={<EditReview />}
                     ></Route>
 
-                    <Route path="/mypage/owndogs" element={<ManageOwnDogs />} />
+                    <Route path="/mypage/owndogs/:pageId" element={<ManageOwnDogs />} />
                     <Route
                         path="/mypage/owndogs/edit/:id"
                         element={<EditOwnDogs />}
