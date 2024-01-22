@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import petTreeIconImage from "../../assets/icons/pets_black_24dp.png";
+import KakaoLogo from "../../assets/images/kakao.png";
 
 export const Container = styled.div`
   display: flex;
@@ -159,9 +160,13 @@ export const BasicLoginButton = styled.button`
 `;
 
 export const KakaoLoginButton = styled(BasicLoginButton)`
+  background-image: url(${KakaoLogo});
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 20px center;
   background-color: #fee500;
-  color: #060606;
-  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #000;
 `;
 
 export const SignUpButtonArea = styled.div`
