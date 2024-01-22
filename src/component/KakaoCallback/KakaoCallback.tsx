@@ -49,15 +49,13 @@ const KakaoCallback = () => {
         sessionStorage.setItem("refreshToken", response.data.data.refreshToken);
         navigate("/");
       } else if (response.data.status === "FAIL") {
-        Swal.fire(alertList.errorMessage("카카오에 연동된 계정이 없습니다."));
+        Swal.fire(alertList.errorMessage("연동된 기존 계정이 없습니다."));
         navigate("/login");
         return;
       }
     } catch (error) {
       console.error("Kakao login error:", error);
-      await Swal.fire(
-        alertList.errorMessage("카카오 로그인 중 오류가 발생했습니다."),
-      );
+      await Swal.fire(alertList.infoMessage("연동된 기존 계정이 없습니다."));
       navigate("/login");
     }
   };
