@@ -56,10 +56,10 @@
 | **Language** |
 
 JavaScript, TypeScript
-
+<!--
 | **Backend** |
 
-Node.js, Express.js, Mongoose
+Node.js, Express.js, Mongoose-->
 
 | **Frontend** |
 
@@ -73,7 +73,7 @@ Figma, Github, Slack
 
 Frontend : AWS S3, CloudFront, Route53
 <br/>
-BackEnd:
+<!--BackEnd:-->
 
 <br>
 
