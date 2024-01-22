@@ -4,7 +4,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - boilerPlate
+      - main
 
 # 작업 정의
 jobs:
@@ -53,5 +53,5 @@ jobs:
         run: |
           aws s3 sync \
             --region ap-northeast-2 \
-            build s3://petree-front\
+            build s3://nextpetree.store\
             --delete
