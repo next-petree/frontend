@@ -56,6 +56,7 @@
 | **Language** |
 
 JavaScript, TypeScript
+
 <!--
 | **Backend** |
 
@@ -73,6 +74,7 @@ Figma, Github, Slack
 
 Frontend : AWS S3, CloudFront, Route53
 <br/>
+
 <!--BackEnd:-->
 
 <br>
@@ -370,7 +372,7 @@ npm run start
 
 <br>
 
-## 📌 팀 구성원
+## 📌 프론트엔드 팀 구성원
 
 <table width="600">
     <thead>
