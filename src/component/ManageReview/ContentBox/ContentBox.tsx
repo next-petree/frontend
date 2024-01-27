@@ -21,7 +21,7 @@ interface IReview {
 }
 
 const ContentBox = () => {
-     // 첫 페이지로 오실려면 "mypage/review/1" 이런 식으로 url을 연결 하셔야 합니다.
+    // 첫 페이지로 오실려면 "mypage/review/1" 이런 식으로 url을 연결 하셔야 합니다.
     // 되도록이면 첫 페이지가 "mypage/review/0" 이 아닌 "mypage/review/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
     const param = useParams();
     const [page, setPage] = useState(Number(param.pageId));
@@ -33,7 +33,7 @@ const ContentBox = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<any>(
-                `${process.env.REACT_APP_API_URL}adopter/reviews`
+                `${process.env.REACT_APP_API_URL}/adopter/reviews`
             );
 
             return res.data.data.content;

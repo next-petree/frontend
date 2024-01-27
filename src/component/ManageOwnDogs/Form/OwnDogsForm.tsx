@@ -63,13 +63,7 @@ const OwnDogsForm = ({ dog }: IProps) => {
                         </S.LeftInputContainer>
                         <S.RightInputContainer>
                             <S.InputContainer>
-                                <S.InputTitle>출생일</S.InputTitle>
-                                {/* Date 부분 진행해주시면 됩니다.*/}
-                                {/* Date 부분 진행해주시면 됩니다.*/}
-                                {/* Date 부분 진행해주시면 됩니다.*/}
-                                {/* Date 부분 진행해주시면 됩니다.*/}
-                                {/* Date 부분 진행해주시면 됩니다.*/}
-                                {/* Date 부분 진행해주시면 됩니다.*/}
+                                <S.InputTitle>출생일</S.InputTitle>s
                                 <CustomDate>
                                 <DateInput
                                     placeHolder="년"

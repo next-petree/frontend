@@ -84,15 +84,15 @@ const DateInput = ({ placeHolder, width, height }: Props) => {
         <SelectUl customwidth={width}>
           {placeHolder === "년" &&
             years.map((y) => (
-              <SelectLi onClick={() => onClickDate(y)}>{y}</SelectLi>
+              <SelectLi key={y} onClick={() => onClickDate(y)}>{y}</SelectLi>
             ))}
           {placeHolder === "월" &&
             month.map((m) => (
-              <SelectLi onClick={() => onClickDate(m)}>{m}</SelectLi>
+              <SelectLi key={m} onClick={() => onClickDate(m)}>{m}</SelectLi>
             ))}
           {placeHolder === "일" &&
             day.map((d) => (
-              <SelectLi onClick={() => onClickDate(d)}>{d}</SelectLi>
+              <SelectLi key={d} onClick={() => onClickDate(d)}>{d}</SelectLi>
             ))}
         </SelectUl>
       )}
