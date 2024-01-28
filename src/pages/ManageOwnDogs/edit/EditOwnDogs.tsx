@@ -24,7 +24,6 @@ const EditOwnDogs = () => {
                     <Navbar />
                     <OwnDogsForm dog={dog} />
                 </BoxsContainer>
-                <SubmitButton>저장</SubmitButton>
             </Container>
         </CustomLayout>
     );

@@ -192,13 +192,13 @@ export const TextLength = styled.span`
 
 export const ImageUploaderContainer = styled.div`
     // 240 * 3 + 36 * 2
-    width: 792px;
+    width: 100%;
     // 지워야함
     /* height: 212px; */
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 `;
 
 export const ImageUploaderTitle = styled.div`
@@ -214,40 +214,31 @@ export const ImageUploaderTitle = styled.div`
 export const ImageUploaderFlexBox = styled.div`
     width: 100%;
     display: flex;
-    gap: 36px;
+    flex-wrap: wrap;
+    gap: 18px;
 `;
 
-export const ImageUpoaderbox = styled.div`
-    width: 240px;
+export const ImageUploaderBox = styled.div`
+    width: 220px;
     height: 212px;
 
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    position: relative;
 `;
 
-export const ImageBox = styled.div<{ img?: string }>`
-    width: 240px;
+export const ImageBox = styled.div`
+    width: 100%;
     height: 144px;
     border-radius: 12px;
     background: #f5f5f5;
-    background-image: url(${(props) => props.img});
 `;
 
-export const ImageUploaderButton = styled.button`
-    width: 240px;
-    height: 52px;
-    border: none;
-    border-radius: 16px;
-    background: #4ec1bf;
-
-    font-family: Noto Sans KR;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 26px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #ffffff;
-
-    cursor: pointer;
-`;
+export const Image = styled.img`
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+`

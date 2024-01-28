@@ -1,14 +1,41 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import { IoIosArrowBack } from "react-icons/io";
 
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 import DateInput from "../CustomInput/DateInput";
+import ImageDeleteButton from "../ImageDeleteButton/ ImageDeleteButton";
+import AddImageIcon from "../AddImageIcon/AddImageIcon";
+import { patch, post } from "../../../api/api";
+
+const MergeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const SubmitButton = styled.button`
+  width: 240px;
+  height: 52px;
+  border-radius: 16px;
+  border: none;
+  background: #4ec1bf;
+
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 30px;
+  cursor: pointer;
+`;
 
 const CustomDate = styled.div`
     width: 100%;
@@ -16,6 +43,21 @@ const CustomDate = styled.div`
     display: flex;
     gap: 9%;
 `;
+
+const Container = styled.label`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:12px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+`
+
+const Input = styled.input`
+    display: none;
+`
 
 interface IProps {
     dog?: IDogInfo;
@@ -60,20 +102,24 @@ const OwnDogsForm = ({dog}: IProps) => {
         year: 2001,
         month: 1,
         day: 1
-    })
+    });
+    const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
+    const [prevImages, setPrevImages] = useState<string[] | undefined>();
 
     const naviage = useNavigate();
 
+    /*
+        수정 시 강아지 정보를 저장하기 위한 useEffects
+    */
     useEffect(() => {
         setDog1(dog!);
         handleDate(dog?.birthDate!);
+        setPrevImages(dog?.dogImgUrl!);
     }, [dog])
-
 
     /*
         Handle Date
     */
-
     const handleDate = (dateString: string) => {
         if(dateString !== undefined) {
             const dateObject = new Date(dateString);
@@ -96,9 +142,64 @@ const OwnDogsForm = ({dog}: IProps) => {
         setDate({...date, year})
     }
 
-    const handleSubmit = () => {}
+    /*
+        Handle Image
+    */
+        const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target?.files?.[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                setPrevImages([...prevImages!, imageUrl]);
+            }
+        }
     
+        const handleDeleteImage = (index: number) => {
+            setPrevImages(prevImages?.filter((img, i) => {
+                return i !== index;
+            }))
+        }
+
+    /*
+        Submit 할 때 create | edit 인지 확인 (dog1.id)
+    */
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('click');
+        
+        const dateForSubmit = new Date(date.year + date.month + date.day);
+        setDog1({...dog1, dogImgUrl: prevImages!, birthDate: dateForSubmit.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })})
+
+        if(dog1.id === undefined) {
+            try {
+                const res = await post(`${process.env.REACT_APP_API_URL}/breeder/dogs`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                      },
+                    body: JSON.stringify(dog1),
+                });
+                console.log(res);
+            } catch(error) {
+                console.error('ERROR: ', error);
+                
+            }
+            
+        } else {
+            try {
+                await patch(`/breeder/dogs/${dog1.id}`, {
+                    dog1
+                }).then((res) => console.log(res)
+                ).catch((err) => console.error(err)
+                );
+                
+            } catch (error) {
+                console.error('ERROR: ', error);
+            }   
+        }
+    }
+
     return (
+        <MergeContainer>
         <S.Wrapper>
             <S.ReturnBtnContainer onClick={() => naviage(-1)}>
                 <S.ReturnButton>
@@ -108,7 +209,7 @@ const OwnDogsForm = ({dog}: IProps) => {
             </S.ReturnBtnContainer>
             <S.InnerContainer>
                 <S.Title>보유견종 글쓰기</S.Title>
-                <S.Form>
+                <S.Form id="dogSubmit" onSubmit={handleSubmit}>
                     <S.TopInputContainer>
                         <S.LeftInputContainer>
                             <S.InputContainer>
@@ -198,19 +299,28 @@ const OwnDogsForm = ({dog}: IProps) => {
                 </S.Form>
                 <S.ImageUploaderContainer>
                     <S.ImageUploaderTitle>
-                        이미지 업로드({`${dog1?.dogImgUrl ? dog1?.dogImgUrl?.length : 0}/4`})
+                        이미지 업로드({`${prevImages === undefined ? 0 : prevImages?.length}/4`})
                     </S.ImageUploaderTitle>
                     <S.ImageUploaderFlexBox>
-                        <S.ImageUpoaderbox>
-                            <S.ImageBox />
-                            <S.ImageUploaderButton>
-                                업로드
-                            </S.ImageUploaderButton>
-                        </S.ImageUpoaderbox>
+                        {prevImages?.map((img, index) => (
+                            <S.ImageUploaderBox key={index}>
+                                <ImageDeleteButton onClick={() => handleDeleteImage(index)
+                                }/>
+                                <S.Image src={img}/>
+                            </S.ImageUploaderBox>
+                        ))}
+                        <S.ImageUploaderBox>
+                            <Container htmlFor="file" onClick={() => setAddButtonClicked(!addButtonClicked)}>
+                            <Input type="file" accept="image/*" id="file" onChange={(e) => handleAddImage(e)}/>
+                            <AddImageIcon />
+                            </Container>
+                        </S.ImageUploaderBox>
                     </S.ImageUploaderFlexBox>
                 </S.ImageUploaderContainer>
             </S.InnerContainer>
         </S.Wrapper>
+        <SubmitButton type="submit" form="dogSubmit">저장</SubmitButton>
+    </MergeContainer>
     );
 };
 
