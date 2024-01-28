@@ -7,7 +7,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
-import { IDogInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
 import { useNavigate } from "react-router-dom";
 import DateInput from "../CustomInput/DateInput";
 
@@ -22,17 +21,83 @@ interface IProps {
     dog?: IDogInfo;
 }
 
-const OwnDogsForm = ({ dog }: IProps) => {
-    const [fetchedDog, setFetchedDog] = useState<IDogInfo>();
-    const [signicant, setSignificant] = useState<string>();
+export interface IDogInfo {
+    birthDate: string;
+    dogImgUrl: string[];
+    dogType: string;
+    gender: string;
+    id: number;
+    management: string;
+    name: string;
+    status: string;
+}
+
+const initialState:IDogInfo = {
+    birthDate: "",
+    dogImgUrl: [],
+    dogType: "",
+    gender: "",
+    id: -1,
+    management: "",
+    name: "",
+    status: ""
+}
+
+export interface IData {
+    status: string;
+    data: IDogInfo;
+}
+
+interface IDate {
+    year:number,
+    month: number,
+    day: number
+}
+
+const OwnDogsForm = ({dog}: IProps) => {
+    const [dog1, setDog1] = useState<IDogInfo>(initialState);
+    const [date, setDate ] = useState<IDate>({
+        year: 2001,
+        month: 1,
+        day: 1
+    })
 
     const naviage = useNavigate();
 
     useEffect(() => {
-        setFetchedDog(dog);
-        setSignificant(fetchedDog?.management);
-    }, [dog]);
+        setDog1(dog!);
+        handleDate(dog1?.birthDate!);
+    }, [dog])
 
+    const handleDate = (dateString: string) => {
+        if(dateString !== undefined) {
+            const dateObject = new Date(dateString);
+
+            setDate({
+                year: dateObject.getFullYear(),
+                month: (dateObject.getMonth() + 1),
+                day: dateObject.getDate()
+            })
+        }
+    } 
+    
+    const handleDay = (day: number) => {
+        setDate({...date, day})
+    }
+    const handleMonth = (month: number) => {
+        setDate({...date, month})
+    }
+    const handleYear = (year: number) => {
+        setDate({...date, year})
+    }
+
+    useEffect(()=>{
+        console.log('IN Form: ', date);
+        
+    },[date])
+
+    const handleSubmit = () => {}
+    
     return (
         <S.Wrapper>
             <S.ReturnBtnContainer onClick={() => naviage(-1)}>
@@ -50,35 +115,43 @@ const OwnDogsForm = ({ dog }: IProps) => {
                                 <S.InputTitle>강아지 이름</S.InputTitle>
                                 <S.Input
                                     placeholder="강아지 이름을 작성하세요"
-                                    value={fetchedDog?.name}
+                                    value={dog1?.name}
+                                    onChange={(e) => setDog1({...dog1!, name: e.target.value})}
                                 />
                             </S.InputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>견종</S.InputTitle>
                                 <S.Input
                                     placeholder="포메라니안"
-                                    value={fetchedDog?.dogType}
+                                    value={dog1?.dogType}
+                                    onChange={(e) => setDog1({...dog1!, dogType: e.target.value})}
                                 />
                             </S.InputContainer>
                         </S.LeftInputContainer>
                         <S.RightInputContainer>
                             <S.InputContainer>
-                                <S.InputTitle>출생일</S.InputTitle>s
+                                <S.InputTitle>출생일</S.InputTitle>
                                 <CustomDate>
                                 <DateInput
                                     placeHolder="년"
                                     width={"22%"}
                                     height="48px"
+                                    originalVal={date.year}
+                                    onClick={handleYear}
                                 />
                                 <DateInput
                                     placeHolder="월"
                                     width={"22%"}
                                     height="48px"
+                                    originalVal={date.month}
+                                    onClick={handleMonth}
                                 />
                                 <DateInput
                                     placeHolder="일"
                                     width={"22%"}
                                     height="48px"
+                                    originalVal={date.day}
+                                    onClick={handleDay}
                                 />
                                 </CustomDate>
                                 
@@ -89,7 +162,7 @@ const OwnDogsForm = ({ dog }: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        fetchedDog ? fetchedDog.gender : "MALE"
+                                        dog1?.gender ? dog1?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}
                                 />
@@ -101,8 +174,8 @@ const OwnDogsForm = ({ dog }: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        fetchedDog?.status
-                                            ? fetchedDog?.status
+                                        dog1?.status
+                                            ? dog1?.status
                                             : "AVAILABLE"
                                     }
                                     statusArr={["DONE", "AVAILABLE"]}
@@ -113,18 +186,19 @@ const OwnDogsForm = ({ dog }: IProps) => {
                     <S.ReviewInputContainer>
                         <S.InputTitle>기타사항</S.InputTitle>
                         <S.Textarea
-                            value={signicant}
-                            onChange={(e) => setSignificant(e.target.value)}
+                            value={dog1?.management}
+                            // onChange={(e) => setDog({...dog, management: e.target.value})}
                             placeholder="견종의 특이사항에 대해 작성해주세요"
+                            onChange={(e) => setDog1((prev) => ({...prev, management: e.target.value}))}
                         />
                         <S.TextLength>
-                            {signicant ? signicant.length : 0}/2000
+                            {dog1?.management ? dog1?.management?.length : 0}/2000
                         </S.TextLength>
                     </S.ReviewInputContainer>
                 </S.Form>
                 <S.ImageUploaderContainer>
                     <S.ImageUploaderTitle>
-                        이미지 업로드({`${fetchedDog?.dogImgUrl.length}/4`})
+                        이미지 업로드({`${dog1?.dogImgUrl ? dog1?.dogImgUrl?.length : 0}/4`})
                     </S.ImageUploaderTitle>
                     <S.ImageUploaderFlexBox>
                         <S.ImageUpoaderbox>

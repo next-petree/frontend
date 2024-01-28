@@ -1,53 +1,28 @@
 import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsForm from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
+import OwnDogsForm, { IDogInfo } from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState , useEffect} from "react";
+import { IData } from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
 import { get } from "../../../api/api";
-
-export interface IDogInfo {
-    birthDate: string;
-    dogImgUrl: string[];
-    dogType: string;
-    gender: string;
-    id: number;
-    management: string;
-    name: string;
-    status: string;
-}
-
-interface IData {
-    status: string;
-    data: IDogInfo;
-}
 
 const EditOwnDogs = () => {
     const { id } = useParams();
-    const [dogInfo, setDogInfo] = useState<IDogInfo>();
-
+    const [dog, setDog] = useState<IDogInfo>();
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await get<IData>(
-                `${process.env.REACT_APP_API_URL}/breeder/dogs/${id}`
-            );
-
-            return res.data;
-        };
-
-        fetchData()
-            .then((res) => {
-                setDogInfo(res.data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
-
+        const getDogById = async () => {
+            const res = await get<IData>(`${process.env.REACT_APP_API_URL}/breeder/dogs/${id}`);
+            setDog(res.data.data);
+        }
+        getDogById();
+    }, [id]);
     return (
         <CustomLayout height={1653}>
             <Container>
                 <BoxsContainer>
                     <Navbar />
-                    <OwnDogsForm dog={dogInfo} />
+                    <OwnDogsForm dog={dog} />
                 </BoxsContainer>
                 <SubmitButton>저장</SubmitButton>
             </Container>

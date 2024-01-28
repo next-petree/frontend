@@ -34,6 +34,7 @@ import ManageOwnDogs from "./pages/ManageOwnDogs/ManageOwnDogs";
 import CreateReview from "./pages/ManageReview/create/CreateReview";
 import EditReview from "./pages/ManageReview/edit/EditReview";
 import EditOwnDogs from "./pages/ManageOwnDogs/edit/EditOwnDogs";
+import CreateOwnDogs from "./pages/ManageOwnDogs/create/CreateOwnDogs";
 
 function App() {
     return (
@@ -97,6 +98,10 @@ function App() {
                         path="/mypage/owndogs/edit/:id"
                         element={<EditOwnDogs />}
                     />
+                     <Route
+                        path="/mypage/owndogs/create"
+                        element={<CreateOwnDogs />}
+                    ></Route>
                 </Route>
                 <Route path="/breeder/:id" element={<BreederDetails />} />
                 <Route path="/customer-details" element={<CustomerDetails />} />
