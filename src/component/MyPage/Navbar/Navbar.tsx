@@ -11,6 +11,8 @@ import {
   NavBarContainer,
   LogoutContainer,
 } from "./Styles1";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setProfileImg } from "../../../redux/Breeder1/BreederSlice1";
 
 export const NavCategory = [
   {
@@ -38,6 +40,7 @@ export const NavCategory = [
 const Navbar = () => {
   const navigation = useNavigate();
   const location = useLocation();
+  const dispath = useAppDispatch();
 
   const decodedJWT = DecodeToken();
   let roleBasedLink = "/mypage/adoptlist/breeder";
@@ -58,6 +61,7 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
+    
     const answer = await Swal.fire(
       alertList.doubleCheckMessage("로그아웃 하시겠습니까?"),
     );
@@ -66,6 +70,8 @@ const Navbar = () => {
       try {
         removeToken("accessToken");
         removeToken("refreshToken");
+        localStorage.removeItem("profileImg");
+        dispath(setProfileImg(""))
         navigation("/");
         Swal.fire(alertList.successMessage("로그아웃이 완료되었습니다"));
       } catch (error) {
