@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const SearchContainer = styled.div`
-  width: 400px;
+  width: 50rem;
   height: 45px;
   position: relative;
   border: 0;
@@ -12,7 +12,11 @@ export const Search = styled.input<{$width: number | null}>`
   display: flex;
   align-items: center;
   border: none;
-  width: ${props => props.$width ? props.$width.toString() + "px" : "314px"};
+  width: ${props => props.$width ? props.$width.toString() + "px" : "40rem"};
+  @media (max-width: 1120px) {
+    width: ${props => props.$width ? props.$width.toString() + "px" : "90%"};
+  } ;
+  
   height: 48px;
   border-radius: 12px;
   background-color: #f5f5f5;

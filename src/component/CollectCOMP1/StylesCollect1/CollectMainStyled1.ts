@@ -18,8 +18,6 @@ export const MainBox = styled.div`
   width: 74vw; //
   height: fit-content;
   padding: 4% 3% 5% 3%; //
-  min-width: 1075px;
-  min-height: 725px;
   box-shadow: 0px 4px 6px 0px #00000017;
 `;
 export const Title = styled.h1`
@@ -35,6 +33,11 @@ export const BoxContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   column-gap: 20px; //
   row-gap: 40px; //
+  @media (max-width: 1120px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    column-gap: 1vw;
+  } ;
   justify-items: center;
   align-items: center;
   width: 100%; //
@@ -58,6 +61,10 @@ export const No_return = styled.div`
 
 export const SearchBtn = styled.button`
   align-self: flex-end;
+  @media (max-width: 768px) {
+    align-self: center;
+    margin-top: 2rem;
+  }
   margin-right: 2%;
   display: flex;
   justify-content: center;

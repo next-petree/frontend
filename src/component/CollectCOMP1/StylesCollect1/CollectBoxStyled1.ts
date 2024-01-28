@@ -9,7 +9,7 @@ export const BoxWrapper = styled.div`
   padding-top: 15px;
   padding-bottom: 20px;
   width: 80%;
-  height: 90%;
+  height: 85%;
   border-radius: 12px;
   box-shadow: 0px 4px 20px 0px #00000017;
   &:hover {
@@ -18,10 +18,14 @@ export const BoxWrapper = styled.div`
 `;
 export const ImgBox = styled.div`
   position: relative;
+  margin: 0 3rem;
 `;
 export const Img = styled.img`
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  height: 13.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
   border-radius: 12px;
   background-color: aliceblue;
   object-fit: cover;
@@ -29,8 +33,8 @@ export const Img = styled.img`
 
 export const AlreadyImg = styled.img`
   position: relative;
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  height: 13.7rem;
   border-radius: 12px;
   object-fit: cover;
 `;
@@ -54,8 +58,11 @@ export const Availtext = styled.div`
 `;
 
 export const Dermyimg = styled.div`
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  height: 13.7rem;
   border-radius: 12px;
   background-color: slategray;
 `;
@@ -67,7 +74,10 @@ export const Badge = styled.span`
 export const Nameline = styled.div`
   display: flex;
   align-items: center;
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
 `;
 export const Name = styled.span`
   /* width: 220px; */
@@ -86,7 +96,10 @@ export const Distance = styled.span`
   font-weight: 600;
 `;
 export const MajorDog = styled.div`
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
@@ -102,7 +115,10 @@ export const LitteBadge = styled.span`
 export const Doginfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
   gap: 2px;
 `;
 

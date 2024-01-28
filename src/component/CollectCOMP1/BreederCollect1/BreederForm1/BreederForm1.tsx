@@ -6,7 +6,7 @@ import {
   selectBreeder_search,
   set_breedersearchkeyword,
 } from "../../../../redux/Collect1/BreederSearchSlice1";
-import { Btn, Container, Form, State } from "./Styles1";
+import { Btn, Container, Form, State, ToggleContainer } from "./Styles1";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
@@ -29,15 +29,18 @@ export default function BreederForm() {
   };
   return (
     <Container>
-      <BreederAuthToggle />
-      <State>{searchs.auth ? "인증 브리더만 보기" : "모든 브리더 보기"}</State>
+      <ToggleContainer>
+        <BreederAuthToggle />
+        <State>
+          {searchs.auth ? "인증 브리더만 보기" : "모든 브리더 보기"}
+        </State>
+      </ToggleContainer>
       <Form onSubmit={handleSubmit(onValid)}>
         <AutoInput
           register={register("keyword")}
           type="text"
           setValue={setValue}
           watch={watch}
-          width={314}
         />
         <Btn>검색</Btn>
       </Form>
