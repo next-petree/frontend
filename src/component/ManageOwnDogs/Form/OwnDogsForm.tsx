@@ -66,8 +66,13 @@ const OwnDogsForm = ({dog}: IProps) => {
 
     useEffect(() => {
         setDog1(dog!);
-        handleDate(dog1?.birthDate!);
+        handleDate(dog?.birthDate!);
     }, [dog])
+
+
+    /*
+        Handle Date
+    */
 
     const handleDate = (dateString: string) => {
         if(dateString !== undefined) {
@@ -90,11 +95,6 @@ const OwnDogsForm = ({dog}: IProps) => {
     const handleYear = (year: number) => {
         setDate({...date, year})
     }
-
-    useEffect(()=>{
-        console.log('IN Form: ', date);
-        
-    },[date])
 
     const handleSubmit = () => {}
     
@@ -136,21 +136,21 @@ const OwnDogsForm = ({dog}: IProps) => {
                                     placeHolder="년"
                                     width={"22%"}
                                     height="48px"
-                                    originalVal={date.year}
+                                    value={date.year}
                                     onClick={handleYear}
                                 />
                                 <DateInput
                                     placeHolder="월"
                                     width={"22%"}
                                     height="48px"
-                                    originalVal={date.month}
+                                    value={date.month}
                                     onClick={handleMonth}
                                 />
                                 <DateInput
                                     placeHolder="일"
                                     width={"22%"}
                                     height="48px"
-                                    originalVal={date.day}
+                                    value={date.day}
                                     onClick={handleDay}
                                 />
                                 </CustomDate>

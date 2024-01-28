@@ -8,7 +8,7 @@ type Props = {
   placeHolder: string;
   width: string;
   height: string;
-  originalVal?: number;
+  value: number;
   onClick: (val: number) => void;
 };
 
@@ -61,15 +61,13 @@ const SelectLi = styled.li`
   }
 `;
 
-const DateInput = ({ placeHolder, width, height, originalVal, onClick }: Props) => {
+const DateInput = ({ placeHolder, width, height, value, onClick }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<number>(originalVal || 0);
   const years = [...Array(24)].map((v, i) => i + 2000);
   const months = [...Array(12)].map((v, i) => i + 1);
   const days = [...Array(31)].map((v, i) => i + 1);
   const onClickDate = (Date: number) => {
     setIsOpen(false);
-    setValue(Date);
     onClick(Date);
   };
   
