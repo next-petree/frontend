@@ -8,6 +8,7 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   opacity: 1;
+  z-index: 99999;
 `;
 
 export const FilterContainer = styled.div`
@@ -22,7 +23,6 @@ export const FilterContainer = styled.div`
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index: 99999;
   background-color: white;
   padding: 3vw 6vw;
 `;
@@ -34,6 +34,7 @@ export const Form = styled.form`
   gap: 2vw;
 `;
 export const Title = styled.h1`
+  width: 100%;
   font-size: 3.5rem;
   display: flex;
   align-items: center;

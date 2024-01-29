@@ -10,6 +10,9 @@ export const BoxWrapper = styled.div`
   padding-bottom: 20px;
   width: 80%;
   height: 85%;
+  @media (max-width: 392px) {
+    height: 80%;
+  } ;
   border-radius: 12px;
   box-shadow: 0px 4px 20px 0px #00000017;
   &:hover {
@@ -26,6 +29,9 @@ export const Img = styled.img`
   @media (max-width: 768px) {
     width: 17rem;
   } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
   border-radius: 12px;
   background-color: aliceblue;
   object-fit: cover;
@@ -34,6 +40,12 @@ export const Img = styled.img`
 export const AlreadyImg = styled.img`
   position: relative;
   width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
   height: 13.7rem;
   border-radius: 12px;
   object-fit: cover;
@@ -62,6 +74,10 @@ export const Dermyimg = styled.div`
   @media (max-width: 768px) {
     width: 17rem;
   } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
+  
   height: 13.7rem;
   border-radius: 12px;
   background-color: slategray;
@@ -70,6 +86,12 @@ export const Badge = styled.span`
   position: absolute;
   bottom: 5px;
   right: 5px;
+  width: 3.5rem;
+  height: 3.5rem;
+  @media (max-width:392px)  {
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 export const Nameline = styled.div`
   display: flex;
@@ -77,6 +99,9 @@ export const Nameline = styled.div`
   width: 21.7rem;
   @media (max-width: 768px) {
     width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
   } ;
 `;
 export const Name = styled.span`
@@ -92,6 +117,9 @@ export const Distance = styled.span`
   margin-top: 2px;
   margin-left: 0.7vw;
   font-size: 2rem;
+  @media (max-width: 392px) {
+    font-size: 1.5rem;
+  } ;
   color: #333333;
   font-weight: 600;
 `;
@@ -99,6 +127,9 @@ export const MajorDog = styled.div`
   width: 21.7rem;
   @media (max-width: 768px) {
     width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
   } ;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
@@ -110,6 +141,8 @@ export const LitteBadge = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const Doginfo = styled.div`
@@ -118,6 +151,9 @@ export const Doginfo = styled.div`
   width: 21.7rem;
   @media (max-width: 768px) {
     width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
   } ;
   gap: 2px;
 `;

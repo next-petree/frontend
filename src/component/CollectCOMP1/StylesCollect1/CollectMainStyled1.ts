@@ -19,6 +19,9 @@ export const MainBox = styled.div`
   height: fit-content;
   padding: 4% 3% 5% 3%; //
   box-shadow: 0px 4px 6px 0px #00000017;
+  @media (max-width: 500px) {
+    box-shadow: none;
+  }
 `;
 export const Title = styled.h1`
   font-family: "Noto Sans KR", sans-serif;

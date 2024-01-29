@@ -14,7 +14,7 @@ export const Search = styled.input<{$width: number | null}>`
   border: none;
   width: ${props => props.$width ? props.$width.toString() + "px" : "40rem"};
   @media (max-width: 1120px) {
-    width: ${props => props.$width ? props.$width.toString() + "px" : "90%"};
+    width: ${props => props.$width ? props.$width.toString() + "px" : "80%"};
   } ;
   
   height: 48px;
