@@ -8,18 +8,21 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   opacity: 1;
+  z-index: 99999;
 `;
 
 export const FilterContainer = styled.div`
   position: absolute;
   width: 50vw;
+  @media (max-width: 768px) {
+    width: 70vw;
+  }
   height: 82vh;
   border-radius: 50px;
   top: 20px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index: 99999;
   background-color: white;
   padding: 3vw 6vw;
 `;
@@ -31,15 +34,23 @@ export const Form = styled.form`
   gap: 2vw;
 `;
 export const Title = styled.h1`
+  width: 100%;
   font-size: 3.5rem;
   display: flex;
   align-items: center;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 export const Checks = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.1vw;
+  @media (max-width: 800px) {
+    gap: 2rem;
+  }
 `;
 export const Check = styled.div`
   display: flex;
@@ -49,9 +60,13 @@ export const Check = styled.div`
 export const Buttons = styled.div`
   display: flex;
   gap: 0.8vw;
+  width: 100%;
 `;
 export const Btn = styled.div<{ $isCheck: boolean | undefined; $isLong: boolean }>`
   width: ${(props) => (props.$isLong ? "17vw" : "7.5vw")};
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   height: 7vh;
   display: flex;
   justify-content: center;
