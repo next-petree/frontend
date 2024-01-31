@@ -205,30 +205,29 @@ export const ImageUploaderTitle = styled.div`
 
 export const ImageUploaderFlexBox = styled.div`
     width: 100%;
-    background-color: green;
     display: flex;
-    justify-content: space-between;
-    /* gap: 15px; */
+    
+    gap: 15px;
 `;
 
-export const ImageUpoaderbox = styled.div`
-    width: 200px;
+export const ImageUploaderBox = styled.div`
+    width: 220px;
     height: 180px;
-
-    background-color: greenyellow;
 
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    position: relative;
 `;
 
-export const ImageBox = styled.div<{ img?: string }>`
-    width: 100%;
-    height: 144px;
-    border-radius: 12px;
-    background: #f5f5f5;
-    background-image: url(${(props) => props.img});
-`;
+// export const ImageBox = styled.div<{ img?: string }>`
+//     width: 100%;
+//     height: 144px;
+//     border-radius: 12px;
+//     background: #f5f5f5;
+//     background-image: url(${(props) => props.img});
+// `;
 
 export const ImageUploaderButton = styled.button`
     width: 100%;
@@ -246,4 +245,50 @@ export const ImageUploaderButton = styled.button`
     color: #ffffff;
 
     cursor: pointer;
+`;
+
+export const Image = styled.img`
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+`
+
+export const MergeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const Container = styled.label`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:12px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+`
+
+export const ImageInput = styled.input`
+    display: none;
+`
+
+export const SubmitButton = styled.button`
+  width: 240px;
+  height: 52px;
+  border-radius: 16px;
+  border: none;
+  background: #4ec1bf;
+
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 30px;
+  cursor: pointer;
 `;

@@ -33,7 +33,7 @@ const ContentBox = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<any>(
-                `${process.env.REACT_APP_API_URL}/adopter/reviews`
+                `${process.env.REACT_APP_API_URL}adopter/reviews`
             );
 
             return res.data.data.content;
@@ -110,7 +110,7 @@ const ContentBox = () => {
                 <S.ReviewContainer>
                     {searchResult?.map((d, index) => (
                         <S.ReviewItem key={index}>
-                            <Link to={`edit/${d.id}`}>
+                            <Link to={`/mypage/review/edit/${d.id}`}>
                                 <S.ReviewDogImage src={d.imgUrl} />
                             </Link>
                             <S.ReviewDescContainer>
@@ -134,7 +134,7 @@ const ContentBox = () => {
                 <S.ReviewContainer>
                     {reviews?.map((d, index) => (
                         <S.ReviewItem key={index}>
-                            <Link to={`edit/${d.id}`}>
+                            <Link to={`/mypage/review/edit/${d.id}`}>
                                 <S.ReviewDogImage src={d.imgUrl} />
                             </Link>
                             <S.ReviewDescContainer>

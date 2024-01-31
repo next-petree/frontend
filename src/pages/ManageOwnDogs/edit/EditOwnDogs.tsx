@@ -1,10 +1,10 @@
 import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsForm, { IDogInfo } from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
+import OwnDogsEditForm, { IDogInfo } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from "react";
-import { IData } from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
+import { IData } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { get } from "../../../api/api";
 
 const EditOwnDogs = () => {
@@ -12,7 +12,7 @@ const EditOwnDogs = () => {
     const [dog, setDog] = useState<IDogInfo>();
     useEffect(() => {
         const getDogById = async () => {
-            const res = await get<IData>(`${process.env.REACT_APP_API_URL}/breeder/dogs/${id}`);
+            const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
             setDog(res.data.data);
         }
         getDogById();
@@ -22,7 +22,7 @@ const EditOwnDogs = () => {
             <Container>
                 <BoxsContainer>
                     <Navbar />
-                    <OwnDogsForm dog={dog} />
+                    <OwnDogsEditForm dog={dog} />
                 </BoxsContainer>
             </Container>
         </CustomLayout>

@@ -242,3 +242,20 @@ export const Image = styled.img`
     border-radius: 12px;
     object-fit: cover;
 `
+export const SubmitButton = styled.button`
+  width: 240px;
+  height: 52px;
+  border-radius: 16px;
+  border: none;
+  background: #4ec1bf;
+
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 30px;
+  cursor: pointer;
+`;

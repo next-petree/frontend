@@ -9,6 +9,8 @@ interface IProps {
     statusArr?: string[];
     width: string;
     height: string;
+    updateGenderState?: (value: string) => void;
+    updateStatusState?: (value: string) => void;
 }
 
 const CustomInput = ({
@@ -17,6 +19,8 @@ const CustomInput = ({
     statusArr,
     width,
     height,
+    updateGenderState,
+    updateStatusState
 }: IProps) => {
     const [isArrowClicked, setIsArrowClicked] = useState(false);
     const [gender, setGender] = useState<string | undefined>(value);
@@ -39,6 +43,7 @@ const CustomInput = ({
                                 key={index}
                                 onClick={() => {
                                     setGender(g);
+                                    updateGenderState && updateGenderState(g);
                                     setIsArrowClicked(!isArrowClicked);
                                 }}
                             >
@@ -66,6 +71,7 @@ const CustomInput = ({
                             key={index}
                             onClick={() => {
                                 setStatus(s);
+                                updateStatusState && updateStatusState(s);
                                 setIsArrowClicked(!isArrowClicked);
                             }}
                         >

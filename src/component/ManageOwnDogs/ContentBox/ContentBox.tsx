@@ -41,7 +41,7 @@ const ContentBox = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await get<IData>(
-        `${process.env.REACT_APP_API_URL}/breeder/dogs`,
+        `${process.env.REACT_APP_API_URL}breeder/dogs`,
       );
 
       return res.data.data;

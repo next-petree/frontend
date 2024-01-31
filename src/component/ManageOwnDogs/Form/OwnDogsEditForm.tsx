@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import DatePicker from "react-datepicker";
 import { IoIosArrowBack } from "react-icons/io";
 
-// import "react-datepicker/dist/react-datepicker.css";
 
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
@@ -11,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import DateInput from "../CustomInput/DateInput";
 import ImageDeleteButton from "../ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../AddImageIcon/AddImageIcon";
-import { patch, post } from "../../../api/api";
+import { patch } from "../../../api/api";
 
 const MergeContainer = styled.div`
     display: flex;
@@ -63,6 +61,10 @@ interface IProps {
     dog?: IDogInfo;
 }
 
+interface IResponse {
+    status: string
+}
+
 export interface IDogInfo {
     birthDate: string;
     dogImgUrl: string[];
@@ -96,7 +98,22 @@ interface IDate {
     day: number
 }
 
-const OwnDogsForm = ({dog}: IProps) => {
+/**
+ * 
+ * @param id
+ * @RequestBody 
+ * gender
+ * birthDate
+ * name
+ * management
+ * status
+ * imgNameToDelete: string[]
+ * uploadImage: boolean
+ * dogImgFiles
+ * 
+ */
+
+const OwnDogsEditForm = ({dog}: IProps) => {
     const [dog1, setDog1] = useState<IDogInfo>(initialState);
     const [date, setDate ] = useState<IDate>({
         year: 2001,
@@ -104,7 +121,7 @@ const OwnDogsForm = ({dog}: IProps) => {
         day: 1
     });
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
-    const [prevImages, setPrevImages] = useState<string[] | undefined>();
+    const [prevImages, setPrevImages] = useState<string[]>([]);
 
     const naviage = useNavigate();
 
@@ -147,9 +164,19 @@ const OwnDogsForm = ({dog}: IProps) => {
     */
         const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target?.files?.[0];
+            console.log(file);
+            
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
-                setPrevImages([...prevImages!, imageUrl]);
+                if (!prevImages) {
+                    let prev: string[] = [];
+                    prev.push(imageUrl);
+                    setPrevImages(prev);
+                } else {
+                    setPrevImages(prevImages => [...prevImages, imageUrl]);
+                }
+                console.log(prevImages);
+                
             }
         }
     
@@ -168,36 +195,24 @@ const OwnDogsForm = ({dog}: IProps) => {
         
         const dateForSubmit = new Date(date.year + date.month + date.day);
         setDog1({...dog1, dogImgUrl: prevImages!, birthDate: dateForSubmit.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })})
-
-        if(dog1.id === undefined) {
             try {
-                const res = await post(`${process.env.REACT_APP_API_URL}/breeder/dogs`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                      },
-                    body: JSON.stringify(dog1),
-                });
-                console.log(res);
-            } catch(error) {
-                console.error('ERROR: ', error);
-                
-            }
-            
-        } else {
-            try {
-                await patch(`/breeder/dogs/${dog1.id}`, {
-                    dog1
-                }).then((res) => console.log(res)
+                await patch(`${process.env.REACT_APP_API_URL}breeder/dogs/${dog1.id}`, dog1).then((res) => console.log(res)
                 ).catch((err) => console.error(err)
                 );
                 
             } catch (error) {
                 console.error('ERROR: ', error);
             }   
-        }
     }
 
+    const updateGenderState = (value: string) => {
+        setDog1({...dog1, gender: value});
+    }
+
+    const updateStatusState = (value: string) => {
+        setDog1({...dog1, status: value});
+    }
+    
     return (
         <MergeContainer>
         <S.Wrapper>
@@ -266,6 +281,7 @@ const OwnDogsForm = ({dog}: IProps) => {
                                         dog1?.gender ? dog1?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}
+                                    updateGenderState={updateGenderState}
                                 />
                             </S.InputContainer>
 
@@ -280,6 +296,7 @@ const OwnDogsForm = ({dog}: IProps) => {
                                             : "AVAILABLE"
                                     }
                                     statusArr={["DONE", "AVAILABLE"]}
+                                    updateStatusState={updateStatusState}
                                 />
                             </S.InputContainer>
                         </S.RightInputContainer>
@@ -288,7 +305,6 @@ const OwnDogsForm = ({dog}: IProps) => {
                         <S.InputTitle>기타사항</S.InputTitle>
                         <S.Textarea
                             value={dog1?.management}
-                            // onChange={(e) => setDog({...dog, management: e.target.value})}
                             placeholder="견종의 특이사항에 대해 작성해주세요"
                             onChange={(e) => setDog1((prev) => ({...prev, management: e.target.value}))}
                         />
@@ -324,4 +340,4 @@ const OwnDogsForm = ({dog}: IProps) => {
     );
 };
 
-export default OwnDogsForm;
+export default OwnDogsEditForm;

@@ -1,6 +1,6 @@
 import Navbar from "../../../component/ManageReview/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsForm from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
+import OwnDogsForm from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 
 const CreateOwnDogs = () => {
