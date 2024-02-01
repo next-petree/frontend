@@ -1,90 +1,47 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-
 
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
-import { useNavigate } from "react-router-dom";
+
 import DateInput from "../CustomInput/DateInput";
 import ImageDeleteButton from "../ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
-
-const MergeContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
-
-export const SubmitButton = styled.button`
-  width: 240px;
-  height: 52px;
-  border-radius: 16px;
-  border: none;
-  background: #4ec1bf;
-
-  font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 26px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
-  margin-top: 30px;
-  cursor: pointer;
-`;
-
-const CustomDate = styled.div`
-    width: 100%;
-    height: 48px;
-    display: flex;
-    gap: 9%;
-`;
-
-const Container = styled.label`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius:12px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-`
-
-const Input = styled.input`
-    display: none;
-`
-
 interface IProps {
     dog?: IDogInfo;
-}
-
-interface IResponse {
-    status: string
 }
 
 export interface IDogInfo {
     birthDate: string;
     dogImgUrl: string[];
     dogType: string;
-    gender: string;
+    gender: IGender;
     id: number;
     management: string;
     name: string;
-    status: string;
+    status: IStatus;
 }
+
+export interface IStatus {
+    status: 'AVAILABLE' | 'DONE';
+}
+
+export interface IGender {
+    gender: 'FEMALE' | 'MALE';
+}
+
 
 const initialState:IDogInfo = {
     birthDate: "",
     dogImgUrl: [],
     dogType: "",
-    gender: "",
+    gender: {gender: 'FEMALE'},
     id: -1,
     management: "",
     name: "",
-    status: ""
+    status: { status: 'AVAILABLE' }
 }
 
 export interface IData {
@@ -122,13 +79,15 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     });
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
     const [prevImages, setPrevImages] = useState<string[]>([]);
+    const [formDataFile, setFormDataFile] = useState<File[]>();
+    const [delImgIds, setDelImgIds] = useState<string[]>();
 
     const naviage = useNavigate();
 
     /*
         수정 시 강아지 정보를 저장하기 위한 useEffects
     */
-    useEffect(() => {
+    useEffect(() => {        
         setDog1(dog!);
         handleDate(dog?.birthDate!);
         setPrevImages(dog?.dogImgUrl!);
@@ -138,7 +97,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
         Handle Date
     */
     const handleDate = (dateString: string) => {
-        if(dateString !== undefined) {
+        if(dateString) {
             const dateObject = new Date(dateString);
 
             setDate({
@@ -164,57 +123,104 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     */
         const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target?.files?.[0];
-            console.log(file);
             
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
+
+                if (formDataFile) 
+                    setFormDataFile([...formDataFile, file]);
+                else 
+                    setFormDataFile([file]);
+                
+                
                 if (!prevImages) {
                     let prev: string[] = [];
                     prev.push(imageUrl);
                     setPrevImages(prev);
-                } else {
-                    setPrevImages(prevImages => [...prevImages, imageUrl]);
-                }
-                console.log(prevImages);
-                
+                } else setPrevImages(prevImages => [...prevImages, imageUrl]);
             }
         }
     
         const handleDeleteImage = (index: number) => {
+            const filteredPrevImg = prevImages.filter((img, i) => {
+                return i === index;
+            })
+
+            const willDeleteImg = dog1.dogImgUrl.filter((i) => {
+                return i === filteredPrevImg[0];
+            });
+
+            if (delImgIds) setDelImgIds([...delImgIds, willDeleteImg[0]]);
+            else setDelImgIds(willDeleteImg);
+            
             setPrevImages(prevImages?.filter((img, i) => {
                 return i !== index;
             }))
         }
 
-    /*
-        Submit 할 때 create | edit 인지 확인 (dog1.id)
-    */
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log('click');
+        const updateGenderState = (value: string) => {
+            if (value === 'FEMALE') setDog1({...dog1, gender: {gender: 'FEMALE'}});
+            else setDog1({...dog1, gender: {gender: 'MALE'}});
+        }
+    
+        const updateStatusState = (value: string) => {
+            if (value === 'AVAILABLE') setDog1({...dog1, status: {status: 'AVAILABLE'}});
+             else setDog1({...dog1, status: {status: 'DONE'}});
+        }
+
+        /*
+            Submit 할 때 create | edit 인지 확인 (dog1.id)
+        */
+        const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+
+            const formDataToSend = new FormData();
+
+            formDataToSend.append('name', dog1.name);
+            formDataToSend.append('gender', dog1.gender?.gender);
+            formDataToSend.append('management', dog1.management);
+            formDataToSend.append('birthDate', dog1.birthDate);
+
+            /**
+             * 
+             * FIX: dog1.birthDate 수정이 안됨
+             * 
+             */
+
+            if (delImgIds && delImgIds.length > 0) formDataToSend.append('isDeleteImages', JSON.stringify(true));
+            else formDataToSend.append('isDeleteImages', JSON.stringify(false));
+            
+            formDataToSend.append('status', dog1.status?.status);
+
+            if (delImgIds) {
+                delImgIds.forEach((d) => {
+                    formDataToSend.append('imgIdToDeletes', d);
+                });
+            }
+
+            if (formDataFile) {
+                if (formDataFile.length > 0) {
+                    formDataFile.forEach((f) => {
+                        formDataToSend.append('dogImgFiles', f);
+                    })
+                } else {
+                    formDataToSend.append('dogImgFiles', formDataFile[0]);
+                }
+            }
         
-        const dateForSubmit = new Date(date.year + date.month + date.day);
-        setDog1({...dog1, dogImgUrl: prevImages!, birthDate: dateForSubmit.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })})
             try {
-                await patch(`${process.env.REACT_APP_API_URL}breeder/dogs/${dog1.id}`, dog1).then((res) => console.log(res)
-                ).catch((err) => console.error(err)
-                );
-                
+                const result = await patch(`${process.env.REACT_APP_API_URL}breeder/dogs/${dog1.id}`, formDataToSend);
+                console.log(result.data);
+
             } catch (error) {
                 console.error('ERROR: ', error);
             }   
-    }
+        }
 
-    const updateGenderState = (value: string) => {
-        setDog1({...dog1, gender: value});
-    }
-
-    const updateStatusState = (value: string) => {
-        setDog1({...dog1, status: value});
-    }
+    
     
     return (
-        <MergeContainer>
+        <S.MergeContainer>
         <S.Wrapper>
             <S.ReturnBtnContainer onClick={() => naviage(-1)}>
                 <S.ReturnButton>
@@ -247,7 +253,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                         <S.RightInputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>출생일</S.InputTitle>
-                                <CustomDate>
+                                <S.CustomDate>
                                 <DateInput
                                     placeHolder="년"
                                     width={"22%"}
@@ -269,7 +275,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                     value={date.day}
                                     onClick={handleDay}
                                 />
-                                </CustomDate>
+                                </S.CustomDate>
                                 
                             </S.InputContainer>
                             <S.InputContainer>
@@ -278,7 +284,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        dog1?.gender ? dog1?.gender : "MALE"
+                                        dog1?.gender?.gender ? dog1?.gender?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}
                                     updateGenderState={updateGenderState}
@@ -291,8 +297,8 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        dog1?.status
-                                            ? dog1?.status
+                                        dog1?.status?.status
+                                            ? dog1?.status?.status
                                             : "AVAILABLE"
                                     }
                                     statusArr={["DONE", "AVAILABLE"]}
@@ -326,17 +332,17 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                             </S.ImageUploaderBox>
                         ))}
                         <S.ImageUploaderBox>
-                            <Container htmlFor="file" onClick={() => setAddButtonClicked(!addButtonClicked)}>
-                            <Input type="file" accept="image/*" id="file" onChange={(e) => handleAddImage(e)}/>
+                            <S.Container htmlFor="file" onClick={() => setAddButtonClicked(!addButtonClicked)}>
+                            <S.ImageInput type="file" accept="image/*" id="file" onChange={(e) => handleAddImage(e)}/>
                             <AddImageIcon />
-                            </Container>
+                            </S.Container>
                         </S.ImageUploaderBox>
                     </S.ImageUploaderFlexBox>
                 </S.ImageUploaderContainer>
             </S.InnerContainer>
         </S.Wrapper>
-        <SubmitButton type="submit" form="dogSubmit">저장</SubmitButton>
-    </MergeContainer>
+        <S.SubmitButton type="submit" form="dogSubmit">저장</S.SubmitButton>
+    </S.MergeContainer>
     );
 };
 

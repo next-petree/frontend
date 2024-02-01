@@ -42,7 +42,6 @@ const ReviewEditForm = ({ review }: IProp) => {
     const [prevImages, setPrevImages] = useState<IReviewImg[] | undefined>([]);
     const [formImages, setFormImages] = useState<File[]>([]);
     const [file, setFile] = useState<File>();
-    const [cnt, setCnt] = useState(0);
 
     const naviagate = useNavigate();
 
@@ -85,24 +84,22 @@ const ReviewEditForm = ({ review }: IProp) => {
 
     const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputFile = e.target?.files?.[0];
-        const { files } = e.target;
 
         setFile(inputFile);
-        setCnt(cnt + 1);
             
-            if (inputFile) {
-                const imageUrl = URL.createObjectURL(inputFile);
-                if(prevImages && prevImages.length > 0) {    
-                    let lastId = prevImages?.[prevImages.length - 1].id;
-                
-                    setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
-                    setFormImages([...formImages, inputFile]);
-                } else {
-                    let id = 1;
-                    let arr = [{id: id++, fileUrl:imageUrl}];
-                    setPrevImages(arr);
-                    setFormImages([...formImages, inputFile]);
-                }
+        if (inputFile) {
+            const imageUrl = URL.createObjectURL(inputFile);
+            if(prevImages && prevImages.length > 0) {    
+                let lastId = prevImages?.[prevImages.length - 1].id;
+            
+                setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+                setFormImages([...formImages, inputFile]);
+            } else {
+                let id = 1;
+                let arr = [{id: id++, fileUrl:imageUrl}];
+                setPrevImages(arr);
+                setFormImages([...formImages, inputFile]);
+            }
                 
             //     if(prevImages?.length! > 0 && prevImages?.[prevImages.length - 1].id) {
             //         let lastId = prevImages?.[prevImages.length - 1].id;

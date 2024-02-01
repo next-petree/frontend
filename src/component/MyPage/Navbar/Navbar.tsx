@@ -21,7 +21,7 @@ export const NavCategory = [
   {
     id: 2,
     name: "보유견종 관리",
-    link: "/mypage/owndogs",
+    link: "/mypage/owndogs/1",
   },
   {
     id: 3,

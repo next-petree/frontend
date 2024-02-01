@@ -242,6 +242,13 @@ export const Image = styled.img`
     border-radius: 12px;
     object-fit: cover;
 `
+
+export const MergeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
 export const SubmitButton = styled.button`
   width: 240px;
   height: 52px;
@@ -259,3 +266,25 @@ export const SubmitButton = styled.button`
   margin-top: 30px;
   cursor: pointer;
 `;
+
+export const CustomDate = styled.div`
+    width: 100%;
+    height: 48px;
+    display: flex;
+    gap: 9%;
+`;
+
+export const Container = styled.label`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:12px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+`
+
+export const ImageInput = styled.input`
+    display: none;
+`

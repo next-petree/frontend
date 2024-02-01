@@ -10,13 +10,16 @@ import { get } from "../../../api/api";
 const EditOwnDogs = () => {
     const { id } = useParams();
     const [dog, setDog] = useState<IDogInfo>();
+
     useEffect(() => {
         const getDogById = async () => {
             const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
             setDog(res.data.data);
+            console.log("res.data.data: ", res.data.data);
         }
         getDogById();
     }, [id]);
+
     return (
         <CustomLayout height={1653}>
             <Container>
