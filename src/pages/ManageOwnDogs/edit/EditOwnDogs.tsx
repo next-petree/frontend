@@ -1,24 +1,51 @@
 import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsEditForm, { IDogInfo } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
+import OwnDogsEditForm, { IStatus } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from "react";
-import { IData } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { get } from "../../../api/api";
+
+export interface IDogEditInfo {
+    birthDate: string;
+    dogImgUrl: string[];
+    dogType: string;
+    gender: string;
+    id: number;
+    management: string;
+    name: string;
+    status: string;
+}
+
+export interface IData {
+    status: string;
+    data: IDogEditInfo;
+}
 
 const EditOwnDogs = () => {
     const { id } = useParams();
-    const [dog, setDog] = useState<IDogInfo>();
+    const [dog, setDog] = useState<IDogEditInfo>();
 
     useEffect(() => {
         const getDogById = async () => {
             const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
-            setDog(res.data.data);
-            console.log("res.data.data: ", res.data.data);
+            setDog({
+                name: res.data.data.name,
+                id: res.data.data.id,
+                dogType: res.data.data.dogType,
+                dogImgUrl: res.data.data.dogImgUrl,
+                birthDate: res.data.data.birthDate,
+                management: res.data.data.management,
+                status: res.data.data.status || "AVAILABLE",
+                gender: res.data.data.gender,
+            });
+
+            console.log(res.data.data.status);
         }
         getDogById();
     }, [id]);
+
+
 
     return (
         <CustomLayout height={1653}>

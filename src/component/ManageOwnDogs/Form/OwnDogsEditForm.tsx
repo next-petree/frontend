@@ -9,44 +9,38 @@ import DateInput from "../CustomInput/DateInput";
 import ImageDeleteButton from "../ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
+import { IDogEditInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
 interface IProps {
-    dog?: IDogInfo;
+    dog?: IDogEditInfo;
 }
 
-export interface IDogInfo {
-    birthDate: string;
-    dogImgUrl: string[];
-    dogType: string;
-    gender: IGender;
-    id: number;
-    management: string;
-    name: string;
-    status: IStatus;
-}
+// export interface IDogInfo {
+//     birthDate: string;
+//     dogImgUrl: string[];
+//     dogType: string;
+//     gender: IGender;
+//     id: number;
+//     management: string;
+//     name: string;
+//     status: IStatus;
+// }
 
-export interface IStatus {
-    status: 'AVAILABLE' | 'DONE';
-}
+export type IStatus = 'AVAILABLE' | 'DONE';
 
 export interface IGender {
     gender: 'FEMALE' | 'MALE';
 }
 
 
-const initialState:IDogInfo = {
+const initialState:IDogEditInfo = {
     birthDate: "",
     dogImgUrl: [],
     dogType: "",
-    gender: {gender: 'FEMALE'},
+    gender: "FEMALE",
     id: -1,
     management: "",
     name: "",
-    status: { status: 'AVAILABLE' }
-}
-
-export interface IData {
-    status: string;
-    data: IDogInfo;
+    status: 'AVAILABLE'
 }
 
 interface IDate {
@@ -71,7 +65,7 @@ interface IDate {
  */
 
 const OwnDogsEditForm = ({dog}: IProps) => {
-    const [dog1, setDog1] = useState<IDogInfo>(initialState);
+    const [dog1, setDog1] = useState<IDogEditInfo>(initialState);
     const [date, setDate ] = useState<IDate>({
         year: 2001,
         month: 1,
@@ -89,6 +83,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     */
     useEffect(() => {        
         setDog1(dog!);
+        // setDog1({...dog1, status: {status: dog1.status.status}})
         handleDate(dog?.birthDate!);
         setPrevImages(dog?.dogImgUrl!);
     }, [dog])
@@ -159,14 +154,17 @@ const OwnDogsEditForm = ({dog}: IProps) => {
         }
 
         const updateGenderState = (value: string) => {
-            if (value === 'FEMALE') setDog1({...dog1, gender: {gender: 'FEMALE'}});
-            else setDog1({...dog1, gender: {gender: 'MALE'}});
+            if (value === 'FEMALE') setDog1({...dog1, gender: 'FEMALE'});
+            else setDog1({...dog1, gender: 'MALE'});
         }
     
         const updateStatusState = (value: string) => {
-            if (value === 'AVAILABLE') setDog1({...dog1, status: {status: 'AVAILABLE'}});
-             else setDog1({...dog1, status: {status: 'DONE'}});
+            if (value === 'AVAILABLE') setDog1({...dog1, status: 'AVAILABLE'});
+             else setDog1({...dog1, status: 'DONE'});
         }
+
+        console.log(dog1);
+        
 
         /*
             Submit 할 때 create | edit 인지 확인 (dog1.id)
@@ -177,7 +175,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
             const formDataToSend = new FormData();
 
             formDataToSend.append('name', dog1.name);
-            formDataToSend.append('gender', dog1.gender?.gender);
+            formDataToSend.append('gender', dog1.gender);
             formDataToSend.append('management', dog1.management);
             formDataToSend.append('birthDate', dog1.birthDate);
 
@@ -190,7 +188,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
             if (delImgIds && delImgIds.length > 0) formDataToSend.append('isDeleteImages', JSON.stringify(true));
             else formDataToSend.append('isDeleteImages', JSON.stringify(false));
             
-            formDataToSend.append('status', dog1.status?.status);
+            formDataToSend.append('status', dog1.status);
 
             if (delImgIds) {
                 delImgIds.forEach((d) => {
@@ -207,6 +205,12 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                     formDataToSend.append('dogImgFiles', formDataFile[0]);
                 }
             }
+
+            formDataToSend.forEach((e) => {
+                console.log(e);
+                
+            })
+            
         
             try {
                 const result = await patch(`${process.env.REACT_APP_API_URL}breeder/dogs/${dog1.id}`, formDataToSend);
@@ -217,8 +221,6 @@ const OwnDogsEditForm = ({dog}: IProps) => {
             }   
         }
 
-    
-    
     return (
         <S.MergeContainer>
         <S.Wrapper>
@@ -284,7 +286,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        dog1?.gender?.gender ? dog1?.gender?.gender : "MALE"
+                                        dog1?.gender ? dog1?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}
                                     updateGenderState={updateGenderState}
@@ -297,8 +299,8 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                     width={"84%"}
                                     height="48px"
                                     value={
-                                        dog1?.status?.status
-                                            ? dog1?.status?.status
+                                        dog1?.status
+                                            ? dog1?.status
                                             : "AVAILABLE"
                                     }
                                     statusArr={["DONE", "AVAILABLE"]}
