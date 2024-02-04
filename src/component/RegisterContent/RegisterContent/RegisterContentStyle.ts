@@ -4,10 +4,10 @@ import CheckedImage from "../../../assets/images/checkbox-image.png";
 
 export const Container = styled.div`
   display: flex;
-  width: 80vh;
+  width: 100%;
   margin: 80px auto 150px auto;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 `;
 
 export const RegisterSequence = styled.div`
@@ -23,6 +23,11 @@ export const RegisterSequenceStyle = styled.img`
 export const InnerContent = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const TitleArea = styled.div`
@@ -135,6 +140,13 @@ export const DropDown = styled.div`
     right: 30px;
     top: 15px;
   }
+
+  @media (max-width: 768px) {
+    max-width: 94%;
+  }
+  @media (max-width: 390px) {
+    width: 88.5%;
+  }
 `;
 
 export const PersonalInfomationArea = styled.div`
@@ -160,6 +172,12 @@ export const NextButtonContainer = styled.div`
   justify-content: center;
   margin-top: 100px;
   width: 100%;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+  @media (max-width: 390px) {
+    width: 80%;
+  }
 `;
 
 export const NextButton = styled.button`

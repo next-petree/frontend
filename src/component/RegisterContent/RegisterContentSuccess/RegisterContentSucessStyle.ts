@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
-  width: 80vh;
+  width: 100%;
   margin: 80px auto 150px auto;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,10 @@ export const SuccessText = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.96px;
+
+  @media (max-width: 390px) {
+    font-size: 25px;
+  }
 `;
 
 export const RegisterButtonContainer = styled.div`
