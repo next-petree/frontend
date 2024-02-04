@@ -8,6 +8,29 @@ import { get } from "../../../api/api";
 
 import * as S from "./styles";
 
+export interface IReviewApi {
+    status: "SUCCESS" | "FAIL";
+    data: IReview;
+  }
+
+interface Pageable {}
+
+interface Sort {}
+
+export interface ReviewData {
+  content: IReview[];
+  pageable: Pageable;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  sort: Sort;
+  first: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  empty: boolean;
+}
+
 interface IReview {
     content: string;
     dogId: number;
@@ -29,6 +52,7 @@ const ContentBox = () => {
     const [searchResult, setSearchResult] = useState<IReview[]>();
     const [inputText, setInputText] = useState("");
     const [category, setCategory] = useState("");
+    const [totalPage, setTotalPage] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,15 +60,20 @@ const ContentBox = () => {
                 `${process.env.REACT_APP_API_URL}adopter/reviews`
             );
 
-            return res.data.data.content;
+            console.log(res.data.data);
+            
+            return res.data.data;
         };
 
         fetchData()
             .then((res) => {
-                setReviews(res);
+                setReviews(res.content);                
+                setTotalPage(res.totalPages);
             })
             .catch((err) => console.log(err));
+        setPage(1);  
     }, []);
+
     const searchItems = (searchValue: string) => {
         setInputText(searchValue);
         if (searchValue !== "") {
@@ -160,7 +189,7 @@ const ContentBox = () => {
             <S.PaginationContainer>
                 <Pagenation
                     page={page}
-                    totalPage={10}
+                    totalPage={totalPage}
                     setPage={setPage}
                     name={"mypage/review"}
                 />
