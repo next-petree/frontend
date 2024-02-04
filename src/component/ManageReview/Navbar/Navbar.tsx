@@ -17,7 +17,7 @@ export const NavCategory = [
     {
         id: 2,
         name: "분양후기 관리",
-        link: "/mypage/review",
+        link: "/mypage/review/1",
     },
     {
         id: 3,

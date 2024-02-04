@@ -1,7 +1,7 @@
 import Navbar from "../../../component/ManageReview/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsForm from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
-import { BoxsContainer, Container, SubmitButton } from "../styles";
+import { BoxsContainer, Container } from "../styles";
+import OwnDogsCreateForm from "../../../component/ManageOwnDogs/Form/OwnDogsCreateForm";
 
 const CreateOwnDogs = () => {
   return (
@@ -9,9 +9,8 @@ const CreateOwnDogs = () => {
       <Container>
         <BoxsContainer>
           <Navbar />
-          <OwnDogsForm />
+          <OwnDogsCreateForm />
         </BoxsContainer>
-        <SubmitButton>저장</SubmitButton>
       </Container>
     </CustomLayout>
   );

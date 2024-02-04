@@ -1,28 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
 
 import * as S from "./styles";
 
 interface IProps {
-    value?: string;
+    genderValue?: string;
+    statusValue?: string;
     genderArr?: string[];
     statusArr?: string[];
     width: string;
     height: string;
+    updateGenderState?: (value: string) => void;
+    updateStatusState?: (value: string) => void;
 }
 
 const CustomInput = ({
-    value,
+    genderValue,
+    statusValue,
     genderArr,
     statusArr,
     width,
     height,
+    updateGenderState,
+    updateStatusState
 }: IProps) => {
     const [isArrowClicked, setIsArrowClicked] = useState(false);
-    const [gender, setGender] = useState<string | undefined>(value);
-    const [status, setStatus] = useState<string | undefined>(value);
+    const [gender, setGender] = useState<string | undefined>();
+    const [status, setStatus] = useState<string | undefined>();
 
     if (genderArr) {
+        useEffect(() => {
+            setGender(genderValue);
+            console.log("g");
+            
+        }, [genderValue])
         return (
             <S.Wrapper width={width} height={height}>
                 <S.Input value={gender} disabled />
@@ -39,6 +50,7 @@ const CustomInput = ({
                                 key={index}
                                 onClick={() => {
                                     setGender(g);
+                                    updateGenderState && updateGenderState(g);
                                     setIsArrowClicked(!isArrowClicked);
                                 }}
                             >
@@ -49,6 +61,12 @@ const CustomInput = ({
             </S.Wrapper>
         );
     }
+
+    useEffect(() => {
+        setStatus(statusValue);
+        console.log('s');
+        
+    }, [statusValue])
 
     return (
         <S.Wrapper width={width} height={height}>
@@ -66,6 +84,7 @@ const CustomInput = ({
                             key={index}
                             onClick={() => {
                                 setStatus(s);
+                                updateStatusState && updateStatusState(s);
                                 setIsArrowClicked(!isArrowClicked);
                             }}
                         >
