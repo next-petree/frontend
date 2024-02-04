@@ -56,11 +56,12 @@ const ContentBox = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${process.env.REACT_APP_API_URL}adopter/reviews?page=${page - 1}`;
             const res = await get<any>(
-                `${process.env.REACT_APP_API_URL}adopter/reviews`
+                url
             );
 
-            console.log(res.data.data);
+            console.log(res);
             
             return res.data.data;
         };
@@ -71,8 +72,7 @@ const ContentBox = () => {
                 setTotalPage(res.totalPages);
             })
             .catch((err) => console.log(err));
-        setPage(1);  
-    }, []);
+    }, [page]);
 
     const searchItems = (searchValue: string) => {
         setInputText(searchValue);

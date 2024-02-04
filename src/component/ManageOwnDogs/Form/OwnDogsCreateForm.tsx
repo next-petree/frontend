@@ -214,7 +214,7 @@ const OwnDogsCreateForm = () => {
                                 <CustomInput
                                     width={"84%"}
                                     height="48px"
-                                    value={
+                                    genderValue={
                                         dog?.gender?.gender ? dog?.gender?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}

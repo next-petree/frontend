@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
 
 import * as S from "./styles";
 
 interface IProps {
-    value?: string;
+    genderValue?: string;
+    statusValue?: string;
     genderArr?: string[];
     statusArr?: string[];
     width: string;
@@ -14,7 +15,8 @@ interface IProps {
 }
 
 const CustomInput = ({
-    value,
+    genderValue,
+    statusValue,
     genderArr,
     statusArr,
     width,
@@ -23,10 +25,15 @@ const CustomInput = ({
     updateStatusState
 }: IProps) => {
     const [isArrowClicked, setIsArrowClicked] = useState(false);
-    const [gender, setGender] = useState<string | undefined>(value);
-    const [status, setStatus] = useState<string | undefined>(value);
+    const [gender, setGender] = useState<string | undefined>();
+    const [status, setStatus] = useState<string | undefined>();
 
     if (genderArr) {
+        useEffect(() => {
+            setGender(genderValue);
+            console.log("g");
+            
+        }, [genderValue])
         return (
             <S.Wrapper width={width} height={height}>
                 <S.Input value={gender} disabled />
@@ -54,6 +61,12 @@ const CustomInput = ({
             </S.Wrapper>
         );
     }
+
+    useEffect(() => {
+        setStatus(statusValue);
+        console.log('s');
+        
+    }, [statusValue])
 
     return (
         <S.Wrapper width={width} height={height}>

@@ -25,7 +25,9 @@ interface IProps {
 //     status: IStatus;
 // }
 
-export type IStatus = 'AVAILABLE' | 'DONE';
+export interface IStatus {
+    status: 'AVAILABLE' | 'DONE';
+};
 
 export interface IGender {
     gender: 'FEMALE' | 'MALE';
@@ -36,11 +38,11 @@ const initialState:IDogEditInfo = {
     birthDate: "",
     dogImgUrl: [],
     dogType: "",
-    gender: "FEMALE",
+    gender: "",
     id: -1,
     management: "",
     name: "",
-    status: 'AVAILABLE'
+    status: ""
 }
 
 interface IDate {
@@ -83,11 +85,10 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     */
     useEffect(() => {        
         setDog1(dog!);
-        // setDog1({...dog1, status: {status: dog1.status.status}})
         handleDate(dog?.birthDate!);
         setPrevImages(dog?.dogImgUrl!);
-    }, [dog])
-
+    }, [dog]);
+    
     /*
         Handle Date
     */
@@ -161,10 +162,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
         const updateStatusState = (value: string) => {
             if (value === 'AVAILABLE') setDog1({...dog1, status: 'AVAILABLE'});
              else setDog1({...dog1, status: 'DONE'});
-        }
-
-        console.log(dog1);
-        
+        }        
 
         /*
             Submit 할 때 create | edit 인지 확인 (dog1.id)
@@ -204,6 +202,15 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                 } else {
                     formDataToSend.append('dogImgFiles', formDataFile[0]);
                 }
+            } else {
+                if (dog1.dogImgUrl.length > 0) {
+                    dog1.dogImgUrl.forEach((d) => {
+                        formDataToSend.append('dogImgFiles', d);
+                    });
+                } else {
+                    formDataToSend.append('dogImgFiles', dog1.dogImgUrl[0]);
+                }
+                formDataToSend.append('dogImgFiles', "");
             }
 
             formDataToSend.forEach((e) => {
@@ -285,8 +292,8 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                 <CustomInput
                                     width={"84%"}
                                     height="48px"
-                                    value={
-                                        dog1?.gender ? dog1?.gender : "MALE"
+                                    genderValue={
+                                        dog1?.gender === "FEMALE" ? dog1?.gender : "MALE"
                                     }
                                     genderArr={["FEMAIL", "MALE"]}
                                     updateGenderState={updateGenderState}
@@ -298,10 +305,10 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                 <CustomInput
                                     width={"84%"}
                                     height="48px"
-                                    value={
-                                        dog1?.status
+                                    statusValue={
+                                        dog1?.status === "AVAILABLE"
                                             ? dog1?.status
-                                            : "AVAILABLE"
+                                            : "DONE"
                                     }
                                     statusArr={["DONE", "AVAILABLE"]}
                                     updateStatusState={updateStatusState}

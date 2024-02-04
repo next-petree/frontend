@@ -41,8 +41,9 @@ const ContentBox = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const url = `${process.env.REACT_APP_API_URL}breeder/dogs?page=${page - 1}`;
       const res = await get<IData>(
-        `${process.env.REACT_APP_API_URL}breeder/dogs`,
+        url
       );
 
       return res.data.data;
@@ -54,7 +55,7 @@ const ContentBox = () => {
         setDogs(res.content);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [page]);
 
   const searchItems = (searchValue: string) => {
     setInputText(searchValue);

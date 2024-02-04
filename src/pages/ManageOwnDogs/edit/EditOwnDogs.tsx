@@ -1,6 +1,6 @@
 import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsEditForm, { IStatus } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
+import OwnDogsEditForm, { IGender, IStatus } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from "react";
@@ -36,11 +36,9 @@ const EditOwnDogs = () => {
                 dogImgUrl: res.data.data.dogImgUrl,
                 birthDate: res.data.data.birthDate,
                 management: res.data.data.management,
-                status: res.data.data.status || "AVAILABLE",
+                status: res.data.data.status,
                 gender: res.data.data.gender,
             });
-
-            console.log(res.data.data.status);
         }
         getDogById();
     }, [id]);
