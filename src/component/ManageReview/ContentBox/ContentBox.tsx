@@ -8,6 +8,29 @@ import { get } from "../../../api/api";
 
 import * as S from "./styles";
 
+export interface IReviewApi {
+    status: "SUCCESS" | "FAIL";
+    data: IReview;
+  }
+
+interface Pageable {}
+
+interface Sort {}
+
+export interface ReviewData {
+  content: IReview[];
+  pageable: Pageable;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  sort: Sort;
+  first: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  empty: boolean;
+}
+
 interface IReview {
     content: string;
     dogId: number;
@@ -21,7 +44,7 @@ interface IReview {
 }
 
 const ContentBox = () => {
-     // 첫 페이지로 오실려면 "mypage/review/1" 이런 식으로 url을 연결 하셔야 합니다.
+    // 첫 페이지로 오실려면 "mypage/review/1" 이런 식으로 url을 연결 하셔야 합니다.
     // 되도록이면 첫 페이지가 "mypage/review/0" 이 아닌 "mypage/review/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
     const param = useParams();
     const [page, setPage] = useState(Number(param.pageId));
@@ -29,22 +52,28 @@ const ContentBox = () => {
     const [searchResult, setSearchResult] = useState<IReview[]>();
     const [inputText, setInputText] = useState("");
     const [category, setCategory] = useState("");
+    const [totalPage, setTotalPage] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${process.env.REACT_APP_API_URL}adopter/reviews?page=${page - 1}`;
             const res = await get<any>(
-                `${process.env.REACT_APP_API_URL}adopter/reviews`
+                url
             );
 
-            return res.data.data.content;
+            console.log(res);
+            
+            return res.data.data;
         };
 
         fetchData()
             .then((res) => {
-                setReviews(res);
+                setReviews(res.content);                
+                setTotalPage(res.totalPages);
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [page]);
+
     const searchItems = (searchValue: string) => {
         setInputText(searchValue);
         if (searchValue !== "") {
@@ -110,7 +139,7 @@ const ContentBox = () => {
                 <S.ReviewContainer>
                     {searchResult?.map((d, index) => (
                         <S.ReviewItem key={index}>
-                            <Link to={`edit/${d.id}`}>
+                            <Link to={`/mypage/review/edit/${d.id}`}>
                                 <S.ReviewDogImage src={d.imgUrl} />
                             </Link>
                             <S.ReviewDescContainer>
@@ -134,7 +163,7 @@ const ContentBox = () => {
                 <S.ReviewContainer>
                     {reviews?.map((d, index) => (
                         <S.ReviewItem key={index}>
-                            <Link to={`edit/${d.id}`}>
+                            <Link to={`/mypage/review/edit/${d.id}`}>
                                 <S.ReviewDogImage src={d.imgUrl} />
                             </Link>
                             <S.ReviewDescContainer>
@@ -160,7 +189,7 @@ const ContentBox = () => {
             <S.PaginationContainer>
                 <Pagenation
                     page={page}
-                    totalPage={10}
+                    totalPage={totalPage}
                     setPage={setPage}
                     name={"mypage/review"}
                 />

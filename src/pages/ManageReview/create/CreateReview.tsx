@@ -1,7 +1,7 @@
 import Navbar from "../../../component/ManageReview/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import ReviewForm from "../../../component/ManageReview/Form/ReviewForm";
-import { BoxsContainer, Container, SubmitButton } from "../styles";
+import ReviewCreateForm from "../../../component/ManageReview/Form/ReviewCreateForm";
+import { BoxsContainer, Container } from "../styles";
 
 const CreateReview = () => {
   return (
@@ -9,9 +9,8 @@ const CreateReview = () => {
       <Container>
         <BoxsContainer>
           <Navbar />
-          <ReviewForm />
+          <ReviewCreateForm />
         </BoxsContainer>
-        <SubmitButton>저장</SubmitButton>
       </Container>
     </CustomLayout>
   );

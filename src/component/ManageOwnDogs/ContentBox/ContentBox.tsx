@@ -33,6 +33,7 @@ const ContentBox = () => {
   // 되도록이면 첫 페이지가 "mypage/owndogs/0" 이 아닌 "mypage/owndogs/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
+  const [totalPage, setTotalPage] = useState(0);
   const [dogs, setDogs] = useState<IContent[]>();
   const [category, setCategory] = useState("");
   const [result, setResult] = useState<IContent[]>();
@@ -40,8 +41,9 @@ const ContentBox = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const url = `${process.env.REACT_APP_API_URL}breeder/dogs?page=${page - 1}`;
       const res = await get<IData>(
-        `${process.env.REACT_APP_API_URL}breeder/dogs`,
+        url
       );
 
       return res.data.data;
@@ -49,11 +51,11 @@ const ContentBox = () => {
 
     fetchData()
       .then(res => {
-        setPage(res.totalPages);
+        setTotalPage(res.totalPages);
         setDogs(res.content);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [page]);
 
   const searchItems = (searchValue: string) => {
     setInputText(searchValue);
@@ -125,7 +127,7 @@ const ContentBox = () => {
         {/* 상단에 param.pageId 에 따라서 데이터가 잘 표시 되도록 하셔야 될 겁니다. */}
         <Pagenation
           page={page}
-          totalPage={10}
+          totalPage={totalPage}
           setPage={setPage}
           name={"mypage/owndogs"}
         />

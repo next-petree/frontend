@@ -8,6 +8,8 @@ type Props = {
   placeHolder: string;
   width: string;
   height: string;
+  value: number;
+  onClick: (val: number) => void;
 };
 
 const SelectUl = styled.ul<{ customwidth: string }>`
@@ -59,19 +61,20 @@ const SelectLi = styled.li`
   }
 `;
 
-const DateInput = ({ placeHolder, width, height }: Props) => {
+const DateInput = ({ placeHolder, width, height, value, onClick }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<number>();
   const years = [...Array(24)].map((v, i) => i + 2000);
-  const month = [...Array(12)].map((v, i) => i + 1);
-  const day = [...Array(31)].map((v, i) => i + 1);
+  const months = [...Array(12)].map((v, i) => i + 1);
+  const days = [...Array(31)].map((v, i) => i + 1);
   const onClickDate = (Date: number) => {
     setIsOpen(false);
-    setValue(Date);
+    onClick(Date);
   };
+  
+  
   return (
     <S.Wrapper width={width} height={height}>
-      <S.Input placeholder={placeHolder} value={`${value}${placeHolder}`} disabled />
+      <S.Input placeholder={placeHolder} value={`${value + placeHolder}`} disabled />
       <S.IconContainer
         isclicked={isOpen}
         onClick={() => {
@@ -84,15 +87,15 @@ const DateInput = ({ placeHolder, width, height }: Props) => {
         <SelectUl customwidth={width}>
           {placeHolder === "년" &&
             years.map((y) => (
-              <SelectLi onClick={() => onClickDate(y)}>{y}</SelectLi>
+              <SelectLi key={y} onClick={() => onClickDate(y)}>{y}</SelectLi>
             ))}
           {placeHolder === "월" &&
-            month.map((m) => (
-              <SelectLi onClick={() => onClickDate(m)}>{m}</SelectLi>
+            months.map((m) => (
+              <SelectLi key={m} onClick={() => onClickDate(m)}>{m}</SelectLi>
             ))}
           {placeHolder === "일" &&
-            day.map((d) => (
-              <SelectLi onClick={() => onClickDate(d)}>{d}</SelectLi>
+            days.map((d) => (
+              <SelectLi key={d} onClick={() => onClickDate(d)}>{d}</SelectLi>
             ))}
         </SelectUl>
       )}
