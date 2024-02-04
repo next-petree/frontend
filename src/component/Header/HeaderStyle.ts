@@ -17,6 +17,13 @@ export const Container = styled.div`
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 10px 0px rgba(119, 119, 119, 0.05);
   backdrop-filter: blur(5px);
+  @media (max-width: 768px) {
+    padding: 14px 50px 14px 50px;
+  }
+  @media (max-width: 390px) {
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+  }
 `;
 
 export const TitleArea = styled(Link)`
@@ -30,6 +37,12 @@ export const TitleLogo = styled.div`
   height: 36px;
   background: url(${petTreeIconImage}) no-repeat center;
   background-size: contain;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const TitleText = styled.div`
@@ -37,6 +50,12 @@ export const TitleText = styled.div`
   height: 18.38px;
   background: url(${petTreeTextImage}) no-repeat center;
   background-size: contain;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    width: 50px;
+    height: 15px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -48,6 +67,12 @@ export const NavigationMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: 30px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    margin-right: 0px;
+    margin-left: 15px;
+  }
 `;
 
 export const NavigationLink = styled(Link)`
@@ -59,6 +84,11 @@ export const NavigationLink = styled(Link)`
   font-weight: 500;
   line-height: normal;
   margin-right: 20px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    font-size: 12px;
+  }
 `;
 
 export const UserProfileImage = styled.div<{

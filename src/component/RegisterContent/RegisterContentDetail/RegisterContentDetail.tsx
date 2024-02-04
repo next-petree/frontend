@@ -66,7 +66,6 @@ const RegisterContentDetail = () => {
     role = "ADOPTER";
   }
 
-  // 최종 제출
   const handleSubmit = async () => {
     console.log(email.emailCheck);
     console.log(nickname.nicknameCheck);
