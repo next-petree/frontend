@@ -22,7 +22,7 @@ export const NavCategory = [
   },
   {
     id: 2,
-    name: "보유견종 관리",
+    name: "",
     link: "",
   },
   {
@@ -49,10 +49,23 @@ const Navbar = () => {
     roleBasedLink = "/mypage/adoptlist/adopter";
   }
 
+  NavCategory.map(category => {
+    if (category.id === 2) {
+      if (decodedJWT.role === "ADOPTER") {
+        category.name = "리뷰 관리";
+        category.link = "/mypage/review/1";
+      } else if (decodedJWT.role === "BREEDER") {
+        category.name = "보유 견종 관리";
+        category.link = "/mypage/owndogs/1";
+      }
+    }
+  })
+
   const NavCategoryWithRole = NavCategory.map(category => {
     if (category.name === "분양신청내역") {
       return { ...category, link: roleBasedLink };
     }
+
     return category;
   });
 

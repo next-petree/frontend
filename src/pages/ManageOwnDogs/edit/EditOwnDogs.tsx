@@ -1,12 +1,12 @@
 import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
-import OwnDogsForm from "../../../component/ManageOwnDogs/Form/OwnDogsForm";
+import OwnDogsEditForm, { IGender, IStatus } from "../../../component/ManageOwnDogs/Form/OwnDogsEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState , useEffect} from "react";
 import { get } from "../../../api/api";
 
-export interface IDogInfo {
+export interface IDogEditInfo {
     birthDate: string;
     dogImgUrl: string[];
     dogType: string;
@@ -17,39 +17,41 @@ export interface IDogInfo {
     status: string;
 }
 
-interface IData {
+export interface IData {
     status: string;
-    data: IDogInfo;
+    data: IDogEditInfo;
 }
 
 const EditOwnDogs = () => {
     const { id } = useParams();
-    const [dogInfo, setDogInfo] = useState<IDogInfo>();
+    const [dog, setDog] = useState<IDogEditInfo>();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await get<IData>(
-                `${process.env.REACT_APP_API_URL}/breeder/dogs/${id}`
-            );
+        const getDogById = async () => {
+            const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
+            setDog({
+                name: res.data.data.name,
+                id: res.data.data.id,
+                dogType: res.data.data.dogType,
+                dogImgUrl: res.data.data.dogImgUrl,
+                birthDate: res.data.data.birthDate,
+                management: res.data.data.management,
+                status: res.data.data.status,
+                gender: res.data.data.gender,
+            });
+        }
+        getDogById();
+    }, [id]);
 
-            return res.data;
-        };
 
-        fetchData()
-            .then((res) => {
-                setDogInfo(res.data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
 
     return (
         <CustomLayout height={1653}>
             <Container>
                 <BoxsContainer>
                     <Navbar />
-                    <OwnDogsForm dog={dogInfo} />
+                    <OwnDogsEditForm dog={dog} />
                 </BoxsContainer>
-                <SubmitButton>저장</SubmitButton>
             </Container>
         </CustomLayout>
     );
