@@ -9,7 +9,10 @@ export const BoxWrapper = styled.div`
   padding-top: 15px;
   padding-bottom: 20px;
   width: 80%;
-  height: 90%;
+  height: 85%;
+  @media (max-width: 392px) {
+    height: 80%;
+  } ;
   border-radius: 12px;
   box-shadow: 0px 4px 20px 0px #00000017;
   &:hover {
@@ -18,10 +21,17 @@ export const BoxWrapper = styled.div`
 `;
 export const ImgBox = styled.div`
   position: relative;
+  margin: 0 3rem;
 `;
 export const Img = styled.img`
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  height: 13.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
   border-radius: 12px;
   background-color: aliceblue;
   object-fit: cover;
@@ -29,8 +39,14 @@ export const Img = styled.img`
 
 export const AlreadyImg = styled.img`
   position: relative;
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
+  height: 13.7rem;
   border-radius: 12px;
   object-fit: cover;
 `;
@@ -54,8 +70,15 @@ export const Availtext = styled.div`
 `;
 
 export const Dermyimg = styled.div`
-  width: 12vw;
-  height: 7.2vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
+  
+  height: 13.7rem;
   border-radius: 12px;
   background-color: slategray;
 `;
@@ -63,11 +86,23 @@ export const Badge = styled.span`
   position: absolute;
   bottom: 5px;
   right: 5px;
+  width: 3.5rem;
+  height: 3.5rem;
+  @media (max-width:392px)  {
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 export const Nameline = styled.div`
   display: flex;
   align-items: center;
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
 `;
 export const Name = styled.span`
   /* width: 220px; */
@@ -82,11 +117,20 @@ export const Distance = styled.span`
   margin-top: 2px;
   margin-left: 0.7vw;
   font-size: 2rem;
+  @media (max-width: 392px) {
+    font-size: 1.5rem;
+  } ;
   color: #333333;
   font-weight: 600;
 `;
 export const MajorDog = styled.div`
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
@@ -97,12 +141,20 @@ export const LitteBadge = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const Doginfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 12vw;
+  width: 21.7rem;
+  @media (max-width: 768px) {
+    width: 17rem;
+  } ;
+  @media (max-width: 392px) {
+    width: 15rem;
+  } ;
   gap: 2px;
 `;
 
