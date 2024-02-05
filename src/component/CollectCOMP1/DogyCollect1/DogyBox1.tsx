@@ -1,9 +1,7 @@
-import { useState } from "react";
 import {
   AlreadyImg,
   Availtext,
   BoxWrapper,
-  Dermyimg,
   Doginfo,
   Img,
   ImgBox,
@@ -16,7 +14,6 @@ import {
 import { DogsContent } from "../../../types/DogsCollectTypes1";
 
 export default function DogyBox({
-  id,
   name,
   type,
   gender,
@@ -88,3 +85,4 @@ export default function DogyBox({
     </BoxWrapper>
   );
 }
+
