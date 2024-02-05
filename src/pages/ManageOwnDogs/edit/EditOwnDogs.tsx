@@ -20,8 +20,8 @@ export interface IDogEditInfo {
 export interface IData {
     status: string;
     data: IDogEditInfo;
-}
 
+}
 export interface IImgProps {
     id: number;
     fileUrl: string;
@@ -34,7 +34,6 @@ const EditOwnDogs = () => {
     useEffect(() => {
         const getDogById = async () => {
             const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
-            
             setDog({
                 name: res.data.data.name,
                 id: res.data.data.id,

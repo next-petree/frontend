@@ -42,6 +42,11 @@ export const SubTitle1 = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -2px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 600px) {
+    font-size: 25px;
+  }
 `;
 
 export const SubTitle2 = styled.div`
@@ -53,18 +58,30 @@ export const SubTitle2 = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.96px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 export const ContentArea = styled.div`
   width: 330px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 65px;
   flex-direction: column;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    margin-right: 0px;
+  }
 `;
 
 const InputArea = styled.div`
   display: flex;
-  width: 332px;
+  width: 330px;
   flex-direction: row;
   gap: 20px;
   align-items: center;
@@ -114,6 +131,10 @@ export const FindIdOrPassWordArea = styled.div`
   margin-bottom: 80px;
   font-size: 16px;
   font-family: Noto Sans KR;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const FindIdButton = styled(Link)`
@@ -143,6 +164,11 @@ export const LoginOrSignUpButtonArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    align-items: center;
+  }
 `;
 
 export const BasicLoginButton = styled.button`

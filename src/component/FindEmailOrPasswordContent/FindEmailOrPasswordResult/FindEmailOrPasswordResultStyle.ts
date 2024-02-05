@@ -49,6 +49,12 @@ export const ResultInput = styled.input`
   background-color: #f5f5f5;
   border: 0px;
   border-radius: 10px;
+  @media (max-width: 768px) {
+    width: 70%;
+    height: 25px;
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const ButtonArea = styled.div`
@@ -57,6 +63,11 @@ export const ButtonArea = styled.div`
   margin-top: 20px;
   gap: 28px;
   margin-top: 100px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    flex-direction: column;
+  }
 `;
 
 const Button = `
@@ -74,7 +85,8 @@ font-size: 15px;
 text-decoration: none;
 cursor: pointer;
 justify-content: center;
-align-items: center;`;
+align-items: center;
+`;
 
 export const LoginPageButton = styled(Link)`
   ${Button}

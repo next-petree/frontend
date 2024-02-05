@@ -16,12 +16,14 @@ import ThirdDogsImage from "../../assets/images/Rectangle7.png";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 `;
 
 export const IntroArea1 = styled.div`
   height: 850px;
   width: 100%;
   background: url(${firstBackgrondImage}) no-repeat center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +55,7 @@ export const IntroArea2DogImage = styled.div`
   width: 480px;
   height: 440px;
   background: url(${FirstDogsImage}) no-repeat center;
+  background-size: 100%;
 `;
 
 export const IntroArea2TextArea = styled.div`
@@ -71,6 +74,13 @@ export const IntroArea2MainTitle = styled.div`
   line-height: 50px;
   letter-spacing: -2px;
   margin-bottom: 20px;
+  @media (max-width: 1300px) {
+    line-height: 30px;
+    font-size: 35px;
+  }
+  @media (max-width: 800px) {
+    font-size: 30px;
+  }
 `;
 
 export const IntroArea2SubTitle1 = styled.div`
@@ -82,6 +92,14 @@ export const IntroArea2SubTitle1 = styled.div`
   line-height: normal;
   letter-spacing: -1.2px;
   margin-bottom: 50px;
+  @media (max-width: 1300px) {
+    line-height: 25px;
+    font-size: 30px;
+  }
+  @media (max-width: 800px) {
+    font-size: 25px;
+    margin-bottom: 0px;
+  }
 `;
 
 export const IntroArea2SubTitle2 = styled.div`
@@ -93,6 +111,13 @@ export const IntroArea2SubTitle2 = styled.div`
   line-height: normal;
   letter-spacing: -1.2px;
   margin-bottom: 30px;
+  @media (max-width: 1300px) {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 800px) {
+    font-size: 20px;
+  }
 `;
 
 export const IntroArea2Introduce = styled.div`
@@ -104,6 +129,13 @@ export const IntroArea2Introduce = styled.div`
   line-height: 30px;
   letter-spacing: -1px;
   margin-bottom: 20px;
+  @media (max-width: 1300px) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 800px) {
+    font-size: 15px;
+  }
 `;
 
 export const IntroArea3 = styled.div`
@@ -115,8 +147,8 @@ export const IntroArea3 = styled.div`
 `;
 
 export const IntroArea3ContentBox = styled.div`
-  min-width: 570px;
-  min-height: 270px;
+  width: 570px;
+  height: 270px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,10 +163,15 @@ export const IntroArea3MainTitle = styled.div`
   text-align: center;
   font-family: Noto Sans KR;
   font-size: 40px;
-  font-style: normal;
   font-weight: 700;
   line-height: 50px;
   letter-spacing: -2px;
+  @media (max-width: 1300px) {
+    font-size: 30px;
+  }
+  @media (max-width: 800px) {
+    font-size: 25px;
+  }
 `;
 
 export const IntroArea3SubTitle = styled.div`
@@ -147,6 +184,13 @@ export const IntroArea3SubTitle = styled.div`
   line-height: 50px;
   letter-spacing: -2px;
   margin-bottom: 30px;
+  @media (max-width: 1300px) {
+    font-size: 30px;
+    line-height: 20px;
+  }
+  @media (max-width: 800px) {
+    font-size: 25px;
+  }
 `;
 
 export const IntroArea3Introduce = styled.div`
@@ -158,14 +202,24 @@ export const IntroArea3Introduce = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -1.2px;
+  @media (max-width: 1300px) {
+    font-size: 22px;
+    line-height: 25px;
+  }
+  @media (max-width: 800px) {
+    font-size: 20px;
+  }
 `;
 
 export const IntroArea4 = styled.div`
-  height: 1000px;
+  min-height: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 1000px) {
+    margin: 20px 0;
+  }
 `;
 
 export const IntroArea4MainTitle = styled.div`
@@ -177,6 +231,9 @@ export const IntroArea4MainTitle = styled.div`
   font-weight: 700;
   line-height: 54px;
   letter-spacing: -2px;
+  @media (max-width: 800px) {
+    font-size: 35px;
+  }
 `;
 
 export const IntroArea4SubTitle = styled.div`
@@ -189,11 +246,18 @@ export const IntroArea4SubTitle = styled.div`
   line-height: 42px;
   letter-spacing: -1.2px;
   margin-bottom: 50px;
+
+  @media (max-width: 800px) {
+    font-size: 20px;
+  }
 `;
 
 export const ImageContainer = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 
 export const LeftContent = styled.div`
@@ -206,16 +270,19 @@ export const LeftContent = styled.div`
 export const LeftImage = styled.div`
   width: 480px;
   height: 340px;
-  background: 
-  // linear-gradient(
-  //     0deg,
-  //     rgba(255, 255, 255, 0.1) 0%,
-  //     rgba(255, 255, 255, 0.1) 100%
-  //   ),
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
     url(${LeftDogImage}) center / cover no-repeat;
   border-radius: 30px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 240px;
+  }
 `;
 
 export const LeftHashTag = styled.div`
@@ -237,6 +304,9 @@ export const LeftHashTag = styled.div`
   font-style: normal;
   font-weight: 700;
   letter-spacing: -0.8px;
+  @media (max-width: 500px) {
+    font-size: 13px;
+  }
 `;
 
 export const LeftImageIntroduce = styled.div`
@@ -269,6 +339,10 @@ export const RightImage = styled.div`
   border-radius: 30px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 240px;
+  }
 `;
 
 export const RightHashTag = styled.div`
@@ -290,6 +364,9 @@ export const RightHashTag = styled.div`
   font-style: normal;
   font-weight: 700;
   letter-spacing: -0.8px;
+  @media (max-width: 500px) {
+    font-size: 13px;
+  }
 `;
 
 export const RightImageIntroduce = styled.div`
@@ -304,11 +381,13 @@ export const RightImageIntroduce = styled.div`
 `;
 
 export const IntroArea5 = styled.div`
+  width: 100%;
   height: 717px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-size: cover;
   background: url(${ThirdDogsImage}) no-repeat center;
 `;
 
@@ -338,7 +417,20 @@ export const IntroArea5SubTitle = styled.div`
 
 export const IntroArea5HashTagArea = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 10px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+export const HashTagArea = styled.div`
+  width: 100%:
+  height: 100px;
+  display:flex;
+  gap: 10px;
+  @media (max-width: 600px) {
+    justify-content:center;
+  }
 `;
 
 const HashTag = styled.div`

@@ -30,7 +30,6 @@ import {
   SignUpButtonArea,
   SignUpButton,
 } from "./LoginContentStyle";
-import { setAvatar } from "../../redux/Mypage1/AvatarSlice1";
 
 const LoginContent = () => {
   const [email, setEmail] = useState("");
@@ -69,10 +68,10 @@ const LoginContent = () => {
     } catch (error: any) {
       console.error(
         "로그인 에러:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
       await Swal.fire(
-        alertList.errorMessage("로그인 과정에서 오류가 발생했습니다.")
+        alertList.errorMessage("로그인 과정에서 오류가 발생했습니다."),
       );
     }
   };
@@ -92,7 +91,7 @@ const LoginContent = () => {
           <EmailText>이메일</EmailText>
           <EmailInput
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           ></EmailInput>
         </EmailInputArea>
         <PassWordInputArea>
@@ -100,7 +99,7 @@ const LoginContent = () => {
           <PassWordInput
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           ></PassWordInput>
         </PassWordInputArea>
 

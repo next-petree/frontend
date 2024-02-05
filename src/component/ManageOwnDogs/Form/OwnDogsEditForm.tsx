@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import Swal from "sweetalert2";
+import alertList from "../../../utils/Swal1";
 
 import * as S from "./styles";
 import CustomInput from "../CustomInput/CustomInput";
@@ -12,7 +13,6 @@ import AddImageIcon from "../AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
 import { IData, IDogEditInfo } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
 import { IImgProps } from "../../../pages/ManageOwnDogs/edit/EditOwnDogs";
-import alertList from "../../../utils/Swal1";
 
 interface IProps {
     dog?: IDogEditInfo;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  width: 80vh;
+  width: 100%;
   margin: 80px auto 150px auto;
   flex-direction: column;
   align-items: start;
@@ -23,6 +23,9 @@ export const SelectArea = styled.div`
   margin: 0 auto;
   gap: 10px;
   margin-bottom: 50px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SelectButton = styled.button`
@@ -128,6 +131,12 @@ export const TopContentArea = styled.div`
   margin: 0 auto;
   margin-bottom: 100px;
   gap: 55px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  @media (max-width: 390px) {
+    width: 100%;
+  }
 `;
 
 export const TopLeftContentArea = styled.div`
@@ -232,6 +241,12 @@ export const BottomContentArea = styled.div`
   margin: 0 auto;
   margin-bottom: 100px;
   gap: 55px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  @media (max-width: 390px) {
+    width: 100%;
+  }
 `;
 
 export const BottomLeftContentArea = styled.div`

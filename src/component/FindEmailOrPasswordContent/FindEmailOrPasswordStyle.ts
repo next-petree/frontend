@@ -7,6 +7,11 @@ export const Container = styled.div`
   margin: 300px auto 0 auto;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 768px) {
+    margin: 150px auto 0 auto;
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const FindEmailOrPasswordTitle = styled.div`
@@ -24,6 +29,16 @@ export const ContentArea = styled.div`
   height: 300px;
   display: flex;
   margin-right: 180px;
+  width: 100%;
+  justify-content: center;
+  @media (max-width: 768px) {
+    margin-right: 0px;
+    height: 500px;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const CharacterImage = styled.div`
@@ -37,6 +52,9 @@ export const CharacterImage = styled.div`
 
 export const InnerContentArea = styled.div`
   margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const InputArea = styled.div`
@@ -75,6 +93,11 @@ const Input = styled.input`
   background-color: #f5f5f5;
   border: 0px;
   border-radius: 10px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    width: 180px;
+  }
 `;
 
 export const NameInput = styled(Input)``;
@@ -92,6 +115,14 @@ const Button = styled.button`
   padding: 0 16px;
   margin-left: 10px;
   color: #fff;
+  @media (max-width: 768px) {
+    padding: 0 8px;
+    font-size: 14px;
+  }
+  @media (max-width: 390px) {
+    padding: 0 8px;
+    font-size: 13px;
+  }
 `;
 
 export const PhoneNumberSendButton = styled(Button)`
