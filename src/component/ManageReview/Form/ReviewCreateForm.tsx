@@ -2,10 +2,12 @@ import * as S from './styles';
 import { IoIosArrowBack } from "react-icons/io";
 import ImageDeleteButton from "../../ManageOwnDogs/ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../../ManageOwnDogs/AddImageIcon/AddImageIcon";
-import { IReview, IReviewImg } from "../../../pages/ManageReview/edit/EditReview";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { post } from '../../../api/api';
+
+import Swal from "sweetalert2";
+import alertList from "../../../utils/Swal1";
 
 /**
  * 
@@ -40,7 +42,7 @@ const ReviewCreateForm = () => {
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
     const [prevImages, setPrevImages] = useState<string[]>([]);
 
-    const naviagate = useNavigate();
+    const navigate = useNavigate();
 
     const handleDeleteImage = (index: number) => {
         setPrevImages(prevImages?.filter((img, i) => {
@@ -70,10 +72,6 @@ const ReviewCreateForm = () => {
             } 
     }
 
-    const handleGenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    }
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -85,14 +83,18 @@ const ReviewCreateForm = () => {
 
 
         review1.reviewImgFiles.forEach((file) => {
-            console.log(file);
-            
             formDataToSend.append(`reviewImgFiles`, file);
          });
 
         try {
             const response = await post(`${process.env.REACT_APP_API_URL}adopter/review`, formDataToSend)
-            console.log('서버 응답:', response.data);
+            if(response.status === 200) {
+                Swal.fire({
+                    ...alertList.successMessage("리뷰가 생성되었습니다"),
+                    width: "350px",
+                  });
+                navigate('/mypage/review/1');
+            }
         } catch(e) {
             console.error('에러 발생:', e);
         }
@@ -102,7 +104,7 @@ const ReviewCreateForm = () => {
     <S.MergeContainer>
         <S.Wrapper>
             <S.ReturnBtnContainer>
-                <S.ReturnButton onClick={() => naviagate(-1)}>
+                <S.ReturnButton onClick={() => navigate('/mypage/review/1')}>
                     <IoIosArrowBack />
                 </S.ReturnButton>
                 <S.ReturnBtnText>이전 페이지로</S.ReturnBtnText>
@@ -124,12 +126,7 @@ const ReviewCreateForm = () => {
                                 <S.InputTitle>성별</S.InputTitle>
                                 <S.Input
                                     placeholder="수컷"
-                                    // value={
-                                    //     review1 && review1?.gender === "MALE"
-                                    //         ? "수컷"
-                                    //         : "암컷"
-                                    // }
-                                    // onChange={handleGenderChange}
+                                    disabled
                                 />
                             </S.InputContainer>
                         </S.LeftInputContainer>
@@ -139,16 +136,14 @@ const ReviewCreateForm = () => {
                                 <S.InputTitle>견종</S.InputTitle>
                                 <S.Input
                                     placeholder="포메라니안"
-                                    // value={review1?.dogTypeName}
-                                    // onChange={(e) => setReview1({...review1!, dogTypeName: e.target.value})}
+                                    disabled
                                 />
                             </S.InputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>강아지 이름</S.InputTitle>
                                 <S.Input
                                     placeholder="루카스"
-                                    // value={review1?.name}
-                                    // onChange={(e) => setReview1({...review1!, name: e.target.value})}
+                                    disabled
                                 />
                             </S.InputContainer>
                         </S.RightInputContainer>
