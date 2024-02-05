@@ -33,6 +33,11 @@ export const PasswordInputArea = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 150px 0 0;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+  @media (max-width: 390px) {
+  }
 `;
 
 export const NewPasswordArea = styled.div`
@@ -69,6 +74,11 @@ const Input = styled.input`
   background-color: #f5f5f5;
   border: 0px;
   border-radius: 10px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 390px) {
+    width: 60%;
+  }
 `;
 
 export const NewPasswordInput = styled(Input)``;
