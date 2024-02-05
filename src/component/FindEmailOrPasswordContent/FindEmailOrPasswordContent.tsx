@@ -95,6 +95,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         response.data.status === "FAIL" &&
         typeof response.data.data !== "string"
       ) {
+        console.log(response.data.data);
         await Swal.fire(alertList.errorMessage(`${response.data.data.code}`));
       }
     } catch (error) {
@@ -119,6 +120,7 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         response.data.status === "FAIL" &&
         typeof response.data.data !== "string"
       ) {
+        console.log(response.data);
         await Swal.fire(alertList.errorMessage(`${response.data.data.code}`));
       }
     } catch (error) {
@@ -162,7 +164,9 @@ const FindEmailOrPasswordContent = ({ pageType }: Props) => {
         <CharacterImage />
         <InnerContentArea>
           <NameInputArea>
-            <NameText>{pageType === "findemail" ? "이름" : "이메일"}</NameText>
+            <NameText>
+              {pageType === "findemail" ? "닉네임" : "이메일"}
+            </NameText>
 
             <NameInput
               value={nickname}

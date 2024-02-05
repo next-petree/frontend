@@ -32,6 +32,7 @@ import {
   IntroArea5MainTitle,
   IntroArea5SubTitle,
   IntroArea5HashTagArea,
+  HashTagArea,
   HashTag1,
   HashTag2,
   HashTag3,
@@ -124,11 +125,15 @@ const IntroContent = () => {
           섬세한 브리더의 손길로 탄생한 반려견과 함께하세요!
         </IntroArea5SubTitle>
         <IntroArea5HashTagArea>
-          <HashTag1>#펫트리</HashTag1>
-          <HashTag2>#브리더</HashTag2>
-          <HashTag3>#반려동물</HashTag3>
-          <HashTag4>#댕댕이</HashTag4>
-          <HashTag5>#가족</HashTag5>
+          <HashTagArea>
+            <HashTag1>#펫트리</HashTag1>
+            <HashTag2>#브리더</HashTag2>
+            <HashTag3>#반려동물</HashTag3>
+          </HashTagArea>
+          <HashTagArea>
+            <HashTag4>#댕댕이</HashTag4>
+            <HashTag5>#가족</HashTag5>
+          </HashTagArea>
         </IntroArea5HashTagArea>
       </IntroArea5>
     </Container>

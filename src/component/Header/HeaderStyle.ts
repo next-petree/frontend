@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import petTreeIconImage from "../../assets/icons/header_pets_black_24dp.png";
 import petTreeTextImage from "../../assets/icons/header_petree.png";
 import userProfileImage from "../../assets/icons/Group 21.png";
+import HamburgerBarImage from "../../assets/icons/hamburger.png";
 
 export const Container = styled.div`
   position: relative;
@@ -17,12 +18,11 @@ export const Container = styled.div`
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 10px 0px rgba(119, 119, 119, 0.05);
   backdrop-filter: blur(5px);
-  @media (max-width: 768px) {
-    padding: 14px 50px 14px 50px;
+  @media (max-width: 1300px) {
+    padding: 14px 100px 14px 100px;
   }
-  @media (max-width: 390px) {
-    padding: 5px 0px 5px 0px;
-    text-align: center;
+  @media (max-width: 800px) {
+    padding: 14px 50px 14px 50px;
   }
 `;
 
@@ -63,15 +63,45 @@ export const HeaderContent = styled.div`
   align-items: center;
 `;
 
+export const HamburgerIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  background-image: url(${HamburgerBarImage});
+  background-size: cover;
+  display: none;
+  cursor: pointer;
+  @media (max-width: 1300px) {
+    display: block;
+  }
+`;
+
 export const NavigationMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: 30px;
-  @media (max-width: 768px) {
-  }
-  @media (max-width: 390px) {
-    margin-right: 0px;
-    margin-left: 15px;
+
+  @media (max-width: 1300px) {
+    display: none;
+    &.visible {
+      display: flex;
+      flex-direction: column;
+      justify-content:space-around;
+      position: absolute;
+      width: 200px;
+      height: 150px;
+      border-radius:10px;
+      right: 120px;
+      top: 58px;
+      background: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    @media (max-width: 800px) {
+      display: none;
+      &.visible {
+        right: 60px;
+      }
   }
 `;
 
@@ -84,10 +114,10 @@ export const NavigationLink = styled(Link)`
   font-weight: 500;
   line-height: normal;
   margin-right: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
+    margin-right: 0px;
   }
-  @media (max-width: 390px) {
-    font-size: 12px;
+  @media (max-width: 800px) {
   }
 `;
 
