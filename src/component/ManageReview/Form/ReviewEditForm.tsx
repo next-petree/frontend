@@ -7,6 +7,8 @@ import { IReview, IReviewImg } from "../../../pages/ManageReview/edit/EditReview
 import ImageDeleteButton from "../../ManageOwnDogs/ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../../ManageOwnDogs/AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
+import Swal from "sweetalert2";
+import alertList from "../../../utils/Swal1";
 
 interface IProp {
     review?: IReview;
@@ -43,7 +45,7 @@ const ReviewEditForm = ({ review }: IProp) => {
     const [formImages, setFormImages] = useState<File[]>([]);
     const [file, setFile] = useState<File>();
 
-    const naviagate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setReview1(review!);
@@ -78,47 +80,34 @@ const ReviewEditForm = ({ review }: IProp) => {
                 }
             }
         }        
-        console.log(prevImages);
-        
     }, [file]);
 
-    const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputFile = e.target?.files?.[0];
+    const handleAddImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
-        setFile(inputFile);
-            
-        if (inputFile) {
-            const imageUrl = URL.createObjectURL(inputFile);
-            if(prevImages && prevImages.length > 0) {    
-                let lastId = prevImages?.[prevImages.length - 1].id;
-            
-                setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
-                setFormImages([...formImages, inputFile]);
-            } else {
-                let id = 1;
-                let arr = [{id: id++, fileUrl:imageUrl}];
-                setPrevImages(arr);
-                setFormImages([...formImages, inputFile]);
+        const answer = await Swal.fire({
+            ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
+            width: "350px",
+          });
+
+        if (answer.isConfirmed) {
+            const inputFile = e.target?.files?.[0];
+
+            setFile(inputFile);
+
+            if (inputFile) {
+                const imageUrl = URL.createObjectURL(inputFile);
+                if(prevImages && prevImages.length > 0) {    
+                    let lastId = prevImages?.[prevImages.length - 1].id;
+                
+                    setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+                    setFormImages([...formImages, inputFile]);
+                } else {
+                    let id = 1;
+                    let arr = [{id: id++, fileUrl:imageUrl}];
+                    setPrevImages(arr);
+                    setFormImages([...formImages, inputFile]);
+                }
             }
-                
-            //     if(prevImages?.length! > 0 && prevImages?.[prevImages.length - 1].id) {
-            //         let lastId = prevImages?.[prevImages.length - 1].id;
-            //         // const imageArr:IReviewImg = {id: ++lastId, fileUrl: imageUrl}
-                
-            //         setPrevImages([...prevImages!, { id: ++lastId!, fileUrl: imageUrl}]);
-            //         // setPrevImages([imageArr]);
-            //         if(files) {
-            //             setFormImages([...formImages, files[0]]);
-            //         }
-            //     } else {
-            //         let id = 1;
-            //         let arr = [{id: id++, fileUrl:imageUrl}];
-            //         setPrevImages(arr);
-            //         if(files) {
-            //             setFormImages([...formImages, files[0]]);
-            //         }
-            //     }    
-            // }
         }
     }
 
@@ -139,14 +128,16 @@ const ReviewEditForm = ({ review }: IProp) => {
         formImages.forEach((file) => {            
             formDataToSend.append(`reviewImgFiles`, file);
          });        
-         
-        formDataToSend.forEach((form) => {
-            console.log(form);  
-        })
 
         try {
             const result = await patch(`${process.env.REACT_APP_API_URL}adopter/review/${review1.id}`, formDataToSend);
-            console.log('응답 결과: ', result.data);
+            if(result.status === 200) {
+                Swal.fire({
+                    ...alertList.successMessage("수정되었습니다"),
+                    width: "350px",
+                  });
+                navigate(-1);
+            }
             
         } catch (error) {
             console.error('에러 발생: ',error);
@@ -157,7 +148,7 @@ const ReviewEditForm = ({ review }: IProp) => {
         <S.MergeContainer>
         <S.Wrapper>
             <S.ReturnBtnContainer>
-                <S.ReturnButton onClick={() => naviagate(-1)}>
+                <S.ReturnButton onClick={() => navigate(-1)}>
                     <IoIosArrowBack />
                 </S.ReturnButton>
                 <S.ReturnBtnText>이전 페이지로</S.ReturnBtnText>
@@ -195,7 +186,6 @@ const ReviewEditForm = ({ review }: IProp) => {
                                 <S.Input
                                     placeholder="포메라니안"
                                     value={review1?.dogTypeName}
-                                    // onChange={(e) => setReview1({...review1!, dogTypeName: e.target.value})}
                                     disabled
                                 />
                             </S.InputContainer>
@@ -204,7 +194,6 @@ const ReviewEditForm = ({ review }: IProp) => {
                                 <S.Input
                                     placeholder="루카스"
                                     value={review1?.name}
-                                    // onChange={(e) => setReview1({...review1!, name: e.target.value})}
                                     disabled
                                 />
                             </S.InputContainer>
@@ -232,12 +221,12 @@ const ReviewEditForm = ({ review }: IProp) => {
                                 <S.Image src={img.fileUrl}/>
                             </S.ImageUploaderBox>
                         ))}
-                        <S.ImageUploaderBox>
+                        {prevImages && prevImages?.length < 4 &&  <S.ImageUploaderBox>
                             <S.Container htmlFor="file" onClick={() => setAddButtonClicked(!addButtonClicked)}>
                             <S.ImageInput type="file" accept="image/*" id="file" onChange={(e) => handleAddImage(e)}/>
                             <AddImageIcon />
                             </S.Container>
-                        </S.ImageUploaderBox>
+                        </S.ImageUploaderBox>}
                     </S.ImageUploaderFlexBox>
                 </S.ImageUploaderContainer>
             </S.InnerContainer>

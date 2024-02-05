@@ -31,7 +31,6 @@ const CustomInput = ({
     if (genderArr) {
         useEffect(() => {
             setGender(genderValue);
-            console.log("g");
             
         }, [genderValue])
         return (
@@ -64,7 +63,6 @@ const CustomInput = ({
 
     useEffect(() => {
         setStatus(statusValue);
-        console.log('s');
         
     }, [statusValue])
 
