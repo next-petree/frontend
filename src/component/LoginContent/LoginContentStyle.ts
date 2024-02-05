@@ -44,7 +44,7 @@ export const SubTitle1 = styled.div`
   letter-spacing: -2px;
   @media (max-width: 768px) {
   }
-  @media (max-width: 390px) {
+  @media (max-width: 600px) {
     font-size: 25px;
   }
 `;
@@ -60,7 +60,7 @@ export const SubTitle2 = styled.div`
   letter-spacing: -0.96px;
   @media (max-width: 768px) {
   }
-  @media (max-width: 390px) {
+  @media (max-width: 600px) {
     font-size: 20px;
   }
 `;

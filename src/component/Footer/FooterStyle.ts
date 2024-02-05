@@ -6,12 +6,13 @@ import petTreeTextImage from "../../assets/images/PetreeTitleBig.png";
 import copyRightLogo from "../../assets/images/Copyright.png";
 
 export const Container = styled.footer`
-  height: 325px;
+  min-height: 325px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   background: #507375;
+  max-width: 100%;
 `;
 
 export const InnerContent = styled.div`
@@ -20,12 +21,22 @@ export const InnerContent = styled.div`
   width: 70%;
   padding-bottom: 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.53);
+  @media (max-width: 800px) {
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LeftArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 800px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const TitleArea = styled.div`
@@ -33,6 +44,7 @@ export const TitleArea = styled.div`
   justify-content: center;
   align-items: center;
   gap: 11px;
+  flex-direction: column;
 `;
 
 export const TitleLogo = styled.div`
@@ -55,6 +67,9 @@ export const InnerTextArea = styled.div`
   width: 200px;
   heigth: 100px;
   color: #fff;
+  @media (max-width: 800px) {
+    text-align: center;
+  }
 `;
 
 export const InnerText = styled.p`
@@ -81,7 +96,12 @@ export const CategoriesMenu = styled.ul`
   font-size: 16px;
   font-style: normal;
   font-weight: 900;
+  padding: 0;
   line-height: 26px;
+  @media (max-width: 800px) {
+    margin-left: 0px;
+    text-align: center;
+  }
 `;
 
 export const CategoriesLink = styled(Link)`
@@ -103,6 +123,10 @@ export const PagesMenu = styled.ul`
   font-weight: 900;
   line-height: 26px;
   margin-left: 10px;
+  @media (max-width: 800px) {
+    margin-left: 0px;
+    text-align: center;
+  }
 `;
 
 export const PagesLink = styled(Link)`
