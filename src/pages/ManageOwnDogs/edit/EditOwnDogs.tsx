@@ -8,7 +8,7 @@ import { get } from "../../../api/api";
 
 export interface IDogEditInfo {
     birthDate: string;
-    dogImgUrl: string[];
+    dogImgId: IImgProps[];
     dogType: string;
     gender: string;
     id: number;
@@ -20,6 +20,11 @@ export interface IDogEditInfo {
 export interface IData {
     status: string;
     data: IDogEditInfo;
+
+}
+export interface IImgProps {
+    id: number;
+    fileUrl: string;
 }
 
 const EditOwnDogs = () => {
@@ -33,7 +38,7 @@ const EditOwnDogs = () => {
                 name: res.data.data.name,
                 id: res.data.data.id,
                 dogType: res.data.data.dogType,
-                dogImgUrl: res.data.data.dogImgUrl,
+                dogImgId: res.data.data.dogImgId,
                 birthDate: res.data.data.birthDate,
                 management: res.data.data.management,
                 status: res.data.data.status,
@@ -41,9 +46,7 @@ const EditOwnDogs = () => {
             });
         }
         getDogById();
-    }, [id]);
-
-
+    }, [id]);   
 
     return (
         <CustomLayout height={1653}>
