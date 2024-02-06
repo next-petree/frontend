@@ -12,7 +12,7 @@
  *  ]
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -23,6 +23,9 @@ import DateInput from "../CustomInput/DateInput";
 import ImageDeleteButton from "../ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../AddImageIcon/AddImageIcon";
 import { post } from "../../../api/api";
+
+import Swal from "sweetalert2";
+import alertList from "../../../utils/Swal1";
 
 
 /**
@@ -68,12 +71,7 @@ const OwnDogsCreateForm = () => {
   const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
   const [prevImages, setPrevImages] = useState<string[]>([]);
   const [formDataFile, setFormDataFile] = useState<File[]>();
-  const naviage = useNavigate();
-
-  useEffect(() => {
-    console.log(date);
-    
-  }, [date])
+  const navigate = useNavigate();
   
   const handleDay = (day: number) => {
       setDate({...date, day})
@@ -127,10 +125,7 @@ const OwnDogsCreateForm = () => {
       // YYYY-MM-DD 형식의 문자열을 만듭니다.
       const formattedDate = `${date.year}-${formattedMonth}-${formattedDay}`;
       // const localDate = new Date(formattedDate);
-
-      // console.log("localDate", localDate);
       
-
       formDataToSend.append('birthDate', formattedDate);
 
       if (formDataFile) {
@@ -143,15 +138,16 @@ const OwnDogsCreateForm = () => {
           }
       }
 
-      formDataToSend.forEach((e) => {
-        console.log(e);
-      })
-
       const dogTypeId = 35;
-      // 
       try {
           const result = await post(`${process.env.REACT_APP_API_URL}breeder/dogs?dogTypeId=${dogTypeId}`, formDataToSend);
-          console.log(result.data);
+          if(result.status === 200) {
+            Swal.fire({
+                ...alertList.successMessage("보유견종이 생성되었습니다"),
+                width: "350px",
+              });
+            navigate('/mypage/ownDogs/1');
+        }
       } catch (error) {
           console.error('ERROR: ', error);
       }   
@@ -161,7 +157,7 @@ const OwnDogsCreateForm = () => {
   return (
         <S.MergeContainer>
         <S.Wrapper>
-            <S.ReturnBtnContainer onClick={() => naviage(-1)}>
+            <S.ReturnBtnContainer onClick={() => navigate('/mypage/owndogs/1')}>
                 <S.ReturnButton>
                     <IoIosArrowBack />
                 </S.ReturnButton>

@@ -31,8 +31,6 @@ const CustomInput = ({
     if (genderArr) {
         useEffect(() => {
             setGender(genderValue);
-            console.log("g");
-            
         }, [genderValue])
         return (
             <S.Wrapper width={width} height={height}>
@@ -64,8 +62,6 @@ const CustomInput = ({
 
     useEffect(() => {
         setStatus(statusValue);
-        console.log('s');
-        
     }, [statusValue])
 
     return (

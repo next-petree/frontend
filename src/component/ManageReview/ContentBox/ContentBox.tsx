@@ -60,8 +60,6 @@ const ContentBox = () => {
             const res = await get<any>(
                 url
             );
-
-            console.log(res);
             
             return res.data.data;
         };
