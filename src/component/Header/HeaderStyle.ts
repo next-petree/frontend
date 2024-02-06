@@ -103,6 +103,7 @@ export const NavigationMenu = styled.div`
         right: 60px;
       }
   }
+}
 `;
 
 export const NavigationLink = styled(Link)`
