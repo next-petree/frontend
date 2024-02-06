@@ -106,7 +106,7 @@ const TableComp = ({
                             buttonwidth="70px;"
                             buttonheight="40px;"
                             onClick={() => {
-                              console.log("후기 작성!!");
+                              console.log("후기 작성 데이터:", row.original);
                             }}
                           >
                             후기작성
