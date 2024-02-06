@@ -29,7 +29,7 @@ export const CategoryContainer = styled.div<{ isHere: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => (props.isHere ? "#f5f5f5" : "")};
+  background-color: ${props => (props.isHere ? "#f5f5f5" : "")};
   &:hover {
     background-color: #f5f5f5;
   }
