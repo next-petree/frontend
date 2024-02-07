@@ -87,7 +87,7 @@ const ReviewCreateForm = () => {
          });
 
         try {
-            const response = await post(`${process.env.REACT_APP_API_URL}adopter/review`, formDataToSend)
+            const response = await post(`${process.env.REACT_APP_API_URL}/adopter/review`, formDataToSend)
             if(response.status === 200) {
                 Swal.fire({
                     ...alertList.successMessage("리뷰가 생성되었습니다"),
