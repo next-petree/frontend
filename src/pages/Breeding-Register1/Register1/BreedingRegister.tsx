@@ -5,7 +5,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import CustomLayout from "../../Layout/CustomLayout";
 import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 
-import { BreederBadge } from "../../../assets/icons";
+import BreederBadge from "../../../component/Avatar/BreederBadge";
 
 import { agreementInfo } from "../../../constants";
 import * as S from "./Styles1";

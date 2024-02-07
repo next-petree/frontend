@@ -1,4 +1,6 @@
-import { CustomerBadge, BreederBadge, Avatar } from "../../assets/icons";
+import CustomerBadge from "./CustomerBadge";
+import Avatar from "./Avatar";
+import BreederBadge from "./BreederBadge";
 import { ICAProps } from "../../types";
 
 import * as S from "./Styles1";

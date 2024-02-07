@@ -35,7 +35,7 @@ const EditReview = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<IData>(
-                `${process.env.REACT_APP_API_URL}adopter/review/${id}`
+                `${process.env.REACT_APP_API_URL}/adopter/review/${id}`
             );
 
             return res.data;
