@@ -140,7 +140,7 @@ const OwnDogsCreateForm = () => {
 
       const dogTypeId = 35;
       try {
-          const result = await post(`${process.env.REACT_APP_API_URL}breeder/dogs?dogTypeId=${dogTypeId}`, formDataToSend);
+          const result = await post(`${process.env.REACT_APP_API_URL}/breeder/dogs?dogTypeId=${dogTypeId}`, formDataToSend);
           if(result.status === 200) {
             Swal.fire({
                 ...alertList.successMessage("보유견종이 생성되었습니다"),
