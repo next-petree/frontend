@@ -10,9 +10,12 @@ import {
   Main,
   NavBarContainer,
   LogoutContainer,
+  MenuIcon,
+  Overlay,
 } from "./Styles1";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setProfileImg } from "../../../redux/Breeder1/BreederSlice1";
+import { useEffect, useState } from "react";
 
 export const NavCategory = [
   {
@@ -42,6 +45,27 @@ const Navbar = () => {
   const location = useLocation();
   const dispath = useAppDispatch();
 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth > 1300) {
+        setIsDropdownVisible(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleDropdown = () => {
+    if (window.innerWidth <= 1300) {
+      setIsDropdownVisible(!isDropdownVisible);
+    }
+  };
+
   const decodedJWT = DecodeToken();
   let roleBasedLink = "/mypage/adoptlist/breeder";
 
@@ -49,7 +73,7 @@ const Navbar = () => {
     roleBasedLink = "/mypage/adoptlist/adopter";
   }
 
-  NavCategory.map(category => {
+  NavCategory.map((category) => {
     if (category.id === 2) {
       if (decodedJWT.role === "ADOPTER") {
         category.name = "리뷰 관리";
@@ -59,9 +83,9 @@ const Navbar = () => {
         category.link = "/mypage/owndogs/1";
       }
     }
-  })
+  });
 
-  const NavCategoryWithRole = NavCategory.map(category => {
+  const NavCategoryWithRole = NavCategory.map((category) => {
     if (category.name === "분양신청내역") {
       return { ...category, link: roleBasedLink };
     }
@@ -74,9 +98,8 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    
     const answer = await Swal.fire(
-      alertList.doubleCheckMessage("로그아웃 하시겠습니까?"),
+      alertList.doubleCheckMessage("로그아웃 하시겠습니까?")
     );
 
     if (answer.isConfirmed) {
@@ -84,7 +107,7 @@ const Navbar = () => {
         removeToken("accessToken");
         removeToken("refreshToken");
         localStorage.removeItem("profileImg");
-        dispath(setProfileImg(""))
+        dispath(setProfileImg(""));
         navigation("/");
         Swal.fire(alertList.successMessage("로그아웃이 완료되었습니다"));
       } catch (error) {
@@ -94,25 +117,36 @@ const Navbar = () => {
   };
 
   return (
-    <NavBarContainer>
-      <Main>
-        {NavCategoryWithRole.map(category => (
-          <CategoryContainer
-            onClick={() => navigation(`${category.link}`)}
-            key={category.id}
-            $isHere={location.pathname === category.link}
-          >
-            <CategoryContent>{category.name}</CategoryContent>
-          </CategoryContainer>
-        ))}
-        <LogoutContainer onClick={handleLogout}>
-          <CategoryContent style={{ color: "red" }}>로그아웃</CategoryContent>
-        </LogoutContainer>
-      </Main>
-      <AuthDeleteContainer onClick={DeleteAccount}>
-        <CategoryContent>회원탈퇴</CategoryContent>
-      </AuthDeleteContainer>
-    </NavBarContainer>
+    <>
+      {(windowWidth <= 1100) && (
+        <MenuIcon onClick={toggleDropdown}>메뉴</MenuIcon>
+      )}
+      {(windowWidth > 1100 || isDropdownVisible) && (
+        <Overlay onClick={toggleDropdown} className={isDropdownVisible ? "visible" : ""}>
+          <NavBarContainer className={isDropdownVisible ? "visible" : ""}>
+            <Main>
+              {NavCategoryWithRole.map((category) => (
+                <CategoryContainer
+                  onClick={() => navigation(`${category.link}`)}
+                  key={category.id}
+                  $isHere={location.pathname === category.link}
+                >
+                  <CategoryContent>{category.name}</CategoryContent>
+                </CategoryContainer>
+              ))}
+              <LogoutContainer onClick={handleLogout}>
+                <CategoryContent style={{ color: "red" }}>
+                  로그아웃
+                </CategoryContent>
+              </LogoutContainer>
+            </Main>
+            <AuthDeleteContainer onClick={DeleteAccount}>
+              <CategoryContent>회원탈퇴</CategoryContent>
+            </AuthDeleteContainer>
+          </NavBarContainer>
+        </Overlay>
+      )}
+    </>
   );
 };
 
