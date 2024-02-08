@@ -4,6 +4,7 @@ import { useTable } from "react-table";
 import { Table, THead, TBody, Tr, Th, Td } from "./TableCompStyle";
 import Button from "../../Button/Button";
 import AdopterRowModal from "../../Modal/Adopter/AdopterRowModal";
+import { useNavigate } from "react-router";
 
 type dataType = {
   id: number;
@@ -46,6 +47,12 @@ const TableComp = ({
   const [modalData, setModalData] = useState<ModalDataType | null>(null);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
+
+
+  /**
+   * Yonghyun
+   */
+  const navigate = useNavigate();
 
   const fetchAndShowModal = async (matchingId: number) => {
     try {
@@ -106,6 +113,7 @@ const TableComp = ({
                             buttonwidth="70px;"
                             buttonheight="40px;"
                             onClick={() => {
+                              navigate('/mypage/review/create', {state: row.original})
                               console.log("후기 작성 데이터:", row.original);
                             }}
                           >

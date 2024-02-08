@@ -1,4 +1,4 @@
-import Navbar from "../../../component/ManageReview/Navbar/Navbar";
+import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
 import { BoxsContainer, Container } from "../styles";
 import OwnDogsCreateForm from "../../../component/ManageOwnDogs/Form/OwnDogsCreateForm";
