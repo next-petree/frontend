@@ -21,6 +21,13 @@ export const Form1 = styled.form`
 
 export const InsideForm = styled.div`
   display: flex;
+  justify-content: space-between;
+  @media (max-width: 850px) {
+    justify-content: flex-start;
+  }
+  @media (max-width: 450px) {
+    justify-content: space-between;
+  }
   gap: 0.5vw;
 `;
 
@@ -33,6 +40,9 @@ export const Infos = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-column-gap: 3vw;
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+  }
 `;
 export const Info = styled.div`
   display: flex;
@@ -45,7 +55,6 @@ export const Label = styled.label`
   font-weight: 600;
   font-size: 2rem;
   span {
-
     font-weight: 500;
     font-size: 1.7rem;
     margin-left: 8vw;
@@ -63,6 +72,10 @@ export const Input = styled.input<{ $islen: string }>`
       : props.$islen === "long"
       ? "21.5vw"
       : null};
+  min-width: 230px;
+  @media (max-width: 450px) {
+    min-width: 180px;
+  }
   height: 48px;
   border-radius: 12px;
   background-color: #f5f5f5;
@@ -70,7 +83,6 @@ export const Input = styled.input<{ $islen: string }>`
   font-size: 1.7rem;
   font-weight: 600;
   &::placeholder {
-    
     font-weight: 600;
     font-size: 1.7rem;
     color: #939393;
@@ -82,7 +94,11 @@ export const SearchButton = styled.div`
   justify-content: center;
   align-items: center;
   width: 6vw;
+  min-width: 85px;
   height: 52px;
+  @media (max-width: 450px) {
+    min-width: 50px;
+  }
   border: none;
   border-radius: 12px;
   background-color: #35d8d5;
@@ -92,17 +108,17 @@ export const SearchButton = styled.div`
   cursor: pointer;
 `;
 
-
 export const Button = styled.button<{ $isLong: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${(props) => (props.$isLong ? "12.5vw" : "6vw")};
+  min-width: 80px;
   height: 52px;
   border: none;
   border-radius: 12px;
   background-color: #35d8d5;
- 
+
   font-weight: 700;
   font-size: 1.8rem;
   color: white;
@@ -119,7 +135,6 @@ export const Pws = styled.div`
   flex-direction: column;
   gap: 4.3vh;
   span {
-
     font-size: 14px;
     font-weight: 350;
     text-align: right;
@@ -129,28 +144,49 @@ export const Pws = styled.div`
 
 export const Pw = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 1.5vh;
+  gap: 1.5vw;
+  min-width: 800px;
+  @media (max-width: 850px) {
+    min-width: 300px;
+    flex-direction: column;
+    gap: 1.5vh;
+  }
   position: relative;
 `;
 
-export const SeeBtn = styled.span<{$isClicked: boolean}>`
-  position: absolute;
+export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media (max-width: 850px) {
+    gap: 20px;
+  }
+`;
+
+export const SeeBtn = styled.span<{ $isClicked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.$isClicked ? "#35d8d5" : "#b6b6b6"};
+  color: ${(props) => (props.$isClicked ? "#35d8d5" : "#b6b6b6")};
   width: 20px;
   height: 10px;
-  right: 0.5vw;
-  top: 40%;
-`
+  padding-bottom: 25px;
+  @media (min-width: 850px) {
+    margin-left: 100px;
+  }
+`;
 
-export const Errmsg = styled.div<{$needMargin:boolean}>`
+export const Errmsg = styled.div<{ $needMargin: boolean }>`
   font-weight: 500;
   font-size: 1.7rem;
-  margin-left: ${props => props.$needMargin ? "12.5vw" : "14px"};
-  margin-top: ${props => props.$needMargin ? "-2.5vh" : null};
+  margin-left: ${(props) => (props.$needMargin ? "12.5vw" : "14px")};
+  margin-top: ${(props) => (props.$needMargin ? "-2.5vh" : null)};
   color: #35d8d5;
 `;
 
+export const TextSpan = styled.span`
+  min-width: 270px;
+  @media (max-width: 450px) {
+    margin-left: -30px;
+    margin-top: -10px;
+  }
+`;
