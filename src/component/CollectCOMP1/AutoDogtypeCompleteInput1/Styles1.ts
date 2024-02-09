@@ -14,7 +14,7 @@ export const Search = styled.input<{$width: number | null}>`
   border: none;
   width: ${props => props.$width ? props.$width.toString() + "px" : "40rem"};
   @media (max-width: 1120px) {
-    width: ${props => props.$width ? props.$width.toString() + "px" : "80%"};
+    width: ${props => props.$width ? props.$width.toString() + "px" : "90%"};
   } ;
   
   height: 48px;
@@ -36,7 +36,7 @@ export const Search = styled.input<{$width: number | null}>`
 export const AutoSearchContainer = styled.div`
   z-index: 3;
   height: fit-content;
-  width: 314px;
+  width: 90%;
   padding: 14px 0 14px 14px;
   background-color: #fff;
   position: absolute;

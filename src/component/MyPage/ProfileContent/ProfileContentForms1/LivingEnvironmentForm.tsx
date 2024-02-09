@@ -184,8 +184,8 @@ const LivingEnvironmentForm = () => {
                   <Image src={imagesPre.yard} alt="Yard_image" />
                   <ImageDeleteBtn onClick={() => onDelete("yard")}>
                     <svg
-                      width="36"
-                      height="36"
+                      width="100%"
+                      height="100%"
                       viewBox="0 0 36 36"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -270,8 +270,8 @@ const LivingEnvironmentForm = () => {
                   <Image src={imagesPre.bathRoom} alt="BathRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("bathRoom")}>
                     <svg
-                      width="36"
-                      height="36"
+                      width="100%"
+                      height="100%"
                       viewBox="0 0 36 36"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -356,8 +356,8 @@ const LivingEnvironmentForm = () => {
                   <Image src={imagesPre.livingRoom} alt="LivingRoom_image" />
                   <ImageDeleteBtn onClick={() => onDelete("livingRoom")}>
                     <svg
-                      width="36"
-                      height="36"
+                      width="100%"
+                      height="100%"
                       viewBox="0 0 36 36"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
