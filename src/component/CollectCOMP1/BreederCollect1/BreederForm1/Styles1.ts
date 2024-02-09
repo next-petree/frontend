@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  width: 100%;
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -18,6 +19,7 @@ export const ToggleContainer = styled.div`
   display: flex;
   @media (max-width: 768px) {
     margin-top: 8rem;
+    
   }
 `
 
@@ -38,6 +40,10 @@ export const Form = styled.form`
     gap: 0.5rem;
     width: 70%;
   } ;
+  @media (max-width: 450px){
+    gap: 0.2rem;
+    width: 90%;
+  }
   justify-content: center;
   align-items: center;
 `;
