@@ -58,6 +58,12 @@ export const Avatar = styled.img`
 export const AvatarBorder = styled.div<{ $isAuth: boolean }>`
   width: 9vw;
   height: 9vw;
+  min-width: 140px;
+  min-height: 140px;
+  @media (max-width: 850px) {
+    min-width: 110px;
+    min-height: 110px;
+  }
   border-radius: 100%;
   border: 2px solid ${(props) => (props.$isAuth ? "#FF6363" : "#23F39C")};
   overflow: hidden;
@@ -95,6 +101,16 @@ export const Badge = styled.span`
   height: 2.5vw;
   bottom: 0;
   left: 7vw;
+  @media (max-width:1555px) {
+    left: 108px;
+    width: 34.2px;
+    height: 38.9px;
+  }
+  @media (max-width: 850px) {
+    left:85px;
+    width: 24.2px;
+    height: 28.9px;
+  }
 `;
 export const Title = styled.h1`
   font-weight: 600;
@@ -102,6 +118,11 @@ export const Title = styled.h1`
   span {
     font-size: 1.5rem;
     margin-left: 3vw;
+  }
+  @media (max-width:450px) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 `;
 
@@ -114,7 +135,8 @@ export const Label = styled.label`
 export const Auth = styled.div`
   position: relative;
   width: 22vw;
-  height: 5vh;
+  min-width: 180px;
+  height: 42px;
   background-color: #f5f5f5;
   border-radius: 12px;
   display: flex;
@@ -135,6 +157,9 @@ export const Introduce = styled.textarea`
   font-size: 1.8rem;
   padding: 20px;
   padding-right: 10%;
+  @media (max-width:450px) {
+    padding-right: 10px;
+  }
   border: none;
   background-color: #f5f5f5;
   border-radius: 12px;
@@ -156,6 +181,9 @@ export const Checklen = styled.div`
   font-weight: 600;
   bottom: 10%;
   right: 5%;
+  @media (max-width:450px) {
+    padding-right: 10px;
+  }
 `;
 
 export const Input = styled.input<{ $islen: string }>`
@@ -185,12 +213,24 @@ export const Input = styled.input<{ $islen: string }>`
 export const Images = styled.div`
   display: flex;
   gap: 2vw;
+  @media (max-width:1100px) {
+    gap: 20px;
+  }
+  @media (max-width: 605px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const ImageContainer = styled.div`
   position: relative;
   width: 12.5vw;
-  height: 26vh;
+  height: 12vw;
+  min-width: 125px;
+  min-height: 155px;
+  @media (max-width:605px) {
+    min-width:115px;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -210,6 +250,12 @@ export const ImageDeleteBtn = styled.div`
   position: absolute;
   top: -18px;
   right: -19px;
+  width: 36px;
+  @media (max-width:605px) {
+    width: 25px;
+    top: -13px;
+    right: -13px;
+  }
 `;
 
 export const ImageInput = styled.input`
@@ -239,6 +285,7 @@ export const SearchButton = styled.div`
   justify-content: center;
   align-items: center;
   width: 6vw;
+  min-width: 47px;
   height: 52px;
   border: none;
   border-radius: 12px;
