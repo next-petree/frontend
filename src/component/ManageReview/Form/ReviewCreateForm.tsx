@@ -66,7 +66,7 @@ const ReviewCreateForm = () => {
             try {
                 const response = await get<IData>(`${process.env.REACT_APP_API_URL}/dogs/${data.id}`);
                 if(response.status === 200) {
-                    console.log(response.data.data);
+                    console.log("리뷰 생성애서 강아지 데이터: ",response.data.data);
                     
                     setDog(response.data.data);
                 }

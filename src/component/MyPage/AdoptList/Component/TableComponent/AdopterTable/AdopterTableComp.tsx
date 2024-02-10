@@ -59,6 +59,8 @@ const TableComp = ({
     try {
       const response = await get<ApiResponse>(`/me/matchings/${matchingId}`);
       setModalData(response.data.data);
+      console.log("매칭 상세 조회 결과: ", response.data.data);
+      
       setShowModal(true);
     } catch (error) {
       console.error("매칭 상세 조회 중 오류 발생:", error);
@@ -113,7 +115,7 @@ const TableComp = ({
                             buttonwidth="70px;"
                             buttonheight="40px;"
                             onClick={() => {
-                              console.log(row);
+                              console.log("분양승인 클릭시 후기 작성 데이터: ", row.original);
                               
                               navigate('/mypage/review/create', {state: {data: {id: row.original.dogId}}})
                             }}
