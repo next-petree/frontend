@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   background-color: white;
-  width: 100%;
   height: fit-content;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
@@ -22,7 +21,7 @@ export const Form1 = styled.form`
 export const InsideForm = styled.div`
   display: flex;
   justify-content: space-between;
-  @media (max-width: 850px) {
+  @media (max-width: 975px) {
     justify-content: flex-start;
   }
   @media (max-width: 450px) {
@@ -40,7 +39,7 @@ export const Infos = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-column-gap: 3vw;
-  @media (max-width: 850px) {
+  @media (max-width: 975px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -64,7 +63,7 @@ export const Input = styled.input<{ $islen: string }>`
   display: flex;
   align-items: center;
   border: none;
-  width: ${(props) =>
+  width: ${props =>
     props.$islen === "mid"
       ? "18.7vw"
       : props.$islen === "shot"
@@ -112,7 +111,7 @@ export const Button = styled.button<{ $isLong: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(props) => (props.$isLong ? "12.5vw" : "6vw")};
+  width: ${props => (props.$isLong ? "12.5vw" : "6vw")};
   min-width: 80px;
   height: 52px;
   border: none;
@@ -166,7 +165,7 @@ export const SeeBtn = styled.span<{ $isClicked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${(props) => (props.$isClicked ? "#35d8d5" : "#b6b6b6")};
+  color: ${props => (props.$isClicked ? "#35d8d5" : "#b6b6b6")};
   width: 20px;
   height: 10px;
   padding-bottom: 25px;
@@ -178,8 +177,8 @@ export const SeeBtn = styled.span<{ $isClicked: boolean }>`
 export const Errmsg = styled.div<{ $needMargin: boolean }>`
   font-weight: 500;
   font-size: 1.7rem;
-  margin-left: ${(props) => (props.$needMargin ? "12.5vw" : "14px")};
-  margin-top: ${(props) => (props.$needMargin ? "-2.5vh" : null)};
+  margin-left: ${props => (props.$needMargin ? "12.5vw" : "14px")};
+  margin-top: ${props => (props.$needMargin ? "-2.5vh" : null)};
   color: #35d8d5;
 `;
 

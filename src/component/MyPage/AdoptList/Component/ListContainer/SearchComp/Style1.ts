@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const SearchWrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -8,6 +8,9 @@ export const SearchWrap = styled.div`
   padding: 10px 0;
   input:focus {
     outline: none;
+  }
+  @media (max-width: 545px) {
+    gap: 10px;
   }
 `;
 export const DropDown = styled.div`
@@ -29,6 +32,14 @@ export const Selected = styled.div`
   gap: 15px;
   color: #939393;
   cursor: pointer;
+  @media (max-width: 545px) {
+    padding: 8px 15px;
+    width: 120px;
+  }
+  @media (max-width: 440px) {
+    padding: 8px 15px;
+    width: 80px;
+  }
 `;
 export const DropDownWrap = styled.div`
   width: 170px;
@@ -41,6 +52,12 @@ export const DropDownWrap = styled.div`
     border-top: 0.5px solid #eee;
     padding: 15px;
     cursor: pointer;
+  }
+  @media (max-width: 545px) {
+    width: 120px;
+  }
+  @media (max-width: 440px) {
+    width: 80px;
   }
 `;
 export const DisNone = styled.div`
@@ -55,6 +72,14 @@ export const Input = styled.input`
   padding: 0 20px;
   height: 50px;
   font-size: 14px;
+  @media (max-width: 545px) {
+    padding: 0 25px;
+    width: 120px;
+  }
+  @media (max-width: 440px) {
+    padding: 0 25px;
+    width: 80px;
+  }
 `;
 export const Button = styled.button`
   background: #4ec1bf;

@@ -15,12 +15,19 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 49vw;
-  height: fit-content;
+  height: 902px;
   padding: 5.75vw 3vw 5.75vw;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
   z-index: 1;
   background-color: #fff;
+
+  @media (max-width: 1100px) {
+    width: 76vw;
+  }
+  @media (max-width: 440px) {
+    width: 100vw;
+  }
 `;
 
 export const TitleArea = styled.div`

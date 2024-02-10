@@ -15,4 +15,7 @@ export const Button = styled.button<ButtonProps>`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  @media (max-width: 450px) {
+    width: 60px;
+  }
 `;

@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   background-color: white;
-  width: 100%;
   height: fit-content;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
@@ -45,7 +44,6 @@ export const AvatarBox = styled.div`
   align-items: center;
 `;
 
-
 export const AvatarInfo = styled.div`
   position: relative;
 `;
@@ -65,7 +63,7 @@ export const AvatarBorder = styled.div<{ $isAuth: boolean }>`
     min-height: 110px;
   }
   border-radius: 100%;
-  border: 2px solid ${(props) => (props.$isAuth ? "#FF6363" : "#23F39C")};
+  border: 2px solid ${props => (props.$isAuth ? "#FF6363" : "#23F39C")};
   overflow: hidden;
   cursor: pointer;
 `;
@@ -92,7 +90,7 @@ export const AvatarLabel = styled.label`
 
 export const AvatarDeleteBtn = styled.div`
   position: absolute;
-  top:5vw;
+  top: 5vw;
   right: 4.27vw;
 `;
 export const Badge = styled.span`
@@ -101,13 +99,13 @@ export const Badge = styled.span`
   height: 2.5vw;
   bottom: 0;
   left: 7vw;
-  @media (max-width:1555px) {
+  @media (max-width: 1555px) {
     left: 108px;
     width: 34.2px;
     height: 38.9px;
   }
   @media (max-width: 850px) {
-    left:85px;
+    left: 85px;
     width: 24.2px;
     height: 28.9px;
   }
@@ -119,7 +117,7 @@ export const Title = styled.h1`
     font-size: 1.5rem;
     margin-left: 3vw;
   }
-  @media (max-width:450px) {
+  @media (max-width: 450px) {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -149,7 +147,7 @@ export const Auth = styled.div`
 export const CheckMark = styled.div`
   position: absolute;
   right: 1vw;
-`
+`;
 export const Introduce = styled.textarea`
   width: 85%;
   height: 150px;
@@ -157,7 +155,7 @@ export const Introduce = styled.textarea`
   font-size: 1.8rem;
   padding: 20px;
   padding-right: 10%;
-  @media (max-width:450px) {
+  @media (max-width: 450px) {
     padding-right: 10px;
   }
   border: none;
@@ -181,7 +179,7 @@ export const Checklen = styled.div`
   font-weight: 600;
   bottom: 10%;
   right: 5%;
-  @media (max-width:450px) {
+  @media (max-width: 450px) {
     padding-right: 10px;
   }
 `;
@@ -190,7 +188,7 @@ export const Input = styled.input<{ $islen: string }>`
   display: flex;
   align-items: center;
   border: none;
-  width: ${(props) =>
+  width: ${props =>
     props.$islen === "mid"
       ? "18.7vw"
       : props.$islen === "shot"
@@ -213,7 +211,7 @@ export const Input = styled.input<{ $islen: string }>`
 export const Images = styled.div`
   display: flex;
   gap: 2vw;
-  @media (max-width:1100px) {
+  @media (max-width: 1100px) {
     gap: 20px;
   }
   @media (max-width: 605px) {
@@ -228,8 +226,8 @@ export const ImageContainer = styled.div`
   height: 12vw;
   min-width: 125px;
   min-height: 155px;
-  @media (max-width:605px) {
-    min-width:115px;
+  @media (max-width: 605px) {
+    min-width: 115px;
   }
   display: flex;
   flex-direction: column;
@@ -251,7 +249,7 @@ export const ImageDeleteBtn = styled.div`
   top: -18px;
   right: -19px;
   width: 36px;
-  @media (max-width:605px) {
+  @media (max-width: 605px) {
     width: 25px;
     top: -13px;
     right: -13px;
@@ -300,7 +298,7 @@ export const Button = styled.button<{ $isLong: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(props) => (props.$isLong ? "12.5vw" : "6vw")};
+  width: ${props => (props.$isLong ? "12.5vw" : "6vw")};
   height: 52px;
   border: none;
   border-radius: 12px;

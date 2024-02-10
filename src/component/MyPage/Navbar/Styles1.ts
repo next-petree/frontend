@@ -58,12 +58,16 @@ export const NavBarContainer = styled.div`
       justify-content: space-between;
       position: fixed;
       left: 0;
-      top: 10px;
+      top: 66px;
       width: 30vw;
       height: 90vh;
       border-radius: 0 20px 20px 0;
     }
-    
+    @media (max-width: 550px) {
+      &.visible {
+        top: 60px;
+        width: 70vw;
+      }
   }
 `;
 
@@ -79,7 +83,7 @@ export const CategoryContainer = styled.div<{ $isHere: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => (props.$isHere ? "#f5f5f5" : "")};
+  background-color: ${props => (props.$isHere ? "#f5f5f5" : "")};
   cursor: pointer;
   &:hover {
     background-color: #f5f5f5;
