@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CustomBanner = styled.div`
   position: absolute;
@@ -73,4 +73,4 @@ export const Text = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 383px;
-`
+`;

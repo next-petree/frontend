@@ -21,6 +21,13 @@ export const Container = styled.div`
   padding: 0px 50px;
   border-radius: 15px;
   background-color: #fff;
+  @media (max-width: 1100px) {
+    width: 60%;
+    height: 55%;
+  }
+  @media (max-width: 560px) {
+    width: 100%;
+  }
 `;
 
 export const TitleArea = styled.div`

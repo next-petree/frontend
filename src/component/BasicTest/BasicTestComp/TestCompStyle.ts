@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TestTitle = styled.h3`
   font-size: 24px;

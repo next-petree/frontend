@@ -35,6 +35,14 @@ export const Modal = styled.div`
   position: relative;
   overflow: auto;
   z-index: 10000;
+  @media (max-width: 1100px) {
+    width: 60%;
+    height: 55%;
+  }
+  @media (max-width: 890px) {
+    padding: 0px;
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h3`
@@ -52,6 +60,12 @@ export const InfoWrap = styled.div`
   align-items: center;
   gap: 3%;
   padding: 20px 0;
+  @media (max-width: 1100px) {
+    width: 60%;
+  }
+  @media (max-width: 890px) {
+    width: 100%;
+  }
 `;
 export const Img = styled.img`
   width: 130px;

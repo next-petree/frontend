@@ -1,6 +1,6 @@
 //스타일 파일
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   padding-top: 80px;
@@ -52,5 +52,10 @@ export const StartTestBtn = styled.button`
   cursor: pointer;
   :hover {
     background: #35d8d5;
+  }
+
+  @media (max-width: 450px) {
+    width: 100%;
+    padding: 20px 0px;
   }
 `;

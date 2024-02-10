@@ -28,11 +28,9 @@ const TableComp = ({
     <Table {...getTableProps()}>
       <THead>
         {headerGroups.map(header => (
-          // getHeaderGroupProps를 통해 header 배열을 호출한다
           <Tr {...header.getHeaderGroupProps()}>
             <Th>No</Th>
             {header.headers.map(col => (
-              // getHeaderProps는 각 셀 순서에 맞게 header를 호출한다
               <Th {...col.getHeaderProps()}>{col.render("Header")}</Th>
             ))}
             <Th>신청내역</Th>

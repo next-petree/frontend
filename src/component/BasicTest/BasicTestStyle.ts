@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 1100px;
   text-align: center;
 `;
 
@@ -26,7 +26,7 @@ export const TitleWrap = styled.div`
   }
 `;
 export const TestModalWrap = styled.div`
-  width: 600px;
+  width: 50%;
   height: 80vh;
   border-radius: 40px;
   display: flex;
@@ -37,6 +37,12 @@ export const TestModalWrap = styled.div`
   box-shadow: 0.5px 1px 5px 0.5px rgba(0, 0, 0, 0.05);
   position: absolute;
   top: 24%;
+  @media (max-width: 1400px) {
+    width: 70%;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 export const TestTitle = styled.h3`
   font-size: 24px;

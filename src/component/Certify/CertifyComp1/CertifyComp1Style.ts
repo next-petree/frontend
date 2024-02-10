@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CertificateWrap = styled.div``;
 export const CertificateName = styled.div`
@@ -13,8 +13,17 @@ export const CertWrap = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   padding: 20px 28px;
+  @media (max-width: 1100px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+  }
 `;
-export const CertificateImg = styled.img``;
+export const CertificateImg = styled.img`
+  width: 300px;
+  height: 400px;
+`;
 export const DescriptionWrap = styled.div`
   width: 70%;
 `;
@@ -41,6 +50,9 @@ export const Btn = styled.button`
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 export const ModalWrap = styled.div`
@@ -60,8 +72,8 @@ export const Modal = styled.div`
   top: 0;
   bottom: 10vh;
   padding: 50px 20px 120px;
-  width: 861px;
-  height: 80vh; /* 화면 높이의 80%만큼 높이를 설정합니다. */
+  width: 80%;
+  height: 80vh;
   background: #fff;
   border-radius: 32px;
   position: relative;

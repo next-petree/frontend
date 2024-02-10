@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled.div``;
 export const Header = styled.div`
@@ -30,6 +30,10 @@ export const ScoreWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const ScoreDiv = styled.div`
   font-size: 80px;
@@ -46,6 +50,10 @@ export const ResultInfo = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const ResultFailed = styled.span`
   color: #ff5757;
@@ -58,10 +66,11 @@ export const ResultAcceptance = styled.span`
   font-weight: 700;
 `;
 export const BtnWrapper = styled.div`
-  width: 660px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 30px;
   a {
     text-decoration: none;
     padding: 13px 125px;
@@ -75,10 +84,20 @@ export const BtnWrapper = styled.div`
   :nth-child(1):hover {
     background: #35d8d5;
   }
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 export const RestartBtn = styled(Link)`
   background: #4ec1bf;
+  @media (max-width: 1100px) {
+  }
 `;
 export const AnswerBtn = styled(Link)`
   background: #2f2f2f;
+  @media (max-width: 1100px) {
+  }
 `;

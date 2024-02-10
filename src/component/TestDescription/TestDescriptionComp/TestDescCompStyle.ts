@@ -1,5 +1,5 @@
 //스타일 파일
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   from {
@@ -23,8 +23,11 @@ export const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  content-align: center;
   padding: 20px 44px;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    height: 30%;
+  }
 `;
 
 export const ImgWrap = styled.img`
