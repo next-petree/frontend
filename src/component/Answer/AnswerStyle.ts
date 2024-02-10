@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   margin: 0;
@@ -30,6 +30,10 @@ export const AnswerWrapper = styled.div`
   row-gap: 0;
   column-gap: 120px;
   margin-bottom: 50px;
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Btn = styled.button`
@@ -42,4 +46,7 @@ export const Btn = styled.button`
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  @media (max-width: 1100px) {
+    width: 50%;
+  }
 `;

@@ -10,6 +10,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5vh;
+  @media (max-width: 1100px) {
+    width: 80vw;
+  }
+  @media (max-width: 450px) {
+    width: 100vw;
+  }
 `;
 interface Iuser {
   email: string;

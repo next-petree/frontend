@@ -1,5 +1,5 @@
-import React from 'react';
-import useModal from '../../Modal/Modal';
+import React from "react";
+import useModal from "../../Modal/Modal";
 
 import {
   CertificateName,
@@ -12,7 +12,7 @@ import {
   Btn,
   ModalWrap,
   Modal,
-} from './CertifyComp1Style';
+} from "./CertifyComp1Style";
 
 type CertProps = {
   img: string;
@@ -47,16 +47,16 @@ export default function CertifyComp1(props: CertProps) {
       <Btn onClick={showModal}>자격증 취득방법 상세보기</Btn>
       {isModalVisible && (
         <ModalWrap onClick={hideModal}>
-          <Modal onClick={(e) => e.stopPropagation()}>
+          <Modal onClick={e => e.stopPropagation()}>
             <img
               src={props.descImg}
-              style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+              style={{ width: "100%", height: "auto", objectFit: "cover" }}
               alt="자격증 취득 방법"
             />
             <Btn
               style={{
-                position: 'relative',
-                right: '32%',
+                position: "relative",
+                right: "32%",
               }}
               onClick={hideModal}
             >

@@ -226,9 +226,9 @@ export default function CertifyComp() {
             </InputWrap>
             <FileBox className="filebox">
               {selectedFileName ? (
-                <label htmlFor="file">{selectedFileName}</label> // 선택된 파일명 보여주기
+                <label htmlFor="file">{selectedFileName}</label>
               ) : (
-                <label htmlFor="file">파일찾기</label> // 파일이 선택되지 않은 경우 "파일찾기" 보여주기
+                <label htmlFor="file">파일찾기</label>
               )}
               <input
                 type="file"

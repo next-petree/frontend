@@ -96,23 +96,23 @@ const TableComp = ({
                         상세보기
                       </Button>
                     ) : cell.column.id === "state" ? (
-                      <>
-                        <span style={{ marginRight: "10px" }}>
-                          {cell.render("Cell")}
-                        </span>
+                      <div>
+                        <span>{cell.render("Cell")}</span>
                         {cell.value === "분양승인" && (
-                          <Button
-                            bgcolor="#4EC1BF"
-                            buttonwidth="70px;"
-                            buttonheight="40px;"
-                            onClick={() => {
-                              console.log("후기 작성!!");
-                            }}
-                          >
-                            후기작성
-                          </Button>
+                          <div style={{ marginTop: "10px" }}>
+                            <Button
+                              bgcolor="#4EC1BF"
+                              buttonwidth="70px;"
+                              buttonheight="40px;"
+                              onClick={() => {
+                                console.log("후기 작성 데이터:", row.original);
+                              }}
+                            >
+                              후기작성
+                            </Button>
+                          </div>
                         )}
-                      </>
+                      </div>
                     ) : (
                       cell.render("Cell")
                     )}

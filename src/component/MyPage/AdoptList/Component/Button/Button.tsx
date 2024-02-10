@@ -18,9 +18,9 @@ const PrimaryButton = ({
 }: ButtonProps) => {
   return (
     <Button
-      bgcolor={bgcolor}
-      buttonwidth={buttonwidth}
-      buttonheight={buttonheight}
+      $bgcolor={bgcolor}
+      $buttonwidth={buttonwidth}
+      $buttonheight={buttonheight}
       onClick={onClick}
     >
       {children}

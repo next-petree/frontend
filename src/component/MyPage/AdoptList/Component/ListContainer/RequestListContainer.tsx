@@ -2,22 +2,18 @@ import { useState, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectSearchResultSlice } from "../../../../../redux/SearchResult/SearchResultSlice";
 import { selectSuccessResultSlice } from "../../../../../redux/SuccessResult/SuccessResultSlice";
-import { styled } from "styled-components";
 import { get } from "../../../../../api/api";
-import { TitleWrap, Title, SubTitle, PageNationWrap } from "./RequestListStyle";
+import {
+  Container,
+  TitleWrap,
+  Title,
+  SubTitle,
+  PageNationWrap,
+} from "./RequestListStyle";
 import BreederTableComp from "../TableComponent/BreederTable/BreederTableComp";
 import AdopterTableComp from "../TableComponent/AdopterTable/AdopterTableComp";
 import SearchComp from "./SearchComp/SearchComp";
 
-export const Container = styled.div`
-  background-color: white;
-  width: 49vw;
-  height: fit-content;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
-  border-radius: 32px;
-  padding: 4vw 3vw 2.5vw;
-  z-index: 100;
-`;
 type BreederColumn = {
   Header: string;
   accessor: keyof BreederdataType;
