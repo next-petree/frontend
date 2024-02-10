@@ -86,7 +86,7 @@ const ModifyAuthForm = () => {
   };
   const closeModal = () => {
     setAddressSearch(false);
-  }
+  };
   const addressSearchHandler = (data: any) => {
     setValue("address1", data.roadAddress);
     setAddressSearch(false);

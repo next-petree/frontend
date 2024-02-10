@@ -86,13 +86,13 @@ export const NavigationMenu = styled.div`
     &.visible {
       display: flex;
       flex-direction: column;
-      justify-content:space-around;
+      justify-content: space-around;
       position: absolute;
       width: 200px;
-      height: 150px;
-      border-radius:10px;
+      height: 160px;
+      border-radius: 10px;
       right: 120px;
-      top: 58px;
+      top: 65px;
       background: white;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       z-index: 1000;
@@ -102,8 +102,8 @@ export const NavigationMenu = styled.div`
       &.visible {
         right: 60px;
       }
+    }
   }
-}
 `;
 
 export const NavigationLink = styled(Link)`
