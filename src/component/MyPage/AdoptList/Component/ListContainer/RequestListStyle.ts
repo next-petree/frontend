@@ -2,12 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: white;
-  width: 49vw;
+  width: 50vw;
   height: fit-content;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
   padding: 4vw 3vw 2.5vw;
   z-index: 100;
+  @media (max-width: 1100px) {
+    width: 80vw;
+  }
+  @media (max-width: 700px) {
+    width: 95vw;
+  }
 `;
 
 export const TitleWrap = styled.div``;

@@ -105,10 +105,8 @@ const TableComp = ({
                         상세보기
                       </Button>
                     ) : cell.column.id === "state" ? (
-                      <>
-                        <span style={{ marginRight: "10px" }}>
-                          {cell.render("Cell")}
-                        </span>
+                      <div>
+                        <span>{cell.render("Cell")}</span>
                         {cell.value === "분양승인" && (
                           <Button
                             bgcolor="#4EC1BF"
@@ -123,7 +121,7 @@ const TableComp = ({
                             후기작성
                           </Button>
                         )}
-                      </>
+                      </div>
                     ) : (
                       cell.render("Cell")
                     )}

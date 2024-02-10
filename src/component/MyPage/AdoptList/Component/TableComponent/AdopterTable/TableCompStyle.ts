@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const Table = styled.table`
   width: 100%;
   display: flex;
@@ -20,7 +20,7 @@ export const TBody = styled.tbody`
   text-align: center;
   padding: 0;
   color: #9e9e9e;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 `;
 export const Tr = styled.tr`
@@ -34,8 +34,8 @@ export const Tr = styled.tr`
   padding: 20px 0;
 `;
 export const Th = styled.th`
-  width: 16%;
+  width: 20%;
 `;
 export const Td = styled.td`
-  width: 16%;
+  width: 20%;
 `;
