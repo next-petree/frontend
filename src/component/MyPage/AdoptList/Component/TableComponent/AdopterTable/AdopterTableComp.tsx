@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { get } from "../../../../../../api/api";
 import { useTable } from "react-table";
 import { Table, THead, TBody, Tr, Th, Td } from "./TableCompStyle";
 import Button from "../../Button/Button";
 import AdopterRowModal from "../../Modal/Adopter/AdopterRowModal";
 import { useNavigate } from "react-router";
+import { set } from "react-hook-form";
 
 type dataType = {
   id: number;
+  dogId: number;
   breeder: string;
   bday: string;
   breed: string;
@@ -48,7 +50,6 @@ const TableComp = ({
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-
   /**
    * Yonghyun
    */
@@ -58,7 +59,6 @@ const TableComp = ({
     try {
       const response = await get<ApiResponse>(`/me/matchings/${matchingId}`);
       setModalData(response.data.data);
-      console.log(response.data.data);
       setShowModal(true);
     } catch (error) {
       console.error("매칭 상세 조회 중 오류 발생:", error);
@@ -113,8 +113,9 @@ const TableComp = ({
                             buttonwidth="70px;"
                             buttonheight="40px;"
                             onClick={() => {
-                              navigate('/mypage/review/create', {state: row.original})
-                              console.log("후기 작성 데이터:", row.original);
+                              console.log(row);
+                              
+                              navigate('/mypage/review/create', {state: {data: {id: row.original.dogId}}})
                             }}
                           >
                             후기작성

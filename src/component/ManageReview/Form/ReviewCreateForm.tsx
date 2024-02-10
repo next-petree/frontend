@@ -2,9 +2,9 @@ import * as S from './styles';
 import { IoIosArrowBack } from "react-icons/io";
 import ImageDeleteButton from "../../ManageOwnDogs/ImageDeleteButton/ ImageDeleteButton";
 import AddImageIcon from "../../ManageOwnDogs/AddImageIcon/AddImageIcon";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { post } from '../../../api/api';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { get, post } from '../../../api/api';
 
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
@@ -23,6 +23,19 @@ import alertList from "../../../utils/Swal1";
  *   
  */
 
+interface IData {
+    status: string;
+    data: IDogData;
+}
+
+  interface IDogData {
+    id: number;
+    name: string;
+    status: string;
+    gender: string;
+    type: string;
+  }
+
   interface ICreateReview {
     dogId: string;
     title: string;
@@ -39,10 +52,31 @@ import alertList from "../../../utils/Swal1";
   
 const ReviewCreateForm = () => {
     const [review1, setReview1] = useState<ICreateReview>(initialReview);
+    const [dog, setDog] = useState<IDogData>();
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
     const [prevImages, setPrevImages] = useState<string[]>([]);
-
+    
+    const location = useLocation();
+    const { data } = location.state;
+    
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchDog = async () => {
+            try {
+                const response = await get<IData>(`${process.env.REACT_APP_API_URL}/dogs/${data.id}`);
+                if(response.status === 200) {
+                    console.log(response.data.data);
+                    
+                    setDog(response.data.data);
+                }
+            } catch(e) {
+                console.error('에러 발생:', e);
+            }
+        }
+
+        fetchDog();
+    }, [data.id]);
 
     const handleDeleteImage = (index: number) => {
         setPrevImages(prevImages?.filter((img, i) => {
@@ -77,14 +111,16 @@ const ReviewCreateForm = () => {
 
         const formDataToSend = new FormData();
 
-        formDataToSend.append('title',review1.title);
-        formDataToSend.append('content',review1.content);
-        formDataToSend.append('dogId', review1.dogId.toString());
-
-
-        review1.reviewImgFiles.forEach((file) => {
-            formDataToSend.append(`reviewImgFiles`, file);
-         });
+        if(dog) {
+            formDataToSend.append('title',review1.title);
+            formDataToSend.append('content',review1.content);
+            formDataToSend.append('dogId', dog.id.toString());
+            review1.reviewImgFiles.forEach((file) => {
+                formDataToSend.append(`reviewImgFiles`, file);
+            });
+        } else {
+            return;
+        }
 
         try {
             const response = await post(`${process.env.REACT_APP_API_URL}/adopter/review`, formDataToSend)
@@ -125,7 +161,7 @@ const ReviewCreateForm = () => {
                             <S.InputContainer>
                                 <S.InputTitle>성별</S.InputTitle>
                                 <S.Input
-                                    placeholder="수컷"
+                                    defaultValue={dog?.gender}
                                     disabled
                                 />
                             </S.InputContainer>
@@ -135,14 +171,14 @@ const ReviewCreateForm = () => {
                             <S.InputContainer>
                                 <S.InputTitle>견종</S.InputTitle>
                                 <S.Input
-                                    placeholder="포메라니안"
+                                    defaultValue={dog?.type}
                                     disabled
                                 />
                             </S.InputContainer>
                             <S.InputContainer>
                                 <S.InputTitle>강아지 이름</S.InputTitle>
                                 <S.Input
-                                    placeholder="루카스"
+                                    defaultValue={dog?.name}
                                     disabled
                                 />
                             </S.InputContainer>
