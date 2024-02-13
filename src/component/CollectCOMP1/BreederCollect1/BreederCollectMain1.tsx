@@ -59,14 +59,11 @@ export default function BreederCollect_Main() {
   }, [searchs, page]);
 
   return (
-    <Wrapper>
+    <>
+    {!loading && <Wrapper>
       <MainBox>
         <Title>브리더 모아보기</Title>
         <BreederForm />
-        {loading ? (
-          <Title>잠시만 기다려 주십시오...</Title>
-        ) : (
-          <>
             {breeders?.data.totalElements != 0 ? (
               <BoxContainer>
                 {breeders?.data.content.map((breeder, i) => (
@@ -95,8 +92,6 @@ export default function BreederCollect_Main() {
                 <div>검색조건에 맞는 브리더가 없습니다.</div>
               </No_return>
             )}
-          </>
-        )}
       </MainBox>
       <Pagenation
         page={page}
@@ -104,6 +99,7 @@ export default function BreederCollect_Main() {
         setPage={setPage}
         name={"breeders"}
       />
-    </Wrapper>
+    </Wrapper>}
+    </>
   );
 }

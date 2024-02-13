@@ -69,7 +69,7 @@ export const Availtext = styled.div`
 
 `;
 
-export const Dermyimg = styled.div`
+export const Dermyimg = styled.img`
   width: 21.7rem;
   @media (max-width: 768px) {
     width: 17rem;
@@ -80,9 +80,8 @@ export const Dermyimg = styled.div`
   
   height: 13.7rem;
   border-radius: 12px;
-  background-color: slategray;
 `;
-export const Badge = styled.span`
+export const Badge = styled.img`
   position: absolute;
   bottom: 5px;
   right: 5px;

@@ -18,7 +18,7 @@ const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
   };
 
   return (
-    <S.ModalWrapper customtop={customTop} customleft={customLeft}>
+    <S.ModalWrapper $customtop={customTop} $customleft={customLeft}>
       <S.ModalContainer>
         <S.DetailInfoFlexBox>
           <S.DogImage src={dog?.data?.imagesUrl[0]} alt={dog?.data.name} />

@@ -68,20 +68,18 @@ export default function DogyCollect_main() {
     setSelectedId(id);
   };
 
+
   useEffect(() => {
     getDogs();
   }, [category, page]);
   return (
-    <Wrapper>
+    <>
+    {!loading && <Wrapper>
       <MainBox>
         <Title>강아지 모아보기</Title>
         <SearchBtn onClick={() => dispath(setOnDogSearch(true))}>
           검색 필터
         </SearchBtn>
-        {loading ? (
-          <Title>잠시만 기다려 주십시오...</Title>
-        ) : (
-          <>
             {dogs?.data.totalElements != 0 ? (
               <BoxContainer>
                 {dogs?.data.content.map(box => (
@@ -109,8 +107,6 @@ export default function DogyCollect_main() {
                 <div>검색조건에 맞는 강아지가 없습니다.</div>
               </No_return>
             )}
-          </>
-        )}
       </MainBox>
       <Pagenation
         page={page}
@@ -127,6 +123,7 @@ export default function DogyCollect_main() {
           onClick={() => setDogBoxClicked(false)}
         />
       )}
-    </Wrapper>
+    </Wrapper>}
+    </>
   );
 }

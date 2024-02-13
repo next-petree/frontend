@@ -15,15 +15,15 @@ const Container = styled.div`
   gap: 8px;
 `;
 
-const Btn = styled.button<{ current?: string | null }>`
+const Btn = styled.button<{ $current?: string | null }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 32px;
   height: 32px;
   background: none;
-  background-color: ${(props) => (props.current === "page" ? "#4ec1bf" : null)};
-  color: ${(props) => (props.current === "page" ? "white" : null)};
+  background-color: ${(props) => (props.$current === "page" ? "#4ec1bf" : null)};
+  color: ${(props) => (props.$current === "page" ? "white" : null)};
   border: 1.5px solid #dfe3e8;
   border-radius: 4px;
   font-size: 14px;
@@ -71,7 +71,7 @@ export default function Pagenation({
         firstNum + i <= totalPage ? (
           <Btn
             key={i + 1}
-            current={page === firstNum + i ? "page" : null}
+            $current={page === firstNum + i ? "page" : null}
             onClick={() => {setPage(firstNum + i); navi(`/${name}/${firstNum + i }`)}}
           >
             {firstNum + i}{" "}
