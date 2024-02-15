@@ -3,20 +3,13 @@ import Header from "../../component/Header/Header"
 import Banner from "../../component/Banner/Banner"
 
 const Wrapper = styled.div`
-  overflow-y: none;
+  overflow-y: scroll;
   background: #ffffff;
-    min-height: 100vh;
+  min-height: 100vh;
 `
 
 const Container = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: yellow;
-
-    position: relative;
+    margin-top: 250px;
 `
 
 interface IProps {

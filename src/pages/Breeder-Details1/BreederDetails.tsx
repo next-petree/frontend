@@ -7,6 +7,7 @@ import DogCard from "../../component/Card/DogCard";
 import CustomLayout from "../Layout/CustomLayout";
 import DetailModal from "../../component/DetailModal/DetailModal";
 import CustomAvatar from "../../component/Avatar/CustomAvatar";
+import CustomLayout3 from "../Layout/CustomLayout3";
 
 import { useGetBreederDetailQuery } from "../../redux/api/BreederApiSlice1";
 import { useParams } from "react-router-dom";
@@ -58,9 +59,11 @@ const BreederDetails = () => {
   };
 
   return (
-    <CustomLayout height={2040}>
+    <CustomLayout3>
       <S.Wrapper>
-        <S.IconContainer>
+      <S.WhiteBox1>
+        <S.IconNameAddressContainer>
+          <S.IconContainer>
                  {breeder?.data?.profileImgUrl ? (
                       breeder?.data?.verified ? (
                         <CustomAvatar
@@ -76,12 +79,13 @@ const BreederDetails = () => {
                       <CustomAvatar />
                     )}
         </S.IconContainer>
-        <S.WhiteBox1>
           <S.Name>{breeder?.data?.nickname}</S.Name>
           <S.AddressContainer>
               <p>활동지역</p>
               <p>{breeder?.data?.address1}</p>
            </S.AddressContainer>
+        </S.IconNameAddressContainer>
+      
 
            <S.IntroContainer>
             <S.Title>자기소개</S.Title>
@@ -115,7 +119,10 @@ const BreederDetails = () => {
           </S.MainDogImgContainer>
            </S.MainDogContainer>
         </S.WhiteBox1>
-        <S.WhiteBox2>
+        
+        
+        
+        { breeder?.data?.simpleDogDtos.length > 0 ? (<S.WhiteBox2>
           <S.OwnDogTitle>보유견종</S.OwnDogTitle>
           <S.OwnDogImgFlexBox>
              {!loadingBreeder &&
@@ -131,7 +138,10 @@ const BreederDetails = () => {
                 />
               ))}
           </S.OwnDogImgFlexBox>
-        </S.WhiteBox2>
+        </S.WhiteBox2>) : (
+          <S.WhiteBox2><S.EmptyMessage>보유견종이 없습니다.</S.EmptyMessage> </S.WhiteBox2>
+        )}
+        
         {isModalOpenClicked && (
         <S.ModalContainer>
           <DetailModal
@@ -143,7 +153,7 @@ const BreederDetails = () => {
         </S.ModalContainer>
       )}
       </S.Wrapper>
-    </CustomLayout>
+    </CustomLayout3>
   );
 };
 

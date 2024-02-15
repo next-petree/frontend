@@ -12,4 +12,19 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 26px;
   letter-spacing: -0.03em;
+
+  @media (min-width: 1024px) {
+    padding: 11px 28px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    font-size: 12px;
+    padding: 11px 28px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 22px;
+  }
 `;

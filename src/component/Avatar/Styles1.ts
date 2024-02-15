@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 export const SvgWrapper = styled.div`
   width: 140px;
   height: 140px;
-  opacity: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +14,6 @@ export const SvgWrapper = styled.div`
 export const Container = styled.div`
   width: 140px;
   height: 140px;
-  /* background-color: aqua; */
   position: absolute;
   width: 52px;
   height: 52px;

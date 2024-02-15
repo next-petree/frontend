@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  padding: 0px;
-
   width: 240px;
   height: 341px;
+  padding: 0px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+
 `;
 
 export const Container = styled.div`
