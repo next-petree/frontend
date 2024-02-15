@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { post } from "../../../api/api";
 import CustomLayout from "../../Layout/CustomLayout";
 import * as S from "./Styles1";
+import CustomLayout3 from "../../Layout/CustomLayout3";
 
 const RegisterFillOut = () => {
   const [firstTextarea, setFirstTextarea] = useState("");
@@ -73,7 +74,7 @@ const RegisterFillOut = () => {
   };
 
   return (
-    <CustomLayout height={1185}>
+    <CustomLayout3>
       <S.InnerWrapper>
         <S.WhiteBox>
         <S.InnerContainer>
@@ -121,7 +122,7 @@ const RegisterFillOut = () => {
         </S.InnerContainer>
         </S.WhiteBox>
       </S.InnerWrapper>
-    </CustomLayout>
+    </CustomLayout3>
   );
 };
 
