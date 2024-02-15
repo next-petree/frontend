@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{
-  customwidth: number;
-  customheight: number;
-  customtop: number;
-  customleft: number;
-}>`
+export const Wrapper = styled.div`
   box-sizing: border-box;
-  position: absolute;
-  width: ${(props) => `${props.customwidth}px`};
-  height: ${(props) => `${props.customheight}px`};
-  left: ${(props) => `${props.customleft}px`};
-  top: ${(props) => `${props.customtop}px`};
+  /* position: absolute; */
   background: #ffffff;
   /* shadow */
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
+
+  width: 68vw;
+  min-height: 500px;
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  position: absolute;
+
+  padding: 40px 0;
 `;

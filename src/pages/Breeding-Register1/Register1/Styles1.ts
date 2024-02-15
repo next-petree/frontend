@@ -7,15 +7,37 @@ export const InnerContainer = styled.div`
   align-items: center;
   padding: 0px;
   gap: 57px;
-
-  position: absolute;
   width: 1248px;
   height: 601px;
-  left: 336px;
-  top: 370px;
-
   z-index: 999;
 `;
+
+export const InnerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const WhiteBox = styled.div`
+  box-sizing: border-box;
+  width: 74vw;
+  height: 793px;
+  background: #ffffff;
+  /* shadow */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 0;
+  margin-top: 4%;
+`
 
 export const InfoContainer = styled.div`
   /* Auto layout */
@@ -25,7 +47,7 @@ export const InfoContainer = styled.div`
   padding: 0px;
   gap: 57px;
 
-  width: 1248px;
+  
   height: 344px;
 
   /* Inside auto layout */

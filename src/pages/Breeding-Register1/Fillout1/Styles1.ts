@@ -1,18 +1,44 @@
 import styled, { css } from "styled-components";
 
 export const InnerContainer = styled.div`
-  // width, height => not fixed
-  width: 968px;
-  height: 658px;
-  position: absolute;
-  top: 370px;
-  left: 476px;
-  gap: 43px;
-  z-index: 999;
+  /* Auto layout */
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px;
+  gap: 57px;
+  width: 1248px;
+  height: 601px;
+  z-index: 999;
+
 `;
+
+export const InnerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const WhiteBox = styled.div`
+  box-sizing: border-box;
+  width: 1400px;
+  height: 793px;
+  background: #ffffff;
+  /* shadow */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 0;
+  margin-top: 4%;
+`
 
 export const InnerTopContainer = styled.div`
   display: flex;
@@ -32,7 +58,7 @@ export const TitleContainer = styled.div`
 
 export const FormContainer = styled.form`
   // width, height => not fixed
-  width: 968px;
+  width: 1200px;
   height: 484px;
 
   display: flex;
@@ -42,7 +68,7 @@ export const FormContainer = styled.form`
 `;
 
 export const FormBox = styled.div`
-  width: 968px;
+  width: 100%;
   //height => not fixed
   height: 230px;
   display: flex;
@@ -60,17 +86,15 @@ export const FormBoxQuestion = styled.div`
   color: #000000;
 `;
 
-export const FormBoxTextareaContainer = styled.div<{ top: number }>`
-  width: 968px;
-  height: 189px;
-  position: absolute;
-  top: ${(props) => props.top}px;
+export const FormBoxTextareaContainer = styled.div`
+  position: relative; 
 `;
 
 export const FormBoxTextarea = styled.textarea`
+  width: 98%;
+  height: 158px;
   background: #f5f5f5;
   border-radius: 16px;
-  height: 189px;
   padding: 20px;
   font-family: Noto Sans KR;
   font-size: 16px;

@@ -38,6 +38,8 @@ export const BadgeInnerContainer = styled.div`
 export const ImageContainer = styled.div<{ borderColor?: string }>`
   overflow: hidden;
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,8 +51,8 @@ export const ImageContainer = styled.div<{ borderColor?: string }>`
 `;
 
 export const CustomImage = styled.img`
-  width: 118px;
-  height: 118px;
+  width: 90px;
+  height: 90px;
 
   object-fit: cover;
 `;

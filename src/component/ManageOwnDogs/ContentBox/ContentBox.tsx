@@ -29,8 +29,6 @@ export interface IData {
 }
 
 const ContentBox = () => {
-  // 첫 페이지로 오실려면 "mypage/owndogs/1" 이런 식으로 url을 연결 하셔야 합니다.
-  // 되도록이면 첫 페이지가 "mypage/owndogs/0" 이 아닌 "mypage/owndogs/1" 이 되도록 하셔야 제가 만든 Pagenation 컴포넌트를 쓰시기 편하실 겁니다.
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
   const [totalPage, setTotalPage] = useState(0);
@@ -123,8 +121,6 @@ const ContentBox = () => {
             ))}
       </S.ListContainer>
       <S.PaginationContainer>
-        {/* 현재 api에 데이터가 없는 것 같아서 totalPage는 일단 10으로 세팅 해두었습니다 */}
-        {/* 상단에 param.pageId 에 따라서 데이터가 잘 표시 되도록 하셔야 될 겁니다. */}
         <Pagenation
           page={page}
           totalPage={totalPage}
