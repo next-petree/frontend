@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   background-color: white;
   /* width: 1060px; */
-  width: 49vw;
+  /* width: 49vw; */
   height: fit-content;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
   padding: 4vw 3vw 2.5vw;
-  z-index: 100;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
@@ -16,6 +16,21 @@ export const Wrapper = styled.div`
   align-items: center;
 
   position: relative;
+  background-color: aqua;
+
+  width: 1060px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 980px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 720px;
+  }
+
+  @media (max-width: 767px) {
+    width: 310px;
+  }
 `;
 
 export const ReturnBtnContainer = styled.div`
@@ -75,6 +90,9 @@ export const InnerContainer = styled.div`
   align-items: flex-start;
   gap: 40px;
   margin-top: 20px;
+  background-color: red;
+
+ 
 `;
 
 export const Form = styled.form`
@@ -89,6 +107,10 @@ export const TopInputContainer = styled.div`
   width: 100%;
   display: flex;
   gap: 40px 30px;
+  @media (max-width: 767px) {
+    background-color: green;
+    flex-direction: column;
+  }
 `;
 
 export const LeftInputContainer = styled.div`
@@ -107,6 +129,14 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 320px;
+  }
+
+  @media (max-width: 767px) {
+    width: 95%;
+  }
 `;
 
 export const InputTitle = styled.h1`

@@ -40,6 +40,7 @@ const initialReview: IReview = {
 
 const ReviewEditForm = ({ review }: IProp) => {
     const [review1, setReview1] = useState<IReview>(initialReview);
+    const [isOriginalImgDeleted, setIsOriginalImgDeleted] = useState(false);
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
     const [prevImages, setPrevImages] = useState<IReviewImg[] | undefined>([]);
     const [formImages, setFormImages] = useState<File[]>([]);
@@ -51,6 +52,10 @@ const ReviewEditForm = ({ review }: IProp) => {
         setReview1(review!);
         setPrevImages(review?.reviewImgId!);
     }, [review])
+
+    console.log(review1);
+    console.log(prevImages);
+    
 
     const handleDeleteImage = (index: number) => {
         setPrevImages(prevImages?.filter((img, i) => {
@@ -83,13 +88,37 @@ const ReviewEditForm = ({ review }: IProp) => {
     }, [file]);
 
     const handleAddImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        
+        if(!isOriginalImgDeleted) {
+            const answer = await Swal.fire({
+                ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
+                width: "350px",
+              });
 
-        const answer = await Swal.fire({
-            ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
-            width: "350px",
-          });
+            if (answer.isConfirmed) {
+                setIsOriginalImgDeleted(true);
+                const inputFile = e.target?.files?.[0];
 
-        if (answer.isConfirmed) {
+                setFile(inputFile);
+                
+                if (inputFile) {
+                    const imageUrl = URL.createObjectURL(inputFile);
+                    if(prevImages && prevImages.length > 0) {    
+                        let lastId = prevImages?.[prevImages.length - 1].id;
+                    
+                        setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+                        setFormImages([...formImages, inputFile]);
+                    } else {
+                        let id = 1;
+                        let arr = [{id: id++, fileUrl:imageUrl}];
+                        setPrevImages(arr);
+                        setFormImages([...formImages, inputFile]);
+                    }
+                }
+            } else {
+                return;
+            }
+        } else {
             const inputFile = e.target?.files?.[0];
 
             setFile(inputFile);
@@ -109,6 +138,32 @@ const ReviewEditForm = ({ review }: IProp) => {
                 }
             }
         }
+
+        
+
+
+        
+
+    //       if (answer.isConfirmed) {
+    //         const inputFile = e.target?.files?.[0];
+
+    //         setFile(inputFile);
+
+    //         if (inputFile) {
+    //             const imageUrl = URL.createObjectURL(inputFile);
+    //             if(prevImages && prevImages.length > 0) {    
+    //                 let lastId = prevImages?.[prevImages.length - 1].id;
+                
+    //                 setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+    //                 setFormImages([...formImages, inputFile]);
+    //             } else {
+    //                 let id = 1;
+    //                 let arr = [{id: id++, fileUrl:imageUrl}];
+    //                 setPrevImages(arr);
+    //                 setFormImages([...formImages, inputFile]);
+    //             }
+    //         }
+    //    }
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
