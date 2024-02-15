@@ -37,13 +37,11 @@ export default function BreederCollect_Main() {
     try {
       setLoading(true);
       if (onSearch.onBreederSearch) {
-        console.log("on here");
         setPage(1);
       }
       console.log(page, searchs);
       const url = BreedersCollecturl({ page, searchs });
       const response = await get<IBreedersAPI>(url);
-
       if (response.data.status === "FAIL") {
         throw "올바르지 못한 접근 입니다.";
       }
@@ -66,7 +64,7 @@ export default function BreederCollect_Main() {
         <BreederForm />
             {breeders?.data.totalElements != 0 ? (
               <BoxContainer>
-                {breeders?.data.content.map((breeder, i) => (
+                {breeders?.data.content.map((breeder) => (
                   <Link
                     style={{
                       width: "100%",
@@ -77,7 +75,6 @@ export default function BreederCollect_Main() {
                     key={breeder.id}
                   >
                     <BreederBox
-                      id={breeder.id}
                       nickname={breeder.nickname}
                       distance={breeder.distance}
                       types={breeder.types}

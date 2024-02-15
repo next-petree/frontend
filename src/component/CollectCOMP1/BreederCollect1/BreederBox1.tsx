@@ -12,7 +12,6 @@ import {
 import dermyAvatar from "../../../assets/svgs/DermyAvartar.svg"
 import redBadge from "../../../assets/svgs/RedBadge.svg"
 interface IBreederBox {
-  id: number;
   nickname: string;
   distance: number | null;
   types: string[];
@@ -21,7 +20,6 @@ interface IBreederBox {
 }
 
 export default function BreederBox({
-  id,
   nickname,
   distance,
   types,
