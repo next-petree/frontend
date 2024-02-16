@@ -26,6 +26,7 @@ import { post } from "../../../api/api";
 
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
+import { resizeFile } from "../../../utils/ImageResize";
 
 
 /**
@@ -124,17 +125,24 @@ const OwnDogsCreateForm = () => {
 
       // YYYY-MM-DD 형식의 문자열을 만듭니다.
       const formattedDate = `${date.year}-${formattedMonth}-${formattedDay}`;
-      // const localDate = new Date(formattedDate);
       
       formDataToSend.append('birthDate', formattedDate);
+        
+      let resizedFiles = null;
+      if(formDataFile && formDataFile.length > 0) {
+        resizedFiles = await Promise.all(formDataFile!.map((file) => resizeFile(file)));
+      }
+        
+      console.log('resizedFiles: ', resizedFiles![0]);
+      
 
-      if (formDataFile) {
-          if (formDataFile.length > 0) {
-              formDataFile.forEach((f) => {
+      if (resizedFiles) {
+          if (resizedFiles.length > 0) {
+            resizedFiles.forEach((f: any) => {
                   formDataToSend.append('dogImgFiles', f);
               })
           } else {
-              formDataToSend.append('dogImgFiles', formDataFile[0]);
+            formDataToSend.append('dogImgFiles', resizedFiles![0] as File);
           }
       }
 
@@ -149,7 +157,11 @@ const OwnDogsCreateForm = () => {
             navigate('/mypage/ownDogs/1');
         }
       } catch (error) {
-          console.error('ERROR: ', error);
+            console.error('ERROR: ', error);
+            Swal.fire({
+                ...alertList.errorMessage("보유견종 생성에 실패했습니다"),
+                width: "350px",
+            });
       }   
     }
   
@@ -183,21 +195,18 @@ const OwnDogsCreateForm = () => {
                                 <S.CustomDate>
                                 <DateInput
                                     placeHolder="년"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.year}
                                     onClick={handleYear}
                                 />
                                 <DateInput
                                     placeHolder="월"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.month}
                                     onClick={handleMonth}
                                 />
                                 <DateInput
                                     placeHolder="일"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.day}
                                     onClick={handleDay}

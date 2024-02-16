@@ -9,6 +9,7 @@ import AddImageIcon from "../../ManageOwnDogs/AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
+import { set } from "react-hook-form";
 
 interface IProp {
     review?: IReview;
@@ -40,6 +41,7 @@ const initialReview: IReview = {
 
 const ReviewEditForm = ({ review }: IProp) => {
     const [review1, setReview1] = useState<IReview>(initialReview);
+    const [isOriginalImgDeleted, setIsOriginalImgDeleted] = useState(false);
     const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
     const [prevImages, setPrevImages] = useState<IReviewImg[] | undefined>([]);
     const [formImages, setFormImages] = useState<File[]>([]);
@@ -54,6 +56,10 @@ const ReviewEditForm = ({ review }: IProp) => {
 
     const handleDeleteImage = (index: number) => {
         setPrevImages(prevImages?.filter((img, i) => {
+            return i !== index
+        }))
+
+        setFormImages(formImages.filter((img, i) => {
             return i !== index
         }))
     }
@@ -83,13 +89,37 @@ const ReviewEditForm = ({ review }: IProp) => {
     }, [file]);
 
     const handleAddImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        
+        if(!isOriginalImgDeleted) {
+            const answer = await Swal.fire({
+                ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
+                width: "350px",
+              });
 
-        const answer = await Swal.fire({
-            ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
-            width: "350px",
-          });
+            if (answer.isConfirmed) {
+                setIsOriginalImgDeleted(true);
+                const inputFile = e.target?.files?.[0];
 
-        if (answer.isConfirmed) {
+                setFile(inputFile);
+                
+                if (inputFile) {
+                    const imageUrl = URL.createObjectURL(inputFile);
+                    if(prevImages && prevImages.length > 0) {    
+                        let lastId = prevImages?.[prevImages.length - 1].id;
+                    
+                        setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+                        setFormImages([...formImages, inputFile]);
+                    } else {
+                        let id = 1;
+                        let arr = [{id: id++, fileUrl:imageUrl}];
+                        setPrevImages(arr);
+                        setFormImages([...formImages, inputFile]);
+                    }
+                }
+            } else {
+                return;
+            }
+        } else {
             const inputFile = e.target?.files?.[0];
 
             setFile(inputFile);
@@ -137,10 +167,13 @@ const ReviewEditForm = ({ review }: IProp) => {
                     width: "350px",
                   });
                 navigate(-1);
-            }
-            
+            } 
         } catch (error) {
             console.error('에러 발생: ',error);
+            Swal.fire({
+                ...alertList.errorMessage("수정 실패하였습니다"),
+                width: "350px",
+              });
         }
     }
 

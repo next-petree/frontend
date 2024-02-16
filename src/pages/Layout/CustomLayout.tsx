@@ -6,13 +6,12 @@ import { Wrapper } from "./Styles1";
 
 const CustomLayout = ({ height, children }: ICLProps) => {
   return (
-    <>
       <Wrapper height={height}>
         <Header />
         <Banner />
+        {/* <Container>{children}</Container> */}
         {children}
       </Wrapper>
-    </>
   );
 };
 

@@ -1,20 +1,53 @@
 import styled, { css } from "styled-components";
 
+export const InnerWrapper = styled.div`
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const WhiteBox = styled.div`
+  box-sizing: border-box;
+  /* width: 74vw; */
+  background: #ffffff;
+  /* shadow */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 1280px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 1020px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 90%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+    gap: 40px;
+  }
+
+`
+
 export const InnerContainer = styled.div`
   /* Auto layout */
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px;
   gap: 57px;
 
-  position: absolute;
-  width: 1248px;
-  height: 601px;
-  left: 336px;
-  top: 370px;
-
-  z-index: 999;
+  background-color: red;
 `;
 
 export const InfoContainer = styled.div`
@@ -25,13 +58,9 @@ export const InfoContainer = styled.div`
   padding: 0px;
   gap: 57px;
 
-  width: 1248px;
-  height: 344px;
+  width: 100%;
 
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  background-color: aqua;
 `;
 
 export const Headline = styled.div<{ textsize: number }>`
@@ -52,14 +81,20 @@ export const InfoInnerContainer = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 44px;
+  width: 100%;
+  /* height: 251px; */
 
-  width: 1248px;
-  height: 251px;
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-  /* Inside auto layout */
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  background-color: green;
 `;
 
 export const DogInfoContainer = styled.div`
@@ -73,27 +108,10 @@ export const DogInfoContainer = styled.div`
   width: 674px;
   height: 251px;
 
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  background-color: blue;
 `;
 
-export const DogDescContainer = styled.div`
-  /* Auto layout */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
 
-  width: 520px;
-
-  /* Inside auto layout */
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-`;
 
 export const DogInfoInnerContainer = styled.div`
   display: flex;
@@ -101,8 +119,10 @@ export const DogInfoInnerContainer = styled.div`
   align-items: start;
   gap: 4px;
 
-  width: 343px;
-  height: 251px;
+  /* width: 343px; */
+  /* height: 251px; */
+
+  background-color: pink;
 `;
 
 export const DogNameContainer = styled.div`
@@ -150,10 +170,24 @@ export const DogInfoBoxItem = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #333333;
+
+  background-color: orange;
+`;
+
+export const DogDescContainer = styled.div`
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+
+  background-color: yellow;
+
+  width: 100%;
 `;
 
 export const DogDescTitleBox = styled.div`
-  width: Fixed 429px;
   font-family: Noto Sans KR;
   font-size: 20px;
   font-weight: 500;
@@ -164,7 +198,7 @@ export const DogDescTitleBox = styled.div`
 `;
 
 export const DogDescBox = styled.div`
-  width: 520px;
+  width: 85%;
   border-radius: 16px;
   padding: 15px 20px;
   font-family: Noto Sans KR;
@@ -183,8 +217,15 @@ export const AgreementContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  width: 722px;
-  height: 91px;
+  /* width: 722px; */
+  /* height: 91px; */
+
+  background-color: purple;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 
 export const CheckboxContainer = styled.div`
@@ -197,6 +238,8 @@ export const CheckboxContainer = styled.div`
   color: #000000;
   display: flex;
   gap: 16px;
+
+  
 `;
 
 export const Checkbox = styled.div<{ isactive: boolean }>`
@@ -221,8 +264,8 @@ export const Checkbox = styled.div<{ isactive: boolean }>`
 `;
 
 export const AgreementInfoContainer = styled.div`
-  width: 722px;
-  height: 46px;
+  width: 90%;
+  /* height: 46px; */
   font-family: Noto Sans KR;
   font-size: 16px;
   font-weight: 350;
@@ -259,4 +302,8 @@ export const Button = styled.button<{ color: string }>`
   line-height: 26px;
   color: #ffffff;
   cursor: pointer;
+
+  @media (max-width: 767px) {
+    width: 120px;
+  }
 `;

@@ -8,7 +8,6 @@ import BreederBadge from "../../../component/Avatar/BreederBadge";
 
 import { agreementInfo } from "../../../constants";
 import * as S from "./Styles1";
-import CustomLayout3 from "../../Layout/CustomLayout3";
 
 const BreedingRegister = () => {
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
@@ -32,14 +31,14 @@ const BreedingRegister = () => {
   };
 
   return (
-    <CustomLayout3>
+    <CustomLayout height={1185}>
       <S.InnerWrapper>
       <S.WhiteBox>
       <S.InnerContainer>
         <S.InfoContainer>
           <S.Headline textsize={28}>분양 신청하기</S.Headline>
           <S.InfoInnerContainer>
-            {/* <S.DogInfoContainer> */}
+            <S.DogInfoContainer>
               <img
                 src={data.imagesUrl[0]}
                 alt="강아지"
@@ -68,7 +67,7 @@ const BreedingRegister = () => {
                   )}
                 </S.DogInfoBox>
               </S.DogInfoInnerContainer>
-            {/* </S.DogInfoContainer> */}
+            </S.DogInfoContainer>
             <S.DogDescContainer>
               <S.DogDescTitleBox>상세설명</S.DogDescTitleBox>
               <S.DogDescBox>{data.management}</S.DogDescBox>
@@ -99,7 +98,7 @@ const BreedingRegister = () => {
       </S.InnerContainer>
       </S.WhiteBox>
       </S.InnerWrapper>
-    </CustomLayout3>
+    </CustomLayout>
   );
 };
 

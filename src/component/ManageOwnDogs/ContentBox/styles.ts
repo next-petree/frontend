@@ -72,7 +72,7 @@ export const PaginationContainer = styled.div`
 
 export const ListContainer = styled.div`
   width: 100%;
-  height: 618px;
+  /* height: 618px; */
 
   display: flex;
   flex-wrap: wrap;

@@ -1,15 +1,9 @@
-import { IWBProps } from "../../types";
 import { Wrapper } from "./Styles1";
 
-const WhiteBox = (props: IWBProps) => {
+const WhiteBox = ({children} : any) => {
   return (
-    <Wrapper
-      customwidth={props.width}
-      customheight={props.height}
-      customtop={props.top}
-      customleft={props.left}
-    >
-      {props.children}
+    <Wrapper>
+      {children}
     </Wrapper>
   );
 };

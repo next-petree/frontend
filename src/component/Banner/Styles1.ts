@@ -28,7 +28,7 @@ export const IconContainer = styled.div`
   width: 386px;
   height: 156px;
   left: calc(50% - 386px / 2 - 417px);
-  top: 118px;
+  top: 140px;
 `;
 
 export const InnerContainer = styled.div`
@@ -73,4 +73,17 @@ export const Text = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 383px;
+  object-fit: cover;
+
+  @media (min-width: 480px) {
+    #background { width: 480px }
+  }
+
+  @media (min-width: 768px) {
+      #background { width: 768px  }
+  }
+
+  @media (min-width: 992px) {
+      #background { width: 992px  }
+  }
 `;

@@ -1,92 +1,100 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section`
-  position: relative;
-  width: 1920px;
-  /* width: 100vw; */
-  height: 2040px;
-  overflow-y: scroll;
-  background: #ffffff;
-`;
-
-export const BannerContainer = styled.div`
-  /* Rectangle 24 */
-  position: absolute;
+export const Wrapper = styled.div`
   width: 100%;
-  height: 383px;
-  left: 0px;
-  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 `;
 
-export const Frame62 = styled.div`
-  position: absolute;
+export const WhiteBox1 = styled.div`
   box-sizing: border-box;
-  width: 968px;
-  height: 793px;
-  top: 206px;
-  left: 436px;
-  gap: 70px;
+  /* position: absolute; */
+
+  /* height: 793px; */
+  /* top: 12%;  */
+  background: #ffffff;
   /* background-color: aqua; */
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  /* shadow */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
   z-index: 1;
-`;
-
-export const Frame122 = styled.div`
-  width: 968px;
-  height: 472px;
-  gap: 35px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Frame178 = styled.div`
-  width: 230px;
-  height: 180px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 10px;
+  width: 1200px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 1020px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 90%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+    gap: 40px;
+  }
 `;
 
-export const Frame179 = styled.div`
-  width: 968px;
-  height: 190px;
-  gap: 24px;
+export const WhiteBox2 = styled.div`
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  /* top: 48%;  */
+  background: #ffffff;
+  /* shadow */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
+  border-radius: 32px;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+
+  padding: 40px 0;
+
+  width: 1200px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 1020px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 90%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
 `;
 
-export const Frame113 = styled.div`
-  width: 504px;
-  height: 251px;
+export const IconNameAddressContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Frame178_1 = styled.div`
-  width: 140px;
-  height: 140px;
-  color: black;
+  @media (max-width: 767px) {
+    padding: 40px 0;
+  }
 `;
 
 export const IconContainer = styled.div`
+  /* position: absolute; */
   width: 118.13px;
   height: 118.13px;
-  top: 13.13px;
-  left: 54px;
+  /* top: 8%; */
+  /* left: 54px; */
+  /* z-index: 2; */
+  margin-right: 20px;
 `;
 
 export const Name = styled.div`
@@ -95,18 +103,43 @@ export const Name = styled.div`
   font-weight: 500;
   line-height: 34.75px;
   letter-spacing: 0em;
-  text-align: left;
-  padding-top: 10px;
+  text-align: center;
+  margin-top: 10px;
 `;
 
 export const AddressContainer = styled.div`
   width: 100%;
-  height: 25px;
-  gap: 16px;
-
+  /* height: 25px; */
+  
   margin-bottom: 10px;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 6px;
+  }
+`;
+
+export const IntroContainer = styled.div`
+  width: 100%;
+  height: 25px;
+  gap: 15px;
+
+  margin: 100px 0;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -115,47 +148,46 @@ export const AddressContainer = styled.div`
   font-weight: 500;
   line-height: 23px;
   letter-spacing: 0em;
-  text-align: left;
+
+  @media (max-width: 767px) {
+    margin: 120px 0;
+  }
 `;
 
-export const IntroHeading = styled.div`
-  min-width: 140px;
-  height: 36px;
+export const Title = styled.p`
   font-family: Noto Sans KR;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
-  line-height: 36px;
+  line-height: 34.75px;
   letter-spacing: 0em;
   text-align: center;
+  margin: 0;
+
+  @media (max-width: 767px) {
+    margin: 30px 0 0 0;
+  }
 `;
 
-export const ButtonGroup = styled.div`
-  width: 720px;
-  height: 48px;
-  gap: 16px;
+export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
-`;
+  gap: 16px;
 
-export const Button = styled.button`
-  min-width: 170px;
-  height: 48px;
-  border-radius: 80px;
-  border: solid 2px #4ec1bf;
-  gap: 10px;
-  color: #4ec1bf;
-  padding: 11px 30px;
-  font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 26px;
-  letter-spacing: -0.03em;
+  @media (min-width: 1024px) {
+    
+    flex-direction: row;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    flex-direction: row;
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const DescContainer = styled.div`
-  width: 726px;
-  height: 58px;
-
+  padding: 20px 0;
   font-family: Noto Sans KR;
   font-size: 20px;
   font-weight: 500;
@@ -166,21 +198,30 @@ export const DescContainer = styled.div`
   white-space: pre-wrap;
 `;
 
-export const TitleContainer = styled.div`
-  font-family: Noto Sans KR;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 36px;
-  letter-spacing: 0em;
-  text-align: left;
+export const MainDogContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 36px;
+  padding: 20px 0;
+  @media (max-width: 767px) {
+    margin-top: 20px;
+  }
 `;
 
-export const MainDogContainer = styled.div`
+export const MainDogImgContainer = styled.div`
   width: 504px;
-  height: 195px;
+  /* height: 195px; */
   gap: 36px;
 
   display: flex;
+  flex-direction: row;
+
+  @media (max-width: 767px) {
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const MainDog = styled.div`
@@ -207,40 +248,6 @@ export const MainDogName = styled.div`
   justify-content: center;
 `;
 
-export const Frame63 = styled.div`
-  position: absolute;
-  box-sizing: border-box;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: 44px 69px;
-
-  z-index: 1;
-`;
-
-export const FlexBox = styled.div`
-  padding: 26px 65px;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 36px;
-`;
-
-export const Title = styled.div`
-  font-family: Noto Sans KR;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 36px;
-  letter-spacing: 0em;
-  text-align: left;
-
-  padding: 0 69px;
-`;
-
 export const CustomImage = styled.img`
   width: 144px;
   height: 144px;
@@ -249,6 +256,40 @@ export const CustomImage = styled.img`
   object-fit: cover;
 `;
 
+export const OwnDogImgFlexBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+    margin-left: 60px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+`;
+
+export const OwnDogTitle = styled(Title)`
+  padding: 20px 0;
+  @media (min-width: 1024px) {
+    margin-left: 80px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    margin-left: 300px;
+  }
+
+  @media (max-width: 767px) {
+    margin-left: 150px;
+  }
+`
+
 export const ModalContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -256,3 +297,9 @@ export const ModalContainer = styled.div`
   z-index: 2;
   background: rgba(0, 0, 0, 0.25);
 `;
+
+export const EmptyMessage = styled(Title)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`

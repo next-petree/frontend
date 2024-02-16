@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { post } from "../../../api/api";
 import CustomLayout from "../../Layout/CustomLayout";
-import WhiteBox from "../../../component/WhiteBox/WhiteBox";
 import * as S from "./Styles1";
+import CustomLayout3 from "../../Layout/CustomLayout3";
 
 const RegisterFillOut = () => {
   const [firstTextarea, setFirstTextarea] = useState("");
@@ -74,8 +74,10 @@ const RegisterFillOut = () => {
   };
 
   return (
-    <CustomLayout height={1185}>
-      <S.InnerContainer>
+    <CustomLayout3>
+      <S.InnerWrapper>
+        <S.WhiteBox>
+        <S.InnerContainer>
         <S.InnerTopContainer>
           <S.TitleContainer>분양 신청하기</S.TitleContainer>
           <S.FormContainer id="form" onSubmit={submitHandler}>
@@ -84,13 +86,13 @@ const RegisterFillOut = () => {
                 1. 반려동물을 분양하려는 사유에 대해 작성하세요.
               </S.FormBoxQuestion>
 
+              <S.FormBoxTextareaContainer>
               <S.FormBoxTextarea
                 name="reason"
                 placeholder="분양하려는 사유를 작성해주세요"
                 value={firstTextarea}
                 onChange={e => setFirstTextarea(e.target.value)}
               />
-              <S.FormBoxTextareaContainer top={120}>
                 <S.TextLength>{firstTextarea.length}/2000</S.TextLength>
               </S.FormBoxTextareaContainer>
             </S.FormBox>
@@ -99,13 +101,13 @@ const RegisterFillOut = () => {
                 2. 해당 견종을 분양하는 것에 있어 자신의 마음가짐을
                 작성해주세요.
               </S.FormBoxQuestion>
+              <S.FormBoxTextareaContainer>
               <S.FormBoxTextarea
                 name="reason"
                 placeholder="분양 이유와 마음가짐을 작성해주세요"
                 value={secondTextarea}
                 onChange={e => setSecondTextarea(e.target.value)}
               />
-              <S.FormBoxTextareaContainer top={374}>
                 <S.TextLength>{secondTextarea.length}/2000</S.TextLength>
               </S.FormBoxTextareaContainer>
             </S.FormBox>
@@ -117,9 +119,10 @@ const RegisterFillOut = () => {
           </S.Button>
           <S.Button onClick={handleCancelClick}>취소</S.Button>
         </S.ButtonGroup>
-      </S.InnerContainer>
-      <WhiteBox top={284} left={250} width={1420} height={830}></WhiteBox>
-    </CustomLayout>
+        </S.InnerContainer>
+        </S.WhiteBox>
+      </S.InnerWrapper>
+    </CustomLayout3>
   );
 };
 

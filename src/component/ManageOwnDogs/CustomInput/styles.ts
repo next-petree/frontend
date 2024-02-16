@@ -1,8 +1,20 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{ width: string; height: string }>`
+export const Wrapper = styled.div<{ height: string }>`
     /* width: calc((100% / 3) - 20px); */
-    width: ${(props) => props.width};
+
+    @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 200px;
+    }
+
+    @media (min-width: 768px ) and (max-width: 1023px) {
+      width: 120px;
+    }
+
+    @media (max-width: 767px) {
+      width: 100px;
+    }
+
     height: ${(props) => props.height};
     position: relative;
 `;
