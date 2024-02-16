@@ -69,6 +69,7 @@ export const NavBarContainer = styled.div`
         width: 70vw;
       }
   }
+}
 `;
 
 export const Main = styled.div`

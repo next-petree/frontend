@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const ModalWrapper = styled.div<{
-  customtop: string;
-  customleft: string;
+  $customtop: string;
+  $customleft: string;
 }>`
   width: 900px;
   height: 822px;
   position: absolute;
   /* top: 1140px; */
-  top: ${(props) => props.customtop};
+  top: ${(props) => props.$customtop};
   /* left: 520px; */
-  left: ${(props) => props.customleft};
+  left: ${(props) => props.$customleft};
   z-index: 3;
 `;
 

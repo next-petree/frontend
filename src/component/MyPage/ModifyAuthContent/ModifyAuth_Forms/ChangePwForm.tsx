@@ -15,7 +15,6 @@ import {
   TextSpan,
   Title,
 } from "./Styles1";
-import { useEffect } from "react";
 import Swal from "sweetalert2";
 import alertList from "../../../../utils/Swal1";
 import { put } from "../../../../api/api";
@@ -25,7 +24,7 @@ import {
   IChangePasswordForm,
   ResultResponse,
 } from "../../../../types/MypageType1";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import React from "react";
 
 const ChangePwForm = () => {
@@ -33,10 +32,7 @@ const ChangePwForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    setValue,
     setError,
-    clearErrors,
   } = useForm<IChangePasswordForm>();
   const [isShow, setIsShow] = useState({
     currentPassword: false,
@@ -112,8 +108,6 @@ const ChangePwForm = () => {
       }
     }
   };
-
-  useEffect(() => {}, []);
   return (
     <Container>
       <Title>비밀번호 변경</Title>

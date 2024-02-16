@@ -1,5 +1,4 @@
-import IMG1 from "./Rectangle24.png";
-
+import IMG1 from "./Rectangle24.webp";
 import IMG2 from "./Group21.png";
 import IMG3 from "./Rectangle6.png";
 import IMG4 from "./pome1.png";

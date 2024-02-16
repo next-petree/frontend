@@ -37,13 +37,11 @@ export default function BreederCollect_Main() {
     try {
       setLoading(true);
       if (onSearch.onBreederSearch) {
-        console.log("on here");
         setPage(1);
       }
       console.log(page, searchs);
       const url = BreedersCollecturl({ page, searchs });
       const response = await get<IBreedersAPI>(url);
-
       if (response.data.status === "FAIL") {
         throw "올바르지 못한 접근 입니다.";
       }
@@ -59,17 +57,14 @@ export default function BreederCollect_Main() {
   }, [searchs, page]);
 
   return (
-    <Wrapper>
+    <>
+    {!loading && <Wrapper>
       <MainBox>
         <Title>브리더 모아보기</Title>
         <BreederForm />
-        {loading ? (
-          <Title>잠시만 기다려 주십시오...</Title>
-        ) : (
-          <>
             {breeders?.data.totalElements != 0 ? (
               <BoxContainer>
-                {breeders?.data.content.map((breeder, i) => (
+                {breeders?.data.content.map((breeder) => (
                   <Link
                     style={{
                       width: "100%",
@@ -80,7 +75,6 @@ export default function BreederCollect_Main() {
                     key={breeder.id}
                   >
                     <BreederBox
-                      id={breeder.id}
                       nickname={breeder.nickname}
                       distance={breeder.distance}
                       types={breeder.types}
@@ -95,8 +89,6 @@ export default function BreederCollect_Main() {
                 <div>검색조건에 맞는 브리더가 없습니다.</div>
               </No_return>
             )}
-          </>
-        )}
       </MainBox>
       <Pagenation
         page={page}
@@ -104,6 +96,7 @@ export default function BreederCollect_Main() {
         setPage={setPage}
         name={"breeders"}
       />
-    </Wrapper>
+    </Wrapper>}
+    </>
   );
 }
