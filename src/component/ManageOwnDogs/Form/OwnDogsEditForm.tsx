@@ -220,7 +220,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
             }); 
             
             try {
-                const result = await patch<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${dog1.id}`, formDataToSend);
+                const result = await patch<IData>(`${process.env.REACT_APP_API_URL}/breeder/dogs/${dog1.id}`, formDataToSend);
                 if(result.status === 200) {
                     Swal.fire({
                         ...alertList.successMessage("수정되었습니다"),

@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
-import React from "react";
-import { BreederBadge } from "../../assets/icons";
+import  BreederBadge  from "../Avatar/BreederBadge";
 import { IDMProps } from "../../types";
 import { useGetDogDetailQuery } from "../../redux/api/DogApiSlice1";
 import * as S from "./Styles1";
@@ -11,7 +10,6 @@ const DetailModal = ({ customTop, customLeft, dogId, onClick }: IDMProps) => {
 
   const navigate = useNavigate();
 
-  console.log(dog);
 
   const handleReservationClick = () => {
     navigate("/breeding-register", { state: dog });

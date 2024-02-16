@@ -33,7 +33,7 @@ const EditOwnDogs = () => {
 
     useEffect(() => {
         const getDogById = async () => {
-            const res = await get<IData>(`${process.env.REACT_APP_API_URL}breeder/dogs/${id}`);
+            const res = await get<IData>(`${process.env.REACT_APP_API_URL}/breeder/dogs/${id}`);
             setDog({
                 name: res.data.data.name,
                 id: res.data.data.id,

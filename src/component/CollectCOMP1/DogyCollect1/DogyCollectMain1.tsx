@@ -56,6 +56,8 @@ export default function DogyCollect_main() {
         throw "올바르지 못한 접근 입니다.";
       }
       setdogs(response.data);
+      console.log("dogs: ", response.data);
+      
     } catch (e) {
     } finally {
       setLoading(false);

@@ -39,7 +39,7 @@ type AdopterdataType = {
 type MatchingDataType = {
   adopterNickname: string;
   breederNickname: string;
-  dogName: string;
+  dogId: number;
   dogTypeName: string;
   isProcessed: boolean;
   matchingId: number;
@@ -112,6 +112,7 @@ const RequestListContainer = () => {
   const AdopterItems = useMemo(() => {
     return matchings.map(matching => ({
       id: matching.matchingId,
+      dogId: matching.dogId,
       breeder: matching.breederNickname,
       breed: matching.dogTypeName,
       bday: matching.submitDate,

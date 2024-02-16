@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { get } from "../../../../../../api/api";
 import { useTable } from "react-table";
 import { Table, THead, TBody, Tr, Th, Td } from "./TableCompStyle";
 import Button from "../../Button/Button";
 import AdopterRowModal from "../../Modal/Adopter/AdopterRowModal";
+import { useNavigate } from "react-router";
+import { set } from "react-hook-form";
 
 type dataType = {
   id: number;
+  dogId: number;
   breeder: string;
   bday: string;
   breed: string;
@@ -47,11 +50,17 @@ const TableComp = ({
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
+  /**
+   * Yonghyun
+   */
+  const navigate = useNavigate();
+
   const fetchAndShowModal = async (matchingId: number) => {
     try {
       const response = await get<ApiResponse>(`/me/matchings/${matchingId}`);
       setModalData(response.data.data);
-      console.log(response.data.data);
+      console.log("매칭 상세 조회 결과: ", response.data.data);
+      
       setShowModal(true);
     } catch (error) {
       console.error("매칭 상세 조회 중 오류 발생:", error);
@@ -99,18 +108,18 @@ const TableComp = ({
                       <div>
                         <span>{cell.render("Cell")}</span>
                         {cell.value === "분양승인" && (
-                          <div style={{ marginTop: "10px" }}>
-                            <Button
-                              bgcolor="#4EC1BF"
-                              buttonwidth="70px;"
-                              buttonheight="40px;"
-                              onClick={() => {
-                                console.log("후기 작성 데이터:", row.original);
-                              }}
-                            >
-                              후기작성
-                            </Button>
-                          </div>
+                          <Button
+                            bgcolor="#4EC1BF"
+                            buttonwidth="70px;"
+                            buttonheight="40px;"
+                            onClick={() => {
+                              console.log("분양승인 클릭시 후기 작성 데이터: ", row.original);
+                              
+                              navigate('/mypage/review/create', {state: {data: {id: row.original.dogId}}})
+                            }}
+                          >
+                            후기작성
+                          </Button>
                         )}
                       </div>
                     ) : (

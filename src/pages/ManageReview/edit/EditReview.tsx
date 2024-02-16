@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { get } from "../../../api/api";
 
-import Navbar from "../../../component/ManageReview/Navbar/Navbar";
+import Navbar from "../../../component/MyPage/Navbar/Navbar";
 import CustomLayout from "../../Layout/CustomLayout";
 import ReviewEditForm from "../../../component/ManageReview/Form/ReviewEditForm";
 import { BoxsContainer, Container, SubmitButton } from "../styles";
@@ -35,7 +35,7 @@ const EditReview = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await get<IData>(
-                `${process.env.REACT_APP_API_URL}adopter/review/${id}`
+                `${process.env.REACT_APP_API_URL}/adopter/review/${id}`
             );
 
             return res.data;

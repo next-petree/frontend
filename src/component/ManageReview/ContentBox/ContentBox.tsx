@@ -56,7 +56,7 @@ const ContentBox = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `${process.env.REACT_APP_API_URL}adopter/reviews?page=${page - 1}`;
+            const url = `${process.env.REACT_APP_API_URL}/adopter/reviews?page=${page - 1}`;
             const res = await get<any>(
                 url
             );
