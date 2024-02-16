@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
   align-items: center;
 
   position: relative;
-  background-color: aqua;
 
   width: 1060px;
 
@@ -89,10 +88,7 @@ export const InnerContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
-  margin-top: 20px;
-  background-color: red;
-
- 
+  margin-top: 20px; 
 `;
 
 export const Form = styled.form`
@@ -108,7 +104,6 @@ export const TopInputContainer = styled.div`
   display: flex;
   gap: 40px 30px;
   @media (max-width: 767px) {
-    background-color: green;
     flex-direction: column;
   }
 `;

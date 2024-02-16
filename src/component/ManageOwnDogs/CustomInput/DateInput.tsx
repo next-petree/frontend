@@ -6,15 +6,12 @@ import { useEffect, useState } from "react";
 
 type Props = {
   placeHolder: string;
-  width: string;
   height: string;
   value: number;
   onClick: (val: number) => void;
 };
 
-const SelectUl = styled.ul<{ customwidth: string }>`
-  /* width: ${(props) => props.customwidth}; */
-  width: 110%;
+const SelectUl = styled.ul`
   position: absolute;
   top: 50px;
   height: 250px;
@@ -31,6 +28,18 @@ const SelectUl = styled.ul<{ customwidth: string }>`
   z-index: 9999;
 
   cursor: pointer;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 120px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 100px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100px;
+  }
 `;
 
 const SelectLi = styled.li`
@@ -61,7 +70,7 @@ const SelectLi = styled.li`
   }
 `;
 
-const DateInput = ({ placeHolder, width, height, value, onClick }: Props) => {
+const DateInput = ({ placeHolder, height, value, onClick }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const years = [...Array(24)].map((v, i) => i + 2000);
   const months = [...Array(12)].map((v, i) => i + 1);
@@ -73,7 +82,7 @@ const DateInput = ({ placeHolder, width, height, value, onClick }: Props) => {
   
   
   return (
-    <S.Wrapper width={width} height={height}>
+    <S.Wrapper height={height}>
       <S.Input placeholder={placeHolder} value={`${value + placeHolder}`} disabled />
       <S.IconContainer
         isclicked={isOpen}
@@ -84,7 +93,7 @@ const DateInput = ({ placeHolder, width, height, value, onClick }: Props) => {
         <BiSolidDownArrow />
       </S.IconContainer>
       {isOpen && (
-        <SelectUl customwidth={width}>
+        <SelectUl>
           {placeHolder === "년" &&
             years.map((y) => (
               <SelectLi key={y} onClick={() => onClickDate(y)}>{y}</SelectLi>

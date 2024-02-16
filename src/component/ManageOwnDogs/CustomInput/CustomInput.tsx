@@ -33,7 +33,7 @@ const CustomInput = ({
             setGender(genderValue);
         }, [genderValue])
         return (
-            <S.Wrapper width={width} height={height}>
+            <S.Wrapper  height={height}>
                 <S.Input value={gender} disabled />
                 <S.IconContainer
                     onClick={() => setIsArrowClicked(!isArrowClicked)}
@@ -65,7 +65,7 @@ const CustomInput = ({
     }, [statusValue])
 
     return (
-        <S.Wrapper width={width} height={height}>
+        <S.Wrapper height={height}>
             <S.Input value={status} disabled />
             <S.IconContainer
                 isclicked={isArrowClicked}

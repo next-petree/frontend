@@ -133,6 +133,10 @@ const ReviewCreateForm = () => {
             }
         } catch(e) {
             console.error('에러 발생:', e);
+            Swal.fire({
+                ...alertList.errorMessage("리뷰 생성에 실패했습니다"),
+                width: "350px",
+              });
         }
     }
 

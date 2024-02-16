@@ -157,7 +157,11 @@ const OwnDogsCreateForm = () => {
             navigate('/mypage/ownDogs/1');
         }
       } catch (error) {
-          console.error('ERROR: ', error);
+            console.error('ERROR: ', error);
+            Swal.fire({
+                ...alertList.errorMessage("보유견종 생성에 실패했습니다"),
+                width: "350px",
+            });
       }   
     }
   
@@ -191,21 +195,18 @@ const OwnDogsCreateForm = () => {
                                 <S.CustomDate>
                                 <DateInput
                                     placeHolder="년"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.year}
                                     onClick={handleYear}
                                 />
                                 <DateInput
                                     placeHolder="월"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.month}
                                     onClick={handleMonth}
                                 />
                                 <DateInput
                                     placeHolder="일"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.day}
                                     onClick={handleDay}

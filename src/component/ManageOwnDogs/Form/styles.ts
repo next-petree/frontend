@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: white;
-  width: 1060px;
-  width: 49vw;
   height: fit-content;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 32px;
@@ -16,6 +14,20 @@ export const Wrapper = styled.div`
   align-items: center;
 
   position: relative;
+
+  width: 1060px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 980px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 720px;
+  }
+
+  @media (max-width: 767px) {
+    width: 310px;
+  }
 `;
 
 export const ReturnBtnContainer = styled.div`
@@ -88,24 +100,49 @@ export const Form = styled.form`
 export const TopInputContainer = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export const LeftInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 50%;
 `;
 export const RightInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 50%;
 `;
 
 export const InputContainer = styled.div`
-  width: 429px;
+  /* width: 429px; */
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 429px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 300px;
+  }
+
+  @media (max-width: 767px) {
+    width: 300px
+  }
 `;
 
 export const InputTitle = styled.h1`
@@ -269,9 +306,13 @@ export const SubmitButton = styled.button`
 
 export const CustomDate = styled.div`
   width: 100%;
-  height: 48px;
+  /* height: 48px; */
   display: flex;
   gap: 9%;
+
+  @media (max-width: 767px) {
+    width: 300px;
+  }
 `;
 
 export const Container = styled.label`

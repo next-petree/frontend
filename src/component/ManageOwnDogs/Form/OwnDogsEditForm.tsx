@@ -71,6 +71,7 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     const [formDataFile, setFormDataFile] = useState<File[]>([]);
     const [delImgIds, setDelImgIds] = useState<string[]>();
     const [file, setFile] = useState<File>();
+    const [isOriginalImgDeleted, setIsOriginalImgDeleted] = useState(false);
 
     const navigate = useNavigate();
 
@@ -133,12 +134,30 @@ const OwnDogsEditForm = ({dog}: IProps) => {
     }, [file]);
 
     const handleAddImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const answer = await Swal.fire({
-            ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
-            width: "350px",
-          });
-
-        if(answer.isConfirmed) {
+        if(!isOriginalImgDeleted) {
+            const answer = await Swal.fire({
+                ...alertList.doubleCheckMessage("사진을 추가하시면 기존 이미지는 삭제됩니다. 삭제하시겠습니까?"),
+                width: "350px",
+              });
+              if(answer.isConfirmed) {
+                const file = e.target?.files?.[0];
+                setFile(file);
+                if (file) {
+                    const imageUrl = URL.createObjectURL(file);
+                    if(prevImages && prevImages.length > 0) {    
+                        let lastId = prevImages?.[prevImages.length - 1].id;
+                    
+                        setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
+                        setFormDataFile([...formDataFile, file]);
+                    } else {
+                        let id = 1;
+                        let arr = [{id: id++, fileUrl:imageUrl}];
+                        setPrevImages(arr);
+                        setFormDataFile([...formDataFile, file]);
+                    }
+                }
+            }
+        } else {
             const file = e.target?.files?.[0];
             setFile(file);
             if (file) {
@@ -231,6 +250,10 @@ const OwnDogsEditForm = ({dog}: IProps) => {
 
             } catch (error) {
                 console.error('ERROR: ', error);
+                Swal.fire({
+                    ...alertList.errorMessage("수정에 실패했습니다"),
+                    width: "350px",
+                  });
             }   
         }
 
@@ -271,21 +294,18 @@ const OwnDogsEditForm = ({dog}: IProps) => {
                                 <S.CustomDate>
                                 <DateInput
                                     placeHolder="년"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.year}
                                     onClick={handleYear}
                                 />
                                 <DateInput
                                     placeHolder="월"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.month}
                                     onClick={handleMonth}
                                 />
                                 <DateInput
                                     placeHolder="일"
-                                    width={"22%"}
                                     height="48px"
                                     value={date.day}
                                     onClick={handleDay}
