@@ -9,6 +9,7 @@ import AddImageIcon from "../../ManageOwnDogs/AddImageIcon/AddImageIcon";
 import { patch } from "../../../api/api";
 import Swal from "sweetalert2";
 import alertList from "../../../utils/Swal1";
+import { set } from "react-hook-form";
 
 interface IProp {
     review?: IReview;
@@ -53,12 +54,12 @@ const ReviewEditForm = ({ review }: IProp) => {
         setPrevImages(review?.reviewImgId!);
     }, [review])
 
-    console.log(review1);
-    console.log(prevImages);
-    
-
     const handleDeleteImage = (index: number) => {
         setPrevImages(prevImages?.filter((img, i) => {
+            return i !== index
+        }))
+
+        setFormImages(formImages.filter((img, i) => {
             return i !== index
         }))
     }
@@ -138,32 +139,6 @@ const ReviewEditForm = ({ review }: IProp) => {
                 }
             }
         }
-
-        
-
-
-        
-
-    //       if (answer.isConfirmed) {
-    //         const inputFile = e.target?.files?.[0];
-
-    //         setFile(inputFile);
-
-    //         if (inputFile) {
-    //             const imageUrl = URL.createObjectURL(inputFile);
-    //             if(prevImages && prevImages.length > 0) {    
-    //                 let lastId = prevImages?.[prevImages.length - 1].id;
-                
-    //                 setPrevImages([...prevImages, { id: ++lastId!, fileUrl: imageUrl}]);
-    //                 setFormImages([...formImages, inputFile]);
-    //             } else {
-    //                 let id = 1;
-    //                 let arr = [{id: id++, fileUrl:imageUrl}];
-    //                 setPrevImages(arr);
-    //                 setFormImages([...formImages, inputFile]);
-    //             }
-    //         }
-    //    }
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -192,10 +167,13 @@ const ReviewEditForm = ({ review }: IProp) => {
                     width: "350px",
                   });
                 navigate(-1);
-            }
-            
+            } 
         } catch (error) {
             console.error('에러 발생: ',error);
+            Swal.fire({
+                ...alertList.errorMessage("수정 실패하였습니다"),
+                width: "350px",
+              });
         }
     }
 
