@@ -27,7 +27,7 @@ export default function DogyBox({
     <BoxWrapper>
       <ImgBox>
         {status === "AVAILABLE" ? (
-          <Img src={imgUrl} alt="Dog_image" rel="preload"/>
+          <Img src={imgUrl} alt="Dog_image"/>
         ) : status === "UNDERWAY" ? (
           <>
             <AlreadyImg src={imgUrl} alt="Dog_image" />
