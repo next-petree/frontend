@@ -14,6 +14,19 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media (min-width: 1024px) and (max-width: 1240px) {
+    width: 1020px;
+  }
+
+  @media (min-width: 768px ) and (max-width: 1023px) {
+    width: 90%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+    gap: 40px;
+  }
 `;
 
 export const Title = styled.div`
@@ -25,6 +38,11 @@ export const Title = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #000000;
+
+  @media (max-width: 767px) {
+    text-align: center;
+    margin-top: 10px;
+  }
 `;
 
 export const SearchContainer = styled.div`
@@ -34,6 +52,13 @@ export const SearchContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 767px) {
+    width: 80%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
 `;
 
 export const SearchBoxContainer = styled.div`
@@ -41,6 +66,12 @@ export const SearchBoxContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const Input = styled.input`
@@ -58,6 +89,10 @@ export const Input = styled.input`
   letter-spacing: -0.03em;
   text-align: left;
   color: #939393;
+
+  @media (max-width: 767px) {
+    width: 200px;
+  }
 `;
 
 export const PaginationContainer = styled.div`
