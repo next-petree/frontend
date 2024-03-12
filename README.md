@@ -2,7 +2,7 @@
 <br />
 
 <div align="center">
-<img width=1000" src="./src/assets/images/Rectangle9.png"/>
+<img width="1000" src="./src/assets/images/Rectangle9.png"/>
 <br />
 <br />
 </div>
